@@ -106,6 +106,7 @@ def offline_decision(pools, *, fresh):
                 not (delta['p_at_k'] == 0 and delta['map_at_k'] >= .02 - 1e-12)):
             return 'NO_GO_OFFLINE'
         if any(delta['p_at_k'] * pool['deltas'][baseline]['p_at_k'] < 0
+               or delta['ndcg_at_k'] * pool['deltas'][baseline]['ndcg_at_k'] < 0
                for name, pool in pools.items() if name != 'full'):
             return 'NO_GO_OFFLINE'
     if (candidate['p_at_k'] < .5 or candidate['p_at_k'] <= full['chance_p_at_k']
