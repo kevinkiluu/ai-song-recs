@@ -2,11 +2,10 @@
 """Taste modeling v2: clusters + learned weights from like/skip labels.
 
 Inputs: features_v2.json (ReccoBeats panel + deep librosa features).
-Split: time-based by Liked Songs list position (0 = most recent).
+Historical split is by Liked Songs list position.
   test  = positions 0..129  (most recent 20%, held out)
   train = positions 130..649
-  (added_at is not exposed by the Spotify connector; list position is the
-  verified time proxy.)
+  The snapshot has no verified added_at values.
 
 Clustering: PCA(15) -> GaussianMixture, k chosen by BIC in 2..8.
   Alternative inspected: HDBSCAN on UMAP(10). The clustering with the
@@ -25,12 +24,12 @@ Run: ~/workspace/audio-env/bin/python model_v2.py
 Outputs: model_v2.json (config, clusters, coefficients, metrics),
          model_v2.npz (scaler, PCA, GMM, LR, z-norm stats for reuse)
 """
-import json, os, sys, time
+from collections import Counter
+import json, os, sys
 import numpy as np
 
 BASE = os.path.expanduser('~/workspace/audio-pipeline')
 DATA = os.path.join(BASE, 'data')
-sys.path.insert(0, BASE)
 
 from scoring import feat_vector  # single definition, shared with evaluate/recommend
 
@@ -57,7 +56,10 @@ NEGATIVE_IDS = [
 ]
 
 
-def main():
+def fit_records(train, negatives, *, inspect_clusters=False):
+    """Fit the v2 scoring artifacts using the supplied training records."""
+    if len(train) < 3 or not negatives:
+        raise ValueError('v2 fitting requires at least three likes and one reject')
     from sklearn.decomposition import PCA
     from sklearn.impute import SimpleImputer
     from sklearn.linear_model import LogisticRegression
@@ -65,40 +67,25 @@ def main():
     from sklearn.metrics import silhouette_score
     from sklearn.preprocessing import StandardScaler
 
-    doc = json.load(open(os.path.join(BASE, 'features_v2.json')))
-    tracks = doc['tracks']
-    # drop the unresolvable 'None' id track (no features possible)
-    usable = [t for t in tracks if t['spotify_id'] != 'None']
-    print(f'tracks usable: {len(usable)} / {len(tracks)}')
-    X, names = [], []
-    for t in usable:
-        v, names = feat_vector(t)
-        X.append(v)
-    X = np.vstack(X)
-    print(f'feature matrix: {X.shape}, missing frac: {np.isnan(X).mean():.3f}')
-    pos = np.array([t['position'] for t in usable])
-    test_mask = pos < TEST_N
-    train_mask = ~test_mask
-    print(f'train={train_mask.sum()} test={test_mask.sum()}')
-
+    features = [feat_vector(record) for record in train]
+    X = np.vstack([vector for vector, _ in features])
+    names = features[0][1]
+    # Older sklearn versions drop all-missing columns during median
+    # imputation. Keep their original indices without using test values.
+    X[:, np.isnan(X).all(axis=0)] = 0.0
     imp = SimpleImputer(strategy='median')
-    Xtr = imp.fit_transform(X[train_mask])
-    Xte = imp.transform(X[test_mask])
-    Xall = imp.transform(X)
     scaler = StandardScaler()
-    Ztr = scaler.fit_transform(Xtr)
-    Zte = scaler.transform(Xte)
-    Zall = scaler.transform(Xall)
+    Ztr = scaler.fit_transform(imp.fit_transform(X))
 
-    # recency weights for likes: recent ~1.0, oldest ~0.5
-    rec_w = 0.5 + 0.5 * np.exp(-pos[train_mask] / 200.0)
+    positions = np.array([record['position'] for record in train])
+    rec_w = 0.5 + 0.5 * np.exp(-positions / 200.0)
 
     # ---- clustering: PCA -> GMM, k by BIC
-    pca = PCA(n_components=15, random_state=42)
+    pca = PCA(n_components=min(15, *Ztr.shape), random_state=42)
     Ptr = pca.fit_transform(Ztr)
-    print('PCA explained variance (15):', round(float(pca.explained_variance_ratio_.sum()), 3))
+    print('PCA explained variance:', round(float(pca.explained_variance_ratio_.sum()), 3))
     best = None
-    for k in range(2, 9):
+    for k in range(2, min(8, len(train) - 1) + 1):
         gm = GaussianMixture(n_components=k, covariance_type='full',
                              n_init=3, random_state=42)
         gm.fit(Ptr)
@@ -108,77 +95,35 @@ def main():
             best = (bic, k, gm)
     _, best_k, gmm = best
     labels_tr = gmm.predict(Ptr)
-    sil_gmm = silhouette_score(Ptr, labels_tr)
-    print(f'GMM selected k={best_k}, silhouette={sil_gmm:.3f}')
+    sil_gmm = (silhouette_score(Ptr, labels_tr)
+               if 1 < len(set(labels_tr)) < len(train) else None)
+    print(f'GMM selected k={best_k}, silhouette={sil_gmm}')
 
     # ---- alternative: HDBSCAN on UMAP
     sil_hdb = None
-    hdb_labels = None
-    try:
-        import umap
-        import hdbscan
-        red = umap.UMAP(n_components=10, n_neighbors=15, min_dist=0.1,
-                        random_state=42).fit_transform(Ztr)
-        hdb = hdbscan.HDBSCAN(min_cluster_size=15, min_samples=5)
-        hdb_labels = hdb.fit_predict(red)
-        n_cl = len(set(hdb_labels)) - (1 if -1 in hdb_labels else 0)
-        n_noise = int((hdb_labels == -1).sum())
-        if n_cl >= 2:
-            m = hdb_labels != -1
-            sil_hdb = silhouette_score(red[m], hdb_labels[m])
-        print(f'HDBSCAN/UMAP: clusters={n_cl} noise={n_noise} silhouette={sil_hdb}')
-    except Exception as e:
-        print(f'HDBSCAN/UMAP failed: {e}')
+    if inspect_clusters:
+        sil_hdb = inspect_alternative_clusters(Ztr)
 
-    # Selection: GMM is used for scoring because it has a stable transform
-    # for new points (PCA + Gaussian means). HDBSCAN/UMAP is reported as
-    # an inspected alternative only; it has no clean out-of-sample scoring
-    # path here and is not used for candidate scores.
-    method = 'gmm'
-    print('selected clustering for scoring: GMM '
-          f'(hdbscan/umap silhouette was {sil_hdb})')
-    use_labels = labels_tr
-    # cluster sizes + dominant genre bucket per cluster (train)
-    buckets_tr = [usable[i].get('genre_bucket') for i in np.where(train_mask)[0]]
+    # Scoring always uses the GMM; its PCA transform supports new tracks.
+    buckets_tr = [record.get('genre_bucket') for record in train]
     cluster_info = []
-    for c in sorted(set(use_labels)):
-        if c == -1:
-            continue
-        m = use_labels == c
-        bks = [b for b, mm in zip(buckets_tr, m) if mm and b]
-        from collections import Counter
-        top = Counter(bks).most_common(3)
-        cluster_info.append({'cluster': int(c), 'size': int(m.sum()),
+    for cluster in sorted(set(labels_tr)):
+        members = labels_tr == cluster
+        top = Counter(b for b, member in zip(buckets_tr, members)
+                      if member and b).most_common(3)
+        cluster_info.append({'cluster': int(cluster), 'size': int(members.sum()),
                              'genre_counts': dict(top)})
-    print('clusters:', json.dumps(cluster_info))
 
-    # ---- logistic regression: likes vs 13 confirmed negatives
-    # negatives need features: they are NOT in liked; fetch from data/negatives.json
-    neg_path = os.path.join(DATA, 'negatives_features.json')
-    if not os.path.exists(neg_path):
-        print('NEGATIVES FILE MISSING: run negatives_features.py first')
-        sys.exit(1)
-    neg_recs = json.load(open(neg_path))
-    Xn = []
-    for r in neg_recs:
-        v, _ = feat_vector(r)
-        Xn.append(v)
-    Xn = np.vstack(Xn)
-    Xn = imp.transform(Xn)
-    Zn = scaler.transform(Xn)
+    Xn = np.vstack([feat_vector(record)[0] for record in negatives])
+    Zn = scaler.transform(imp.transform(Xn))
     Xlr = np.vstack([Ztr, Zn])
     ylr = np.array([1] * len(Ztr) + [0] * len(Zn))
     wlr = np.concatenate([rec_w, np.ones(len(Zn))])
     lr = LogisticRegression(class_weight='balanced', max_iter=2000, C=1.0)
     lr.fit(Xlr, ylr, sample_weight=wlr)
     acc_tr = lr.score(Xlr, ylr, sample_weight=wlr)
-    print(f'LR train accuracy (weighted): {acc_tr:.3f} '
-          f'(n_pos={len(Ztr)}, n_neg={len(Zn)})')
     coef = lr.coef_[0]
-    order = np.argsort(-np.abs(coef))[:10]
-    print('top LR coefficients:')
-    for i in order:
-        print(f'  {names[i]:28s} {coef[i]:+.3f}')
+    order = np.argsort(-np.abs(coef))[:12]
 
     # ---- scoring function artifacts (GMM centroids in PCA space)
     centroids = gmm.means_  # (k, 15) PCA space
@@ -192,8 +137,8 @@ def main():
     print('score stats:', score_stats)
 
     out = {
-        'method': method, 'gmm_k': best_k,
-        'silhouette_gmm': round(float(sil_gmm), 3),
+        'method': 'gmm', 'gmm_k': best_k,
+        'silhouette_gmm': round(float(sil_gmm), 3) if sil_gmm is not None else None,
         'silhouette_hdbscan_umap': (round(float(sil_hdb), 3)
                                     if sil_hdb is not None else None),
         'pca_explained_15': round(float(pca.explained_variance_ratio_.sum()), 3),
@@ -205,11 +150,10 @@ def main():
                                 for i in order],
         'feature_names': names,
         'score_stats': score_stats,
-        'test_n': int(test_mask.sum()), 'train_n': int(train_mask.sum()),
+        'train_n': len(train),
         'recency_weight': '0.5 + 0.5*exp(-position/200), likes only',
     }
-    json.dump(out, open(os.path.join(BASE, 'model_v2.json'), 'w'), indent=1)
-    np.savez(os.path.join(BASE, 'model_v2.npz'),
+    artifacts = dict(
              imputer_median=imp.statistics_, scaler_mean=scaler.mean_,
              scaler_scale=scaler.scale_, pca_components=pca.components_,
              pca_mean=pca.mean_, gmm_means=gmm.means_,
@@ -221,6 +165,42 @@ def main():
              negdist_mean=score_stats['negdist_mean'],
              negdist_std=score_stats['negdist_std'],
              lr_mean=score_stats['lr_mean'], lr_std=score_stats['lr_std'])
+    return out, artifacts
+
+
+def inspect_alternative_clusters(Ztr):
+    from sklearn.metrics import silhouette_score
+
+    try:
+        import umap
+        import hdbscan
+        reduced = umap.UMAP(n_components=10, n_neighbors=15, min_dist=0.1,
+                            random_state=42).fit_transform(Ztr)
+        labels = hdbscan.HDBSCAN(min_cluster_size=15, min_samples=5).fit_predict(reduced)
+        in_cluster = labels != -1
+        if len(set(labels[in_cluster])) >= 2:
+            return silhouette_score(reduced[in_cluster], labels[in_cluster])
+    except Exception as exc:
+        print(f'HDBSCAN/UMAP failed: {exc}')
+    return None
+
+
+def main():
+    with open(os.path.join(BASE, 'features_v2.json')) as stream:
+        tracks = json.load(stream)['tracks']
+    usable = [track for track in tracks if track['spotify_id'] != 'None']
+    train = [track for track in usable if track['position'] >= TEST_N]
+    neg_path = os.path.join(DATA, 'negatives_features.json')
+    if not os.path.exists(neg_path):
+        print('NEGATIVES FILE MISSING: run negatives_features.py first')
+        sys.exit(1)
+    with open(neg_path) as stream:
+        negatives = json.load(stream)
+    config, artifacts = fit_records(train, negatives, inspect_clusters=True)
+    config['test_n'] = len(usable) - len(train)
+    with open(os.path.join(BASE, 'model_v2.json'), 'w') as stream:
+        json.dump(config, stream, indent=1)
+    np.savez(os.path.join(BASE, 'model_v2.npz'), **artifacts)
     print('wrote model_v2.json + model_v2.npz')
 
 

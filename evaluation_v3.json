@@ -1,0 +1,1296 @@
+{
+ "pool": {
+  "n_ranked": 306,
+  "heldout_total": 129,
+  "heldout_with_librosa": 94,
+  "negatives": 13,
+  "negatives_with_librosa": 12,
+  "distractors": 200,
+  "pool_total": 590,
+  "n_dup_audio_removed": 5,
+  "removed_duplicate_audio": [
+   {
+    "title": "Warriors",
+    "artist": "Asketa & Natan Chaim, Requenze, M.I.M.E",
+    "spotify_id": "3IpjZ7WnAwMp5HLAAGW94d",
+    "deezer_id": 3794801972
+   },
+   {
+    "title": "CRAZY",
+    "artist": "LE SSERAFIM",
+    "spotify_id": "4gxEY3Mh5FZZDAJAKPNrCS",
+    "deezer_id": 2967699621
+   },
+   {
+    "title": "Red Rum",
+    "artist": "Cardeair\u00e8 Jack, Witchouse 40k",
+    "spotify_id": "0fgXxAsTZj5nv4xsGS6DCX",
+    "deezer_id": 2980031271
+   },
+   {
+    "title": "[Gen]inside",
+    "artist": "Catch Your Breath, Kami Kehoe",
+    "spotify_id": "1BK0Biq1BJ3HH57zq3Rlpf",
+    "deezer_id": 4015474791
+   },
+   {
+    "title": "Partyy",
+    "artist": "Softwilly, J\u00f8jo, LEX PAIN, Yumi",
+    "spotify_id": "0IaVAViDtNRVQfbkLnrs5h",
+    "deezer_id": 3952394101
+   }
+  ],
+  "random_P@10": 0.307,
+  "random_NDCG@10_v2_convention": 0.625,
+  "random_mean_rank": 153.5,
+  "split_label": "position-based holdout (NOT time-based)",
+  "note": "5 held-out likes share a Deezer preview ID with a train like (same audio, different Spotify ID); removed from the eval pool for ALL v3 verdicts. The v2/v6 models were TRAINED on the twin rows, so the train side still contains their audio twins; only the test side is decontaminated here."
+ },
+ "baselines": {
+  "v2": {
+   "n_ranked": 306,
+   "P@10": 0.5,
+   "NDCG@10": 0.726,
+   "mean_rank_heldout_like": 134.6,
+   "mean_score_negative": -1.787,
+   "mean_rank_negative": 287.9,
+   "top10_kinds": [
+    "distractor",
+    "heldout",
+    "heldout",
+    "distractor",
+    "heldout",
+    "distractor",
+    "heldout",
+    "distractor",
+    "distractor",
+    "heldout"
+   ],
+   "MAP@10": 0.284,
+   "MRR@10": 0.5,
+   "n_neg_top10": 0,
+   "n_neg_top10_H": 0,
+   "top10_ids": [
+    null,
+    "6Bo1eMY8BFeG6TWrB67f73",
+    "7Lj0xk8V8jaTm58F7s51bE",
+    null,
+    "3A5rfmGdSmfcNqIURUJt4z",
+    null,
+    "68B6aP2i1p8GyhVZ1qSebZ",
+    null,
+    null,
+    "1t1Pll5MMbxVu3unEy1pQy"
+   ]
+  },
+  "v6_per_bucket": {
+   "n_ranked": 306,
+   "P@10": 0.4,
+   "NDCG@10": 0.654,
+   "mean_rank_heldout_like": 134.8,
+   "mean_score_negative": 3.362,
+   "mean_rank_negative": 169.5,
+   "top10_kinds": [
+    "distractor",
+    "heldout",
+    "distractor",
+    "distractor",
+    "heldout",
+    "heldout",
+    "distractor",
+    "distractor",
+    "heldout",
+    "distractor"
+   ],
+   "MAP@10": 0.184,
+   "MRR@10": 0.5,
+   "n_neg_top10": 0,
+   "n_neg_top10_H": 0,
+   "top10_ids": [
+    null,
+    "7AKt9ByQPeQwMxV47UAa9l",
+    null,
+    null,
+    "6c1Bdvp208X0jbLmFnWbkC",
+    "3Y022K4zKNPHmGtDgnF7BL",
+    null,
+    null,
+    "3NHeEYq1z9Y3uhqqkeVFnj",
+    null
+   ]
+  },
+  "v6_global": {
+   "n_ranked": 306,
+   "P@10": 0.6,
+   "NDCG@10": 0.66,
+   "mean_rank_heldout_like": 131.4,
+   "mean_score_negative": 3.337,
+   "mean_rank_negative": 174.3,
+   "top10_kinds": [
+    "distractor",
+    "distractor",
+    "heldout",
+    "distractor",
+    "heldout",
+    "heldout",
+    "heldout",
+    "heldout",
+    "distractor",
+    "heldout"
+   ],
+   "MAP@10": 0.303,
+   "MRR@10": 0.333,
+   "n_neg_top10": 0,
+   "n_neg_top10_H": 0,
+   "top10_ids": [
+    null,
+    null,
+    "7AKt9ByQPeQwMxV47UAa9l",
+    null,
+    "1kpZfXInSxBr4KF73F1dow",
+    "0ZEPxYppmhiWuLDenlcTQL",
+    "6PcPm97GmXub3WuwFPAMVT",
+    "5COAu3CAWWyNkd6RozSAMj",
+    null,
+    "3NHeEYq1z9Y3uhqqkeVFnj"
+   ]
+  }
+ },
+ "candidates": {
+  "troi": {
+   "score_key": "troi",
+   "higher_better": true,
+   "metrics": {
+    "n_ranked": 306,
+    "P@10": 0.8,
+    "NDCG@10": 0.82,
+    "mean_rank_heldout_like": 171.1,
+    "mean_score_negative": -146.667,
+    "mean_rank_negative": 146.7,
+    "top10_kinds": [
+     "distractor",
+     "heldout",
+     "heldout",
+     "heldout",
+     "heldout",
+     "heldout",
+     "heldout",
+     "heldout",
+     "distractor",
+     "heldout"
+    ],
+    "MAP@10": 0.608,
+    "MRR@10": 0.5,
+    "n_neg_top10": 0,
+    "n_neg_top10_H": 0,
+    "top10_ids": [
+     null,
+     "1D5L58KLBbceOynTP4DQnY",
+     "3920QegiL2PHmaYYBVwexC",
+     "7Lj0xk8V8jaTm58F7s51bE",
+     "4dIxAVrv3gRNq1uZ5ezdJM",
+     "3A5rfmGdSmfcNqIURUJt4z",
+     "5f7ZUqbV4Hu6ak4rnt4Ppg",
+     "5MOIAV008posdOGmxiJBsi",
+     null,
+     "26e7XAE2XNM0S8rdVX70OH"
+    ]
+   },
+   "full_pool": {
+    "n_ranked": 701,
+    "P@10": 0.6,
+    "NDCG@10": 1.0,
+    "mean_rank_heldout_like": 323.0,
+    "mean_score_negative": -282.667,
+    "mean_rank_negative": 282.7,
+    "top10_kinds": [
+     "heldout",
+     "heldout",
+     "heldout",
+     "heldout",
+     "heldout",
+     "heldout",
+     "distractor",
+     "distractor",
+     "distractor",
+     "distractor"
+    ],
+    "MAP@10": 0.6,
+    "MRR@10": 1.0,
+    "n_neg_top10": 0,
+    "n_neg_top10_H": 0,
+    "top10_ids": [
+     "3IpjZ7WnAwMp5HLAAGW94d",
+     "4gxEY3Mh5FZZDAJAKPNrCS",
+     "0fgXxAsTZj5nv4xsGS6DCX",
+     "7Lj0xk8V8jaTm58F7s51bE",
+     "1BK0Biq1BJ3HH57zq3Rlpf",
+     "0IaVAViDtNRVQfbkLnrs5h",
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "sampled_disagreement": false,
+   "delta_P@10_fullpool": 0.5,
+   "delta_P@10_sampled": 0.4,
+   "bootstrap_vs_v6b": {
+    "delta_p10": 0.4,
+    "delta_ndcg": 0.166,
+    "delta_p10_ci": [
+     -0.1,
+     0.8
+    ],
+    "delta_ndcg_ci": [
+     -0.214,
+     0.599
+    ],
+    "p10_a": 0.762,
+    "p10_a_ci": [
+     0.4,
+     1.0
+    ],
+    "B": 10000,
+    "seed": 42,
+    "k": 10,
+    "resampling_unit": "pool item, stratified by kind"
+   },
+   "verdict_inputs": {
+    "delta_ndcg_ci_low": -0.214,
+    "delta_ndcg": 0.166,
+    "delta_p10": 0.4,
+    "delta_map10": 0.424,
+    "p10_v3": 0.8,
+    "p10_v3_ci_low": 0.4,
+    "random_p10": 0.307,
+    "n_neg_top10": 0,
+    "n_neg_top10_H": 0,
+    "mean_rank_negative_v3": 146.7,
+    "random_mean_rank": 153.5,
+    "sampled_disagreement": false,
+    "live_keeps": null,
+    "live_n": null
+   },
+   "verdict": "NO-GO \u2014 offline",
+   "offline_pass": false,
+   "legs": {
+    "leg1_offline_vs_v6": {
+     "passed": false,
+     "delta_ndcg": 0.166,
+     "delta_ndcg_ci_low": -0.214,
+     "delta_p10": 0.4,
+     "delta_map10": 0.424,
+     "rule": "bootstrap 95% CI low on delta_NDCG@10 > 0 AND delta_P@10 >= +0.10 (or delta_P@10 == 0 with delta_MAP@10 >= +0.02)"
+    },
+    "leg2_vs_chance": {
+     "passed": true,
+     "p10_v3": 0.8,
+     "p10_v3_ci_low": 0.4,
+     "random_p10": 0.307,
+     "rule": "P@10(v3) >= 0.50 AND bootstrap 95% low of P@10(v3) > random baseline"
+    },
+    "leg3_negative_control": {
+     "passed": false,
+     "n_neg_top10": 0,
+     "n_neg_top10_H": 0,
+     "mean_rank_negative_v3": 146.7,
+     "random_mean_rank": 153.5,
+     "power_label": "UNDERPOWERED (n=12 ranked negatives; half-width ~50.8 ranks \u2014 the leg passes on point conditions, the label records that the control cannot prove much)",
+     "rule": "0 gold negatives in top 10 (incl. 0 H-bucket) AND mean_rank_negative(v3) > random mean rank"
+    },
+    "sampled_metric_agreement": {
+     "passed": true,
+     "sampled_disagreement": false,
+     "rule": "sampled-pool and full-pool deltas must not disagree in sign (P-10)"
+    },
+    "leg4_live_keep_rate": {
+     "passed": null,
+     "status": "pending",
+     "rule": "cumulative keeps k >= 32 of n = 42 (or k >= 37 of 50); Wilson 95% lower bound > 0.60 AND exact binomial p <= 0.05 vs p0 = 0.60"
+    }
+   }
+  },
+  "embeat_full": {
+   "score_key": "embeat_full",
+   "higher_better": true,
+   "metrics": {
+    "n_ranked": 306,
+    "P@10": 0.6,
+    "NDCG@10": 0.829,
+    "mean_rank_heldout_like": 130.8,
+    "mean_score_negative": 0.0,
+    "mean_rank_negative": 158.2,
+    "top10_kinds": [
+     "heldout",
+     "distractor",
+     "distractor",
+     "heldout",
+     "heldout",
+     "distractor",
+     "heldout",
+     "distractor",
+     "heldout",
+     "heldout"
+    ],
+    "MAP@10": 0.383,
+    "MRR@10": 1.0,
+    "n_neg_top10": 0,
+    "n_neg_top10_H": 0,
+    "top10_ids": [
+     "7ycUoqcTbTEEj5fRL8WhiG",
+     null,
+     null,
+     "7b7EQFWor90ETS1HShGPZI",
+     "1WyI0XnnwlzxsrQeevp5tX",
+     null,
+     "05rltlVmAfXcbVhqmOoIeJ",
+     null,
+     "5PG5Sm3gvnya3koV2sjsqY",
+     "31vrT1chotKX94qbJKAVhA"
+    ]
+   },
+   "full_pool": {
+    "n_ranked": 701,
+    "P@10": 0.2,
+    "NDCG@10": 0.818,
+    "mean_rank_heldout_like": 299.0,
+    "mean_score_negative": 0.0,
+    "mean_rank_negative": 344.2,
+    "top10_kinds": [
+     "heldout",
+     "distractor",
+     "distractor",
+     "distractor",
+     "distractor",
+     "distractor",
+     "heldout",
+     "distractor",
+     "distractor",
+     "distractor"
+    ],
+    "MAP@10": 0.129,
+    "MRR@10": 1.0,
+    "n_neg_top10": 0,
+    "n_neg_top10_H": 0,
+    "top10_ids": [
+     "7ycUoqcTbTEEj5fRL8WhiG",
+     null,
+     null,
+     null,
+     null,
+     null,
+     "31vrT1chotKX94qbJKAVhA",
+     null,
+     null,
+     null
+    ]
+   },
+   "sampled_disagreement": false,
+   "delta_P@10_fullpool": 0.1,
+   "delta_P@10_sampled": 0.2,
+   "bootstrap_vs_v6b": {
+    "delta_p10": 0.2,
+    "delta_ndcg": 0.176,
+    "delta_p10_ci": [
+     -0.3,
+     0.6
+    ],
+    "delta_ndcg_ci": [
+     -0.323,
+     0.548
+    ],
+    "p10_a": 0.526,
+    "p10_a_ci": [
+     0.2,
+     0.8
+    ],
+    "B": 10000,
+    "seed": 42,
+    "k": 10,
+    "resampling_unit": "pool item, stratified by kind"
+   },
+   "verdict_inputs": {
+    "delta_ndcg_ci_low": -0.323,
+    "delta_ndcg": 0.176,
+    "delta_p10": 0.2,
+    "delta_map10": 0.199,
+    "p10_v3": 0.6,
+    "p10_v3_ci_low": 0.2,
+    "random_p10": 0.307,
+    "n_neg_top10": 0,
+    "n_neg_top10_H": 0,
+    "mean_rank_negative_v3": 158.2,
+    "random_mean_rank": 153.5,
+    "sampled_disagreement": false,
+    "live_keeps": null,
+    "live_n": null
+   },
+   "verdict": "NO-GO \u2014 offline",
+   "offline_pass": false,
+   "legs": {
+    "leg1_offline_vs_v6": {
+     "passed": false,
+     "delta_ndcg": 0.176,
+     "delta_ndcg_ci_low": -0.323,
+     "delta_p10": 0.2,
+     "delta_map10": 0.199,
+     "rule": "bootstrap 95% CI low on delta_NDCG@10 > 0 AND delta_P@10 >= +0.10 (or delta_P@10 == 0 with delta_MAP@10 >= +0.02)"
+    },
+    "leg2_vs_chance": {
+     "passed": false,
+     "p10_v3": 0.6,
+     "p10_v3_ci_low": 0.2,
+     "random_p10": 0.307,
+     "rule": "P@10(v3) >= 0.50 AND bootstrap 95% low of P@10(v3) > random baseline"
+    },
+    "leg3_negative_control": {
+     "passed": true,
+     "n_neg_top10": 0,
+     "n_neg_top10_H": 0,
+     "mean_rank_negative_v3": 158.2,
+     "random_mean_rank": 153.5,
+     "power_label": "UNDERPOWERED (n=12 ranked negatives; half-width ~50.8 ranks \u2014 the leg passes on point conditions, the label records that the control cannot prove much)",
+     "rule": "0 gold negatives in top 10 (incl. 0 H-bucket) AND mean_rank_negative(v3) > random mean rank"
+    },
+    "sampled_metric_agreement": {
+     "passed": true,
+     "sampled_disagreement": false,
+     "rule": "sampled-pool and full-pool deltas must not disagree in sign (P-10)"
+    },
+    "leg4_live_keep_rate": {
+     "passed": null,
+     "status": "pending",
+     "rule": "cumulative keeps k >= 32 of n = 42 (or k >= 37 of 50); Wilson 95% lower bound > 0.60 AND exact binomial p <= 0.05 vs p0 = 0.60"
+    }
+   }
+  },
+  "embeat_minus_ch1": {
+   "score_key": "embeat_minus_ch1",
+   "higher_better": true,
+   "metrics": {
+    "n_ranked": 306,
+    "P@10": 0.6,
+    "NDCG@10": 0.948,
+    "mean_rank_heldout_like": 131.4,
+    "mean_score_negative": 0.0,
+    "mean_rank_negative": 155.1,
+    "top10_kinds": [
+     "heldout",
+     "heldout",
+     "heldout",
+     "distractor",
+     "heldout",
+     "distractor",
+     "distractor",
+     "heldout",
+     "heldout",
+     "distractor"
+    ],
+    "MAP@10": 0.509,
+    "MRR@10": 1.0,
+    "n_neg_top10": 0,
+    "n_neg_top10_H": 0,
+    "top10_ids": [
+     "7ycUoqcTbTEEj5fRL8WhiG",
+     "5PG5Sm3gvnya3koV2sjsqY",
+     "59YzxaB9Y9s4ydbmcipb3U",
+     null,
+     "1kpZfXInSxBr4KF73F1dow",
+     null,
+     null,
+     "7b7EQFWor90ETS1HShGPZI",
+     "1WyI0XnnwlzxsrQeevp5tX",
+     null
+    ]
+   },
+   "full_pool": {
+    "n_ranked": 701,
+    "P@10": 0.3,
+    "NDCG@10": 0.594,
+    "mean_rank_heldout_like": 297.6,
+    "mean_score_negative": 0.0,
+    "mean_rank_negative": 343.0,
+    "top10_kinds": [
+     "distractor",
+     "heldout",
+     "distractor",
+     "distractor",
+     "distractor",
+     "distractor",
+     "heldout",
+     "distractor",
+     "heldout",
+     "distractor"
+    ],
+    "MAP@10": 0.112,
+    "MRR@10": 0.5,
+    "n_neg_top10": 0,
+    "n_neg_top10_H": 0,
+    "top10_ids": [
+     null,
+     "7ycUoqcTbTEEj5fRL8WhiG",
+     null,
+     null,
+     null,
+     null,
+     "5PG5Sm3gvnya3koV2sjsqY",
+     null,
+     "59YzxaB9Y9s4ydbmcipb3U",
+     null
+    ]
+   },
+   "sampled_disagreement": false,
+   "delta_P@10_fullpool": 0.2,
+   "delta_P@10_sampled": 0.2,
+   "bootstrap_vs_v6b": {
+    "delta_p10": 0.2,
+    "delta_ndcg": 0.295,
+    "delta_p10_ci": [
+     -0.2,
+     0.7
+    ],
+    "delta_ndcg_ci": [
+     -0.095,
+     0.609
+    ],
+    "p10_a": 0.629,
+    "p10_a_ci": [
+     0.3,
+     0.9
+    ],
+    "B": 10000,
+    "seed": 42,
+    "k": 10,
+    "resampling_unit": "pool item, stratified by kind"
+   },
+   "verdict_inputs": {
+    "delta_ndcg_ci_low": -0.095,
+    "delta_ndcg": 0.295,
+    "delta_p10": 0.2,
+    "delta_map10": 0.325,
+    "p10_v3": 0.6,
+    "p10_v3_ci_low": 0.3,
+    "random_p10": 0.307,
+    "n_neg_top10": 0,
+    "n_neg_top10_H": 0,
+    "mean_rank_negative_v3": 155.1,
+    "random_mean_rank": 153.5,
+    "sampled_disagreement": false,
+    "live_keeps": null,
+    "live_n": null
+   },
+   "verdict": "NO-GO \u2014 offline",
+   "offline_pass": false,
+   "legs": {
+    "leg1_offline_vs_v6": {
+     "passed": false,
+     "delta_ndcg": 0.295,
+     "delta_ndcg_ci_low": -0.095,
+     "delta_p10": 0.2,
+     "delta_map10": 0.325,
+     "rule": "bootstrap 95% CI low on delta_NDCG@10 > 0 AND delta_P@10 >= +0.10 (or delta_P@10 == 0 with delta_MAP@10 >= +0.02)"
+    },
+    "leg2_vs_chance": {
+     "passed": false,
+     "p10_v3": 0.6,
+     "p10_v3_ci_low": 0.3,
+     "random_p10": 0.307,
+     "rule": "P@10(v3) >= 0.50 AND bootstrap 95% low of P@10(v3) > random baseline"
+    },
+    "leg3_negative_control": {
+     "passed": true,
+     "n_neg_top10": 0,
+     "n_neg_top10_H": 0,
+     "mean_rank_negative_v3": 155.1,
+     "random_mean_rank": 153.5,
+     "power_label": "UNDERPOWERED (n=12 ranked negatives; half-width ~50.8 ranks \u2014 the leg passes on point conditions, the label records that the control cannot prove much)",
+     "rule": "0 gold negatives in top 10 (incl. 0 H-bucket) AND mean_rank_negative(v3) > random mean rank"
+    },
+    "sampled_metric_agreement": {
+     "passed": true,
+     "sampled_disagreement": false,
+     "rule": "sampled-pool and full-pool deltas must not disagree in sign (P-10)"
+    },
+    "leg4_live_keep_rate": {
+     "passed": null,
+     "status": "pending",
+     "rule": "cumulative keeps k >= 32 of n = 42 (or k >= 37 of 50); Wilson 95% lower bound > 0.60 AND exact binomial p <= 0.05 vs p0 = 0.60"
+    }
+   }
+  },
+  "bliss_fixed": {
+   "score_key": "bliss_fixed",
+   "higher_better": false,
+   "metrics": {
+    "n_ranked": 306,
+    "P@10": 0.2,
+    "NDCG@10": 0.544,
+    "mean_rank_heldout_like": 154.0,
+    "mean_score_negative": 0.245,
+    "mean_rank_negative": 185.5,
+    "top10_kinds": [
+     "distractor",
+     "distractor",
+     "heldout",
+     "distractor",
+     "heldout",
+     "distractor",
+     "distractor",
+     "distractor",
+     "negative",
+     "distractor"
+    ],
+    "MAP@10": 0.073,
+    "MRR@10": 0.333,
+    "n_neg_top10": 1,
+    "n_neg_top10_H": 0,
+    "top10_ids": [
+     null,
+     null,
+     "5DJH1JUKQosVAzjrqWWqbW",
+     null,
+     "7ycK2uijskzxp4cGpGNoCi",
+     null,
+     null,
+     null,
+     "7zDu3l7DDlfSlt20YMKkWo",
+     null
+    ]
+   },
+   "full_pool": {
+    "n_ranked": 701,
+    "P@10": 0.3,
+    "NDCG@10": 0.484,
+    "mean_rank_heldout_like": 338.3,
+    "mean_score_negative": 0.245,
+    "mean_rank_negative": 414.5,
+    "top10_kinds": [
+     "distractor",
+     "distractor",
+     "distractor",
+     "distractor",
+     "heldout",
+     "heldout",
+     "distractor",
+     "distractor",
+     "distractor",
+     "heldout"
+    ],
+    "MAP@10": 0.083,
+    "MRR@10": 0.2,
+    "n_neg_top10": 0,
+    "n_neg_top10_H": 0,
+    "top10_ids": [
+     null,
+     null,
+     null,
+     null,
+     "1BK0Biq1BJ3HH57zq3Rlpf",
+     "5DJH1JUKQosVAzjrqWWqbW",
+     null,
+     null,
+     null,
+     "7ycK2uijskzxp4cGpGNoCi"
+    ]
+   },
+   "sampled_disagreement": true,
+   "delta_P@10_fullpool": 0.2,
+   "delta_P@10_sampled": -0.2,
+   "bootstrap_vs_v6b": {
+    "delta_p10": -0.2,
+    "delta_ndcg": -0.11,
+    "delta_p10_ci": [
+     -0.6,
+     0.3
+    ],
+    "delta_ndcg_ci": [
+     -0.721,
+     0.429
+    ],
+    "p10_a": 0.242,
+    "p10_a_ci": [
+     0.0,
+     0.5
+    ],
+    "B": 10000,
+    "seed": 42,
+    "k": 10,
+    "resampling_unit": "pool item, stratified by kind"
+   },
+   "verdict_inputs": {
+    "delta_ndcg_ci_low": -0.721,
+    "delta_ndcg": -0.11,
+    "delta_p10": -0.2,
+    "delta_map10": -0.111,
+    "p10_v3": 0.2,
+    "p10_v3_ci_low": 0.0,
+    "random_p10": 0.307,
+    "n_neg_top10": 1,
+    "n_neg_top10_H": 0,
+    "mean_rank_negative_v3": 185.5,
+    "random_mean_rank": 153.5,
+    "sampled_disagreement": true,
+    "live_keeps": null,
+    "live_n": null
+   },
+   "verdict": "NO-GO \u2014 unresolved measurement disagreement (SAMPLED_METRIC_DISAGREEMENT); investigate before re-deciding",
+   "offline_pass": false,
+   "legs": {
+    "leg1_offline_vs_v6": {
+     "passed": false,
+     "delta_ndcg": -0.11,
+     "delta_ndcg_ci_low": -0.721,
+     "delta_p10": -0.2,
+     "delta_map10": -0.111,
+     "rule": "bootstrap 95% CI low on delta_NDCG@10 > 0 AND delta_P@10 >= +0.10 (or delta_P@10 == 0 with delta_MAP@10 >= +0.02)"
+    },
+    "leg2_vs_chance": {
+     "passed": false,
+     "p10_v3": 0.2,
+     "p10_v3_ci_low": 0.0,
+     "random_p10": 0.307,
+     "rule": "P@10(v3) >= 0.50 AND bootstrap 95% low of P@10(v3) > random baseline"
+    },
+    "leg3_negative_control": {
+     "passed": false,
+     "n_neg_top10": 1,
+     "n_neg_top10_H": 0,
+     "mean_rank_negative_v3": 185.5,
+     "random_mean_rank": 153.5,
+     "power_label": "UNDERPOWERED (n=12 ranked negatives; half-width ~50.8 ranks \u2014 the leg passes on point conditions, the label records that the control cannot prove much)",
+     "rule": "0 gold negatives in top 10 (incl. 0 H-bucket) AND mean_rank_negative(v3) > random mean rank"
+    },
+    "sampled_metric_agreement": {
+     "passed": false,
+     "sampled_disagreement": true,
+     "rule": "sampled-pool and full-pool deltas must not disagree in sign (P-10)"
+    },
+    "leg4_live_keep_rate": {
+     "passed": null,
+     "status": "pending",
+     "rule": "cumulative keeps k >= 32 of n = 42 (or k >= 37 of 50); Wilson 95% lower bound > 0.60 AND exact binomial p <= 0.05 vs p0 = 0.60"
+    }
+   }
+  },
+  "bliss_adaptive": {
+   "score_key": "bliss_adaptive",
+   "higher_better": false,
+   "metrics": {
+    "n_ranked": 306,
+    "P@10": 0.2,
+    "NDCG@10": 0.624,
+    "mean_rank_heldout_like": 150.2,
+    "mean_score_negative": 0.25,
+    "mean_rank_negative": 178.0,
+    "top10_kinds": [
+     "distractor",
+     "heldout",
+     "distractor",
+     "distractor",
+     "heldout",
+     "distractor",
+     "distractor",
+     "distractor",
+     "distractor",
+     "distractor"
+    ],
+    "MAP@10": 0.09,
+    "MRR@10": 0.5,
+    "n_neg_top10": 0,
+    "n_neg_top10_H": 0,
+    "top10_ids": [
+     null,
+     "5DJH1JUKQosVAzjrqWWqbW",
+     null,
+     null,
+     "5H1sKFMzDeMtXwND3V6hRY",
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "full_pool": {
+    "n_ranked": 701,
+    "P@10": 0.2,
+    "NDCG@10": 0.651,
+    "mean_rank_heldout_like": 329.2,
+    "mean_score_negative": 0.25,
+    "mean_rank_negative": 398.0,
+    "top10_kinds": [
+     "distractor",
+     "heldout",
+     "distractor",
+     "heldout",
+     "distractor",
+     "distractor",
+     "distractor",
+     "distractor",
+     "distractor",
+     "distractor"
+    ],
+    "MAP@10": 0.1,
+    "MRR@10": 0.5,
+    "n_neg_top10": 0,
+    "n_neg_top10_H": 0,
+    "top10_ids": [
+     null,
+     "5DJH1JUKQosVAzjrqWWqbW",
+     null,
+     "1BK0Biq1BJ3HH57zq3Rlpf",
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "sampled_disagreement": true,
+   "delta_P@10_fullpool": 0.1,
+   "delta_P@10_sampled": -0.2,
+   "bootstrap_vs_v6b": {
+    "delta_p10": -0.2,
+    "delta_ndcg": -0.03,
+    "delta_p10_ci": [
+     -0.6,
+     0.3
+    ],
+    "delta_ndcg_ci": [
+     -0.715,
+     0.497
+    ],
+    "p10_a": 0.243,
+    "p10_a_ci": [
+     0.0,
+     0.6
+    ],
+    "B": 10000,
+    "seed": 42,
+    "k": 10,
+    "resampling_unit": "pool item, stratified by kind"
+   },
+   "verdict_inputs": {
+    "delta_ndcg_ci_low": -0.715,
+    "delta_ndcg": -0.03,
+    "delta_p10": -0.2,
+    "delta_map10": -0.094,
+    "p10_v3": 0.2,
+    "p10_v3_ci_low": 0.0,
+    "random_p10": 0.307,
+    "n_neg_top10": 0,
+    "n_neg_top10_H": 0,
+    "mean_rank_negative_v3": 178.0,
+    "random_mean_rank": 153.5,
+    "sampled_disagreement": true,
+    "live_keeps": null,
+    "live_n": null
+   },
+   "verdict": "NO-GO \u2014 unresolved measurement disagreement (SAMPLED_METRIC_DISAGREEMENT); investigate before re-deciding",
+   "offline_pass": false,
+   "legs": {
+    "leg1_offline_vs_v6": {
+     "passed": false,
+     "delta_ndcg": -0.03,
+     "delta_ndcg_ci_low": -0.715,
+     "delta_p10": -0.2,
+     "delta_map10": -0.094,
+     "rule": "bootstrap 95% CI low on delta_NDCG@10 > 0 AND delta_P@10 >= +0.10 (or delta_P@10 == 0 with delta_MAP@10 >= +0.02)"
+    },
+    "leg2_vs_chance": {
+     "passed": false,
+     "p10_v3": 0.2,
+     "p10_v3_ci_low": 0.0,
+     "random_p10": 0.307,
+     "rule": "P@10(v3) >= 0.50 AND bootstrap 95% low of P@10(v3) > random baseline"
+    },
+    "leg3_negative_control": {
+     "passed": true,
+     "n_neg_top10": 0,
+     "n_neg_top10_H": 0,
+     "mean_rank_negative_v3": 178.0,
+     "random_mean_rank": 153.5,
+     "power_label": "UNDERPOWERED (n=12 ranked negatives; half-width ~50.8 ranks \u2014 the leg passes on point conditions, the label records that the control cannot prove much)",
+     "rule": "0 gold negatives in top 10 (incl. 0 H-bucket) AND mean_rank_negative(v3) > random mean rank"
+    },
+    "sampled_metric_agreement": {
+     "passed": false,
+     "sampled_disagreement": true,
+     "rule": "sampled-pool and full-pool deltas must not disagree in sign (P-10)"
+    },
+    "leg4_live_keep_rate": {
+     "passed": null,
+     "status": "pending",
+     "rule": "cumulative keeps k >= 32 of n = 42 (or k >= 37 of 50); Wilson 95% lower bound > 0.60 AND exact binomial p <= 0.05 vs p0 = 0.60"
+    }
+   }
+  },
+  "bliss_v2_blend": {
+   "score_key": "bliss_v2_blend",
+   "higher_better": true,
+   "metrics": {
+    "n_ranked": 306,
+    "P@10": 0.4,
+    "NDCG@10": 0.956,
+    "mean_rank_heldout_like": 140.2,
+    "mean_score_negative": -1.289,
+    "mean_rank_negative": 267.2,
+    "top10_kinds": [
+     "heldout",
+     "heldout",
+     "distractor",
+     "heldout",
+     "heldout",
+     "distractor",
+     "distractor",
+     "distractor",
+     "distractor",
+     "distractor"
+    ],
+    "MAP@10": 0.355,
+    "MRR@10": 1.0,
+    "n_neg_top10": 0,
+    "n_neg_top10_H": 0,
+    "top10_ids": [
+     "68B6aP2i1p8GyhVZ1qSebZ",
+     "79kqYxIkS29va2I9AeL9ak",
+     null,
+     "5MOIAV008posdOGmxiJBsi",
+     "3ZpgtxF9tG0SdH7qz40qK6",
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "full_pool": {
+    "n_ranked": 701,
+    "P@10": 0.4,
+    "NDCG@10": 0.56,
+    "mean_rank_heldout_like": 304.7,
+    "mean_score_negative": -1.301,
+    "mean_rank_negative": 607.0,
+    "top10_kinds": [
+     "distractor",
+     "distractor",
+     "distractor",
+     "heldout",
+     "heldout",
+     "distractor",
+     "distractor",
+     "heldout",
+     "heldout",
+     "distractor"
+    ],
+    "MAP@10": 0.147,
+    "MRR@10": 0.25,
+    "n_neg_top10": 0,
+    "n_neg_top10_H": 0,
+    "top10_ids": [
+     null,
+     null,
+     null,
+     "68B6aP2i1p8GyhVZ1qSebZ",
+     "79kqYxIkS29va2I9AeL9ak",
+     null,
+     null,
+     "5MOIAV008posdOGmxiJBsi",
+     "3ZpgtxF9tG0SdH7qz40qK6",
+     null
+    ]
+   },
+   "sampled_disagreement": false,
+   "delta_P@10_fullpool": 0.3,
+   "delta_P@10_sampled": 0.0,
+   "bootstrap_vs_v6b": {
+    "delta_p10": 0.0,
+    "delta_ndcg": 0.302,
+    "delta_p10_ci": [
+     -0.4,
+     0.5
+    ],
+    "delta_ndcg_ci": [
+     -0.21,
+     0.616
+    ],
+    "p10_a": 0.451,
+    "p10_a_ci": [
+     0.1,
+     0.8
+    ],
+    "B": 10000,
+    "seed": 42,
+    "k": 10,
+    "resampling_unit": "pool item, stratified by kind"
+   },
+   "verdict_inputs": {
+    "delta_ndcg_ci_low": -0.21,
+    "delta_ndcg": 0.302,
+    "delta_p10": 0.0,
+    "delta_map10": 0.171,
+    "p10_v3": 0.4,
+    "p10_v3_ci_low": 0.1,
+    "random_p10": 0.307,
+    "n_neg_top10": 0,
+    "n_neg_top10_H": 0,
+    "mean_rank_negative_v3": 267.2,
+    "random_mean_rank": 153.5,
+    "sampled_disagreement": false,
+    "live_keeps": null,
+    "live_n": null
+   },
+   "verdict": "NO-GO \u2014 offline",
+   "offline_pass": false,
+   "legs": {
+    "leg1_offline_vs_v6": {
+     "passed": false,
+     "delta_ndcg": 0.302,
+     "delta_ndcg_ci_low": -0.21,
+     "delta_p10": 0.0,
+     "delta_map10": 0.171,
+     "rule": "bootstrap 95% CI low on delta_NDCG@10 > 0 AND delta_P@10 >= +0.10 (or delta_P@10 == 0 with delta_MAP@10 >= +0.02)"
+    },
+    "leg2_vs_chance": {
+     "passed": false,
+     "p10_v3": 0.4,
+     "p10_v3_ci_low": 0.1,
+     "random_p10": 0.307,
+     "rule": "P@10(v3) >= 0.50 AND bootstrap 95% low of P@10(v3) > random baseline"
+    },
+    "leg3_negative_control": {
+     "passed": true,
+     "n_neg_top10": 0,
+     "n_neg_top10_H": 0,
+     "mean_rank_negative_v3": 267.2,
+     "random_mean_rank": 153.5,
+     "power_label": "UNDERPOWERED (n=12 ranked negatives; half-width ~50.8 ranks \u2014 the leg passes on point conditions, the label records that the control cannot prove much)",
+     "rule": "0 gold negatives in top 10 (incl. 0 H-bucket) AND mean_rank_negative(v3) > random mean rank"
+    },
+    "sampled_metric_agreement": {
+     "passed": true,
+     "sampled_disagreement": false,
+     "rule": "sampled-pool and full-pool deltas must not disagree in sign (P-10)"
+    },
+    "leg4_live_keep_rate": {
+     "passed": null,
+     "status": "pending",
+     "rule": "cumulative keeps k >= 32 of n = 42 (or k >= 37 of 50); Wilson 95% lower bound > 0.60 AND exact binomial p <= 0.05 vs p0 = 0.60"
+    }
+   }
+  },
+  "v2_unchanged": {
+   "score_key": "v2",
+   "higher_better": true,
+   "metrics": {
+    "n_ranked": 306,
+    "P@10": 0.5,
+    "NDCG@10": 0.726,
+    "mean_rank_heldout_like": 134.6,
+    "mean_score_negative": -1.787,
+    "mean_rank_negative": 287.9,
+    "top10_kinds": [
+     "distractor",
+     "heldout",
+     "heldout",
+     "distractor",
+     "heldout",
+     "distractor",
+     "heldout",
+     "distractor",
+     "distractor",
+     "heldout"
+    ],
+    "MAP@10": 0.284,
+    "MRR@10": 0.5,
+    "n_neg_top10": 0,
+    "n_neg_top10_H": 0,
+    "top10_ids": [
+     null,
+     "6Bo1eMY8BFeG6TWrB67f73",
+     "7Lj0xk8V8jaTm58F7s51bE",
+     null,
+     "3A5rfmGdSmfcNqIURUJt4z",
+     null,
+     "68B6aP2i1p8GyhVZ1qSebZ",
+     null,
+     null,
+     "1t1Pll5MMbxVu3unEy1pQy"
+    ]
+   },
+   "full_pool": {
+    "n_ranked": 701,
+    "P@10": 0.3,
+    "NDCG@10": 0.465,
+    "mean_rank_heldout_like": 301.5,
+    "mean_score_negative": -1.787,
+    "mean_rank_negative": 664.8,
+    "top10_kinds": [
+     "distractor",
+     "distractor",
+     "distractor",
+     "distractor",
+     "distractor",
+     "heldout",
+     "heldout",
+     "distractor",
+     "heldout",
+     "distractor"
+    ],
+    "MAP@10": 0.079,
+    "MRR@10": 0.167,
+    "n_neg_top10": 0,
+    "n_neg_top10_H": 0,
+    "top10_ids": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     "6Bo1eMY8BFeG6TWrB67f73",
+     "7Lj0xk8V8jaTm58F7s51bE",
+     null,
+     "3A5rfmGdSmfcNqIURUJt4z",
+     null
+    ]
+   },
+   "sampled_disagreement": false,
+   "delta_P@10_fullpool": 0.2,
+   "delta_P@10_sampled": 0.1,
+   "bootstrap_vs_v6b": {
+    "delta_p10": 0.1,
+    "delta_ndcg": 0.072,
+    "delta_p10_ci": [
+     -0.3,
+     0.6
+    ],
+    "delta_ndcg_ci": [
+     -0.333,
+     0.536
+    ],
+    "p10_a": 0.55,
+    "p10_a_ci": [
+     0.2,
+     0.9
+    ],
+    "B": 10000,
+    "seed": 42,
+    "k": 10,
+    "resampling_unit": "pool item, stratified by kind"
+   },
+   "verdict_inputs": {
+    "delta_ndcg_ci_low": -0.333,
+    "delta_ndcg": 0.072,
+    "delta_p10": 0.1,
+    "delta_map10": 0.1,
+    "p10_v3": 0.5,
+    "p10_v3_ci_low": 0.2,
+    "random_p10": 0.307,
+    "n_neg_top10": 0,
+    "n_neg_top10_H": 0,
+    "mean_rank_negative_v3": 287.9,
+    "random_mean_rank": 153.5,
+    "sampled_disagreement": false,
+    "live_keeps": null,
+    "live_n": null
+   },
+   "verdict": "NO-GO \u2014 offline",
+   "offline_pass": false,
+   "legs": {
+    "leg1_offline_vs_v6": {
+     "passed": false,
+     "delta_ndcg": 0.072,
+     "delta_ndcg_ci_low": -0.333,
+     "delta_p10": 0.1,
+     "delta_map10": 0.1,
+     "rule": "bootstrap 95% CI low on delta_NDCG@10 > 0 AND delta_P@10 >= +0.10 (or delta_P@10 == 0 with delta_MAP@10 >= +0.02)"
+    },
+    "leg2_vs_chance": {
+     "passed": false,
+     "p10_v3": 0.5,
+     "p10_v3_ci_low": 0.2,
+     "random_p10": 0.307,
+     "rule": "P@10(v3) >= 0.50 AND bootstrap 95% low of P@10(v3) > random baseline"
+    },
+    "leg3_negative_control": {
+     "passed": true,
+     "n_neg_top10": 0,
+     "n_neg_top10_H": 0,
+     "mean_rank_negative_v3": 287.9,
+     "random_mean_rank": 153.5,
+     "power_label": "UNDERPOWERED (n=12 ranked negatives; half-width ~50.8 ranks \u2014 the leg passes on point conditions, the label records that the control cannot prove much)",
+     "rule": "0 gold negatives in top 10 (incl. 0 H-bucket) AND mean_rank_negative(v3) > random mean rank"
+    },
+    "sampled_metric_agreement": {
+     "passed": true,
+     "sampled_disagreement": false,
+     "rule": "sampled-pool and full-pool deltas must not disagree in sign (P-10)"
+    },
+    "leg4_live_keep_rate": {
+     "passed": null,
+     "status": "pending",
+     "rule": "cumulative keeps k >= 32 of n = 42 (or k >= 37 of 50); Wilson 95% lower bound > 0.60 AND exact binomial p <= 0.05 vs p0 = 0.60"
+    }
+   }
+  }
+ },
+ "full_pool": {
+  "n_ranked": 701,
+  "note": "99 held-out + 12 negatives + all 590 pool tracks. P-10 sensitivity only; the 306 sampled pool governs.",
+  "v6_per_bucket": {
+   "n_ranked": 701,
+   "P@10": 0.1,
+   "NDCG@10": 0.387,
+   "mean_rank_heldout_like": 310.4,
+   "mean_score_negative": 3.362,
+   "mean_rank_negative": 392.2,
+   "top10_kinds": [
+    "distractor",
+    "distractor",
+    "distractor",
+    "distractor",
+    "heldout",
+    "distractor",
+    "distractor",
+    "distractor",
+    "distractor",
+    "distractor"
+   ],
+   "MAP@10": 0.02,
+   "MRR@10": 0.2,
+   "n_neg_top10": 0,
+   "n_neg_top10_H": 0,
+   "top10_ids": [
+    null,
+    null,
+    null,
+    null,
+    "7AKt9ByQPeQwMxV47UAa9l",
+    null,
+    null,
+    null,
+    null,
+    null
+   ]
+  }
+ },
+ "blend_weight_note": {
+  "candidate_weight_w_v2": 0.5,
+  "candidate_definition": "equal-weight z-scored mean of v2 score and -bliss distance, z-scored over the 306 pool. No train-only fit identifies an interior weight: a pseudo-heldout fit on train alone (positions 130-229 as pseudo-test, 289-row twin-excluded seed matrix) is flat in P@10 over w in [0.46, 1.0] and rising in NDCG/MAP to w = 1.0 (pure v2), so no interior optimum exists to fit.",
+  "wave1_reconstruction": {
+   "P@10": 0.6,
+   "NDCG@10": 0.907,
+   "MAP@10": 0.458,
+   "MRR@10": 1.0,
+   "mean_rank_negative": 278.7,
+   "n_neg_top10": 0
+  },
+  "wave1_reconstruction_note": "w_v2 = 0.585 with pool-z reproduces the Wave-1 311-pool blend numbers exactly (P@10 0.60, NDCG 0.907, MAP 0.458, MRR 1.0, mean neg rank 278.7). That weight was recovered FROM the eval pool after the fact, so it is reported here only as a reconstruction of what Wave 1 must have used; it is NOT adopted, because adopting it would be tuning on the test set. The Wave-1 blend weight itself is undocumented."
+ },
+ "verdict": "NO-GO \u2014 offline",
+ "recommendations_built": false,
+ "recommendations_note": "No candidate passes Legs 1-3, so per the eval-spec sequencing no new recommendation list is built or spent. The v7 playlist (v2 list, pending Kevin rating) stands as the current best.",
+ "wall_s": 11.2
+}

@@ -11,7 +11,7 @@ v6 score (baseline, from recommend.py) = |bpm-med|/IQR
 Lower = closer fit. Per-bucket profile when a bucket is known, else the
 global profile.
 """
-import json, os
+import json, os, re
 import numpy as np
 
 BASE = os.path.expanduser('~/workspace/audio-pipeline')
@@ -41,6 +41,15 @@ V6_PROFILE = {
 }
 V6_GLOBAL = {'bpm_med': 123.0, 'bpm_p25': 103.0, 'bpm_p75': 152.0,
              'energy': 0.320, 'bright': 2766}
+
+
+def clean(s):
+    s = (s or '').lower()
+    s = re.sub(r'\(feat[^)]*\)', '', s)
+    s = re.sub(r'\[.*?\]', '', s)
+    s = re.sub(r'[^\w\s]', '', s)
+    s = re.sub(r'\s+', ' ', s).strip()
+    return s
 
 
 def feat_vector(rec):
@@ -94,8 +103,13 @@ def v6_score(librosa_feats, bucket=None):
 class V2Model:
     """Loads model_v2.npz/json and scores feature vectors."""
 
-    def __init__(self):
-        z = np.load(os.path.join(BASE, 'model_v2.npz'))
+    def __init__(self, artifact=None, config=None):
+        if artifact is None:
+            with np.load(os.path.join(BASE, 'model_v2.npz')) as stored:
+                artifact = dict(stored)
+            with open(os.path.join(BASE, 'model_v2.json')) as stream:
+                config = json.load(stream)
+        z = artifact
         self.median = z['imputer_median']
         self.mean = z['scaler_mean']
         self.scale = z['scaler_scale']
@@ -108,9 +122,8 @@ class V2Model:
         self.negdist_std = float(z['negdist_std'])
         self.lr_mean = float(z['lr_mean'])
         self.lr_std = float(z['lr_std'])
-        cfg = json.load(open(os.path.join(BASE, 'model_v2.json')))
-        self.gmm_k = cfg['gmm_k']
-        self.clusters = cfg['clusters']
+        self.gmm_k = config['gmm_k']
+        self.clusters = config['clusters']
 
     def score_matrix(self, X_raw):
         """X_raw: (n, d) with NaNs. Returns dict of score components."""
@@ -121,8 +134,10 @@ class V2Model:
         d = np.sqrt(((P[:, None, :] - self.centroids[None, :, :]) ** 2).sum(axis=2))
         dmin = d.min(axis=1)
         logodds = Z @ self.lr_coef + self.lr_intercept
-        z_negdist = (-dmin - self.negdist_mean) / self.negdist_std
-        z_lr = (logodds - self.lr_mean) / self.lr_std
+        z_negdist = ((-dmin - self.negdist_mean) / self.negdist_std
+                     if self.negdist_std else np.zeros_like(dmin))
+        z_lr = ((logodds - self.lr_mean) / self.lr_std
+                if self.lr_std else np.zeros_like(logodds))
         final = 0.5 * z_negdist + 0.5 * z_lr
         nearest = d.argmin(axis=1)
         return {'final': final, 'z_negdist': z_negdist, 'z_lr': z_lr,

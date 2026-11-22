@@ -3,8 +3,10 @@
 Matches Spotify liked tracks to Deezer, downloads 30s previews,
 computes BPM, key, brightness, energy, harshness with librosa.
 """
-import json, os, re, sys, time, urllib.parse, urllib.request
+import json, os, sys, time, urllib.parse, urllib.request
 import numpy as np
+
+from scoring import clean
 
 BASE = os.path.expanduser('~/workspace/audio-pipeline')
 PREV = os.path.join(BASE, 'previews')
@@ -15,14 +17,6 @@ def log(msg):
     print(msg, flush=True)
     with open(LOG, 'a') as f:
         f.write(msg + '\n')
-
-def clean(s):
-    s = (s or '').lower()
-    s = re.sub(r'\(feat[^)]*\)', '', s)
-    s = re.sub(r'\[.*?\]', '', s)
-    s = re.sub(r'[^\w\s]', '', s)
-    s = re.sub(r'\s+', ' ', s).strip()
-    return s
 
 def deezer_search(title, artist):
     q = f"{artist} {title}"
