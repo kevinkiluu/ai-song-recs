@@ -200,6 +200,47 @@ def mmr_select(cands, feats_std, scores, k, lam=MMR_LAMBDA):
     return selected
 
 
+def pick_search_hit(title, artist, response):
+    """Pick the best Spotify track ID from a search response.
+
+    Prefers an exact title match (cleaned, case-insensitive) over document
+    order; among exact matches only one whose first artist agrees is
+    returned. When no exact title match exists, falls back to the first
+    hit. When exact title matches exist but none agrees on artist, returns
+    None instead of attaching a different artist's same-title track (live
+    case: "drift (feat. Lames)" returns only other artists' "Drift"
+    recordings). The old code returned the first track URI in document
+    order, which picked "af1" for a "drift" query in the v9 run.
+    Title/artist comparison uses clean(), the same normalisation as the
+    dedup keys in load_id_sets()."""
+    hits = []
+
+    def walk(o):
+        if isinstance(o, dict):
+            uri = o.get('spotify_uri', '')
+            if isinstance(uri, str) and uri.startswith('spotify:track:'):
+                hits.append(o)
+                return
+            for v in o.values():
+                walk(v)
+        elif isinstance(o, list):
+            for v in o:
+                walk(v)
+
+    walk(response)
+    if not hits:
+        return None
+    want_title = clean(title)
+    want_artist = clean((artist or '').split(',')[0])
+    exact = [h for h in hits if clean(h.get('title', '')) == want_title]
+    if exact:
+        for h in exact:
+            if clean((h.get('subtitle', '') or '').split(',')[0]) == want_artist:
+                return h['spotify_uri'].replace('spotify:track:', '')
+        return None
+    return hits[0]['spotify_uri'].replace('spotify:track:', '')
+
+
 def spotify_search_id(title, artist):
     r = subprocess.run(['/opt/hatch/bin/spotify-api', 'search', '--query', title,
                         '--artist', artist, '--search-type', 'TRACKS'],
@@ -210,23 +251,7 @@ def spotify_search_id(title, artist):
         d = json.loads(r.stdout)
     except Exception:
         return None
-    # walk the response for the first track uri
-    def walk(o):
-        if isinstance(o, dict):
-            uri = o.get('spotify_uri', '')
-            if isinstance(uri, str) and uri.startswith('spotify:track:'):
-                return uri.replace('spotify:track:', '')
-            for v in o.values():
-                x = walk(v)
-                if x:
-                    return x
-        elif isinstance(o, list):
-            for v in o:
-                x = walk(v)
-                if x:
-                    return x
-        return None
-    return walk(d)
+    return pick_search_hit(title, artist, d)
 
 
 def is_already_known(sid, title, artist, liked_ids, liked_keys, hist_ids, hist_keys):
