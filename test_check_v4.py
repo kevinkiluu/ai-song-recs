@@ -14,6 +14,17 @@ class AuditTests(unittest.TestCase):
     def test_independent_checker_accepts_the_emitted_record(self):
         verify(self.audit)
 
+    def test_checker_accepts_fresh_labels_joined_to_frozen_rows(self):
+        likes, rejects, catalog = fixture()
+        new = [dict(spotify_id=record['spotify_id'], label_source='sealed ratings',
+                    label='reject' if i < 2 else 'like')
+               for i, record in enumerate(catalog[:13])]
+        report = run_experiment(likes, rejects, catalog, fresh=new)
+        self.assertEqual(report['pools']['full']['counts']['like'], 11)
+        self.assertTrue(all(row['source'] == 'frozen_catalog' for row in report['manifest']
+                            if row['partition'] == 'test'))
+        verify(report)
+
     def test_checker_rejects_rank_and_metric_tampering(self):
         audit = copy.deepcopy(self.audit)
         audit['pools']['full']['rows'][0]['ranks']['v2_refit'] = 0
@@ -34,6 +45,14 @@ class AuditTests(unittest.TestCase):
         audit = copy.deepcopy(self.audit)
         audit['pools']['sample_42']['rows'][0]['label'] = 'unlabeled'
         with self.assertRaisesRegex(ValueError, 'label'):
+            verify(audit)
+
+    def test_checker_rebuilds_identity_tokens_from_raw_ids(self):
+        audit = copy.deepcopy(self.audit)
+        train = next(r for r in audit['manifest'] if r['partition'] == 'train')
+        heldout = next(r for r in audit['manifest'] if r['partition'] == 'test')
+        heldout['spotify_id'] = train['spotify_id']
+        with self.assertRaisesRegex(ValueError, 'identity'):
             verify(audit)
 
     def test_checker_rejects_training_identity_in_evaluation(self):

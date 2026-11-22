@@ -42,6 +42,9 @@ class ExperimentTests(unittest.TestCase):
         full_ids = {r['recording_id'] for r in full['rows']}
         self.assertEqual(len(full_ids), len(full['rows']))
         self.assertEqual(len(sample['rows']), 17)
+        full_scores = {r['recording_id']: r['scores'] for r in full['rows']}
+        self.assertTrue(all(r['scores'] == full_scores[r['recording_id']]
+                            for r in sample['rows']))
         self.assertTrue({r['recording_id'] for r in sample['rows']} <= full_ids)
         self.assertTrue(all(len(row['scores']) == len(row['ranks']) == 4
                             for row in full['rows']))
@@ -72,6 +75,38 @@ class ExperimentTests(unittest.TestCase):
         self.assertEqual(sum(r['method'] == v4.TRIAL for r in reveal), 5)
         self.assertEqual({r['token'] for r in blind}, {r['token'] for r in reveal})
         self.assertTrue(all(len(r['scores']) == 4 for r in reveal))
+        one_round = dict(trial_id=result['trial_id'], reveal=reveal,
+                         ratings={row['token']: True for row in blind})
+        summary = v4.summarize_live([one_round], result['trial_id'], result['pools'])
+        self.assertEqual((summary['keeps'], summary['n']), (5, 5))
+        with self.assertRaisesRegex(ValueError, 'repeat'):
+            v4.summarize_live([one_round, one_round], result['trial_id'], result['pools'])
+        with self.assertRaisesRegex(ValueError, 'trial'):
+            v4.summarize_live([one_round], 'another-model', result['pools'])
+
+    def test_gate_requires_ablated_arm_to_beat_intact_embeat(self):
+        pool = {
+            'counts': {'like': 20, 'reject': 4},
+            'chance_p_at_k': .2, 'chance_mean_rank': 50,
+            'metrics': {v4.TRIAL: {'p_at_k': .6, 'negative_top_k': 0,
+                                   'mean_negative_rank': 90}},
+            'deltas': {
+                'v2_refit': {'ndcg_at_k': .2, 'p_at_k': .2, 'map_at_k': .1},
+                'v6_frozen': {'ndcg_at_k': .1, 'p_at_k': .1, 'map_at_k': .1},
+                'embeat_full': {'ndcg_at_k': -.1, 'p_at_k': 0, 'map_at_k': 0}
+            }
+        }
+        self.assertEqual(v4.offline_decision({'full': pool}, fresh=True), 'NO_GO_OFFLINE')
+        pool['deltas']['embeat_full']['ndcg_at_k'] = .05
+        self.assertEqual(v4.offline_decision({'full': pool}, fresh=True), 'ELIGIBLE_FOR_BLIND')
+
+    def test_absent_fresh_matches_are_reported_as_insufficient(self):
+        likes, rejects, catalog = fixture()
+        fresh = [track('no-frozen-match', label='like', label_source='new observation')]
+        result = v4.run_experiment(likes, rejects, catalog, fresh=fresh, sample_size=0)
+        self.assertEqual(result['status'], 'INSUFFICIENT_EVIDENCE')
+        self.assertIn('No eligible known likes in the evaluation pool', result['blockers'])
+        self.assertFalse(result['pools'])
 
     def test_missing_private_inputs_are_reported_without_scoring(self):
         with tempfile.TemporaryDirectory() as path:

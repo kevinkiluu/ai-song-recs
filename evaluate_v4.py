@@ -21,13 +21,17 @@ def identity_tokens(record):
             continue
         if namespace == 'spotify':
             value = value.removeprefix('spotify:track:')
+        elif namespace == 'deezer':
+            if not value.isascii() or not value.isdecimal():
+                continue
+            value = value.lstrip('0')
         elif namespace == 'isrc':
             value = value.replace('-', '').upper()
         elif namespace == 'sha256':
             value = value.lower()
             if not re.fullmatch(r'[0-9a-f]{64}', value):
                 raise ValueError('preview_sha256 must be a 64-character hex digest')
-        if value:
+        if value.lower() not in ('', 'none', 'null', 'nan', 'unknown', '0'):
             tokens.append(f'{namespace}:{value}')
     return tokens
 
@@ -87,13 +91,25 @@ def build_manifest(likes, rejects, catalog, *, cutoff=130, holdout_start=0,
         labeled = [r for r in group if r['label'] != 'unlabeled']
         historic = [r for r in labeled if r['source'] != 'fresh_judgment']
         fresh_rows = [r for r in labeled if r['source'] == 'fresh_judgment']
+        if len({r['label'] for r in labeled}) > 1:
+            for row in group:
+                row['reason'] = 'conflicting labels'
+            continue
         if fresh_rows and historic:
             for row in fresh_rows:
                 row['reason'] = 'previously labeled recording'
             labeled = historic
-        if len({r['label'] for r in labeled}) > 1:
-            for row in group:
-                row['reason'] = 'conflicting labels'
+        elif fresh_rows:
+            candidates = [row for row in group if row['source'] == 'frozen_catalog'
+                          and has_preview_features(row['record'])]
+            if candidates:
+                chosen = min(candidates, key=lambda row: (tuple(row['identities']), row['row_id']))
+                judgment = min(fresh_rows, key=lambda row: row['row_id'])
+                chosen.update(partition='test', reason=None, label=judgment['label'],
+                              label_source=judgment['label_source'], judgment_row_id=judgment['row_id'])
+            for row in fresh_rows:
+                row['reason'] = ('judgment joined to frozen catalog' if candidates
+                                 else 'recording absent from eligible frozen catalog')
             continue
 
         partition = 'test'
@@ -111,7 +127,14 @@ def build_manifest(likes, rejects, catalog, *, cutoff=130, holdout_start=0,
                     if row not in choices:
                         row['reason'] = 'held-out recording alias'
             else:
-                partition, choices = 'train', historic
+                partition = 'train'
+                choices = historic if fresh is not None else [
+                    row for row in historic if row['record']['position'] >= cutoff]
+                for row in historic:
+                    if row not in choices:
+                        row['reason'] = 'newer than the position holdout'
+                if not choices:
+                    continue
         elif historic:
             partition = 'test' if fresh is None and key in reject_test else 'train'
 
@@ -179,7 +202,7 @@ def live_decision(offline_status, keeps=0, n=0, per_list_keeps=()):
         raise ValueError('invalid live keep counts')
     if offline_status != 'ELIGIBLE_FOR_BLIND':
         return offline_status
-    if len(per_list_keeps) >= 2 and max(per_list_keeps[-2:]) <= 7:
+    if any(max(a, b) <= 7 for a, b in zip(per_list_keeps, per_list_keeps[1:])):
         return 'NO_GO_LIVE'
     if n not in (42, 50):
         return 'PENDING_LIVE'

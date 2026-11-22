@@ -112,3 +112,11 @@ Tests (all re-run fresh 2026-11-22): `test_pipeline_v2.py` 37 green;
 1 xpassed; `test_embeat_port.py` 20 passed + T-16 FAIL (honest eval
 failure, not fixed by weakening the test); `test_bliss_features.py`
 20 passed + Z2 FAIL + 1 skipped.
+
+## v4 evaluation
+
+`integrate_v4.py` runs the recording-disjoint comparison of refit v2,
+historical v6, and Embeat with channel 1 on and off. `check_v4.py`
+independently verifies the local audit. See [the v4 evaluation
+report](evaluation_report_v4.md) for the historical replay, frozen input
+requirements, and blinded rating protocol.

@@ -56,6 +56,13 @@ def _score_pool(pool, model, seed, buckets):
         rows.append(dict(recording_id=row['recording_id'], row_id=row['row_id'],
                          label=row['label'], label_source=row['label_source'],
                          scores=scores, embeat_tie_score=float(relatedness), ranks={}))
+    ranked = _rank_pool(rows)
+    ranked['channel_coverage'] = {name: len(result) for name, result in channels.items()}
+    return ranked
+
+
+def _rank_pool(rows):
+    rows = [dict(row, ranks={}) for row in rows]
     metrics = {}
     for method in METHODS:
         def ranking_key(row):
@@ -70,8 +77,7 @@ def _score_pool(pool, model, seed, buckets):
     counts = Counter(row['label'] for row in rows)
     return dict(rows=rows, metrics=metrics, counts=dict(counts),
                 chance_p_at_k=counts['like'] * min(K, len(rows)) / (K * len(rows)),
-                chance_mean_rank=(len(rows) + 1) / 2,
-                channel_coverage={name: len(result) for name, result in channels.items()})
+                chance_mean_rank=(len(rows) + 1) / 2)
 
 
 def _deltas(pool):
@@ -90,6 +96,9 @@ def offline_decision(pools, *, fresh):
     if full['counts'].get('like', 0) < K or full['counts'].get('reject', 0) < 2:
         return 'INSUFFICIENT_EVIDENCE'
     candidate = full['metrics'][TRIAL]
+    ablation = full['deltas']['embeat_full']
+    if ablation['ndcg_at_k'] <= 0 or ablation['p_at_k'] < 0:
+        return 'NO_GO_OFFLINE'
     for baseline in ('v2_refit', 'v6_frozen'):
         delta = full['deltas'][baseline]
         if delta['ndcg_at_k'] <= 0 or (
@@ -108,6 +117,8 @@ def offline_decision(pools, *, fresh):
 
 def run_experiment(likes, rejects, catalog, *, fresh=None, holdout_start=0,
                    cutoff=130, reject_fold=0, sample_size=200, live=None):
+    if sample_size < 0:
+        raise ValueError('sample size must be nonnegative')
     manifest = build_manifest(likes, rejects, catalog, cutoff=cutoff,
                               holdout_start=holdout_start, reject_fold=reject_fold,
                               fresh=fresh)
@@ -120,20 +131,20 @@ def run_experiment(likes, rejects, catalog, *, fresh=None, holdout_start=0,
                 row.update(partition='excluded', reason='missing training features')
             else:
                 train[row['label']].append(record)
-    public_rows = []
+    audit_rows = []
     for row in manifest:
         record = row['record']
         metadata = {name: record.get(name) for name in
                     ('spotify_id', 'deezer_id', 'isrc', 'preview_sha256',
                      'position', 'added_at', 'title', 'artist', 'audio_source')}
-        public_rows.append({key: value for key, value in row.items() if key != 'record'}
+        audit_rows.append({key: value for key, value in row.items() if key != 'record'}
                            | metadata)
 
     pools, blocked = {}, []
     if len(train['like']) < 3 or not train['reject']:
         blocked.append('Need at least three training likes and one disjoint training reject')
-    if not pool:
-        blocked.append('No eligible evaluation rows')
+    if not any(row['label'] == 'like' for row in pool):
+        blocked.append('No eligible known likes in the evaluation pool')
     seed_id = None
     if not blocked:
         with threadpool_limits(limits=1):
@@ -149,13 +160,18 @@ def run_experiment(likes, rejects, catalog, *, fresh=None, holdout_start=0,
                            if row['partition'] == 'train' and row['record'] is seed)
             pools['full'] = _score_pool(pool, model, seed, buckets)
             for draw in SEEDS:
-                sample = sample_pool(pool, sample_size, draw)
-                pools[f'sample_{draw}'] = _score_pool(sample, model, seed, buckets)
+                sample = sample_pool(pools['full']['rows'], sample_size, draw)
+                pools[f'sample_{draw}'] = _rank_pool(sample)
         for value in pools.values():
             value['deltas'] = _deltas(value)
 
     offline = offline_decision(pools, fresh=fresh is not None)
-    live_counts = live or {'keeps': 0, 'n': 0, 'per_list_keeps': []}
+    trial_id = (hashlib.sha256(json.dumps(pools['full']['rows'], sort_keys=True,
+                                          allow_nan=False).encode()).hexdigest()
+                if pools else None)
+    live_rounds = [] if live is None else live
+    live_counts = summarize_live(live_rounds, trial_id, pools)
+    checkpoint = {key: live_counts[key] for key in ('keeps', 'n', 'per_list_keeps')}
     return dict(
         version=4, base_sha=BASE_SHA, split='fresh judgments' if fresh is not None else 'position-based',
         settings=dict(holdout_start=holdout_start, cutoff=cutoff, reject_fold=reject_fold,
@@ -164,9 +180,49 @@ def run_experiment(likes, rejects, catalog, *, fresh=None, holdout_start=0,
                            fresh=len(fresh or [])),
         scope='Matched ranking on the frozen catalog. Retrieval quality is unverified.',
         training_counts={kind: len(records) for kind, records in train.items()},
-        seed_recording_id=seed_id, manifest=public_rows, pools=pools, blockers=blocked,
-        offline_status=offline, live=live_counts, status=live_decision(offline, **live_counts),
+        seed_recording_id=seed_id, manifest=audit_rows, pools=pools, blockers=blocked,
+        trial_id=trial_id, offline_status=offline, live=live_counts, live_rounds=live_rounds,
+        status=live_decision(offline, **checkpoint),
     )
+
+
+def summarize_live(rounds, trial_id, pools):
+    """Count only unique challenger ratings linked to a private round key."""
+    if not isinstance(rounds, list):
+        raise ValueError('live input must be a list of rated rounds')
+    rows = {row['recording_id']: row for row in pools.get('full', {}).get('rows', ())}
+    seen_recordings, seen_spotify, challenger = set(), set(), []
+    for entry in rounds:
+        if trial_id is None or entry.get('trial_id') != trial_id:
+            raise ValueError('live round belongs to a different trial')
+        deck, ratings = entry['reveal'], entry['ratings']
+        tokens = {row['token'] for row in deck}
+        if (len(deck) != len(tokens) or set(ratings) != tokens
+                or not 2 <= len(deck) <= K or any(type(value) is not bool for value in ratings.values())
+                or Counter(row['method'] for row in deck) != {TRIAL: len(deck)//2,
+                                                              'v2_refit': len(deck)//2}
+                or len(deck) % 2):
+            raise ValueError('live round needs balanced arms and one boolean rating per token')
+        for pick in deck:
+            recording, spotify = pick['recording_id'], pick['spotify_id']
+            row = rows.get(recording)
+            if recording in seen_recordings or spotify in seen_spotify:
+                raise ValueError('live rating repeats a recording')
+            if (not isinstance(spotify, str) or not re.fullmatch(r'[A-Za-z0-9]{22}', spotify)
+                    or not row or row['label'] != 'unlabeled' or row['scores'] != pick['scores']
+                    or row['ranks'] != pick['ranks']):
+                raise ValueError('live rating does not match the frozen trial rows')
+            seen_recordings.add(recording)
+            seen_spotify.add(spotify)
+            if pick['method'] == TRIAL:
+                challenger.append(ratings[pick['token']])
+    total = len(challenger)
+    if total > 50:
+        raise ValueError('live protocol ends at 50 challenger judgments')
+    n = 42 if 42 <= total < 50 else total
+    return dict(keeps=sum(challenger[:n]), n=n, total_challenger_judged=total,
+                per_list_keeps=[sum(challenger[i:i+10]) for i in range(0, n - 9, 10)])
+
 
 
 def prepare_blind(result, verified, excluded_ids, excluded_keys):
@@ -181,7 +237,10 @@ def prepare_blind(result, verified, excluded_ids, excluded_keys):
     selected = {method: [] for method in methods}
     ranking = {method: iter(sorted(rows, key=lambda row: row['ranks'][method]))
                for method in methods}
-    seen_ids, seen_keys = set(excluded_ids), set(excluded_keys)
+    previous = [row for entry in result.get('live_rounds', []) for row in entry['reveal']]
+    seen_recordings = {row['recording_id'] for row in previous}
+    seen_ids = set(excluded_ids) | {row['spotify_id'] for row in previous}
+    seen_keys = set(excluded_keys)
     for _ in range(K // 2):
         for method in methods:
             for row in ranking[method]:
@@ -190,15 +249,18 @@ def prepare_blind(result, verified, excluded_ids, excluded_keys):
                 key = (embeat.clean(data['title']), embeat.normalize_artist(data['artist']))
                 if (row['label'] != 'unlabeled' or not isinstance(sid, str)
                         or not re.fullmatch(r'[A-Za-z0-9]{22}', sid)
-                        or sid in seen_ids or key in seen_keys or not all(key)):
+                        or sid in seen_ids or row['recording_id'] in seen_recordings
+                        or key in seen_keys or not all(key)):
                     continue
                 seen_ids.add(sid)
+                seen_recordings.add(row['recording_id'])
                 seen_keys.add(key)
                 selected[method].append((row, data, sid))
                 break
 
     # Trim both arms to the same number if the verified catalog is sparse.
-    n = min(map(len, selected.values()))
+    remaining = 50 - result.get('live', {}).get('total_challenger_judged', 0)
+    n = min(remaining, *map(len, selected.values()))
     draft = [(method, row, meta, sid) for method, items in selected.items()
              for row, meta, sid in items[:n]]
     rng.shuffle(draft)
@@ -206,7 +268,7 @@ def prepare_blind(result, verified, excluded_ids, excluded_keys):
     for index, (method, row, meta, sid) in enumerate(draft, 1):
         token = f'{index:02d}'
         blind.append(dict(token=token, title=meta['title'], artist=meta['artist'], spotify_id=sid))
-        reveal.append(dict(token=token, method=method, recording_id=row['recording_id'],
+        reveal.append(dict(token=token, method=method, recording_id=row['recording_id'], spotify_id=sid,
                            scores=row['scores'], ranks=row['ranks']))
     return blind, reveal
 
@@ -229,7 +291,8 @@ def _write_blind(args, result):
     if missing:
         result['blind_list'] = {'status': 'missing shortlist inputs', 'missing': missing}
         return
-    exclusions = [row for path in (args.liked_export, args.history)
+    current_likes = args.current_likes or args.liked_export
+    exclusions = [row for path in (current_likes, args.history)
                   for row in _read_track_export(path).values()]
     ids = {sid for _, _, sid in exclusions}
     keys = {(embeat.clean(title), embeat.normalize_artist(artist))
@@ -241,7 +304,7 @@ def _write_blind(args, result):
             json.dump(blind, stream, indent=2)
             stream.write('\n')
         result['blind_list'] = {'status': 'local deck created', 'count': len(blind),
-                                'reveal_after_ratings': reveal}
+                                'trial_id': result['trial_id'], 'reveal_after_ratings': reveal}
     else:
         result['blind_list'] = {'status': 'no balanced verified shortlist'}
 
@@ -293,8 +356,9 @@ def main(argv=None):
     parser.add_argument('--cutoff', type=int, default=130)
     parser.add_argument('--reject-fold', type=int, choices=range(3), default=0)
     parser.add_argument('--sample-size', type=int, default=200)
-    parser.add_argument('--live', type=Path, help='Local aggregate blind judgment counts')
+    parser.add_argument('--live', type=Path, help='Local rated rounds with private answer keys')
     parser.add_argument('--liked-export', type=Path, help='Original liked-track TSV')
+    parser.add_argument('--current-likes', type=Path, help='Current liked-track TSV for blind-list exclusions')
     parser.add_argument('--history', type=Path, help='Prior recommendations TSV')
     parser.add_argument('--verified-spotify', type=Path, help='Recording ID to verified Spotify ID JSON')
     parser.add_argument('--blind-output', type=Path, help='Optional separate listener-only deck')
@@ -302,7 +366,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
     paths = {name: getattr(args, name) for name in
              ('likes', 'rejects', 'catalog', 'fresh', 'matches', 'live',
-              'liked_export', 'history', 'verified_spotify')
+              'liked_export', 'current_likes', 'history', 'verified_spotify')
              if getattr(args, name) is not None}
     input_paths = {path.resolve() for path in paths.values()}
     if args.output.resolve() in input_paths:

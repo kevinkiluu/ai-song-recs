@@ -59,9 +59,30 @@ class ManifestTests(unittest.TestCase):
         likes = [track('historic', position=0, deezer_id=90)]
         fresh = [track('new-id', deezer_id=90, label='like', label_source='export'),
                  track('new', label='like', label_source='export')]
+        frozen = track('new', value=8)
+        fresh += [track('absent', label='like', label_source='export')]
+        manifest = v4.build_manifest(likes, [], [frozen], fresh=fresh)
+        self.assertEqual(manifest[2]['reason'], 'previously labeled recording')
+        self.assertEqual(manifest[3]['reason'], 'judgment joined to frozen catalog')
+        self.assertEqual(manifest[4]['reason'], 'recording absent from eligible frozen catalog')
+        self.assertIs(manifest[1]['record'], frozen)
+        self.assertEqual((manifest[1]['partition'], manifest[1]['label']), ('test', 'like'))
+
+    def test_conflicting_new_rating_quarantines_historical_alias(self):
+        likes = [track('old', position=7, deezer_id=42)]
+        fresh = [track('new', deezer_id=42, label='reject', label_source='blind')]
         manifest = v4.build_manifest(likes, [], [], fresh=fresh)
-        self.assertEqual(manifest[1]['reason'], 'previously labeled recording')
-        self.assertEqual(manifest[2]['partition'], 'test')
+        self.assertEqual([row['reason'] for row in manifest], ['conflicting labels'] * 2)
+
+    def test_historical_sensitivity_does_not_train_on_newer_rows(self):
+        likes = [track(str(i), position=i) for i in range(5)]
+        manifest = v4.build_manifest(likes, [], [], holdout_start=2, cutoff=4)
+        self.assertEqual([r['partition'] for r in manifest],
+                         ['excluded', 'excluded', 'test', 'test', 'train'])
+
+    def test_provider_sentinels_are_unverified(self):
+        manifest = v4.build_manifest([], [], [track('spotify:track:None', deezer_id=-1)])
+        self.assertEqual(manifest[0]['reason'], 'unverified recording identity')
 
 
 class MetricsTests(unittest.TestCase):
@@ -94,6 +115,8 @@ class MetricsTests(unittest.TestCase):
         self.assertEqual(v4.live_decision('ELIGIBLE_FOR_BLIND', 31, 42), 'NO_GO_LIVE')
         self.assertEqual(v4.live_decision('ELIGIBLE_FOR_BLIND', 37, 50), 'GO')
         self.assertEqual(v4.live_decision('ELIGIBLE_FOR_BLIND', 32, 42, [7, 7]), 'NO_GO_LIVE')
+        self.assertEqual(v4.live_decision('ELIGIBLE_FOR_BLIND', 32, 42, [7, 7, 8, 8]),
+                         'NO_GO_LIVE')
         self.assertEqual(v4.live_decision('INSUFFICIENT_EVIDENCE', 42, 42),
                          'INSUFFICIENT_EVIDENCE')
         with self.assertRaises(ValueError):
