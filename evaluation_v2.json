@@ -1,0 +1,109 @@
+{
+ "v2": {
+  "n_ranked": 311,
+  "P@10": 0.5,
+  "NDCG@10": 0.726,
+  "mean_rank_heldout_like": 137.7,
+  "mean_score_negative": -1.787,
+  "mean_rank_negative": 292.9,
+  "top10_kinds": [
+   "distractor",
+   "heldout",
+   "heldout",
+   "distractor",
+   "heldout",
+   "distractor",
+   "heldout",
+   "distractor",
+   "distractor",
+   "heldout"
+  ]
+ },
+ "v6_per_bucket": {
+  "n_ranked": 311,
+  "P@10": 0.5,
+  "NDCG@10": 0.666,
+  "mean_rank_heldout_like": 136.0,
+  "mean_score_negative": 3.362,
+  "mean_rank_negative": 173.3,
+  "top10_kinds": [
+   "distractor",
+   "heldout",
+   "distractor",
+   "distractor",
+   "heldout",
+   "heldout",
+   "distractor",
+   "distractor",
+   "heldout",
+   "heldout"
+  ]
+ },
+ "v6_global": {
+  "n_ranked": 311,
+  "P@10": 0.6,
+  "NDCG@10": 0.664,
+  "mean_rank_heldout_like": 132.2,
+  "mean_score_negative": 3.337,
+  "mean_rank_negative": 178.2,
+  "top10_kinds": [
+   "distractor",
+   "distractor",
+   "heldout",
+   "distractor",
+   "heldout",
+   "heldout",
+   "heldout",
+   "heldout",
+   "heldout",
+   "distractor"
+  ]
+ },
+ "genre_sanity": {
+  "accuracy": 0.573,
+  "labels": [
+   "E",
+   "R",
+   "H",
+   "O"
+  ],
+  "confusion": [
+   [
+    29,
+    0,
+    8,
+    1
+   ],
+   [
+    11,
+    12,
+    3,
+    0
+   ],
+   [
+    7,
+    1,
+    9,
+    1
+   ],
+   [
+    3,
+    1,
+    2,
+    1
+   ]
+  ],
+  "n_train": 520,
+  "n_test": 89,
+  "note": "Fallback sanity check: predicts Kevin genre-bucket labels from audio features. GTZAN check is separate."
+ },
+ "counts": {
+  "test_likes": 129,
+  "test_with_librosa": 99,
+  "negatives": 13,
+  "negatives_with_librosa": 12,
+  "distractors": 200,
+  "pool_total": 590,
+  "v6_missing_scores": 0
+ }
+}

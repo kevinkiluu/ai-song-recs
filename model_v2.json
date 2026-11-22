@@ -1,0 +1,179 @@
+{
+ "method": "gmm",
+ "gmm_k": 4,
+ "silhouette_gmm": 0.02,
+ "silhouette_hdbscan_umap": 0.48,
+ "pca_explained_15": 0.681,
+ "clusters": [
+  {
+   "cluster": 0,
+   "size": 81,
+   "genre_counts": {
+    "H": 48,
+    "E": 23,
+    "O": 7
+   }
+  },
+  {
+   "cluster": 1,
+   "size": 144,
+   "genre_counts": {
+    "H": 69,
+    "E": 48,
+    "R": 14
+   }
+  },
+  {
+   "cluster": 2,
+   "size": 11,
+   "genre_counts": {
+    "H": 7,
+    "E": 3,
+    "O": 1
+   }
+  },
+  {
+   "cluster": 3,
+   "size": 284,
+   "genre_counts": {
+    "H": 122,
+    "E": 107,
+    "R": 33
+   }
+  }
+ ],
+ "lr_train_accuracy_weighted": 0.981,
+ "lr_n_pos": 520,
+ "lr_n_neg": 13,
+ "lr_top_coefficients": [
+  {
+   "feature": "lb_mfcc_mean_4",
+   "coef": 1.797
+  },
+  {
+   "feature": "lb_mfcc_std_9",
+   "coef": -1.756
+  },
+  {
+   "feature": "rb_acousticness",
+   "coef": -1.585
+  },
+  {
+   "feature": "lb_mfcc_std_11",
+   "coef": 1.213
+  },
+  {
+   "feature": "lb_mfcc_mean_9",
+   "coef": -0.997
+  },
+  {
+   "feature": "lb_zcr_std",
+   "coef": 0.93
+  },
+  {
+   "feature": "lb_zcr_mean",
+   "coef": -0.895
+  },
+  {
+   "feature": "lb_contrast_mean_3",
+   "coef": 0.827
+  },
+  {
+   "feature": "lb_contrast_mean_1",
+   "coef": 0.803
+  },
+  {
+   "feature": "rb_energy",
+   "coef": -0.788
+  }
+ ],
+ "feature_names": [
+  "rb_danceability",
+  "rb_energy",
+  "rb_valence",
+  "rb_acousticness",
+  "rb_instrumentalness",
+  "rb_speechiness",
+  "rb_liveness",
+  "rb_loudness",
+  "rb_tempo",
+  "rb_mode",
+  "rb_key_sin",
+  "rb_key_cos",
+  "lb_bpm",
+  "lb_onset_strength_mean",
+  "lb_brightness_mean",
+  "lb_brightness_std",
+  "lb_rolloff_mean",
+  "lb_bandwidth_mean",
+  "lb_flatness_mean",
+  "lb_zcr_mean",
+  "lb_zcr_std",
+  "lb_rms_mean",
+  "lb_rms_std",
+  "lb_loudness_db",
+  "lb_seg_brightness_delta",
+  "lb_seg_energy_delta",
+  "lb_contrast_mean_0",
+  "lb_contrast_mean_1",
+  "lb_contrast_mean_2",
+  "lb_contrast_mean_3",
+  "lb_contrast_mean_4",
+  "lb_contrast_mean_5",
+  "lb_contrast_mean_6",
+  "lb_mfcc_mean_0",
+  "lb_mfcc_mean_1",
+  "lb_mfcc_mean_2",
+  "lb_mfcc_mean_3",
+  "lb_mfcc_mean_4",
+  "lb_mfcc_mean_5",
+  "lb_mfcc_mean_6",
+  "lb_mfcc_mean_7",
+  "lb_mfcc_mean_8",
+  "lb_mfcc_mean_9",
+  "lb_mfcc_mean_10",
+  "lb_mfcc_mean_11",
+  "lb_mfcc_mean_12",
+  "lb_mfcc_std_0",
+  "lb_mfcc_std_1",
+  "lb_mfcc_std_2",
+  "lb_mfcc_std_3",
+  "lb_mfcc_std_4",
+  "lb_mfcc_std_5",
+  "lb_mfcc_std_6",
+  "lb_mfcc_std_7",
+  "lb_mfcc_std_8",
+  "lb_mfcc_std_9",
+  "lb_mfcc_std_10",
+  "lb_mfcc_std_11",
+  "lb_mfcc_std_12",
+  "lb_chroma_hist_0",
+  "lb_chroma_hist_1",
+  "lb_chroma_hist_2",
+  "lb_chroma_hist_3",
+  "lb_chroma_hist_4",
+  "lb_chroma_hist_5",
+  "lb_chroma_hist_6",
+  "lb_chroma_hist_7",
+  "lb_chroma_hist_8",
+  "lb_chroma_hist_9",
+  "lb_chroma_hist_10",
+  "lb_chroma_hist_11",
+  "lb_tonnetz_mean_0",
+  "lb_tonnetz_mean_1",
+  "lb_tonnetz_mean_2",
+  "lb_tonnetz_mean_3",
+  "lb_tonnetz_mean_4",
+  "lb_tonnetz_mean_5",
+  "lb_is_minor"
+ ],
+ "score_stats": {
+  "negdist_mean": -5.737427701655007,
+  "negdist_std": 3.254072241456443,
+  "lr_mean": 6.923058198180258,
+  "lr_std": 3.988941444210819
+ },
+ "test_n": 129,
+ "train_n": 520,
+ "recency_weight": "0.5 + 0.5*exp(-position/200), likes only"
+}
