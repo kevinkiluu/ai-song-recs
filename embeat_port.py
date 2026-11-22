@@ -72,11 +72,8 @@ BASE = os.path.expanduser('~/workspace/audio-pipeline')
 DATA = os.path.join(BASE, 'data')
 LIKED_FILE = os.path.expanduser('~/workspace/spotify-liked-songs.txt')
 HIST_FILE = os.path.expanduser('~/workspace/spotify-recommended-tracks.txt')
-sys.path.insert(0, BASE)
 
-from scoring import V2Model, feat_vector  # noqa: E402
-import pipeline as P  # noqa: E402  (clean(), used for normalization)
-from recommend_v2 import load_id_sets  # noqa: E402  (liked/history sets)
+from scoring import V2Model, clean, feat_vector  # noqa: E402
 
 # ---------------------------------------------------------------- constants
 CHANNEL_WEIGHTS = {
@@ -153,24 +150,27 @@ def load_negatives():
     return _NEGATIVES
 
 
-def artist_bucket_map():
+def artist_bucket_map(records=None):
     """First-artist (normalized) -> most common genre bucket among likes."""
     global _ARTIST_BUCKET
-    if _ARTIST_BUCKET is None:
-        m = {}
-        for t in load_liked():
-            a = normalize_artist(t.get('artist') or '')
-            b = t.get('genre_bucket')
-            if a and b:
-                m.setdefault(a, Counter())[b] += 1
-        _ARTIST_BUCKET = {a: c.most_common(1)[0][0] for a, c in m.items()}
-    return _ARTIST_BUCKET
+    if records is None and _ARTIST_BUCKET is not None:
+        return _ARTIST_BUCKET
+    m = {}
+    for t in load_liked() if records is None else records:
+        a = normalize_artist(t.get('artist') or '')
+        b = t.get('genre_bucket')
+        if a and b:
+            m.setdefault(a, Counter())[b] += 1
+    buckets = {a: c.most_common(1)[0][0] for a, c in m.items()}
+    if records is None:
+        _ARTIST_BUCKET = buckets
+    return buckets
 
 
 # ---------------------------------------------------------------- identity
 def normalize_artist(s):
     """First artist only, normalized the way pipeline.clean() does."""
-    return P.clean((s or '').split(',')[0].strip())
+    return clean((s or '').split(',')[0].strip())
 
 
 def title_stem(title):
@@ -181,7 +181,7 @@ def title_stem(title):
     s = re.sub(r'\([^)]*\)', '', s)
     s = re.sub(r'\[[^\]]*\]', '', s)
     s = re.split(r'\s+-\s+', s)[0]
-    s = P.clean(s)
+    s = clean(s)
     s = re.sub(r'\s+remix$', '', s)
     return re.sub(r'\s+', ' ', s).strip()
 
@@ -189,7 +189,7 @@ def title_stem(title):
 def is_seed_remix(cand, seed_rec):
     """True iff the candidate is a remix of the seed track itself:
     title contains 'remix', same title stem, same artist."""
-    if 'remix' not in P.clean(cand.get('title') or ''):
+    if 'remix' not in clean(cand.get('title') or ''):
         return False
     return (title_stem(cand.get('title') or '')
             == title_stem(seed_rec.get('title') or '')
@@ -200,10 +200,12 @@ def is_seed_remix(cand, seed_rec):
 def cand_key(rec):
     """Merge identity: ISRC when present, else normalized (title, artist).
     No-ISRC tracks are never dropped (is_filter_no_isrc = 0)."""
+    if '_evaluation_recording_id' in rec:
+        return ('evaluation', rec['_evaluation_recording_id'])
     isrc = rec.get('isrc')
     if isrc:
         return ('isrc', str(isrc))
-    return ('ta', P.clean(rec.get('title') or ''),
+    return ('ta', clean(rec.get('title') or ''),
             normalize_artist(rec.get('artist') or ''))
 
 
@@ -215,9 +217,9 @@ def _is_seed(cand, seed_rec):
     sid_c, sid_s = cand.get('spotify_id'), seed_rec.get('spotify_id')
     if sid_c and sid_s and sid_c != 'None' and sid_c == sid_s:
         return True
-    return ((P.clean(cand.get('title') or ''),
+    return ((clean(cand.get('title') or ''),
              normalize_artist(cand.get('artist') or ''))
-            == (P.clean(seed_rec.get('title') or ''),
+            == (clean(seed_rec.get('title') or ''),
                 normalize_artist(seed_rec.get('artist') or '')))
 
 
@@ -229,7 +231,7 @@ def embed_records(model, records):
     features) impute to the median and yield a defined, non-unit vector
     guarded to zero-norm instead of NaN."""
     if not records:
-        return np.zeros((0, 15))
+        return np.zeros((0, model.pca_comp.shape[0]))
     X, _ = zip(*[feat_vector(r) for r in records])
     X = np.vstack(X)
     X = np.where(np.isnan(X), model.median, X)
@@ -258,7 +260,7 @@ def _assign_bucket(rec, artist_bucket):
 
 
 # ---------------------------------------------------------------- index
-def build_index(pool_features, model_npz):
+def build_index(pool_features, model_npz, *, artist_buckets=None):
     """Build the retrieval index over a record list (pool tracks, or the
     eval items). Embeddings + brute-force cosine NN + dict payload
     indexes (artist, bucket, popularity proxy). model_npz is a path to
@@ -281,7 +283,7 @@ def build_index(pool_features, model_npz):
         model.negdist_std = float(z['negdist_std'])
         model.lr_mean = float(z['lr_mean'])
         model.lr_std = float(z['lr_std'])
-    ab = artist_bucket_map()
+    ab = artist_bucket_map() if artist_buckets is None else artist_buckets
     recs = []
     for r in pool_features:
         c = dict(r)
@@ -333,7 +335,7 @@ def build_index(pool_features, model_npz):
             related_by_via[via].add(rel)
     return {
         'records': recs, 'embeddings': emb, 'nn': nn, 'model': model,
-        'artist_index': dict(artist_index),
+        'artist_index': dict(artist_index), 'artist_buckets': ab,
         'bucket_index': dict(bucket_index),
         'related_by_via': {k: set(v) for k, v in related_by_via.items()},
         'bucket_v2_range': ranges,
@@ -383,8 +385,8 @@ def passes_filters(cand, seed_rec, seed_proxy=0.0):
         return False
     if is_seed_remix(cand, seed_rec):
         return False
-    ct = P.clean(cand.get('title') or '')
-    st = P.clean(seed_rec.get('title') or '')
+    ct = clean(cand.get('title') or '')
+    st = clean(seed_rec.get('title') or '')
     if st and ct.startswith(st + ' '):
         return False
     gate = min(seed_proxy, 0.1) if seed_proxy else 0.0
@@ -408,7 +410,7 @@ def passes_channel1_filter(cand, seed_rec, seed_bucket, bucket_voted,
 def _dedup_titles(cands):
     seen, out = set(), []
     for c in cands:
-        t = P.clean(c.get('title') or '')
+        t = clean(c.get('title') or '')
         if t in seen:
             continue
         seen.add(t)
@@ -450,7 +452,7 @@ def _unfiltered_similar(index, seed_rec, limit):
         c = _cand(index, int(i), cosine=1.0 - float(d))
         out.append(c)
     sp = seed_proxy(index, seed_rec,
-                    _assign_bucket(seed_rec, artist_bucket_map())[0])
+                    _assign_bucket(seed_rec, index['artist_buckets'])[0])
     out = [c for c in out if passes_filters(c, seed_rec, seed_proxy=sp)]
     return _dedup_titles(_dedup_isrc(out))
 
@@ -476,8 +478,7 @@ def vote_track_bucket(index, seed_rec):
         if len(top) == 1 or top[0][1] > 2.0 * top[1][1]:
             result = (top[0][0], 'vote')
     if result is None:
-        ab = artist_bucket_map()
-        b = ab.get(normalize_artist(seed_rec.get('artist') or ''))
+        b = index['artist_buckets'].get(normalize_artist(seed_rec.get('artist') or ''))
         if b in ('E', 'R', 'H', 'O'):
             result = (b, 'artist')
         else:
@@ -647,7 +648,7 @@ def merge_by_score(channel_lists, top_k=10, random_seed=616,
     for d in merged:
         if len(selected) >= top_k:
             break
-        t = P.clean(d.get('title') or '')
+        t = clean(d.get('title') or '')
         if t in titles:
             continue
         a = normalize_artist(d.get('artist') or '')
@@ -676,10 +677,10 @@ def merge_by_score(channel_lists, top_k=10, random_seed=616,
                 if 'popular' not in selected[j].get('sources', []):
                     old = selected[j]
                     counts[normalize_artist(old.get('artist') or '')] -= 1
-                    titles.discard(P.clean(old.get('title') or ''))
+                    titles.discard(clean(old.get('title') or ''))
                     selected[j] = d
                     counts[a] += 1
-                    titles.add(P.clean(d.get('title') or ''))
+                    titles.add(clean(d.get('title') or ''))
                     n_pop += 1
                     break
     # shortfall back-fill: remaining candidates in merged order, relaxing
@@ -690,7 +691,7 @@ def merge_by_score(channel_lists, top_k=10, random_seed=616,
                 break
             if d in selected:
                 continue
-            t = P.clean(d.get('title') or '')
+            t = clean(d.get('title') or '')
             if t in titles:
                 continue
             a = normalize_artist(d.get('artist') or '')
@@ -755,12 +756,14 @@ def recommend(seed_spotify_id, top_k=10, random_seed=616):
     ch5 = recall_related_track_stub(index, seed_rec, top_k=top_k)
     # exclusion: never re-recommend Liked Songs or history (by key; the
     # pool builder already excluded them, this is defense in depth)
+    from recommend_v2 import load_id_sets
+
     _, liked_keys, _, hist_keys = load_id_sets()
     excluded = liked_keys | hist_keys
 
     def _keep(c):
-        return (P.clean(c.get('title') or ''),
-                P.clean((c.get('artist') or '').split(',')[0])) not in excluded
+        return (clean(c.get('title') or ''),
+                clean((c.get('artist') or '').split(',')[0])) not in excluded
 
     lists = {'similar': [c for c in ch1 if _keep(c)],
              'popular': [c for c in ch2 if _keep(c)],
