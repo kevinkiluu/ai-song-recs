@@ -100,6 +100,34 @@ class ExperimentTests(unittest.TestCase):
         pool['deltas']['embeat_full']['ndcg_at_k'] = .05
         self.assertEqual(v4.offline_decision({'full': pool}, fresh=True), 'ELIGIBLE_FOR_BLIND')
 
+    def test_distractor_draw_ndcg_reversal_blocks_eligibility(self):
+        # Fold-2 pattern: full-pool NDCG is positive vs both baselines and
+        # every other leg passes, but a distractor draw reverses NDCG vs v6
+        # (and vs v2) while the P@10 signs still agree, so the P@10-only
+        # reversal check does not fire.
+        pool = {
+            'counts': {'like': 20, 'reject': 4},
+            'chance_p_at_k': .2, 'chance_mean_rank': 50,
+            'metrics': {v4.TRIAL: {'p_at_k': .6, 'negative_top_k': 0,
+                                   'mean_negative_rank': 90}},
+            'deltas': {
+                'v2_refit': {'ndcg_at_k': .2, 'p_at_k': .2, 'map_at_k': .1},
+                'v6_frozen': {'ndcg_at_k': .1, 'p_at_k': .1, 'map_at_k': .1},
+                'embeat_full': {'ndcg_at_k': .05, 'p_at_k': 0, 'map_at_k': 0}
+            }
+        }
+        draw = {
+            'deltas': {
+                'v2_refit': {'ndcg_at_k': -.05, 'p_at_k': .2, 'map_at_k': .1},
+                'v6_frozen': {'ndcg_at_k': -.15, 'p_at_k': .1, 'map_at_k': .1},
+                'embeat_full': {'ndcg_at_k': .05, 'p_at_k': 0, 'map_at_k': 0}
+            }
+        }
+        self.assertEqual(v4.offline_decision({'full': pool}, fresh=True),
+                         'ELIGIBLE_FOR_BLIND')
+        self.assertEqual(v4.offline_decision({'full': pool, 'sample_42': draw},
+                                             fresh=True), 'NO_GO_OFFLINE')
+
     def test_absent_fresh_matches_are_reported_as_insufficient(self):
         likes, rejects, catalog = fixture()
         fresh = [track('no-frozen-match', label='like', label_source='new observation')]
