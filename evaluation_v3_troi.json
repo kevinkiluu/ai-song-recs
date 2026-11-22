@@ -1,0 +1,422 @@
+{
+ "pool": {
+  "test_likes": 129,
+  "test_with_librosa": 99,
+  "negatives": 13,
+  "negatives_with_librosa": 12,
+  "distractors": 200,
+  "pool_total": 590,
+  "n_ranked": 311
+ },
+ "pool_note": "held-out by list position (date order unverified); spotify-liked-songs.txt has NO added dates",
+ "methods": {
+  "v2": {
+   "n_ranked": 311,
+   "P@10": 0.5,
+   "NDCG@10": 0.726,
+   "mean_rank_heldout_like": 137.7,
+   "mean_score_negative": -1.787,
+   "mean_rank_negative": 292.9,
+   "top10_kinds": [
+    "distractor",
+    "heldout",
+    "heldout",
+    "distractor",
+    "heldout",
+    "distractor",
+    "heldout",
+    "distractor",
+    "distractor",
+    "heldout"
+   ]
+  },
+  "v6_per_bucket": {
+   "n_ranked": 311,
+   "P@10": 0.5,
+   "NDCG@10": 0.666,
+   "mean_rank_heldout_like": 136.0,
+   "mean_score_negative": 3.362,
+   "mean_rank_negative": 173.3,
+   "top10_kinds": [
+    "distractor",
+    "heldout",
+    "distractor",
+    "distractor",
+    "heldout",
+    "heldout",
+    "distractor",
+    "distractor",
+    "heldout",
+    "heldout"
+   ]
+  },
+  "v6_global": {
+   "n_ranked": 311,
+   "P@10": 0.6,
+   "NDCG@10": 0.664,
+   "mean_rank_heldout_like": 132.2,
+   "mean_score_negative": 3.337,
+   "mean_rank_negative": 178.2,
+   "top10_kinds": [
+    "distractor",
+    "distractor",
+    "heldout",
+    "distractor",
+    "heldout",
+    "heldout",
+    "heldout",
+    "heldout",
+    "heldout",
+    "distractor"
+   ]
+  },
+  "troi": {
+   "n_ranked": 311,
+   "P@10": 0.9,
+   "NDCG@10": 0.99,
+   "mean_rank_heldout_like": 167.7,
+   "mean_score_negative": -151.167,
+   "mean_rank_negative": 151.2,
+   "top10_kinds": [
+    "heldout",
+    "heldout",
+    "heldout",
+    "heldout",
+    "heldout",
+    "heldout",
+    "distractor",
+    "heldout",
+    "heldout",
+    "heldout"
+   ]
+  },
+  "troi_post_filter": {
+   "n_ranked": 299,
+   "P@10": 0.9,
+   "NDCG@10": 0.99,
+   "mean_rank_heldout_like": 161.0,
+   "mean_score_negative": null,
+   "mean_rank_negative": null,
+   "top10_kinds": [
+    "heldout",
+    "heldout",
+    "heldout",
+    "heldout",
+    "heldout",
+    "heldout",
+    "distractor",
+    "heldout",
+    "heldout",
+    "heldout"
+   ]
+  }
+ },
+ "negatives_in_top10_pre_filter": 0,
+ "negatives_in_top10_post_filter": 0,
+ "per_item_negative_ranks_pre_filter": {
+  "30efCAopZCFcoi43sSToNr": 30,
+  "7zDu3l7DDlfSlt20YMKkWo": 44,
+  "32gSPav2xqFylAeCjJCxWi": 81,
+  "1vvBUZseJ7fwYPX1NedOLd": 100,
+  "4bkPAARkDov1lV05emEF7a": 120,
+  "6HacgXCExkzS552ILfJTXu": 129,
+  "2jv1ovpDpTJEPIlth5Wn07": 138,
+  "5v7oj9PosKdE39x9uwDs6C": 176,
+  "2y57H6nA3vic5t8awwaS69": 229,
+  "0FmrNFYyLLRtIS7XWJPLLk": 238,
+  "1GfBLbAhZUWdseuDqhocmn": 240,
+  "2slLXFcITuhf0oSp2wVJLv": 289
+ },
+ "decontaminated": {
+  "pool": {
+   "test_likes": 129,
+   "test_with_librosa": 94,
+   "negatives": 13,
+   "negatives_with_librosa": 12,
+   "distractors": 200,
+   "pool_total": 590,
+   "n_ranked": 306,
+   "n_dup_audio_removed": 5
+  },
+  "methods": {
+   "v2": {
+    "n_ranked": 306,
+    "P@10": 0.5,
+    "NDCG@10": 0.726,
+    "mean_rank_heldout_like": 134.6,
+    "mean_score_negative": -1.787,
+    "mean_rank_negative": 287.9,
+    "top10_kinds": [
+     "distractor",
+     "heldout",
+     "heldout",
+     "distractor",
+     "heldout",
+     "distractor",
+     "heldout",
+     "distractor",
+     "distractor",
+     "heldout"
+    ]
+   },
+   "v6_per_bucket": {
+    "n_ranked": 306,
+    "P@10": 0.4,
+    "NDCG@10": 0.654,
+    "mean_rank_heldout_like": 134.8,
+    "mean_score_negative": 3.362,
+    "mean_rank_negative": 169.5,
+    "top10_kinds": [
+     "distractor",
+     "heldout",
+     "distractor",
+     "distractor",
+     "heldout",
+     "heldout",
+     "distractor",
+     "distractor",
+     "heldout",
+     "distractor"
+    ]
+   },
+   "v6_global": {
+    "n_ranked": 306,
+    "P@10": 0.6,
+    "NDCG@10": 0.66,
+    "mean_rank_heldout_like": 131.4,
+    "mean_score_negative": 3.337,
+    "mean_rank_negative": 174.3,
+    "top10_kinds": [
+     "distractor",
+     "distractor",
+     "heldout",
+     "distractor",
+     "heldout",
+     "heldout",
+     "heldout",
+     "heldout",
+     "distractor",
+     "heldout"
+    ]
+   },
+   "troi": {
+    "n_ranked": 306,
+    "P@10": 0.8,
+    "NDCG@10": 0.82,
+    "mean_rank_heldout_like": 171.1,
+    "mean_score_negative": -146.667,
+    "mean_rank_negative": 146.7,
+    "top10_kinds": [
+     "distractor",
+     "heldout",
+     "heldout",
+     "heldout",
+     "heldout",
+     "heldout",
+     "heldout",
+     "heldout",
+     "distractor",
+     "heldout"
+    ]
+   }
+  },
+  "negatives_in_top10_pre_filter": 0,
+  "per_item_negative_ranks_pre_filter": {
+   "30efCAopZCFcoi43sSToNr": 24,
+   "7zDu3l7DDlfSlt20YMKkWo": 39,
+   "32gSPav2xqFylAeCjJCxWi": 76,
+   "1vvBUZseJ7fwYPX1NedOLd": 95,
+   "4bkPAARkDov1lV05emEF7a": 115,
+   "6HacgXCExkzS552ILfJTXu": 124,
+   "2jv1ovpDpTJEPIlth5Wn07": 133,
+   "5v7oj9PosKdE39x9uwDs6C": 172,
+   "2y57H6nA3vic5t8awwaS69": 226,
+   "0FmrNFYyLLRtIS7XWJPLLk": 235,
+   "1GfBLbAhZUWdseuDqhocmn": 237,
+   "2slLXFcITuhf0oSp2wVJLv": 284
+  },
+  "removed_items": [
+   {
+    "title": "Warriors",
+    "artist": "Asketa & Natan Chaim, Requenze, M.I.M.E",
+    "spotify_id": "3IpjZ7WnAwMp5HLAAGW94d",
+    "deezer_id": 3794801972
+   },
+   {
+    "title": "CRAZY",
+    "artist": "LE SSERAFIM",
+    "spotify_id": "4gxEY3Mh5FZZDAJAKPNrCS",
+    "deezer_id": 2967699621
+   },
+   {
+    "title": "Red Rum",
+    "artist": "Cardeair\u00e8 Jack, Witchouse 40k",
+    "spotify_id": "0fgXxAsTZj5nv4xsGS6DCX",
+    "deezer_id": 2980031271
+   },
+   {
+    "title": "[Gen]inside",
+    "artist": "Catch Your Breath, Kami Kehoe",
+    "spotify_id": "1BK0Biq1BJ3HH57zq3Rlpf",
+    "deezer_id": 4015474791
+   },
+   {
+    "title": "Partyy",
+    "artist": "Softwilly, J\u00f8jo, LEX PAIN, Yumi",
+    "spotify_id": "0IaVAViDtNRVQfbkLnrs5h",
+    "deezer_id": 3952394101
+   }
+  ],
+  "random_P@10": 0.307,
+  "random_mean_rank": 153.5
+ },
+ "paired_bootstrap": {
+  "B": 10000,
+  "seed": 42,
+  "strata_counts": {
+   "heldout": 94,
+   "negative": 12,
+   "distractor": 200
+  },
+  "delta_P@10": {
+   "mean": 0.357,
+   "ci_95": [
+    -0.1,
+    0.8
+   ]
+  },
+  "delta_NDCG@10": {
+   "mean": 0.182,
+   "ci_95": [
+    -0.219,
+    0.572
+   ]
+  },
+  "P@10_troi": {
+   "mean": 0.757,
+   "ci_95": [
+    0.4,
+    1.0
+   ]
+  },
+  "P_delta_NDCG_le_0": 0.1936
+ },
+ "seed_sweep": {
+  "seeds": [
+   42,
+   43,
+   44,
+   45,
+   46
+  ],
+  "delta_P@10": {
+   "min": 0.2,
+   "median": 0.3,
+   "max": 0.6,
+   "per_seed": [
+    0.4,
+    0.2,
+    0.3,
+    0.6,
+    0.3
+   ]
+  },
+  "delta_NDCG@10": {
+   "min": 0.04,
+   "median": 0.166,
+   "max": 0.32,
+   "per_seed": [
+    0.166,
+    0.04,
+    0.115,
+    0.32,
+    0.235
+   ]
+  }
+ },
+ "prompt": "audio-neighbour:liked-seeds:3:easy similar-artist:top20:2:easy same-artist:top20:1:easy",
+ "exploration_prompt": "audio-neighbour:liked-seeds:3:medium similar-artist:top20:2:medium same-artist:top20:1:easy audio-neighbour:liked-seeds:1:hard",
+ "s1_status": "labs similar-artists endpoint verified live 2026-11-22 from this VM: reachable, validates algorithm enum, but HTTP 200 [] for tested artists (Sleep Theory, Linkin Park; 2 algorithms); no data returned, stream empty, degraded to S3+S4 only",
+ "thresholds_d2": {
+  "M1_P@10_delta_ge_0.10": {
+   "value": 0.3,
+   "threshold": 0.1,
+   "passed": true
+  },
+  "M2_NDCG@10_delta_ge_0.10": {
+   "value": 0.094,
+   "threshold": 0.1,
+   "passed": false
+  },
+  "M3_negatives_in_top10_eq_0": {
+   "value": 0,
+   "threshold": 0,
+   "passed": true
+  },
+  "M4_mean_neg_rank_ge_153.5_of_306": {
+   "value": 146.7,
+   "threshold": 153.5,
+   "passed": false,
+   "note": "spec says >= 200 of 343; pool is 311 raw / 306 decontaminated, rescaled to bottom half of 306 (>= 153.5; 156 would be the 311-pool rescale, also failed)"
+  },
+  "M5_mean_rank_heldout_better_by_ge_10": {
+   "value": -36.5,
+   "threshold": 10,
+   "passed": false
+  },
+  "M6_human_keep_rate_ge_7_of_10": {
+   "value": null,
+   "threshold": 7,
+   "passed": null,
+   "note": "not measurable offline; requires Kevin blind rating of the next 10-track playlist"
+  },
+  "M7_leakage_integrity": {
+   "value": 0,
+   "threshold": 0,
+   "passed": true,
+   "note": "held-out IDs excluded from seeds + neighbour fit (T-16); 0 history IDs in output; 0 duplicate (title, artist) pairs in output (F3). NOTE: 5 duplicate-AUDIO held-out items found (same Deezer preview, different Spotify ID) -- removed in the decontaminated metrics, not counted against M7 because M7 is an ID-level check; the audio leak is a pool-construction flaw, recorded here."
+  }
+ },
+ "thresholds_note": "d.2 bars are minimums for inclusion, judged on DECONTAMINATED numbers. The eval-spec 4-leg GO rule governs the ship decision and is reported under four_leg/verdict.",
+ "four_leg": {
+  "leg1_offline_beats_v6": {
+   "passed": false,
+   "delta_P@10_vs_v6_per_bucket": 0.4,
+   "delta_NDCG@10_vs_v6_per_bucket": 0.166,
+   "bootstrap_ci_delta_NDCG@10": [
+    -0.219,
+    0.572
+   ],
+   "note": "Pass needs bootstrap CI lower bound on delta_NDCG > 0.00 AND point delta_P@10 >= +0.10."
+  },
+  "leg2_beats_chance": {
+   "passed": true,
+   "P@10_troi": 0.8,
+   "bootstrap_ci_P@10_troi": [
+    0.4,
+    1.0
+   ],
+   "random_P@10_rescaled": 0.307,
+   "random_P@10_spec_343": 0.379,
+   "note": "Pass needs P@10 >= 0.50 AND bootstrap lower bound > random baseline (0.307 on the 306 pool; spec states 0.379 on the stale 343 pool)."
+  },
+  "leg3_negative_control": {
+   "passed": false,
+   "negatives_in_top10": 0,
+   "negatives_in_top10_H_bucket": 0,
+   "mean_rank_negative": 146.7,
+   "random_mean_rank_rescaled": 153.5,
+   "random_mean_rank_spec_343": 172,
+   "half_width_95pct_ranks": 50.0,
+   "label": "UNDERPOWERED (n=13 negatives)",
+   "note": "Pass needs 0/13 in top 10 AND mean negative rank above the random mean rank (153.5 on the 306 pool; spec states 172 on the stale 343 pool)."
+  },
+  "leg4_live_keep_rate": {
+   "passed": null,
+   "note": "Not run: no judged v3 list exists yet. Binding rule: accumulate to n=42 judged tracks, pass needs k>=32 keeps (one-sided binomial p<=0.021 vs 0.60 AND Wilson 95% lower bound > 0.60). Per sequencing, Leg 4 is not run when Legs 1-3 fail."
+  }
+ },
+ "verdict": "NO-GO \u2014 offline (Leg 1 fails; Leg 3 fails)",
+ "verdict_sentence": "P@10 = 0.8 (v2 0.5, delta +0.30; v6-per-bucket 0.4, delta +0.40); NDCG@10 = 0.82 (delta vs v2 +0.094); negatives in top 10 = 0/13; mean negative rank = 146.7; Kevin keep rate = unmeasured. Verdict: NO-GO \u2014 offline (Leg 1 fails; Leg 3 fails) (decontaminated 306-item pool).",
+ "wall_s": 10.8
+}

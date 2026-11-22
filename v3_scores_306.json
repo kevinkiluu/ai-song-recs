@@ -1,0 +1,6124 @@
+{
+ "items": [
+  {
+   "spotify_id": "7ycK2uijskzxp4cGpGNoCi",
+   "deezer_id": 7472036,
+   "title": "Under The Knife",
+   "artist": "Rise Against",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -0.98,
+    "v6b": 2.16,
+    "v6g": 2.42,
+    "troi": -153,
+    "embeat_full": 1.1814814814814816,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.13569091903925817,
+    "bliss_adaptive": 0.1425254155569541,
+    "bliss_v2_blend": 0.17503565279054556
+   }
+  },
+  {
+   "spotify_id": "0ZEPxYppmhiWuLDenlcTQL",
+   "deezer_id": 4388793261,
+   "title": "BOTANIST",
+   "artist": "CAIRO!, damienfarron",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.395,
+    "v6b": 1.73,
+    "v6g": 1.4,
+    "troi": -304,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2042845794530627,
+    "bliss_adaptive": 0.20143981824889665,
+    "bliss_v2_blend": 0.0036202579431019125
+   }
+  },
+  {
+   "spotify_id": "7tLemVSIXNbNeEpdnEjkOc",
+   "deezer_id": 4377369921,
+   "title": "When You're Gone",
+   "artist": "Besomorph",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.061,
+    "v6b": 3.45,
+    "v6g": 2.91,
+    "troi": -232,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2027115939813625,
+    "bliss_adaptive": 0.21741943233284214,
+    "bliss_v2_blend": 0.32858798436957776
+   }
+  },
+  {
+   "spotify_id": "2VNPke6MRmTIYhW2mXwVlt",
+   "deezer_id": 4344734342,
+   "title": "Twist My Neck",
+   "artist": "loveshy, ThxSoMch",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.584,
+    "v6b": 2.91,
+    "v6g": 2.37,
+    "troi": -50,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16622690319226563,
+    "bliss_adaptive": 0.16600330202218322,
+    "bliss_v2_blend": 0.1914466737739352
+   }
+  },
+  {
+   "spotify_id": "6c1Bdvp208X0jbLmFnWbkC",
+   "deezer_id": 7419115,
+   "title": "Re-Education (Through Labor)",
+   "artist": "Rise Against",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -0.916,
+    "v6b": 1.45,
+    "v6g": 1.72,
+    "troi": -300,
+    "embeat_full": 1.2851851851851852,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.21201913247624887,
+    "bliss_adaptive": 0.19508798381942322,
+    "bliss_v2_blend": -0.41713781073841705
+   }
+  },
+  {
+   "spotify_id": "79kqYxIkS29va2I9AeL9ak",
+   "deezer_id": 4352064492,
+   "title": "Looks Can Kill",
+   "artist": "IVE",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.815,
+    "v6b": 2.34,
+    "v6g": 2.3,
+    "troi": -90,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.14157628826272248,
+    "bliss_adaptive": 0.1491996465023835,
+    "bliss_v2_blend": 1.3536155520980695
+   }
+  },
+  {
+   "spotify_id": "1mre3HoVD50XwY02NvxKZZ",
+   "deezer_id": 4368548081,
+   "title": "Pop",
+   "artist": "ILLIT",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.34,
+    "v6b": 2.93,
+    "v6g": 3.09,
+    "troi": -142,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19513572091836362,
+    "bliss_adaptive": 0.18837221698788742,
+    "bliss_v2_blend": 0.1174607239938465
+   }
+  },
+  {
+   "spotify_id": "10bXX8nVNHSc9gIlDgb9up",
+   "deezer_id": 4353837802,
+   "title": "DIPLOMA",
+   "artist": "Remydmc, Justin Stone",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": null,
+   "scores": {
+    "v2": 0.297,
+    "v6b": 3.21,
+    "v6g": 3.21,
+    "troi": -194,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.23873065189559345,
+    "bliss_adaptive": 0.22153744105487494,
+    "bliss_v2_blend": 0.1898903998726741
+   }
+  },
+  {
+   "spotify_id": "0AND941e6iXUJq3XMcBkLf",
+   "deezer_id": 3031809711,
+   "title": "$WERVIN\u3164",
+   "artist": "purge!",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": null,
+   "scores": {
+    "v2": -0.881,
+    "v6b": 4.35,
+    "v6g": 4.35,
+    "troi": -229,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2655927819775007,
+    "bliss_adaptive": 0.25724432409856424,
+    "bliss_v2_blend": -0.8395604665123451
+   }
+  },
+  {
+   "spotify_id": "4FwOsQ3ylB2fzRIt8jSGyZ",
+   "deezer_id": 4210750482,
+   "title": "Campo de' Fiori",
+   "artist": "NOMARKMORE",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "O",
+   "scores": {
+    "v2": -0.06,
+    "v6b": 2.18,
+    "v6g": 2.18,
+    "troi": -303,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.26410020205350887,
+    "bliss_adaptive": 0.2427165843034635,
+    "bliss_v2_blend": -0.2656362032554913
+   }
+  },
+  {
+   "spotify_id": "5COAu3CAWWyNkd6RozSAMj",
+   "deezer_id": 3898013101,
+   "title": "Whole Lotta Ice",
+   "artist": "GOTOU\u5bc4\u751f\u7363, vodvor",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.189,
+    "v6b": 2.28,
+    "v6g": 1.47,
+    "troi": -298,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2417146438893437,
+    "bliss_adaptive": 0.24202587295483968,
+    "bliss_v2_blend": -0.167350648583078
+   }
+  },
+  {
+   "spotify_id": "5PG5Sm3gvnya3koV2sjsqY",
+   "deezer_id": 3980915851,
+   "title": "Cold The Weather",
+   "artist": "Faceless 1-7",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.681,
+    "v6b": 2.29,
+    "v6g": 2.11,
+    "troi": -305,
+    "embeat_full": 1.8,
+    "embeat_minus_ch1": 1.8,
+    "bliss_fixed": 0.3143483790043754,
+    "bliss_adaptive": 0.29893042159877686,
+    "bliss_v2_blend": -1.108995732532183
+   }
+  },
+  {
+   "spotify_id": "3WkG1BmjFe51xog3ueoK9R",
+   "deezer_id": 2724767341,
+   "title": "Obstacles",
+   "artist": "Solven, Janet Tung",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "O",
+   "scores": {
+    "v2": 0.201,
+    "v6b": 4.26,
+    "v6g": 4.26,
+    "troi": -199,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20359386904600224,
+    "bliss_adaptive": 0.2119591514096672,
+    "bliss_v2_blend": 0.41698426755815976
+   }
+  },
+  {
+   "spotify_id": "41mFDh95BcXwmay7wvrv9A",
+   "deezer_id": 874453412,
+   "title": "No Crime",
+   "artist": "Asketa & Natan Chaim, Jess Ball",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.243,
+    "v6b": 2.32,
+    "v6g": 2.11,
+    "troi": -176,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19399906710275924,
+    "bliss_adaptive": 0.1980969023330452,
+    "bliss_v2_blend": 0.5256493940446725
+   }
+  },
+  {
+   "spotify_id": "7AKt9ByQPeQwMxV47UAa9l",
+   "deezer_id": 4234593422,
+   "title": "U Make Me - Asketa & Natan Chaim Remix",
+   "artist": "Disco Fries, Raquel Castro, Asketa & Natan Chaim",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -1.615,
+    "v6b": 0.83,
+    "v6g": 0.98,
+    "troi": -214,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17386548590519546,
+    "bliss_adaptive": 0.18424164317653507,
+    "bliss_v2_blend": -0.5773049233699867
+   }
+  },
+  {
+   "spotify_id": "5Ua23YkWmgmg13mVbpgW2g",
+   "deezer_id": 3794673562,
+   "title": "Superhero In My Sleep",
+   "artist": "Rival, Asketa & Natan Chaim",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.282,
+    "v6b": 3.13,
+    "v6g": 2.92,
+    "troi": -111,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20354921622163574,
+    "bliss_adaptive": 0.20149350935840235,
+    "bliss_v2_blend": 0.0870286956616942
+   }
+  },
+  {
+   "spotify_id": "7Lj0xk8V8jaTm58F7s51bE",
+   "deezer_id": 4363267651,
+   "title": "Games",
+   "artist": "Gaullin, WLCH",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": 1.252,
+    "v6b": 3.04,
+    "v6g": 3.19,
+    "troi": -4,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.23370172503156716,
+    "bliss_adaptive": 0.25471711760251853,
+    "bliss_v2_blend": 0.8849221194771933
+   }
+  },
+  {
+   "spotify_id": "6SrGM8PRxZGp26YS7GBae3",
+   "deezer_id": 1732988087,
+   "title": "FRIDAY",
+   "artist": "916frosty",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "H",
+   "scores": {
+    "v2": 0.619,
+    "v6b": 4.64,
+    "v6g": 3.81,
+    "troi": -196,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20697909578046847,
+    "bliss_adaptive": 0.22201526713786487,
+    "bliss_v2_blend": 0.6746531627206294
+   }
+  },
+  {
+   "spotify_id": "28KIoCOyzpswQUcS4sIMqm",
+   "deezer_id": 4219611182,
+   "title": "knock on wood",
+   "artist": "1oftheothers",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.419,
+    "v6b": 3.83,
+    "v6g": 3.5,
+    "troi": -145,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19789883384403045,
+    "bliss_adaptive": 0.22127315249346186,
+    "bliss_v2_blend": 0.613525540643047
+   }
+  },
+  {
+   "spotify_id": "5MOIAV008posdOGmxiJBsi",
+   "deezer_id": 4274980322,
+   "title": "Made My Night",
+   "artist": "LE SSERAFIM",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.863,
+    "v6b": 2.28,
+    "v6g": 2.43,
+    "troi": -8,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16079437579171718,
+    "bliss_adaptive": 0.1500075363882076,
+    "bliss_v2_blend": 1.2263238494349982
+   }
+  },
+  {
+   "spotify_id": "1D5L58KLBbceOynTP4DQnY",
+   "deezer_id": 3989506131,
+   "title": "It's Me",
+   "artist": "ILLIT",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.604,
+    "v6b": 3.53,
+    "v6g": 3.26,
+    "troi": -2,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16916838768843884,
+    "bliss_adaptive": 0.15872658360618067,
+    "bliss_v2_blend": 0.9794219215194542
+   }
+  },
+  {
+   "spotify_id": "0P9FSxwyM3JQ2MGcqxhzmg",
+   "deezer_id": 3472779881,
+   "title": "PLACE IN MY MIND (feat. shy martin)",
+   "artist": "Whethan, shy martin",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.611,
+    "v6b": 2.34,
+    "v6g": 2.3,
+    "troi": -37,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19129948524929213,
+    "bliss_adaptive": 0.19319328015674184,
+    "bliss_v2_blend": 0.7998196690683325
+   }
+  },
+  {
+   "spotify_id": "4OvvTXyoRyGi5HMkdkb3K9",
+   "deezer_id": 4015474741,
+   "title": "Control",
+   "artist": "Catch Your Breath",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -1.096,
+    "v6b": 2.07,
+    "v6g": 2.29,
+    "troi": -269,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16889541422269944,
+    "bliss_adaptive": 0.15651157828517193,
+    "bliss_v2_blend": -0.18094749299080987
+   }
+  },
+  {
+   "spotify_id": "0Tf7hCOVwDEaMwXkiz6loW",
+   "deezer_id": 4210237192,
+   "title": "Surrender",
+   "artist": "Gaullin, WLCH",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.749,
+    "v6b": 5.93,
+    "v6g": 5.39,
+    "troi": -12,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.4438472411345186,
+    "bliss_adaptive": 0.5418702104697308,
+    "bliss_v2_blend": -1.2099525080654423
+   }
+  },
+  {
+   "spotify_id": "4qicFWwY3d2Tvdc6Sedw2P",
+   "deezer_id": 3329548481,
+   "title": "Fuck You!",
+   "artist": "1nonly, Ciscaux",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.497,
+    "v6b": 3.92,
+    "v6g": 3.1,
+    "troi": -255,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.185935360981586,
+    "bliss_adaptive": 0.17501373223167271,
+    "bliss_v2_blend": 0.08674176983326734
+   }
+  },
+  {
+   "spotify_id": "1kpZfXInSxBr4KF73F1dow",
+   "deezer_id": 4072793251,
+   "title": "ARRAK",
+   "artist": "Faceless 1-7",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "H",
+   "scores": {
+    "v2": -1.172,
+    "v6b": 2.23,
+    "v6g": 1.39,
+    "troi": -228,
+    "embeat_full": 1.2,
+    "embeat_minus_ch1": 1.2,
+    "bliss_fixed": 0.256740586742778,
+    "bliss_adaptive": 0.2768088584133408,
+    "bliss_v2_blend": -0.9648239072065943
+   }
+  },
+  {
+   "spotify_id": "5R2HIQEC6QHhwSAHe08XyM",
+   "deezer_id": 4206540932,
+   "title": "LAST BREATH",
+   "artist": "Nevertel",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -0.531,
+    "v6b": 3.02,
+    "v6g": 3.26,
+    "troi": -112,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17506584727827854,
+    "bliss_adaptive": 0.16798622059261134,
+    "bliss_v2_blend": 0.15405039447274893
+   }
+  },
+  {
+   "spotify_id": "20L7L8Fqh5O2IeyReNtbBp",
+   "deezer_id": 4243093992,
+   "title": "Bad News",
+   "artist": "Lil Toe, SXMPRA",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -0.266,
+    "v6b": 3.0,
+    "v6g": 3.35,
+    "troi": -223,
+    "embeat_full": 0.8947368421052632,
+    "embeat_minus_ch1": 0.8947368421052632,
+    "bliss_fixed": 0.20606666798852463,
+    "bliss_adaptive": 0.20037065124346531,
+    "bliss_v2_blend": 0.07699657858357753
+   }
+  },
+  {
+   "spotify_id": "0bHLaArsQpVYVAUE2zwDEl",
+   "deezer_id": 4064789311,
+   "title": "Like That",
+   "artist": "Gaullin, deepcurrent",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.136,
+    "v6b": 3.17,
+    "v6g": 3.13,
+    "troi": -252,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.23469885767577486,
+    "bliss_adaptive": 0.2195047887797683,
+    "bliss_v2_blend": 0.11337288757592759
+   }
+  },
+  {
+   "spotify_id": "7rDleP2IpI5dpyzEcXcAUr",
+   "deezer_id": 4166644212,
+   "title": "I Got Your Back",
+   "artist": "ILLIT, HANA",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.538,
+    "v6b": 3.9,
+    "v6g": 3.06,
+    "troi": -302,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.25849526033185116,
+    "bliss_adaptive": 0.21860389774232844,
+    "bliss_v2_blend": -0.5458455899077562
+   }
+  },
+  {
+   "spotify_id": "7zIw2pKmGRJkkCB3eOEu1U",
+   "deezer_id": 4220817592,
+   "title": "Switch on Me",
+   "artist": "GOTOU\u5bc4\u751f\u7363, vodvor",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.307,
+    "v6b": 3.91,
+    "v6g": 3.66,
+    "troi": -261,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18510835227434316,
+    "bliss_adaptive": 0.15419959053282378,
+    "bliss_v2_blend": 0.2235746925796762
+   }
+  },
+  {
+   "spotify_id": "4F3v50jS42NKOuGppjwUHj",
+   "deezer_id": 1102227092,
+   "title": "Hush",
+   "artist": "One True God, Draicoh",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.713,
+    "v6b": 3.71,
+    "v6g": 3.37,
+    "troi": -26,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20065534931025092,
+    "bliss_adaptive": 0.17355559539983528,
+    "bliss_v2_blend": -0.1836248660073725
+   }
+  },
+  {
+   "spotify_id": "6PcPm97GmXub3WuwFPAMVT",
+   "deezer_id": 4140565741,
+   "title": "obsessed",
+   "artist": "1oftheothers",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.46,
+    "v6b": 1.98,
+    "v6g": 1.45,
+    "troi": -243,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.29791295677498086,
+    "bliss_adaptive": 0.2435455912153794,
+    "bliss_v2_blend": -0.820917080007788
+   }
+  },
+  {
+   "spotify_id": "2P55Usk8lvbbzfyC6nHxXw",
+   "deezer_id": 4363268041,
+   "title": "Too Fine",
+   "artist": "Gaullin, Linas Music",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.158,
+    "v6b": 2.32,
+    "v6g": 2.47,
+    "troi": -251,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16882741011062213,
+    "bliss_adaptive": 0.17842960231802119,
+    "bliss_v2_blend": 0.677239837010794
+   }
+  },
+  {
+   "spotify_id": "5sG3G54H21hNfd5etlheoe",
+   "deezer_id": 9919786,
+   "title": "Satellite",
+   "artist": "Rise Against",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -0.7,
+    "v6b": 2.17,
+    "v6g": 2.41,
+    "troi": -117,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17648182926727843,
+    "bliss_adaptive": 0.17221338790980462,
+    "bliss_v2_blend": 0.02667239435202351
+   }
+  },
+  {
+   "spotify_id": "25lD5Nw5e4ZcvtsvXHwGWG",
+   "deezer_id": 3173761591,
+   "title": "Dead2Me",
+   "artist": "loveshy",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.201,
+    "v6b": 3.81,
+    "v6g": 3.28,
+    "troi": -35,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16898749044796335,
+    "bliss_adaptive": 0.1520599910613559,
+    "bliss_v2_blend": 0.43038309306406614
+   }
+  },
+  {
+   "spotify_id": "1mFpMoeZfkIqtqW2AfQ8ba",
+   "deezer_id": 2797289692,
+   "title": "THE GIRLS - BLACKPINK THE GAME OST",
+   "artist": "BLACKPINK",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.689,
+    "v6b": 6.92,
+    "v6g": 6.48,
+    "troi": -238,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.48889309493428,
+    "bliss_adaptive": 0.4768885418183384,
+    "bliss_v2_blend": -2.5687207613921634
+   }
+  },
+  {
+   "spotify_id": "5H1sKFMzDeMtXwND3V6hRY",
+   "deezer_id": 3454677991,
+   "title": "JUMP",
+   "artist": "BLACKPINK",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.089,
+    "v6b": 2.88,
+    "v6g": 2.62,
+    "troi": -167,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.15949932089872426,
+    "bliss_adaptive": 0.13619796238975765,
+    "bliss_v2_blend": 0.7077689961267158
+   }
+  },
+  {
+   "spotify_id": "20Ov4hI7Z5xh9NkLMMf0db",
+   "deezer_id": 2694039312,
+   "title": "21 Gun Salute",
+   "artist": "Catch Your Breath",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -1.058,
+    "v6b": 2.07,
+    "v6g": 2.34,
+    "troi": -147,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1535073442355796,
+    "bliss_adaptive": 0.1561155247069343,
+    "bliss_v2_blend": -0.026750242276570912
+   }
+  },
+  {
+   "spotify_id": "1WyI0XnnwlzxsrQeevp5tX",
+   "deezer_id": 2694010142,
+   "title": "Tragedy",
+   "artist": "If Not For Me",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -0.154,
+    "v6b": 2.82,
+    "v6g": 3.1,
+    "troi": -256,
+    "embeat_full": 2.4091617933723195,
+    "embeat_minus_ch1": 0.968421052631579,
+    "bliss_fixed": 0.16182571136930887,
+    "bliss_adaptive": 0.15794991332288333,
+    "bliss_v2_blend": 0.5221965495921164
+   }
+  },
+  {
+   "spotify_id": "1MFvVwIPvzDrCBX44NXVuO",
+   "deezer_id": 2694010072,
+   "title": "No Thanks To You",
+   "artist": "If Not For Me",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -0.255,
+    "v6b": 3.36,
+    "v6g": 3.62,
+    "troi": -258,
+    "embeat_full": 0.8315789473684211,
+    "embeat_minus_ch1": 0.8315789473684211,
+    "bliss_fixed": 0.2368255693871255,
+    "bliss_adaptive": 0.22961185073402826,
+    "bliss_v2_blend": -0.17175429273360487
+   }
+  },
+  {
+   "spotify_id": "7b7EQFWor90ETS1HShGPZI",
+   "deezer_id": 2694010082,
+   "title": "Demons",
+   "artist": "If Not For Me",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -0.25,
+    "v6b": 2.82,
+    "v6g": 3.14,
+    "troi": -14,
+    "embeat_full": 2.4456140350877194,
+    "embeat_minus_ch1": 0.9789473684210527,
+    "bliss_fixed": 0.15430532225265745,
+    "bliss_adaptive": 0.14338605114209063,
+    "bliss_v2_blend": 0.5191989801066903
+   }
+  },
+  {
+   "spotify_id": "12ehSFI3uvGxJnZMIQqE6m",
+   "deezer_id": 2694010062,
+   "title": "Blameless",
+   "artist": "If Not For Me",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -0.895,
+    "v6b": 2.27,
+    "v6g": 2.54,
+    "troi": -267,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16363193248913135,
+    "bliss_adaptive": 0.17629242556875138,
+    "bliss_v2_blend": 0.00037176969458535547
+   }
+  },
+  {
+   "spotify_id": "68B6aP2i1p8GyhVZ1qSebZ",
+   "deezer_id": 4018650541,
+   "title": "JIGSAW",
+   "artist": "IVE",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": 1.091,
+    "v6b": 3.18,
+    "v6g": 3.14,
+    "troi": -72,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.15614607299041539,
+    "bliss_adaptive": 0.14985347028904802,
+    "bliss_v2_blend": 1.4209831457128734
+   }
+  },
+  {
+   "spotify_id": "6cAFXLvw1L4DJEmQF07KDm",
+   "deezer_id": 4136546821,
+   "title": "Not a Mistake",
+   "artist": "NOMARKMORE",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "O",
+   "scores": {
+    "v2": -0.164,
+    "v6b": 1.88,
+    "v6g": 1.88,
+    "troi": -165,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.27261824102436105,
+    "bliss_adaptive": 0.2642637824950441,
+    "bliss_v2_blend": -0.4077323677887563
+   }
+  },
+  {
+   "spotify_id": "59YzxaB9Y9s4ydbmcipb3U",
+   "deezer_id": 4099248421,
+   "title": "SEMPA FI",
+   "artist": "Faceless 1-7",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.87,
+    "v6b": 2.8,
+    "v6g": 2.51,
+    "troi": -301,
+    "embeat_full": 1.6,
+    "embeat_minus_ch1": 1.6,
+    "bliss_fixed": 0.16578178403394264,
+    "bliss_adaptive": 0.15793982723782443,
+    "bliss_v2_blend": -0.0004424407742090186
+   }
+  },
+  {
+   "spotify_id": "0Qc7UYagLJkUM8xZ3b7gKJ",
+   "deezer_id": 2694010052,
+   "title": "Feel Me Now",
+   "artist": "If Not For Me",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -0.277,
+    "v6b": 3.49,
+    "v6g": 3.83,
+    "troi": -17,
+    "embeat_full": 0.9052631578947369,
+    "embeat_minus_ch1": 0.9052631578947369,
+    "bliss_fixed": 0.19951837670529105,
+    "bliss_adaptive": 0.2086558900340989,
+    "bliss_v2_blend": 0.12403197140274717
+   }
+  },
+  {
+   "spotify_id": "65fDdaxaH2UxmjtlvIrI7y",
+   "deezer_id": 3333682211,
+   "title": "PAPERCUTS",
+   "artist": "WesGhost",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -1.074,
+    "v6b": 3.01,
+    "v6g": 2.17,
+    "troi": -57,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2726728995455118,
+    "bliss_adaptive": 0.22520431332679314,
+    "bliss_v2_blend": -1.0305441246514082
+   }
+  },
+  {
+   "spotify_id": "3xBQ4S6U0bnzy6uUzRAPnv",
+   "deezer_id": 4019994831,
+   "title": "Lie Awake",
+   "artist": "If Not For Me, Wind Walkers",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -0.98,
+    "v6b": 2.7,
+    "v6g": 3.01,
+    "troi": -254,
+    "embeat_full": 1.2333333333333334,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16748562631160965,
+    "bliss_adaptive": 0.14862088476600632,
+    "bliss_v2_blend": -0.08986822863108662
+   }
+  },
+  {
+   "spotify_id": "26e7XAE2XNM0S8rdVX70OH",
+   "deezer_id": 2940382231,
+   "title": "WALK STOP DROP",
+   "artist": "h3nce",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "O",
+   "scores": {
+    "v2": -0.282,
+    "v6b": 3.12,
+    "v6g": 3.12,
+    "troi": -10,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18288535768082592,
+    "bliss_adaptive": 0.19341927490980254,
+    "bliss_v2_blend": 0.2591937131194323
+   }
+  },
+  {
+   "spotify_id": "7ycUoqcTbTEEj5fRL8WhiG",
+   "deezer_id": 3896075191,
+   "title": "ENEMY LINES",
+   "artist": "SXMPRA",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -0.286,
+    "v6b": 2.45,
+    "v6g": 2.81,
+    "troi": -38,
+    "embeat_full": 4.574074074074074,
+    "embeat_minus_ch1": 2.9,
+    "bliss_fixed": 0.19152132867718819,
+    "bliss_adaptive": 0.1958223045461747,
+    "bliss_v2_blend": 0.1845057832677869
+   }
+  },
+  {
+   "spotify_id": "03phjSrcMaH29jt7u6VkOu",
+   "deezer_id": 3952394151,
+   "title": "MAGGOTS",
+   "artist": "Softwilly, KXLLSWXTCH, Yumi, LEX PAIN",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.56,
+    "v6b": 3.21,
+    "v6g": 2.41,
+    "troi": -122,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19481679045857722,
+    "bliss_adaptive": 0.18783632298339165,
+    "bliss_v2_blend": -0.03034182291101649
+   }
+  },
+  {
+   "spotify_id": "4dIxAVrv3gRNq1uZ5ezdJM",
+   "deezer_id": 4060865571,
+   "title": "Meaningless Love",
+   "artist": "1nonly, Silo",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "H",
+   "scores": {
+    "v2": 0.063,
+    "v6b": 4.43,
+    "v6g": 4.14,
+    "troi": -5,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19077759881148904,
+    "bliss_adaptive": 0.18786902092067342,
+    "bliss_v2_blend": 0.4293862376363534
+   }
+  },
+  {
+   "spotify_id": "5DJH1JUKQosVAzjrqWWqbW",
+   "deezer_id": 3328083701,
+   "title": "Did It All",
+   "artist": "Nevertel",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -0.25,
+    "v6b": 2.91,
+    "v6g": 3.19,
+    "troi": -268,
+    "embeat_full": 0.9157894736842105,
+    "embeat_minus_ch1": 0.9157894736842105,
+    "bliss_fixed": 0.13279311673707522,
+    "bliss_adaptive": 0.12662475127727377,
+    "bliss_v2_blend": 0.6984321678886425
+   }
+  },
+  {
+   "spotify_id": "5Ut7dImFwBmEoqtnn7nTB4",
+   "deezer_id": 3602489592,
+   "title": "All The Things",
+   "artist": "Gaullin",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.088,
+    "v6b": 2.43,
+    "v6g": 2.58,
+    "troi": -253,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16832749233213987,
+    "bliss_adaptive": 0.15937755673305123,
+    "bliss_v2_blend": 0.5131636114413627
+   }
+  },
+  {
+   "spotify_id": "33TjsdQk9yGN2VgrfGhSZf",
+   "deezer_id": 3981873231,
+   "title": "My Signal",
+   "artist": "Lonelysoul., Gaullin",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.861,
+    "v6b": 4.49,
+    "v6g": 4.45,
+    "troi": -249,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2371994171091883,
+    "bliss_adaptive": 0.23292890929100446,
+    "bliss_v2_blend": -0.5893173791886465
+   }
+  },
+  {
+   "spotify_id": "2g47YHPVWGuuJQlC7T35CE",
+   "deezer_id": 4068392081,
+   "title": "Soul Scars",
+   "artist": "Savage Ga$p, WesGhost, Witchouse 40k",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.082,
+    "v6b": 4.52,
+    "v6g": 3.68,
+    "troi": -28,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1571080188997656,
+    "bliss_adaptive": 0.15541765019973688,
+    "bliss_v2_blend": 0.6107443181172111
+   }
+  },
+  {
+   "spotify_id": "31vrT1chotKX94qbJKAVhA",
+   "deezer_id": 4089174761,
+   "title": "SOS",
+   "artist": "Jasiah, Meatcanyon, Sybyr",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -0.404,
+    "v6b": 2.54,
+    "v6g": 2.78,
+    "troi": -101,
+    "embeat_full": 1.7,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.14709013874846452,
+    "bliss_adaptive": 0.14363690300224558,
+    "bliss_v2_blend": 0.473991860789248
+   }
+  },
+  {
+   "spotify_id": "3OOKZkrUWnMdWJFAvy0b58",
+   "deezer_id": 3201573331,
+   "title": "Drop",
+   "artist": "HANA",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.233,
+    "v6b": 3.94,
+    "v6g": 3.1,
+    "troi": -179,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16629592672432647,
+    "bliss_adaptive": 0.16238564668289251,
+    "bliss_v2_blend": 0.749624497156655
+   }
+  },
+  {
+   "spotify_id": "3920QegiL2PHmaYYBVwexC",
+   "deezer_id": 3284976721,
+   "title": "ROSE",
+   "artist": "HANA",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.511,
+    "v6b": 2.52,
+    "v6g": 2.67,
+    "troi": -3,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20500267848707682,
+    "bliss_adaptive": 0.19815534986787214,
+    "bliss_v2_blend": 0.6172580003104324
+   }
+  },
+  {
+   "spotify_id": "6hnk0Fesq9JOhWpck8HJsj",
+   "deezer_id": 3432410561,
+   "title": "Blue Jeans",
+   "artist": "HANA",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.098,
+    "v6b": 3.17,
+    "v6g": 3.09,
+    "troi": -286,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20743180092483318,
+    "bliss_adaptive": 0.24121056932437818,
+    "bliss_v2_blend": 0.18051926249383113
+   }
+  },
+  {
+   "spotify_id": "3A5rfmGdSmfcNqIURUJt4z",
+   "deezer_id": 3647071282,
+   "title": "All I Need Is You",
+   "artist": "NOMARKMORE",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "O",
+   "scores": {
+    "v2": 1.218,
+    "v6b": 3.46,
+    "v6g": 3.46,
+    "troi": -6,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.21978772560546242,
+    "bliss_adaptive": 0.2303340273877969,
+    "bliss_v2_blend": 0.9775964780419268
+   }
+  },
+  {
+   "spotify_id": "3ZpgtxF9tG0SdH7qz40qK6",
+   "deezer_id": 3756080372,
+   "title": "Catch My Eye",
+   "artist": "MISAMO",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.646,
+    "v6b": 2.46,
+    "v6g": 2.42,
+    "troi": -58,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.14785184190787293,
+    "bliss_adaptive": 0.16112908408373847,
+    "bliss_v2_blend": 1.185749071214375
+   }
+  },
+  {
+   "spotify_id": "4KzNvdiaThTQx6UK6ReuIu",
+   "deezer_id": 2939688961,
+   "title": "Losing Faith",
+   "artist": "Nevertel",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -0.559,
+    "v6b": 2.58,
+    "v6g": 2.8,
+    "troi": -262,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17958999925540206,
+    "bliss_adaptive": 0.1730900976602877,
+    "bliss_v2_blend": 0.09720710257482686
+   }
+  },
+  {
+   "spotify_id": "7bcvoCr6gZgH0E65uRvEmm",
+   "deezer_id": 4003738101,
+   "title": "Novocaine",
+   "artist": "If Not For Me, Catch Your Breath",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": 0.82,
+    "v6b": 3.61,
+    "v6g": 3.9,
+    "troi": -257,
+    "embeat_full": 0.9263157894736842,
+    "embeat_minus_ch1": 0.9263157894736842,
+    "bliss_fixed": 0.20788825386579482,
+    "bliss_adaptive": 0.19205374965470048,
+    "bliss_v2_blend": 0.8045438579832704
+   }
+  },
+  {
+   "spotify_id": "3NHeEYq1z9Y3uhqqkeVFnj",
+   "deezer_id": 4064256381,
+   "title": "DO WHAT U WANNA!",
+   "artist": "CAIRO!",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.172,
+    "v6b": 1.7,
+    "v6g": 1.62,
+    "troi": -80,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2112165829779006,
+    "bliss_adaptive": 0.19229010912960806,
+    "bliss_v2_blend": 0.33364078684467824
+   }
+  },
+  {
+   "spotify_id": "0EIiEUREYnDRHbWKP55o4F",
+   "deezer_id": 3504208471,
+   "title": "Die For You",
+   "artist": "VALORANT, Grabbitz",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.827,
+    "v6b": 3.79,
+    "v6g": 3.35,
+    "troi": -45,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.15231210288608008,
+    "bliss_adaptive": 0.1527885803731493,
+    "bliss_v2_blend": 0.14119091497676095
+   }
+  },
+  {
+   "spotify_id": "6Bo1eMY8BFeG6TWrB67f73",
+   "deezer_id": 3898037431,
+   "title": "ALLBACK",
+   "artist": "GOTOU\u5bc4\u751f\u7363",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "H",
+   "scores": {
+    "v2": 1.265,
+    "v6b": 2.95,
+    "v6g": 2.69,
+    "troi": -289,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.21909229482077394,
+    "bliss_adaptive": 0.20310921121443548,
+    "bliss_v2_blend": 1.0155342769951918
+   }
+  },
+  {
+   "spotify_id": "3Y022K4zKNPHmGtDgnF7BL",
+   "deezer_id": 3328083711,
+   "title": "Break The Silence",
+   "artist": "Nevertel, Sleep Theory",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -1.1,
+    "v6b": 1.62,
+    "v6g": 1.89,
+    "troi": -274,
+    "embeat_full": 1.2074074074074075,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16132380249954464,
+    "bliss_adaptive": 0.15190489920513417,
+    "bliss_v2_blend": -0.12059874726985748
+   }
+  },
+  {
+   "spotify_id": "5VkpIzw9veia48jPjPD6LH",
+   "deezer_id": 3328083691,
+   "title": "Criminal",
+   "artist": "Nevertel",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -0.852,
+    "v6b": 2.89,
+    "v6g": 3.24,
+    "troi": -285,
+    "embeat_full": 1.362962962962963,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17066779815072652,
+    "bliss_adaptive": 0.16857363728788421,
+    "bliss_v2_blend": -0.02884088656418443
+   }
+  },
+  {
+   "spotify_id": "5YiZTYIfI5gdsL0evuC1nz",
+   "deezer_id": 3328083761,
+   "title": "Some Things",
+   "artist": "Nevertel",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -0.648,
+    "v6b": 2.34,
+    "v6g": 2.69,
+    "troi": -46,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.21948946401709754,
+    "bliss_adaptive": 0.22631595977669355,
+    "bliss_v2_blend": -0.2960909858199049
+   }
+  },
+  {
+   "spotify_id": "6aVmsQcdI3TLoY2H0FOAyh",
+   "deezer_id": 3926421801,
+   "title": "OTHERSIDE",
+   "artist": "Nevertel",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -0.929,
+    "v6b": 1.89,
+    "v6g": 2.2,
+    "troi": -290,
+    "embeat_full": 1.1555555555555554,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.15304242662504222,
+    "bliss_adaptive": 0.14566541246954592,
+    "bliss_v2_blend": 0.06534745373480177
+   }
+  },
+  {
+   "spotify_id": "3BmjRmFTESgWZLPSVGp8aG",
+   "deezer_id": 14628996,
+   "title": "Lying from You",
+   "artist": "Linkin Park",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -0.911,
+    "v6b": 2.66,
+    "v6g": 2.97,
+    "troi": -53,
+    "embeat_full": 1.1037037037037036,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1774146827985676,
+    "bliss_adaptive": 0.17408830070614936,
+    "bliss_v2_blend": -0.12540446525859264
+   }
+  },
+  {
+   "spotify_id": "05rltlVmAfXcbVhqmOoIeJ",
+   "deezer_id": 2694039252,
+   "title": "Y.S.K.W.",
+   "artist": "Catch Your Breath",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": 0.426,
+    "v6b": 1.96,
+    "v6g": 2.17,
+    "troi": -123,
+    "embeat_full": 2.0769980506822616,
+    "embeat_minus_ch1": 0.9473684210526316,
+    "bliss_fixed": 0.1778387063725413,
+    "bliss_adaptive": 0.18001007093270088,
+    "bliss_v2_blend": 0.7854478100962416
+   }
+  },
+  {
+   "spotify_id": "5f7ZUqbV4Hu6ak4rnt4Ppg",
+   "deezer_id": 3898064421,
+   "title": "HEADLOCK",
+   "artist": "GOTOU\u5bc4\u751f\u7363, vodvor",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "H",
+   "scores": {
+    "v2": 0.228,
+    "v6b": 2.85,
+    "v6g": 2.63,
+    "troi": -7,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19405432284170174,
+    "bliss_adaptive": 0.19434991229749035,
+    "bliss_v2_blend": 0.5149303986499424
+   }
+  },
+  {
+   "spotify_id": "75nFPm2wSIrNamc3Zs5psa",
+   "deezer_id": 3300002241,
+   "title": "Bricks",
+   "artist": "Dr. Fresch",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.174,
+    "v6b": 4.03,
+    "v6g": 3.95,
+    "troi": -160,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18317118269659263,
+    "bliss_adaptive": 0.1570195462732185,
+    "bliss_v2_blend": 0.3306743788936979
+   }
+  },
+  {
+   "spotify_id": "5LG8ODhdsCF9dYM2NqfxQP",
+   "deezer_id": 3991266881,
+   "title": "All Time High+",
+   "artist": "GOTOU\u5bc4\u751f\u7363, vodvor",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "H",
+   "scores": {
+    "v2": 0.472,
+    "v6b": 3.31,
+    "v6g": 3.06,
+    "troi": -264,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.26838647058137605,
+    "bliss_adaptive": 0.2525427567158517,
+    "bliss_v2_blend": 0.06249100614368763
+   }
+  },
+  {
+   "spotify_id": "5zBRpjhkwZ9s2qoQ96avW8",
+   "deezer_id": 3897964981,
+   "title": "Light",
+   "artist": "GOTOU\u5bc4\u751f\u7363, vodvor",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "H",
+   "scores": {
+    "v2": 0.744,
+    "v6b": 2.54,
+    "v6g": 2.31,
+    "troi": -276,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.3285048343645583,
+    "bliss_adaptive": 0.32987342495266514,
+    "bliss_v2_blend": -0.2523740124359707
+   }
+  },
+  {
+   "spotify_id": "0DkyQYHwuLISJNaTH3mXwt",
+   "deezer_id": 3897965141,
+   "title": "DIAMOND",
+   "artist": "GOTOU\u5bc4\u751f\u7363, vodvor",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.096,
+    "v6b": 2.55,
+    "v6g": 2.3,
+    "troi": -294,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.21695327971095163,
+    "bliss_adaptive": 0.23403601459923876,
+    "bliss_v2_blend": 0.10255699816887989
+   }
+  },
+  {
+   "spotify_id": "5JkHbDLjCbw0Dl2Q85ap29",
+   "deezer_id": 3897991691,
+   "title": "I.C.U.",
+   "artist": "GOTOU\u5bc4\u751f\u7363, vodvor",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "H",
+   "scores": {
+    "v2": 0.307,
+    "v6b": 4.1,
+    "v6g": 3.81,
+    "troi": -260,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2069646377076899,
+    "bliss_adaptive": 0.21137005773098788,
+    "bliss_v2_blend": 0.4613943000596063
+   }
+  },
+  {
+   "spotify_id": "3hkqMkHprKyGPDWPyR5HtW",
+   "deezer_id": 3894957331,
+   "title": "BACKSTAGE",
+   "artist": "GOTOU\u5bc4\u751f\u7363, vodvor",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "H",
+   "scores": {
+    "v2": 0.21,
+    "v6b": 3.6,
+    "v6g": 2.78,
+    "troi": -109,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1902976416305622,
+    "bliss_adaptive": 0.21092777070233124,
+    "bliss_v2_blend": 0.5339195843527047
+   }
+  },
+  {
+   "spotify_id": "6Hl0niR88z04GIn5vKYA7f",
+   "deezer_id": 3897963771,
+   "title": "LOCKJAW",
+   "artist": "GOTOU\u5bc4\u751f\u7363, vodvor",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "H",
+   "scores": {
+    "v2": 0.193,
+    "v6b": 3.57,
+    "v6g": 2.72,
+    "troi": -278,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1796049376565357,
+    "bliss_adaptive": 0.174325342438598,
+    "bliss_v2_blend": 0.6113815212904418
+   }
+  },
+  {
+   "spotify_id": "4jMxodISACGA4zomJVA32J",
+   "deezer_id": 3935504321,
+   "title": "MONTAGEM REVIDAR",
+   "artist": "Grioten, RVNGE",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.676,
+    "v6b": 2.81,
+    "v6g": 2.18,
+    "troi": -189,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1939401521019068,
+    "bliss_adaptive": 0.19308349439240205,
+    "bliss_v2_blend": 0.822272457407383
+   }
+  },
+  {
+   "spotify_id": "2GtAtubbeMNi3lCH2hnfnh",
+   "deezer_id": 3647071322,
+   "title": "You Did Me Dirty",
+   "artist": "NOMARKMORE",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "O",
+   "scores": {
+    "v2": 0.584,
+    "v6b": 3.03,
+    "v6g": 3.03,
+    "troi": -279,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.22934126340422184,
+    "bliss_adaptive": 0.23019174027248343,
+    "bliss_v2_blend": 0.4644015647885128
+   }
+  },
+  {
+   "spotify_id": "6S2iHbyPSlhQgCyAVQ2SO6",
+   "deezer_id": 2670479492,
+   "title": "Shame On Me",
+   "artist": "Catch Your Breath",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -1.565,
+    "v6b": 3.81,
+    "v6g": 4.16,
+    "troi": -282,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2221951768312817,
+    "bliss_adaptive": 0.19661673431657933,
+    "bliss_v2_blend": -0.9457778815733483
+   }
+  },
+  {
+   "spotify_id": "454588Y9FY0pCMIg8rXVvE",
+   "deezer_id": 4015474741,
+   "title": "Control",
+   "artist": "Catch Your Breath",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "R",
+   "scores": {
+    "v2": -1.096,
+    "v6b": 2.07,
+    "v6g": 2.29,
+    "troi": -270,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16889541422269944,
+    "bliss_adaptive": 0.15651157828517193,
+    "bliss_v2_blend": -0.18094749299080987
+   }
+  },
+  {
+   "spotify_id": "72rVEZuJBA4Jhe3xpPS49F",
+   "deezer_id": 4014915711,
+   "title": "DO A DANCE",
+   "artist": "1nonly",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.405,
+    "v6b": 2.81,
+    "v6g": 1.97,
+    "troi": -40,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2902896798158252,
+    "bliss_adaptive": 0.24320368045119137,
+    "bliss_v2_blend": -0.7197872980757869
+   }
+  },
+  {
+   "spotify_id": "6qB8dtN8VyQvh46xec1tZy",
+   "deezer_id": 3948293201,
+   "title": "TRIPPIN",
+   "artist": "reap, Qrystral, XATASHI",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "O",
+   "scores": {
+    "v2": -0.159,
+    "v6b": 2.84,
+    "v6g": 2.84,
+    "troi": -216,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17137159852786835,
+    "bliss_adaptive": 0.15976491568024415,
+    "bliss_v2_blend": 0.4392435654881762
+   }
+  },
+  {
+   "spotify_id": "6dDHs7BfroNjwDJrJBhgCA",
+   "deezer_id": 4118378731,
+   "title": "CAN'T STOP",
+   "artist": "svlient, CAIRO!",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -1.309,
+    "v6b": 4.92,
+    "v6g": 4.38,
+    "troi": -241,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.21096991980992946,
+    "bliss_adaptive": 0.18322535072805765,
+    "bliss_v2_blend": -0.6771719661901558
+   }
+  },
+  {
+   "spotify_id": "1t1Pll5MMbxVu3unEy1pQy",
+   "deezer_id": 3944389561,
+   "title": "CHANGE MY LIFE",
+   "artist": "CAIRO!",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.908,
+    "v6b": 3.4,
+    "v6g": 2.87,
+    "troi": -271,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20255081702768485,
+    "bliss_adaptive": 0.17342291250540443,
+    "bliss_v2_blend": 0.9091976784639927
+   }
+  },
+  {
+   "spotify_id": "2JqrzA0LAfgzrbxjg9CCS8",
+   "deezer_id": 2444410275,
+   "title": "HEATSEEKER",
+   "artist": "$werve, Ethan Ross, CAIRO!",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.698,
+    "v6b": 2.13,
+    "v6g": 2.19,
+    "troi": -110,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20077133985543244,
+    "bliss_adaptive": 0.24358377974415685,
+    "bliss_v2_blend": -0.17433264284095384
+   }
+  },
+  {
+   "spotify_id": "5DMDi3WggRUUZpC7pFGfnH",
+   "deezer_id": 2800466142,
+   "title": "High Fvshion",
+   "artist": "Grioten, CAIRO!, Sayfalse",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.22,
+    "v6b": 2.07,
+    "v6g": 2.14,
+    "troi": -94,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2212770738939806,
+    "bliss_adaptive": 0.19801962335992856,
+    "bliss_v2_blend": -0.01827214949944607
+   }
+  },
+  {
+   "spotify_id": "1DQuFMeO2AYgfe5k2d6Rt0",
+   "deezer_id": 2430476565,
+   "title": "LAST LAUGH!",
+   "artist": "CAIRO!, Eldritch",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.76,
+    "v6b": 2.07,
+    "v6g": 2.14,
+    "troi": -60,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19793628147656284,
+    "bliss_adaptive": 0.23800154772214527,
+    "bliss_v2_blend": -0.1931140955377854
+   }
+  },
+  {
+   "spotify_id": "5rJXo4pMH5JiEt4e3QwL7r",
+   "deezer_id": 1977643647,
+   "title": "NONAME!",
+   "artist": "CAIRO!, svlient",
+   "kind": "heldout",
+   "relevant": 1,
+   "bucket": "E",
+   "scores": {
+    "v2": -1.406,
+    "v6b": 3.22,
+    "v6g": 2.69,
+    "troi": -280,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19645740567675413,
+    "bliss_adaptive": 0.20167804493743374,
+    "bliss_v2_blend": -0.6225971736099378
+   }
+  },
+  {
+   "spotify_id": "6HacgXCExkzS552ILfJTXu",
+   "deezer_id": 2422706405,
+   "title": "Census Designated",
+   "artist": "Jane Remover",
+   "kind": "negative",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.535,
+    "v6b": 3.13,
+    "v6g": 3.13,
+    "troi": -124,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18745317656294264,
+    "bliss_adaptive": 0.25081611925772485,
+    "bliss_v2_blend": -0.635800804029071
+   }
+  },
+  {
+   "spotify_id": "1GfBLbAhZUWdseuDqhocmn",
+   "deezer_id": 2077255967,
+   "title": "Rumble",
+   "artist": "Skrillex, Fred again.., Flowdan",
+   "kind": "negative",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -2.429,
+    "v6b": 4.81,
+    "v6g": 4.81,
+    "troi": -237,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.3186883063204847,
+    "bliss_adaptive": 0.2489845655033517,
+    "bliss_v2_blend": -2.3406260288576624
+   }
+  },
+  {
+   "spotify_id": "5v7oj9PosKdE39x9uwDs6C",
+   "deezer_id": 2617681482,
+   "title": "dancinwithsomebawdy",
+   "artist": "ericdoa",
+   "kind": "negative",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.17,
+    "v6b": 2.92,
+    "v6g": 2.92,
+    "troi": -172,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17879858631610948,
+    "bliss_adaptive": 0.15768133084961933,
+    "bliss_v2_blend": -0.31406692503433004
+   }
+  },
+  {
+   "spotify_id": "4bkPAARkDov1lV05emEF7a",
+   "deezer_id": 3803438982,
+   "title": "Soft Spine",
+   "artist": "Spiritbox",
+   "kind": "negative",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.801,
+    "v6b": 2.3,
+    "v6g": 2.3,
+    "troi": -115,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.23102383272146826,
+    "bliss_adaptive": 0.21118219129351398,
+    "bliss_v2_blend": -1.1807378797020847
+   }
+  },
+  {
+   "spotify_id": "2jv1ovpDpTJEPIlth5Wn07",
+   "deezer_id": 2792936492,
+   "title": "TOMBSTONE",
+   "artist": "Wage War",
+   "kind": "negative",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.629,
+    "v6b": 1.89,
+    "v6g": 1.89,
+    "troi": -133,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.22783301563702274,
+    "bliss_adaptive": 0.21760320708288194,
+    "bliss_v2_blend": -1.0365207662879672
+   }
+  },
+  {
+   "spotify_id": "7zDu3l7DDlfSlt20YMKkWo",
+   "deezer_id": 1857908487,
+   "title": "Martini Blue",
+   "artist": "DPR LIVE",
+   "kind": "negative",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.276,
+    "v6b": 4.23,
+    "v6g": 4.23,
+    "troi": -39,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.14049880876038223,
+    "bliss_adaptive": 0.14404205766142786,
+    "bliss_v2_blend": -0.06745902329336884
+   }
+  },
+  {
+   "spotify_id": "2y57H6nA3vic5t8awwaS69",
+   "deezer_id": 1228100792,
+   "title": "Dark Light",
+   "artist": "Night Lovell",
+   "kind": "negative",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -3.725,
+    "v6b": 5.26,
+    "v6g": 5.26,
+    "troi": -226,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.6341953674867873,
+    "bliss_adaptive": 0.7931976602986552,
+    "bliss_v2_blend": -5.855680284953511
+   }
+  },
+  {
+   "spotify_id": "2slLXFcITuhf0oSp2wVJLv",
+   "deezer_id": 899525782,
+   "title": "Opaul",
+   "artist": "Freddie Dredd",
+   "kind": "negative",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.322,
+    "v6b": 2.31,
+    "v6g": 2.31,
+    "troi": -284,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.23639377662489855,
+    "bliss_adaptive": 0.2242320761467535,
+    "bliss_v2_blend": -0.8978866542411765
+   }
+  },
+  {
+   "spotify_id": "30efCAopZCFcoi43sSToNr",
+   "deezer_id": 2614584432,
+   "title": "prove it",
+   "artist": "21 Savage, Summer Walker",
+   "kind": "negative",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": -1.528,
+    "v6b": 3.3,
+    "v6g": 3.01,
+    "troi": -24,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17434792966241636,
+    "bliss_adaptive": 0.14766577288973098,
+    "bliss_v2_blend": -0.5218244952758853
+   }
+  },
+  {
+   "spotify_id": "0FmrNFYyLLRtIS7XWJPLLk",
+   "deezer_id": 372616951,
+   "title": "Akina Speed Star",
+   "artist": "Xavier Wulf",
+   "kind": "negative",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.93,
+    "v6b": 3.67,
+    "v6g": 3.67,
+    "troi": -235,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20156671612516158,
+    "bliss_adaptive": 0.21072117510135172,
+    "bliss_v2_blend": -1.0235342396915135
+   }
+  },
+  {
+   "spotify_id": "32gSPav2xqFylAeCjJCxWi",
+   "deezer_id": 1282329222,
+   "title": "Alone",
+   "artist": "Night Lovell",
+   "kind": "negative",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.824,
+    "v6b": 3.3,
+    "v6g": 3.3,
+    "troi": -76,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.21607338284980449,
+    "bliss_adaptive": 0.20210478781828706,
+    "bliss_v2_blend": -1.0719051406556106
+   }
+  },
+  {
+   "spotify_id": "1vvBUZseJ7fwYPX1NedOLd",
+   "deezer_id": 820149882,
+   "title": "Cha Cha",
+   "artist": "Freddie Dredd",
+   "kind": "negative",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.272,
+    "v6b": 3.22,
+    "v6g": 3.22,
+    "troi": -95,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19524652255449731,
+    "bliss_adaptive": 0.19404303600860145,
+    "bliss_v2_blend": -0.5208647782168536
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3411205551,
+   "title": "KEEP OUT!",
+   "artist": "Zior Park",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.832,
+    "v6b": 2.64,
+    "v6g": 2.64,
+    "troi": -97,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.13629161380514968,
+    "bliss_adaptive": 0.1518780882716775,
+    "bliss_v2_blend": 0.2712492425264465
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4241824812,
+   "title": "Neuralyzer",
+   "artist": "Zior Park",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.086,
+    "v6b": 2.85,
+    "v6g": 2.85,
+    "troi": -139,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1552016183382089,
+    "bliss_adaptive": 0.1724783989710788,
+    "bliss_v2_blend": 0.6238922384641392
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2613149172,
+   "title": "BULLET TO THE HEART",
+   "artist": "Jackson Wang",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.703,
+    "v6b": 2.66,
+    "v6g": 2.66,
+    "troi": -30,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1794123275669096,
+    "bliss_adaptive": 0.19957099689231245,
+    "bliss_v2_blend": 0.9617794143339127
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3086861831,
+   "title": "See",
+   "artist": "eaJ",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.495,
+    "v6b": 5.96,
+    "v6g": 5.96,
+    "troi": -292,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.29467922737104424,
+    "bliss_adaptive": 0.2972151625746543,
+    "bliss_v2_blend": -0.8179114080105867
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2959835921,
+   "title": "when the rain stops",
+   "artist": "eaJ",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.261,
+    "v6b": 2.61,
+    "v6g": 2.61,
+    "troi": -161,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.24675004961165162,
+    "bliss_adaptive": 0.22941996524058253,
+    "bliss_v2_blend": 0.0984545132826597
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4277528432,
+   "title": "anxiety",
+   "artist": "eaJ",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.125,
+    "v6b": 2.34,
+    "v6g": 2.34,
+    "troi": -85,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18123371728779397,
+    "bliss_adaptive": 0.16894171803017216,
+    "bliss_v2_blend": 0.3803282507269849
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4321323112,
+   "title": "kiss/20",
+   "artist": "DPR CREAM",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 1.241,
+    "v6b": 3.09,
+    "v6g": 3.09,
+    "troi": -89,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.23805523734205022,
+    "bliss_adaptive": 0.2411623810178966,
+    "bliss_v2_blend": 0.8411269831226231
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2660515242,
+   "title": "Sugar Rush",
+   "artist": "BIBI",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.116,
+    "v6b": 3.04,
+    "v6g": 3.04,
+    "troi": -51,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19254476679944427,
+    "bliss_adaptive": 0.1969373145035162,
+    "bliss_v2_blend": 0.29224318116081915
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3825529281,
+   "title": "CINEMA",
+   "artist": "WOODZ",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.17,
+    "v6b": 3.66,
+    "v6g": 3.66,
+    "troi": -144,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19592191509150686,
+    "bliss_adaptive": 0.19581108021068322,
+    "bliss_v2_blend": 0.22717476669211145
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2786993892,
+   "title": "Farewell",
+   "artist": "Leo",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.164,
+    "v6b": 3.67,
+    "v6g": 3.67,
+    "troi": -125,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17661062433340222,
+    "bliss_adaptive": 0.17981055680550714,
+    "bliss_v2_blend": 0.6164958994566024
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2786993872,
+   "title": "Come Closer",
+   "artist": "Leo",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.116,
+    "v6b": 2.92,
+    "v6g": 2.92,
+    "troi": -21,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.15913069793269058,
+    "bliss_adaptive": 0.16507343933923035,
+    "bliss_v2_blend": 0.7293057694840013
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 714446022,
+   "title": "Rocket",
+   "artist": "Bearded Legend",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.677,
+    "v6b": 2.45,
+    "v6g": 2.45,
+    "troi": -174,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2130031527020449,
+    "bliss_adaptive": 0.2340336667415349,
+    "bliss_v2_blend": 0.664129212053952
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3414186951,
+   "title": "ICEINMYVEINS",
+   "artist": "PRXJEK",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.505,
+    "v6b": 0.94,
+    "v6g": 0.94,
+    "troi": -212,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2490914827487214,
+    "bliss_adaptive": 0.22838406061291985,
+    "bliss_v2_blend": -0.4449271933721661
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2136168257,
+   "title": "iCARUS",
+   "artist": "HAARPER",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.218,
+    "v6b": 4.22,
+    "v6g": 3.92,
+    "troi": -104,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.21854376453418803,
+    "bliss_adaptive": 0.23699184490646436,
+    "bliss_v2_blend": 0.005868773289221418
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2391748535,
+   "title": "OPP KILLA",
+   "artist": "Kiraw",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.444,
+    "v6b": 2.82,
+    "v6g": 2.82,
+    "troi": -70,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16479838854904752,
+    "bliss_adaptive": 0.18155042415835723,
+    "bliss_v2_blend": 0.2990957576729366
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2371496345,
+   "title": "Guerrilla",
+   "artist": "Kiraw",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.098,
+    "v6b": 2.24,
+    "v6g": 2.24,
+    "troi": -198,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20284147935776836,
+    "bliss_adaptive": 0.20160177530749293,
+    "bliss_v2_blend": -0.46514365339842256
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2449009375,
+   "title": "LOVELY BASTARDS MAKE MY DAY",
+   "artist": "ZWE1HVNDXR",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.084,
+    "v6b": 4.36,
+    "v6g": 4.36,
+    "troi": -245,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.4879594727862506,
+    "bliss_adaptive": 0.32223313170190593,
+    "bliss_v2_blend": -2.8310857982428326
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2127063417,
+   "title": "ON MY LIFESPAN!",
+   "artist": "Dexndre",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.325,
+    "v6b": 2.25,
+    "v6g": 2.25,
+    "troi": -126,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2091254876688772,
+    "bliss_adaptive": 0.20962340012222777,
+    "bliss_v2_blend": -0.6727472450106671
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3088183451,
+   "title": "my last goodbye",
+   "artist": "Mylie Taylor",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.327,
+    "v6b": 3.68,
+    "v6g": 3.68,
+    "troi": -297,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2263769852198473,
+    "bliss_adaptive": 0.26190344179136316,
+    "bliss_v2_blend": 0.31333465557218027
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3203022151,
+   "title": "heaven",
+   "artist": "Mylie Taylor",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.219,
+    "v6b": 3.27,
+    "v6g": 3.27,
+    "troi": -192,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17386615715920628,
+    "bliss_adaptive": 0.19037446719861925,
+    "bliss_v2_blend": 0.6769769143569424
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3342806611,
+   "title": "novocaine",
+   "artist": "Mylie Taylor",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.554,
+    "v6b": 2.64,
+    "v6g": 2.64,
+    "troi": -190,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17831829126498466,
+    "bliss_adaptive": 0.18016087264081795,
+    "bliss_v2_blend": 0.868992288928099
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2493983191,
+   "title": "Nothing Left",
+   "artist": "POORSTACY",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.452,
+    "v6b": 1.71,
+    "v6g": 1.71,
+    "troi": -170,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18249812936797774,
+    "bliss_adaptive": 0.16372250876462932,
+    "bliss_v2_blend": 0.14615560758135043
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1682373077,
+   "title": "DIE OUT HERE (feat. POORSTACY)",
+   "artist": "DE'WAYNE",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.265,
+    "v6b": 2.64,
+    "v6g": 2.64,
+    "troi": -54,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1540964033644701,
+    "bliss_adaptive": 0.16630226767557607,
+    "bliss_v2_blend": 0.5106810077784836
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3387194341,
+   "title": "Nothing belongs to you.",
+   "artist": "POORSTACY",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.651,
+    "v6b": 2.91,
+    "v6g": 2.91,
+    "troi": -131,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18392439786110357,
+    "bliss_adaptive": 0.17428026373430086,
+    "bliss_v2_blend": -0.0018253391708020206
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2080695547,
+   "title": "SPIT IN MY FACE!",
+   "artist": "ThxSoMch",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.888,
+    "v6b": 3.47,
+    "v6g": 3.47,
+    "troi": -265,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16976670236220479,
+    "bliss_adaptive": 0.16718086371918797,
+    "bliss_v2_blend": -0.04595392019261196
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2144543887,
+   "title": "Hate.",
+   "artist": "ThxSoMch",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.084,
+    "v6b": 2.4,
+    "v6g": 2.4,
+    "troi": -25,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18952711905902717,
+    "bliss_adaptive": 0.1857963905921079,
+    "bliss_v2_blend": 0.3392703679007899
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2591250062,
+   "title": "Imperfect Girl",
+   "artist": "ThxSoMch",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.606,
+    "v6b": 3.42,
+    "v6g": 3.42,
+    "troi": -263,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.24373697168847844,
+    "bliss_adaptive": 0.2753435295195369,
+    "bliss_v2_blend": -0.4693897439634096
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3505874431,
+   "title": "Bad Dream",
+   "artist": "ThxSoMch",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.728,
+    "v6b": 3.61,
+    "v6g": 3.61,
+    "troi": -75,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19134759930513928,
+    "bliss_adaptive": 0.17451174542859954,
+    "bliss_v2_blend": -0.11633413034444857
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 744922972,
+   "title": "NUMB",
+   "artist": "Ryan Oakes",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.371,
+    "v6b": 3.98,
+    "v6g": 3.98,
+    "troi": -209,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19135376284072336,
+    "bliss_adaptive": 0.24051482154324538,
+    "bliss_v2_blend": 0.12776970377783245
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4130206531,
+   "title": "LIGHTS OUT",
+   "artist": "Ryan Oakes",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.281,
+    "v6b": 3.01,
+    "v6g": 3.01,
+    "troi": -296,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2256562808467298,
+    "bliss_adaptive": 0.22123772792425775,
+    "bliss_v2_blend": -0.7803848565334375
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3196281251,
+   "title": "OUT OF MY MIND",
+   "artist": "Ryan Oakes",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.643,
+    "v6b": 4.0,
+    "v6g": 4.0,
+    "troi": -130,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.15358328622823572,
+    "bliss_adaptive": 0.14980702434937448,
+    "bliss_v2_blend": 0.25643888786280616
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3227209151,
+   "title": "SEROTONIN",
+   "artist": "LaLion",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.244,
+    "v6b": 3.21,
+    "v6g": 3.21,
+    "troi": -154,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.15703332961731756,
+    "bliss_adaptive": 0.13645054654425884,
+    "bliss_v2_blend": -0.18333458974694056
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2421434085,
+   "title": "Devil Himself",
+   "artist": "LaLion",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.128,
+    "v6b": 4.36,
+    "v6g": 4.36,
+    "troi": -102,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2030846878974321,
+    "bliss_adaptive": 0.19761663868834406,
+    "bliss_v2_blend": 0.19622085041649578
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3217249671,
+   "title": "American Idol",
+   "artist": "Call Me Karizma",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.389,
+    "v6b": 3.33,
+    "v6g": 3.33,
+    "troi": -107,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16238980264204242,
+    "bliss_adaptive": 0.15112956585368614,
+    "bliss_v2_blend": 0.8888588026767614
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3316043801,
+   "title": "Dance With The Devil",
+   "artist": "Call Me Karizma",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.09,
+    "v6b": 2.31,
+    "v6g": 2.31,
+    "troi": -272,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18634891188194946,
+    "bliss_adaptive": 0.17001434253229197,
+    "bliss_v2_blend": 0.4847502355546298
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 618720122,
+   "title": "Monster (Under My Bed)",
+   "artist": "Call Me Karizma",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.393,
+    "v6b": 4.46,
+    "v6g": 4.46,
+    "troi": -116,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17971366409388603,
+    "bliss_adaptive": 0.1747087512834838,
+    "bliss_v2_blend": 0.20970550689399375
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2644272082,
+   "title": "Collide",
+   "artist": "KID BRUNSWICK",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.532,
+    "v6b": 3.97,
+    "v6g": 4.04,
+    "troi": -222,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.22824641640538418,
+    "bliss_adaptive": 0.2704454188901272,
+    "bliss_v2_blend": 0.4379602782424993
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2774823911,
+   "title": "Out Of Style",
+   "artist": "KID BRUNSWICK",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.513,
+    "v6b": 3.98,
+    "v6g": 3.94,
+    "troi": -247,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.23015298676668147,
+    "bliss_adaptive": 0.2786750954733904,
+    "bliss_v2_blend": -0.2926086394321593
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 954203752,
+   "title": "Go Crazy",
+   "artist": "Chris Brown",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.194,
+    "v6b": 3.97,
+    "v6g": 3.97,
+    "troi": -61,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.15506583334385024,
+    "bliss_adaptive": 0.19020023767826078,
+    "bliss_v2_blend": 0.5511614846265014
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 111851362,
+   "title": "No Flockin'",
+   "artist": "Kodak Black",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.275,
+    "v6b": 3.82,
+    "v6g": 3.82,
+    "troi": -96,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17487749947119918,
+    "bliss_adaptive": 0.18759745680716314,
+    "bliss_v2_blend": 0.33070012152828476
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4302331532,
+   "title": "BELIEVE (feat. Babyface Ray, Lil Yachty)",
+   "artist": "BigXthaPlug",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.573,
+    "v6b": 3.64,
+    "v6g": 3.64,
+    "troi": -43,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20307500074721738,
+    "bliss_adaptive": 0.24151881540133074,
+    "bliss_v2_blend": -0.10803753761578597
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1148427422,
+   "title": "Flex Up",
+   "artist": "Lil Yachty",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.18,
+    "v6b": 2.61,
+    "v6g": 2.61,
+    "troi": -242,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.28514942630595147,
+    "bliss_adaptive": 0.26325815045875045,
+    "bliss_v2_blend": -0.5230809415941859
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2125612367,
+   "title": "drive ME crazy!",
+   "artist": "Lil Yachty",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.092,
+    "v6b": 4.59,
+    "v6g": 4.59,
+    "troi": -240,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.27660610372343897,
+    "bliss_adaptive": 0.21099018896574911,
+    "bliss_v2_blend": -0.26587756314714334
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4343840812,
+   "title": "RHYNO",
+   "artist": "Travis Scott",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.706,
+    "v6b": 3.89,
+    "v6g": 3.05,
+    "troi": -208,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17558554357803544,
+    "bliss_adaptive": 0.15513905136136927,
+    "bliss_v2_blend": 0.030036527022971826
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 370426001,
+   "title": "Love Galore (feat. Travis Scott)",
+   "artist": "SZA",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.111,
+    "v6b": 2.97,
+    "v6g": 2.97,
+    "troi": -183,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.22680338520890936,
+    "bliss_adaptive": 0.2044470707710367,
+    "bliss_v2_blend": 0.1620578732146842
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 536421002,
+   "title": "SICKO MODE",
+   "artist": "Travis Scott",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.411,
+    "v6b": 3.7,
+    "v6g": 2.89,
+    "troi": -67,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20010634902657598,
+    "bliss_adaptive": 0.20770708189511172,
+    "bliss_v2_blend": 0.027489480340073154
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2248060737,
+   "title": "Guiding Light",
+   "artist": "Caskets",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.588,
+    "v6b": 2.65,
+    "v6g": 2.65,
+    "troi": -121,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16678468375408115,
+    "bliss_adaptive": 0.15099412182840205,
+    "bliss_v2_blend": -0.4998443038299262
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2612807162,
+   "title": "Almost Ecstasy",
+   "artist": "Wind Walkers",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.22,
+    "v6b": 3.01,
+    "v6g": 3.01,
+    "troi": -108,
+    "embeat_full": 2.4820662768031188,
+    "embeat_minus_ch1": 0.9894736842105263,
+    "bliss_fixed": 0.1526582744794856,
+    "bliss_adaptive": 0.14430118863725538,
+    "bliss_v2_blend": 0.5534389264254175
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4322410262,
+   "title": "Roses",
+   "artist": "Awaken I Am",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.84,
+    "v6b": 4.81,
+    "v6g": 4.81,
+    "troi": -105,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.4873667953327689,
+    "bliss_adaptive": 0.5996227630401748,
+    "bliss_v2_blend": -2.659274215940964
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3068119581,
+   "title": "Perfect Strangers",
+   "artist": "Archers",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.364,
+    "v6b": 2.02,
+    "v6g": 2.02,
+    "troi": -78,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17616931444556483,
+    "bliss_adaptive": 0.14427908662844433,
+    "bliss_v2_blend": 0.2590692903164599
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4003891691,
+   "title": "Blood Rave (feat. Anthony Martinez)",
+   "artist": "Motionless In White",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.143,
+    "v6b": 1.8,
+    "v6g": 1.8,
+    "troi": -171,
+    "embeat_full": 1.337037037037037,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1664340922255097,
+    "bliss_adaptive": 0.1677937008909882,
+    "bliss_v2_blend": -0.19258418284925183
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2878488942,
+   "title": "Wish You The Best",
+   "artist": "Rain City Drive",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.193,
+    "v6b": 1.92,
+    "v6g": 1.92,
+    "troi": -44,
+    "embeat_full": 2.2690058479532165,
+    "embeat_minus_ch1": 0.9578947368421052,
+    "bliss_fixed": 0.13304477524895833,
+    "bliss_adaptive": 0.13489893831342786,
+    "bliss_v2_blend": 0.7353181862309623
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2744074821,
+   "title": "Medicate Me",
+   "artist": "Rain City Drive",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.175,
+    "v6b": 2.98,
+    "v6g": 2.98,
+    "troi": -65,
+    "embeat_full": 0.8631578947368421,
+    "embeat_minus_ch1": 0.8631578947368421,
+    "bliss_fixed": 0.16767744867007645,
+    "bliss_adaptive": 0.18578166038028104,
+    "bliss_v2_blend": 0.6984474052779677
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 969807322,
+   "title": "af2 (feat. Letoa)",
+   "artist": "Lilbubblegum",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.373,
+    "v6b": 2.81,
+    "v6g": 2.81,
+    "troi": -220,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20572123976563184,
+    "bliss_adaptive": 0.20915810770468926,
+    "bliss_v2_blend": 0.5168918492203126
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1412691582,
+   "title": "drift (feat. Lames)",
+   "artist": "Lilbubblegum",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.719,
+    "v6b": 3.24,
+    "v6g": 3.24,
+    "troi": -140,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18174757656774296,
+    "bliss_adaptive": 0.1676860459003557,
+    "bliss_v2_blend": 0.9532653555766486
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1007490622,
+   "title": "GTG",
+   "artist": "Freddie Dredd",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.953,
+    "v6b": 3.59,
+    "v6g": 3.59,
+    "troi": -155,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2615079153474841,
+    "bliss_adaptive": 0.2652330166305255,
+    "bliss_v2_blend": -1.538676062232395
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2494290281,
+   "title": "goth girl",
+   "artist": "Basco",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.152,
+    "v6b": 3.61,
+    "v6g": 3.61,
+    "troi": -158,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18713642427430827,
+    "bliss_adaptive": 0.17726096091341842,
+    "bliss_v2_blend": 0.5205912219206915
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1468301542,
+   "title": "SWITCHIN' LANES",
+   "artist": "Basco",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.326,
+    "v6b": 2.87,
+    "v6g": 2.87,
+    "troi": -31,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19773744128938414,
+    "bliss_adaptive": 0.1673275164481045,
+    "bliss_v2_blend": 0.551266762545721
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1222984982,
+   "title": "Above Umbrellas",
+   "artist": "Shady Moon",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.606,
+    "v6b": 4.11,
+    "v6g": 4.11,
+    "troi": -239,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.28034632209241683,
+    "bliss_adaptive": 0.2623169518608819,
+    "bliss_v2_blend": -0.7744077752745887
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2312381805,
+   "title": "Cherry Blossoms",
+   "artist": "Shady Moon",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.468,
+    "v6b": 4.52,
+    "v6g": 4.52,
+    "troi": -234,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2611273286116521,
+    "bliss_adaptive": 0.25113146663928204,
+    "bliss_v2_blend": -1.2038097068049431
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4173147192,
+   "title": "MARCELINE",
+   "artist": "Lil God Dan",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.042,
+    "v6b": 2.16,
+    "v6g": 2.16,
+    "troi": -224,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19146920236116596,
+    "bliss_adaptive": 0.18942000572369486,
+    "bliss_v2_blend": -0.3320944293377781
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1512396702,
+   "title": "XXXKIRBY",
+   "artist": "Softwilly",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": 0.141,
+    "v6b": 2.74,
+    "v6g": 2.49,
+    "troi": -185,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16987640518418418,
+    "bliss_adaptive": 0.18353429481152403,
+    "bliss_v2_blend": 0.6568734899656905
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 676558852,
+   "title": "Cooler Than Me",
+   "artist": "Lucky Luke",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "E",
+   "scores": {
+    "v2": -1.115,
+    "v6b": 3.41,
+    "v6g": 3.57,
+    "troi": -166,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2991821744485737,
+    "bliss_adaptive": 0.2373562461485382,
+    "bliss_v2_blend": -1.2794516142348527
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1109180732,
+   "title": "Tokyo",
+   "artist": "Dwin",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.015,
+    "v6b": 3.46,
+    "v6g": 3.46,
+    "troi": -87,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20742706827813762,
+    "bliss_adaptive": 0.19356236067953345,
+    "bliss_v2_blend": 0.23732306464337194
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4358498982,
+   "title": "Drifting Away",
+   "artist": "Dwin",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.966,
+    "v6b": 3.34,
+    "v6g": 3.34,
+    "troi": -275,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17260669956142377,
+    "bliss_adaptive": 0.15877191039662827,
+    "bliss_v2_blend": -0.12296074834521731
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4141690961,
+   "title": "Empty Promises",
+   "artist": "Dwin",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.469,
+    "v6b": 2.54,
+    "v6g": 2.54,
+    "troi": -49,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19898118124002187,
+    "bliss_adaptive": 0.1818441776203757,
+    "bliss_v2_blend": 0.6387031539254375
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 463380592,
+   "title": "Virus (How About Now)",
+   "artist": "Martin Garrix",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.97,
+    "v6b": 3.78,
+    "v6g": 3.78,
+    "troi": -99,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.37389618187555274,
+    "bliss_adaptive": 0.4557136304239779,
+    "bliss_v2_blend": -0.47599775910620135
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 958595702,
+   "title": "This Is Dirty",
+   "artist": "DVBBS",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.515,
+    "v6b": 0.73,
+    "v6g": 0.73,
+    "troi": -246,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2138145159702106,
+    "bliss_adaptive": 0.21675232017649354,
+    "bliss_v2_blend": -0.1578492601756619
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2149969017,
+   "title": "Next To You (feat. Kane Brown)",
+   "artist": "Loud Luxury",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.045,
+    "v6b": 3.2,
+    "v6g": 3.2,
+    "troi": -56,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.14635435184900417,
+    "bliss_adaptive": 0.150209941288312,
+    "bliss_v2_blend": 0.7256452176300308
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3705411802,
+   "title": "5 Minutes",
+   "artist": "Don Diablo",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.454,
+    "v6b": 2.28,
+    "v6g": 2.28,
+    "troi": -79,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.14154354798881857,
+    "bliss_adaptive": 0.1533041750538536,
+    "bliss_v2_blend": 1.1069975149731066
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4294466732,
+   "title": "Girls Are Dancin'",
+   "artist": "Don Diablo",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.244,
+    "v6b": 3.26,
+    "v6g": 3.26,
+    "troi": -100,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18012519702414892,
+    "bliss_adaptive": 0.1678752988385293,
+    "bliss_v2_blend": 0.641926190050456
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2659588462,
+   "title": "SLEEP TONIGHT (THIS IS THE LIFE)",
+   "artist": "R3HAB",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.744,
+    "v6b": 2.96,
+    "v6g": 2.96,
+    "troi": -32,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17026215843410417,
+    "bliss_adaptive": 0.1650358775867486,
+    "bliss_v2_blend": 0.04840085415588882
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 452730632,
+   "title": "Riverside (Reloaded)",
+   "artist": "Tujamo",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.925,
+    "v6b": 3.67,
+    "v6g": 3.67,
+    "troi": -187,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2575029476022868,
+    "bliss_adaptive": 0.22443702335317745,
+    "bliss_v2_blend": -0.8022503698990624
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3606526282,
+   "title": "Fed Up",
+   "artist": "Ghostemane",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.804,
+    "v6b": 3.92,
+    "v6g": 3.92,
+    "troi": -68,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.24585673210599138,
+    "bliss_adaptive": 0.25232829341181534,
+    "bliss_v2_blend": -1.3063728339006668
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 128231787,
+   "title": "Venom",
+   "artist": "Ghostemane",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.17,
+    "v6b": 3.44,
+    "v6g": 3.44,
+    "troi": -204,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.30488835320144103,
+    "bliss_adaptive": 0.3130600644136457,
+    "bliss_v2_blend": -0.44817187819225
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4275460662,
+   "title": "Jupiter",
+   "artist": "Ghostemane",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.618,
+    "v6b": 4.54,
+    "v6g": 4.54,
+    "troi": -293,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.26813654263125714,
+    "bliss_adaptive": 0.2244576341103382,
+    "bliss_v2_blend": -0.6808864839413264
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 658585932,
+   "title": "HOLOCAUST",
+   "artist": "Lil Darkie",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.889,
+    "v6b": 2.31,
+    "v6g": 2.31,
+    "troi": -215,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2500843009115795,
+    "bliss_adaptive": 0.19691849878038759,
+    "bliss_v2_blend": -1.399727845468759
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1094557072,
+   "title": "E-GIRLS ARE RUINING MY LIFE!",
+   "artist": "CORPSE",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.833,
+    "v6b": 4.87,
+    "v6g": 4.02,
+    "troi": -83,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17613769230517898,
+    "bliss_adaptive": 0.18194350188561,
+    "bliss_v2_blend": -0.061420136087211
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2109773227,
+   "title": "ETERNAL SLEEP",
+   "artist": "REDZED",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": 0.285,
+    "v6b": 1.25,
+    "v6g": 1.0,
+    "troi": -244,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.24130528764926323,
+    "bliss_adaptive": 0.24866337585503598,
+    "bliss_v2_blend": 0.16023241669935556
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1124897942,
+   "title": "Rave in the Grave",
+   "artist": "REDZED",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.74,
+    "v6b": 5.19,
+    "v6g": 4.33,
+    "troi": -230,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.21267249666108393,
+    "bliss_adaptive": 0.23780546684636533,
+    "bliss_v2_blend": -0.30221362024737597
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4037009371,
+   "title": "LEMONADE",
+   "artist": "aespa",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.305,
+    "v6b": 1.79,
+    "v6g": 1.95,
+    "troi": -15,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.14704560382023796,
+    "bliss_adaptive": 0.16821638778504514,
+    "bliss_v2_blend": 0.9592537455771443
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3412534591,
+   "title": "Strategy",
+   "artist": "TWICE",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.102,
+    "v6b": 2.87,
+    "v6g": 2.79,
+    "troi": -48,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.14192488394540653,
+    "bliss_adaptive": 0.12680566891866654,
+    "bliss_v2_blend": 0.8630846927529063
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3125530581,
+   "title": "Strategy (feat. Megan Thee Stallion)",
+   "artist": "TWICE",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.435,
+    "v6b": 2.66,
+    "v6g": 2.58,
+    "troi": -1,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1391553973765589,
+    "bliss_adaptive": 0.12309810599962794,
+    "bliss_v2_blend": 1.1139006096921285
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2616629602,
+   "title": "DASH",
+   "artist": "NMIXX",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.287,
+    "v6b": 2.04,
+    "v6g": 2.04,
+    "troi": -175,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.14920664231975556,
+    "bliss_adaptive": 0.14731756811598012,
+    "bliss_v2_blend": 0.9289382810722423
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2227832217,
+   "title": "I AM",
+   "artist": "IVE",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.183,
+    "v6b": 2.1,
+    "v6g": 2.26,
+    "troi": -259,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17540473811013077,
+    "bliss_adaptive": 0.17503859996073007,
+    "bliss_v2_blend": 0.6395372322660089
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1572136282,
+   "title": "ELEVEN",
+   "artist": "IVE",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.423,
+    "v6b": 3.15,
+    "v6g": 3.22,
+    "troi": -273,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16960801558151478,
+    "bliss_adaptive": 0.16810241885284893,
+    "bliss_v2_blend": 0.8519717112909858
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3497815281,
+   "title": "POP/STARS",
+   "artist": "K/DA",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.216,
+    "v6b": 3.26,
+    "v6g": 3.26,
+    "troi": -27,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17779527599784822,
+    "bliss_adaptive": 0.15568396247370336,
+    "bliss_v2_blend": 0.34674066738528353
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4357861492,
+   "title": "NEVER GOING BACK",
+   "artist": "K/DA",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.596,
+    "v6b": 2.89,
+    "v6g": 2.89,
+    "troi": -132,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.15759551160057886,
+    "bliss_adaptive": 0.13953276588438507,
+    "bliss_v2_blend": 1.070372358988661
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3495495001,
+   "title": "MORE",
+   "artist": "K/DA",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.463,
+    "v6b": 3.17,
+    "v6g": 3.17,
+    "troi": -266,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.14390094332046674,
+    "bliss_adaptive": 0.13693208220756037,
+    "bliss_v2_blend": 1.0935115830832969
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2735357691,
+   "title": "Midas Touch",
+   "artist": "KISS OF LIFE",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.062,
+    "v6b": 2.38,
+    "v6g": 2.38,
+    "troi": -81,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1797960292349559,
+    "bliss_adaptive": 0.18055914929806777,
+    "bliss_v2_blend": 0.5201974447591388
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2465126995,
+   "title": "Dr0nched In Sw0t",
+   "artist": "Kamaara",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.056,
+    "v6b": 4.51,
+    "v6g": 4.51,
+    "troi": -173,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20705345593490027,
+    "bliss_adaptive": 0.1728378723123919,
+    "bliss_v2_blend": 0.21239565810845046
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1983324957,
+   "title": "1\u2022300\u2022LIQUIDATE",
+   "artist": "Grim Salvo",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.342,
+    "v6b": 3.3,
+    "v6g": 3.3,
+    "troi": -18,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1585365275415207,
+    "bliss_adaptive": 0.1568805429795156,
+    "bliss_v2_blend": 0.42102631385555056
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 965969082,
+   "title": "Ergot",
+   "artist": "Grim Salvo",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.022,
+    "v6b": 1.95,
+    "v6g": 1.95,
+    "troi": -287,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.15436312568798108,
+    "bliss_adaptive": 0.1462998013160942,
+    "bliss_v2_blend": 0.7047403788662292
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1983325007,
+   "title": "BLACK RAINBOW",
+   "artist": "Grim Salvo",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.472,
+    "v6b": 3.7,
+    "v6g": 3.7,
+    "troi": -156,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.178508737131518,
+    "bliss_adaptive": 0.16770800161233182,
+    "bliss_v2_blend": 0.16571585496700275
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2563806282,
+   "title": "Cathedral Ward",
+   "artist": "do not resurrect",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.968,
+    "v6b": 2.32,
+    "v6g": 2.02,
+    "troi": -178,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18518791368418516,
+    "bliss_adaptive": 0.15413274203331076,
+    "bliss_v2_blend": -0.2291514341096733
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4358491832,
+   "title": "PEDIGREE",
+   "artist": "Kxllswxtch",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.566,
+    "v6b": 2.23,
+    "v6g": 2.01,
+    "troi": -11,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.34270383260109155,
+    "bliss_adaptive": 0.3202276801399086,
+    "bliss_v2_blend": -1.2665953629504332
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3642461392,
+   "title": "Mania Likely",
+   "artist": "Warlord Colossus",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.125,
+    "v6b": 3.1,
+    "v6g": 3.1,
+    "troi": -22,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16514531597679594,
+    "bliss_adaptive": 0.14034343939985147,
+    "bliss_v2_blend": 0.5143719428624481
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2657058332,
+   "title": "GANJA GOBLIN",
+   "artist": "Pranav.Wav",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.845,
+    "v6b": 3.17,
+    "v6g": 3.17,
+    "troi": -218,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.27234561632698656,
+    "bliss_adaptive": 0.20935650143579818,
+    "bliss_v2_blend": -1.5551104344903854
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3165573441,
+   "title": "TITANIC",
+   "artist": "Pranav.Wav",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.17,
+    "v6b": 3.48,
+    "v6g": 3.48,
+    "troi": -211,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.21494313682052857,
+    "bliss_adaptive": 0.2112398637449505,
+    "bliss_v2_blend": -0.615212384209136
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3090875,
+   "title": "The Kill",
+   "artist": "Thirty Seconds To Mars",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.051,
+    "v6b": 2.67,
+    "v6g": 2.67,
+    "troi": -63,
+    "embeat_full": 0.8421052631578948,
+    "embeat_minus_ch1": 0.8421052631578948,
+    "bliss_fixed": 0.22141154438523275,
+    "bliss_adaptive": 0.20971973942029462,
+    "bliss_v2_blend": 0.09618794964926067
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 7564043,
+   "title": "This Is War",
+   "artist": "Thirty Seconds To Mars",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.288,
+    "v6b": 3.92,
+    "v6g": 3.92,
+    "troi": -299,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2428082553512581,
+    "bliss_adaptive": 0.28771890055023147,
+    "bliss_v2_blend": -0.24416918895990153
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4672193,
+   "title": "Kings And Queens",
+   "artist": "Thirty Seconds To Mars",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.561,
+    "v6b": 3.93,
+    "v6g": 3.93,
+    "troi": -197,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20386419585310808,
+    "bliss_adaptive": 0.18860610751394072,
+    "bliss_v2_blend": -0.10640597542852671
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 6435662,
+   "title": "Last Resort",
+   "artist": "Papa Roach",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.149,
+    "v6b": 3.24,
+    "v6g": 3.24,
+    "troi": -73,
+    "embeat_full": 1.4148148148148147,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1441754843864818,
+    "bliss_adaptive": 0.13645876489688633,
+    "bliss_v2_blend": -0.01123564525257148
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 6435666,
+   "title": "Getting Away With Murder",
+   "artist": "Papa Roach",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.715,
+    "v6b": 2.85,
+    "v6g": 2.85,
+    "troi": -41,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16197724193021745,
+    "bliss_adaptive": 0.15337229018339574,
+    "bliss_v2_blend": -0.5466464800272148
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4306194,
+   "title": "Too Late",
+   "artist": "Dead By Sunrise",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.382,
+    "v6b": 3.8,
+    "v6g": 3.8,
+    "troi": -135,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20596785991658711,
+    "bliss_adaptive": 0.23120081070242535,
+    "bliss_v2_blend": -0.001513520475211025
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4306192,
+   "title": "Fire",
+   "artist": "Dead By Sunrise",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.058,
+    "v6b": 1.82,
+    "v6g": 1.82,
+    "troi": -205,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.22709261535494965,
+    "bliss_adaptive": 0.24819188470202685,
+    "bliss_v2_blend": -0.6398404578274872
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 998773982,
+   "title": "B12",
+   "artist": "Grey Daze",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.137,
+    "v6b": 3.51,
+    "v6g": 3.51,
+    "troi": -181,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.22639305184880126,
+    "bliss_adaptive": 0.21230677179191676,
+    "bliss_v2_blend": -0.6880406451726688
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2184995487,
+   "title": "Sometimes",
+   "artist": "Grey Daze",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.912,
+    "v6b": 3.49,
+    "v6g": 3.49,
+    "troi": -29,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19574642539892656,
+    "bliss_adaptive": 0.20112697288308024,
+    "bliss_v2_blend": -0.27882290637462914
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1242969132,
+   "title": "Happy Endings (feat. iann dior and UPSAHL)",
+   "artist": "Mike Shinoda",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.095,
+    "v6b": 1.93,
+    "v6g": 1.93,
+    "troi": -16,
+    "embeat_full": 1.9886939571150097,
+    "embeat_minus_ch1": 0.9368421052631579,
+    "bliss_fixed": 0.12376771682249302,
+    "bliss_adaptive": 0.14820125658488173,
+    "bliss_v2_blend": 0.8796348227068286
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2154039437,
+   "title": "In My Head",
+   "artist": "Mike Shinoda",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.957,
+    "v6b": 2.09,
+    "v6g": 2.09,
+    "troi": -98,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1195600731854305,
+    "bliss_adaptive": 0.138787894965017,
+    "bliss_v2_blend": 0.3251628660017897
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 71828738,
+   "title": "Animals",
+   "artist": "Nickelback",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.374,
+    "v6b": 1.81,
+    "v6g": 1.81,
+    "troi": -184,
+    "embeat_full": 1.6481481481481481,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.22853348032422832,
+    "bliss_adaptive": 0.20382673633348508,
+    "bliss_v2_blend": -0.8679602641086507
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 94613616,
+   "title": "Break Stuff",
+   "artist": "Limp Bizkit",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.939,
+    "v6b": 3.63,
+    "v6g": 3.63,
+    "troi": -42,
+    "embeat_full": 1.5185185185185186,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19657483389875458,
+    "bliss_adaptive": 0.21886202843743702,
+    "bliss_v2_blend": -0.30419047369017654
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1652503442,
+   "title": "Cold Blood Warm Nights",
+   "artist": "Faceless 1-7",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.922,
+    "v6b": 3.99,
+    "v6g": 3.76,
+    "troi": -13,
+    "embeat_full": 1.4,
+    "embeat_minus_ch1": 1.4,
+    "bliss_fixed": 0.17310360877841607,
+    "bliss_adaptive": 0.1873992362486045,
+    "bliss_v2_blend": -0.09700888979950556
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2265483117,
+   "title": "methylphenidate :)",
+   "artist": "Santos Santana",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.896,
+    "v6b": 4.56,
+    "v6g": 4.56,
+    "troi": -136,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.31512299948232103,
+    "bliss_adaptive": 0.2645525345405713,
+    "bliss_v2_blend": -1.9463979609369417
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4160986292,
+   "title": "PONTIAC PUMP BLAST",
+   "artist": "Jupiter$ Tyrade",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.275,
+    "v6b": 3.04,
+    "v6g": 3.04,
+    "troi": -248,
+    "embeat_full": 2.5703703703703704,
+    "embeat_minus_ch1": 1.0,
+    "bliss_fixed": 0.2512933897030806,
+    "bliss_adaptive": 0.28745557154842727,
+    "bliss_v2_blend": -0.989882042432159
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 860359172,
+   "title": "BEST ON EARTH (feat. BIA) (Bonus)",
+   "artist": "Russ",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.346,
+    "v6b": 4.04,
+    "v6g": 4.04,
+    "troi": -86,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.23183691358972366,
+    "bliss_adaptive": 0.23909942968861272,
+    "bliss_v2_blend": 0.2808384379510676
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 114395812,
+   "title": "Me, Myself & I",
+   "artist": "G-Eazy",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "E",
+   "scores": {
+    "v2": 1.116,
+    "v6b": 3.28,
+    "v6g": 3.2,
+    "troi": -137,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18880057463035518,
+    "bliss_adaptive": 0.21244432968464394,
+    "bliss_v2_blend": 1.1660134199129055
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 77913387,
+   "title": "I Mean It (feat. Remo)",
+   "artist": "G-Eazy",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "E",
+   "scores": {
+    "v2": 0.536,
+    "v6b": 8.72,
+    "v6g": 5.76,
+    "troi": -306,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2569878349794981,
+    "bliss_adaptive": 0.21024223981303486,
+    "bliss_v2_blend": 0.2012311068196252
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 439864552,
+   "title": "No Limit (feat. A$AP Rocky & Cardi B)",
+   "artist": "G-Eazy",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.395,
+    "v6b": 4.01,
+    "v6g": 3.47,
+    "troi": -33,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19458550037968542,
+    "bliss_adaptive": 0.16520738353623474,
+    "bliss_v2_blend": 0.0844300503008142
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1445417732,
+   "title": "WITHOUT YOU",
+   "artist": "The Kid LAROI",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": 0.111,
+    "v6b": 4.44,
+    "v6g": 3.75,
+    "troi": -71,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20014696282348673,
+    "bliss_adaptive": 0.2371642650624402,
+    "bliss_v2_blend": 0.38415111955991743
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1439691952,
+   "title": "INDUSTRY BABY",
+   "artist": "Lil Nas X",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.108,
+    "v6b": 2.89,
+    "v6g": 2.89,
+    "troi": -127,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1785256485166518,
+    "bliss_adaptive": 0.173638744712241,
+    "bliss_v2_blend": 0.562241644520312
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 826182912,
+   "title": "FML",
+   "artist": "Arizona Zervas",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": 0.148,
+    "v6b": 3.55,
+    "v6g": 2.72,
+    "troi": -180,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19487139420024518,
+    "bliss_adaptive": 0.2023727244955888,
+    "bliss_v2_blend": 0.4534101603876065
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1588674132,
+   "title": "SNOWMAN",
+   "artist": "Arizona Zervas",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": 0.237,
+    "v6b": 3.35,
+    "v6g": 3.13,
+    "troi": -9,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18307822786162645,
+    "bliss_adaptive": 0.1895659816097385,
+    "bliss_v2_blend": 0.6125350739551472
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4022917771,
+   "title": "Janice STFU",
+   "artist": "Drake",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": 0.475,
+    "v6b": 2.73,
+    "v6g": 2.05,
+    "troi": -168,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18264502775370645,
+    "bliss_adaptive": 0.162523504185964,
+    "bliss_v2_blend": 0.7789144907458302
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 124603270,
+   "title": "One Dance",
+   "artist": "Drake",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.154,
+    "v6b": 4.06,
+    "v6g": 3.76,
+    "troi": -77,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16946986365015085,
+    "bliss_adaptive": 0.16795448313923866,
+    "bliss_v2_blend": 0.4585077855463482
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 500084792,
+   "title": "Taste",
+   "artist": "Tyga",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.164,
+    "v6b": 3.88,
+    "v6g": 3.88,
+    "troi": -201,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17299232415700763,
+    "bliss_adaptive": 0.1692815302081705,
+    "bliss_v2_blend": 0.422320629469077
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3756361952,
+   "title": "Rack City",
+   "artist": "Tyga",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.565,
+    "v6b": 4.48,
+    "v6g": 4.48,
+    "troi": -169,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2918960723700796,
+    "bliss_adaptive": 0.2334431585111604,
+    "bliss_v2_blend": -1.526504655014899
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3827375541,
+   "title": "RUDE!",
+   "artist": "Hearts2Hearts",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.247,
+    "v6b": 3.27,
+    "v6g": 3.27,
+    "troi": -66,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17999566298834552,
+    "bliss_adaptive": 0.1925488161335875,
+    "bliss_v2_blend": 0.6450571527050355
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3234208291,
+   "title": "Butterflies",
+   "artist": "Hearts2Hearts",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 1.283,
+    "v6b": 4.35,
+    "v6g": 4.35,
+    "troi": -114,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.225661270328987,
+    "bliss_adaptive": 0.26074636671636103,
+    "bliss_v2_blend": 0.9731139060761864
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4409220901,
+   "title": "Sakuranbo",
+   "artist": "YENA",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.349,
+    "v6b": 3.06,
+    "v6g": 3.06,
+    "troi": -295,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2754565639798642,
+    "bliss_adaptive": 0.2585346531013629,
+    "bliss_v2_blend": -0.5579034118914225
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3963521031,
+   "title": "Mirror Mirror",
+   "artist": "YENA",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.051,
+    "v6b": 2.23,
+    "v6g": 2.23,
+    "troi": -277,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18143815223053297,
+    "bliss_adaptive": 0.17143863442231422,
+    "bliss_v2_blend": -0.25467392734709776
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4298041652,
+   "title": "Dime Girl (Feat. NOWIMYOUNG)",
+   "artist": "YENA",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.546,
+    "v6b": 2.14,
+    "v6g": 2.14,
+    "troi": -150,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19245645191986668,
+    "bliss_adaptive": 0.18169741789805716,
+    "bliss_v2_blend": 0.7457261471979958
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3652691542,
+   "title": "STAR! (feat. Hatsune Miku)",
+   "artist": "YENA",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.745,
+    "v6b": 3.86,
+    "v6g": 3.86,
+    "troi": -84,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16767141828117277,
+    "bliss_adaptive": 0.1714237505280283,
+    "bliss_v2_blend": 0.06930220918854851
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2722514082,
+   "title": "Girls' Capitalism",
+   "artist": "tripleS",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.163,
+    "v6b": 1.65,
+    "v6g": 1.65,
+    "troi": -213,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1772619407799422,
+    "bliss_adaptive": 0.17836859960278328,
+    "bliss_v2_blend": 0.3874313836368051
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3019364521,
+   "title": "Invincible",
+   "artist": "Take the Name",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.263,
+    "v6b": 1.74,
+    "v6g": 1.74,
+    "troi": -191,
+    "embeat_full": 1.5962962962962963,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19278201504282025,
+    "bliss_adaptive": 0.1808303499781731,
+    "bliss_v2_blend": -0.4941760744953573
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1022314302,
+   "title": "Just Friends",
+   "artist": "Take the Name",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.816,
+    "v6b": 4.33,
+    "v6g": 4.33,
+    "troi": -55,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19836980825840472,
+    "bliss_adaptive": 0.200500078776752,
+    "bliss_v2_blend": -0.23502496235644904
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 768731382,
+   "title": "Cruel Summer",
+   "artist": "Versus Me",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.999,
+    "v6b": 3.19,
+    "v6g": 3.19,
+    "troi": -162,
+    "embeat_full": 1.2592592592592593,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1526202829365802,
+    "bliss_adaptive": 0.15559802615795912,
+    "bliss_v2_blend": 0.02099106118012417
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2260502767,
+   "title": "Reap",
+   "artist": "Shallowsky",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.045,
+    "v6b": 2.32,
+    "v6g": 2.32,
+    "troi": -141,
+    "embeat_full": 1.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17035631489732428,
+    "bliss_adaptive": 0.18435566773130238,
+    "bliss_v2_blend": -0.15823996300733595
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3684518492,
+   "title": "Gone To Me",
+   "artist": "Thousand Below",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.299,
+    "v6b": 2.58,
+    "v6g": 2.58,
+    "troi": -217,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2388751139530197,
+    "bliss_adaptive": 0.22268244190113648,
+    "bliss_v2_blend": -0.21892243376209408
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3066876291,
+   "title": "GPT",
+   "artist": "STAYC",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.313,
+    "v6b": 2.5,
+    "v6g": 2.5,
+    "troi": -149,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2258951144038916,
+    "bliss_adaptive": 0.2593752530205864,
+    "bliss_v2_blend": -0.12035171786072586
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 398055742,
+   "title": "Fuck Love",
+   "artist": "XXXTENTACION",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": 0.603,
+    "v6b": 4.5,
+    "v6g": 4.2,
+    "troi": -151,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1988856250784492,
+    "bliss_adaptive": 0.18567351296125406,
+    "bliss_v2_blend": 0.7311429825271822
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2495396711,
+   "title": "Wish (feat. Trippie Redd) (Trippie Mix)",
+   "artist": "Diplo",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.133,
+    "v6b": 4.74,
+    "v6g": 4.74,
+    "troi": -219,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2252037184008704,
+    "bliss_adaptive": 0.21877206446747283,
+    "bliss_v2_blend": 0.19043179097615653
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 639462052,
+   "title": "I",
+   "artist": "Lil Skies",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.217,
+    "v6b": 4.88,
+    "v6g": 4.88,
+    "troi": -164,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.22749197202734334,
+    "bliss_adaptive": 0.2239636030945304,
+    "bliss_v2_blend": -0.0680010761538609
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2497030721,
+   "title": "Lemonade (feat. NAV)",
+   "artist": "Internet Money",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.553,
+    "v6b": 3.34,
+    "v6g": 3.34,
+    "troi": -74,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1612823521841204,
+    "bliss_adaptive": 0.16418570806231866,
+    "bliss_v2_blend": 1.010246670995689
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2493945841,
+   "title": "Lemonade (Remix)",
+   "artist": "Internet Money",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.945,
+    "v6b": 3.77,
+    "v6g": 3.77,
+    "troi": -138,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16644386538314151,
+    "bliss_adaptive": 0.1707183944912097,
+    "bliss_v2_blend": 1.2353344745098322
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 472992602,
+   "title": "SAD!",
+   "artist": "XXXTENTACION",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.15,
+    "v6b": 5.05,
+    "v6g": 4.17,
+    "troi": -281,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16325857634447638,
+    "bliss_adaptive": 0.1857954512646831,
+    "bliss_v2_blend": 0.5129939844815568
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 472992592,
+   "title": "Moonlight",
+   "artist": "XXXTENTACION",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": -1.759,
+    "v6b": 4.32,
+    "v6g": 3.64,
+    "troi": -128,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2343669686328743,
+    "bliss_adaptive": 0.20548801628802038,
+    "bliss_v2_blend": -1.1798677370136699
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 619856202,
+   "title": "VALENTINO",
+   "artist": "24kGoldn",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.113,
+    "v6b": 3.31,
+    "v6g": 3.05,
+    "troi": -177,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19071676493622053,
+    "bliss_adaptive": 0.21708900306989526,
+    "bliss_v2_blend": 0.3095252638775943
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1283264522,
+   "title": "Company (feat. Future)",
+   "artist": "24kGoldn",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.187,
+    "v6b": 2.81,
+    "v6g": 2.13,
+    "troi": -82,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.15158365259373557,
+    "bliss_adaptive": 0.14880108412349013,
+    "bliss_v2_blend": 0.5849613176982168
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 624921,
+   "title": "Check",
+   "artist": "Zebrahead",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.378,
+    "v6b": 2.52,
+    "v6g": 2.52,
+    "troi": -291,
+    "embeat_full": 1.6222222222222222,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18931644627835215,
+    "bliss_adaptive": 0.18732424891905555,
+    "bliss_v2_blend": -0.5439514339998331
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2299895855,
+   "title": "Falling Apart",
+   "artist": "Zebrahead",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.511,
+    "v6b": 1.83,
+    "v6g": 1.83,
+    "troi": -206,
+    "embeat_full": 1.5444444444444445,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2282730006926174,
+    "bliss_adaptive": 0.2099295066825415,
+    "bliss_v2_blend": -0.9594854344602732
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 70715050,
+   "title": "Anthem",
+   "artist": "Zebrahead",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.339,
+    "v6b": 2.19,
+    "v6g": 2.19,
+    "troi": -207,
+    "embeat_full": 1.025925925925926,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16073468918165382,
+    "bliss_adaptive": 0.16177998202141164,
+    "bliss_v2_blend": -0.2791444659866528
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 713380,
+   "title": "Red Flag",
+   "artist": "Billy Talent",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.173,
+    "v6b": 2.73,
+    "v6g": 2.73,
+    "troi": -227,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2099535672283618,
+    "bliss_adaptive": 0.20741014937217858,
+    "bliss_v2_blend": -0.5756925242336205
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 80275944,
+   "title": "My Life In The Knife Trade",
+   "artist": "Boysetsfire",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.6,
+    "v6b": 3.04,
+    "v6g": 3.04,
+    "troi": -193,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1805571934729907,
+    "bliss_adaptive": 0.19889784455887402,
+    "bliss_v2_blend": 0.06110850143962476
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2253494,
+   "title": "Miss Murder",
+   "artist": "AFI",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.627,
+    "v6b": 3.11,
+    "v6g": 3.11,
+    "troi": -163,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.15762829812040535,
+    "bliss_adaptive": 0.15850374245088997,
+    "bliss_v2_blend": 0.2336796019881499
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2253499,
+   "title": "Love Like Winter",
+   "artist": "AFI",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.299,
+    "v6b": 2.47,
+    "v6g": 2.47,
+    "troi": -186,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16610678917799906,
+    "bliss_adaptive": 0.16223250755640847,
+    "bliss_v2_blend": -0.296546854358327
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 7978579,
+   "title": "99 Red Balloons",
+   "artist": "Goldfinger",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.675,
+    "v6b": 2.6,
+    "v6g": 2.6,
+    "troi": -236,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2406068578629197,
+    "bliss_adaptive": 0.23371789697027712,
+    "bliss_v2_blend": -1.1744083269281258
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 7978570,
+   "title": "Here In Your Bedroom",
+   "artist": "Goldfinger",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.477,
+    "v6b": 3.27,
+    "v6g": 3.27,
+    "troi": -88,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1810849436436354,
+    "bliss_adaptive": 0.2032497758776702,
+    "bliss_v2_blend": 0.1408321413141627
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 785405,
+   "title": "Anthem of Our Dying Day",
+   "artist": "Story Of The Year",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.452,
+    "v6b": 2.68,
+    "v6g": 2.68,
+    "troi": -202,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.23603852737106115,
+    "bliss_adaptive": 0.2159163675156448,
+    "bliss_v2_blend": -0.2999267897933006
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2642015242,
+   "title": "Nightmare (The Devil)",
+   "artist": "Fame on Fire",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.642,
+    "v6b": 2.52,
+    "v6g": 2.52,
+    "troi": -20,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.13812876177333225,
+    "bliss_adaptive": 0.15168416394438206,
+    "bliss_v2_blend": 0.3858852179007606
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3617650162,
+   "title": "Without Me",
+   "artist": "Fame on Fire",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.145,
+    "v6b": 4.83,
+    "v6g": 4.83,
+    "troi": -159,
+    "embeat_full": 0.8105263157894738,
+    "embeat_minus_ch1": 0.8105263157894738,
+    "bliss_fixed": 0.265763198516005,
+    "bliss_adaptive": 0.32479102704889257,
+    "bliss_v2_blend": -0.337623973978991
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1198580942,
+   "title": "Bad Nature",
+   "artist": "Nerv",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.187,
+    "v6b": 2.35,
+    "v6g": 2.35,
+    "troi": -69,
+    "embeat_full": 1.3888888888888888,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18919448651530615,
+    "bliss_adaptive": 0.18477501207344518,
+    "bliss_v2_blend": -0.4123088576557006
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3750845042,
+   "title": "Developments",
+   "artist": "Hands Like Houses",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.061,
+    "v6b": 3.75,
+    "v6g": 3.75,
+    "troi": -23,
+    "embeat_full": 0.8842105263157896,
+    "embeat_minus_ch1": 0.8842105263157896,
+    "bliss_fixed": 0.1717576584112759,
+    "bliss_adaptive": 0.16797493429419377,
+    "bliss_v2_blend": 0.5864868103456099
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2862358362,
+   "title": "THRASH (PARTY STARTER)",
+   "artist": "ISOKNOCK",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "E",
+   "scores": {
+    "v2": -0.287,
+    "v6b": 1.62,
+    "v6g": 1.58,
+    "troi": -203,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.26365261602424195,
+    "bliss_adaptive": 0.28761137735708736,
+    "bliss_v2_blend": -0.41715418748514754
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 78630667,
+   "title": "Get Low",
+   "artist": "Dillon Francis",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.568,
+    "v6b": 2.42,
+    "v6g": 2.42,
+    "troi": -200,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.15967793088318832,
+    "bliss_adaptive": 0.1569462602650861,
+    "bliss_v2_blend": 0.25695325902652105
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 104786806,
+   "title": "Bun Up the Dance",
+   "artist": "Dillon Francis",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.144,
+    "v6b": 2.23,
+    "v6g": 2.23,
+    "troi": -221,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19903149027048878,
+    "bliss_adaptive": 0.18577421771568162,
+    "bliss_v2_blend": 0.21904833735667095
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 975929972,
+   "title": "Good Morning World!",
+   "artist": "BURNOUT SYNDROMES",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.145,
+    "v6b": 2.46,
+    "v6g": 2.46,
+    "troi": -103,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.22185220524745608,
+    "bliss_adaptive": 0.21391619709537374,
+    "bliss_v2_blend": -0.6556789498262441
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2644406432,
+   "title": "Orange",
+   "artist": "Spyair",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.657,
+    "v6b": 2.99,
+    "v6g": 2.99,
+    "troi": -106,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19021724713527058,
+    "bliss_adaptive": 0.1889960417748623,
+    "bliss_v2_blend": -0.058358903923454664
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1176876362,
+   "title": "Sakuramitsutsuki",
+   "artist": "Spyair",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.731,
+    "v6b": 3.34,
+    "v6g": 3.34,
+    "troi": -143,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1483377627387962,
+    "bliss_adaptive": 0.16376548046041053,
+    "bliss_v2_blend": 0.23995909092898077
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 711676642,
+   "title": "Inferno",
+   "artist": "Mrs. GREEN APPLE",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.389,
+    "v6b": 2.55,
+    "v6g": 2.55,
+    "troi": -157,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.15083604051129335,
+    "bliss_adaptive": 0.15679574489098133,
+    "bliss_v2_blend": -0.2308673244459425
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 975968052,
+   "title": "Unravel",
+   "artist": "TK from Ling tosite sigure",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.465,
+    "v6b": 2.71,
+    "v6g": 2.71,
+    "troi": -210,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18326621482284464,
+    "bliss_adaptive": 0.1722825598736519,
+    "bliss_v2_blend": -0.5530427395404987
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2668380372,
+   "title": "Party!!",
+   "artist": "Ryokuoushoku Shakai",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.125,
+    "v6b": 2.29,
+    "v6g": 2.29,
+    "troi": -59,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.16469467256193318,
+    "bliss_adaptive": 0.1627159228752851,
+    "bliss_v2_blend": 0.5181265674517442
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2783963122,
+   "title": "Not Like Us",
+   "artist": "Kendrick Lamar",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.172,
+    "v6b": 3.91,
+    "v6g": 3.91,
+    "troi": -47,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1957924902306065,
+    "bliss_adaptive": 0.19486244214000364,
+    "bliss_v2_blend": 0.46214966101564875
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 350171311,
+   "title": "HUMBLE.",
+   "artist": "Kendrick Lamar",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.064,
+    "v6b": 3.11,
+    "v6g": 3.11,
+    "troi": -19,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1920265946992278,
+    "bliss_adaptive": 0.16046232296909846,
+    "bliss_v2_blend": 0.41966388987305225
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 623422582,
+   "title": "F**kin' Problems (feat. Drake, 2 Chainz & Kendrick Lamar)",
+   "artist": "A$AP Rocky",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.464,
+    "v6b": 4.25,
+    "v6g": 3.57,
+    "troi": -52,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.15749605143488646,
+    "bliss_adaptive": 0.1542525664554348,
+    "bliss_v2_blend": 0.34625845943948386
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 623422612,
+   "title": "Fashion Killa",
+   "artist": "A$AP Rocky",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.605,
+    "v6b": 2.5,
+    "v6g": 2.27,
+    "troi": -152,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19155898453193526,
+    "bliss_adaptive": 0.22528240412659967,
+    "bliss_v2_blend": -0.03397463347480201
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 2309928755,
+   "title": "Am I Dreaming",
+   "artist": "Metro Boomin",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": 0.006,
+    "v6b": 5.43,
+    "v6g": 4.58,
+    "troi": -188,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2393822200905344,
+    "bliss_adaptive": 0.2390184805555405,
+    "bliss_v2_blend": -0.014555522329122828
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 90533119,
+   "title": "Empire State Of Mind",
+   "artist": "JA\u0178-Z",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.148,
+    "v6b": 2.97,
+    "v6g": 2.68,
+    "troi": -231,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1703378518487846,
+    "bliss_adaptive": 0.1546688846424823,
+    "bliss_v2_blend": 0.4553794190056764
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 90533115,
+   "title": "Run This Town",
+   "artist": "JA\u0178-Z",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.793,
+    "v6b": 3.55,
+    "v6g": 2.69,
+    "troi": -182,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20022394929879192,
+    "bliss_adaptive": 0.1645822962744039,
+    "bliss_v2_blend": -0.23474321854311683
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 7371872,
+   "title": "Day 'N' Nite (nightmare)",
+   "artist": "Kid Cudi",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.646,
+    "v6b": 3.79,
+    "v6g": 3.79,
+    "troi": -118,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17587063121610036,
+    "bliss_adaptive": 0.1923584278099341,
+    "bliss_v2_blend": 0.06869574825913982
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1048706622,
+   "title": "Power Trip",
+   "artist": "J. Cole",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.505,
+    "v6b": 4.49,
+    "v6g": 4.49,
+    "troi": -91,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20969460909284532,
+    "bliss_adaptive": 0.19381148375728952,
+    "bliss_v2_blend": -0.8005924480735481
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3064010361,
+   "title": "Sticky (feat. GloRilla, Sexyy Red & Lil Wayne)",
+   "artist": "Tyler, The Creator",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.377,
+    "v6b": 3.74,
+    "v6g": 3.74,
+    "troi": -250,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.525956995146733,
+    "bliss_adaptive": 0.5424820967421047,
+    "bliss_v2_blend": -3.3480547276088464
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 137013088,
+   "title": "Sweet Dreams, TN",
+   "artist": "The Last Shadow Puppets",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.025,
+    "v6b": 4.72,
+    "v6g": 4.72,
+    "troi": -134,
+    "embeat_full": 0.8210526315789474,
+    "embeat_minus_ch1": 0.8210526315789474,
+    "bliss_fixed": 0.23434323731540396,
+    "bliss_adaptive": 0.2568993743389362,
+    "bliss_v2_blend": 0.006226606918250943
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4315519,
+   "title": "Standing Next To Me",
+   "artist": "The Last Shadow Puppets",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.867,
+    "v6b": 2.94,
+    "v6g": 2.94,
+    "troi": -146,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19150308623355466,
+    "bliss_adaptive": 0.18832763714163736,
+    "bliss_v2_blend": -0.21269282439519333
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 921027292,
+   "title": "The Adults Are Talking",
+   "artist": "The Strokes",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.372,
+    "v6b": 4.15,
+    "v6g": 4.15,
+    "troi": -62,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19699205915129686,
+    "bliss_adaptive": 0.21787312145523452,
+    "bliss_v2_blend": 0.08010921671301127
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 14880812,
+   "title": "Reptilia",
+   "artist": "The Strokes",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.037,
+    "v6b": 3.13,
+    "v6g": 3.13,
+    "troi": -34,
+    "embeat_full": 0.8736842105263158,
+    "embeat_minus_ch1": 0.8736842105263158,
+    "bliss_fixed": 0.18479384224556078,
+    "bliss_adaptive": 0.18085048174300977,
+    "bliss_v2_blend": 0.4614594766967568
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 15615270,
+   "title": "Last Nite",
+   "artist": "The Strokes",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.872,
+    "v6b": 3.59,
+    "v6g": 3.59,
+    "troi": -288,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.1904324825494146,
+    "bliss_adaptive": 0.22246433132734023,
+    "bliss_v2_blend": -0.20719241884475142
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 71127716,
+   "title": "Come a Little Closer",
+   "artist": "Cage The Elephant",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.372,
+    "v6b": 2.42,
+    "v6g": 2.42,
+    "troi": -225,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.23678031755780932,
+    "bliss_adaptive": 0.27891291852780314,
+    "bliss_v2_blend": -0.2513945142887087
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4315684,
+   "title": "Take Me Out",
+   "artist": "Franz Ferdinand",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -1.128,
+    "v6b": 4.13,
+    "v6g": 4.13,
+    "troi": -233,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.24806872221025905,
+    "bliss_adaptive": 0.2636452905949004,
+    "bliss_v2_blend": -0.8624805998163633
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 3437883,
+   "title": "Fire",
+   "artist": "Kasabian",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.451,
+    "v6b": 3.41,
+    "v6g": 3.41,
+    "troi": -148,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.24626687682729909,
+    "bliss_adaptive": 0.28728036831202414,
+    "bliss_v2_blend": -0.38446239476249805
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 15531170,
+   "title": "Sex on Fire",
+   "artist": "Kings Of Leon",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.041,
+    "v6b": 3.74,
+    "v6g": 3.74,
+    "troi": -113,
+    "embeat_full": 0.8526315789473684,
+    "embeat_minus_ch1": 0.8526315789473684,
+    "bliss_fixed": 0.19378717641007331,
+    "bliss_adaptive": 0.18645415069053511,
+    "bliss_v2_blend": 0.33318490665747136
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 70584823,
+   "title": "Wait for Me",
+   "artist": "Kings Of Leon",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.404,
+    "v6b": 5.0,
+    "v6g": 5.0,
+    "troi": -283,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.23622189972672492,
+    "bliss_adaptive": 0.2379545078672011,
+    "bliss_v2_blend": -0.2686270046348934
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 7330118,
+   "title": "Pyro",
+   "artist": "Kings Of Leon",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.199,
+    "v6b": 4.15,
+    "v6g": 4.15,
+    "troi": -92,
+    "embeat_full": 0.8,
+    "embeat_minus_ch1": 0.8,
+    "bliss_fixed": 0.25921832860500393,
+    "bliss_adaptive": 0.25505086427219636,
+    "bliss_v2_blend": -0.04782971633489436
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 703231522,
+   "title": "Pure Water",
+   "artist": "Mustard",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.672,
+    "v6b": 4.09,
+    "v6g": 4.09,
+    "troi": -120,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.15260639663626896,
+    "bliss_adaptive": 0.13722514527868646,
+    "bliss_v2_blend": 1.1639171699660689
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1693337757,
+   "title": "Bad and Boujee",
+   "artist": "Migos",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.108,
+    "v6b": 2.7,
+    "v6g": 2.7,
+    "troi": -64,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.18183505165306776,
+    "bliss_adaptive": 0.17176477921389308,
+    "bliss_v2_blend": 0.5346686988562435
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 394692942,
+   "title": "I Get the Bag (feat. Migos)",
+   "artist": "Gucci Mane",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": -0.005,
+    "v6b": 3.05,
+    "v6g": 2.83,
+    "troi": -129,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17855014258549937,
+    "bliss_adaptive": 0.18023965932344588,
+    "bliss_v2_blend": 0.48475595358901225
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 635327302,
+   "title": "Who You Foolin",
+   "artist": "Gunna",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": "H",
+   "scores": {
+    "v2": -1.062,
+    "v6b": 3.32,
+    "v6g": 2.53,
+    "troi": -93,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.19548773568438363,
+    "bliss_adaptive": 0.18974432196166782,
+    "bliss_v2_blend": -0.37925379489659666
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 563085372,
+   "title": "Drip Too Hard",
+   "artist": "Lil Baby",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.167,
+    "v6b": 3.71,
+    "v6g": 3.71,
+    "troi": -119,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.2359950951137136,
+    "bliss_adaptive": 0.20448336225037944,
+    "bliss_v2_blend": 0.12377418010067276
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 4081630461,
+   "title": "WTF GOIN (feat. 21 Savage)",
+   "artist": "Belly Gang Kushington",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": -0.434,
+    "v6b": 2.41,
+    "v6g": 2.41,
+    "troi": -195,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.20163682828045482,
+    "bliss_adaptive": 0.2014680889567666,
+    "bliss_v2_blend": -0.0009918957393871969
+   }
+  },
+  {
+   "spotify_id": null,
+   "deezer_id": 1759177047,
+   "title": "HOTEL LOBBY (Unc & Phew)",
+   "artist": "Quavo",
+   "kind": "distractor",
+   "relevant": 0,
+   "bucket": null,
+   "scores": {
+    "v2": 0.14,
+    "v6b": 1.74,
+    "v6g": 1.74,
+    "troi": -36,
+    "embeat_full": 0.0,
+    "embeat_minus_ch1": 0.0,
+    "bliss_fixed": 0.17563825096838734,
+    "bliss_adaptive": 0.19693752301989012,
+    "bliss_v2_blend": 0.6081836260668023
+   }
+  }
+ ]
+}

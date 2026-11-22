@@ -1,0 +1,1054 @@
+{
+ "v2": {
+  "n_ranked": 311,
+  "P@10": 0.5,
+  "NDCG@10": 0.726,
+  "mean_rank_heldout_like": 137.7,
+  "mean_score_negative": -1.787,
+  "mean_rank_negative": 292.9,
+  "top10_kinds": [
+   "distractor",
+   "heldout",
+   "heldout",
+   "distractor",
+   "heldout",
+   "distractor",
+   "heldout",
+   "distractor",
+   "distractor",
+   "heldout"
+  ],
+  "MAP@10": 0.284,
+  "MRR@10": 0.5,
+  "neg_top10": 0,
+  "neg_top10_H": 0,
+  "mean_rank_negative_H": 294.5,
+  "per_negative_ranks": [
+   {
+    "spotify_id": "5v7oj9PosKdE39x9uwDs6C",
+    "title": "dancinwithsomebawdy",
+    "rank": 267,
+    "is_h": false
+   },
+   {
+    "spotify_id": "1vvBUZseJ7fwYPX1NedOLd",
+    "title": "Cha Cha",
+    "rank": 274,
+    "is_h": true
+   },
+   {
+    "spotify_id": "7zDu3l7DDlfSlt20YMKkWo",
+    "title": "Martini Blue",
+    "rank": 276,
+    "is_h": false
+   },
+   {
+    "spotify_id": "2slLXFcITuhf0oSp2wVJLv",
+    "title": "Opaul",
+    "rank": 280,
+    "is_h": false
+   },
+   {
+    "spotify_id": "30efCAopZCFcoi43sSToNr",
+    "title": "prove it",
+    "rank": 292,
+    "is_h": true
+   },
+   {
+    "spotify_id": "6HacgXCExkzS552ILfJTXu",
+    "title": "Census Designated",
+    "rank": 293,
+    "is_h": false
+   },
+   {
+    "spotify_id": "2jv1ovpDpTJEPIlth5Wn07",
+    "title": "TOMBSTONE",
+    "rank": 298,
+    "is_h": false
+   },
+   {
+    "spotify_id": "4bkPAARkDov1lV05emEF7a",
+    "title": "Soft Spine",
+    "rank": 302,
+    "is_h": false
+   },
+   {
+    "spotify_id": "32gSPav2xqFylAeCjJCxWi",
+    "title": "Alone",
+    "rank": 304,
+    "is_h": true
+   },
+   {
+    "spotify_id": "0FmrNFYyLLRtIS7XWJPLLk",
+    "title": "Akina Speed Star",
+    "rank": 308,
+    "is_h": true
+   },
+   {
+    "spotify_id": "1GfBLbAhZUWdseuDqhocmn",
+    "title": "Rumble",
+    "rank": 310,
+    "is_h": false
+   },
+   {
+    "spotify_id": "2y57H6nA3vic5t8awwaS69",
+    "title": "Dark Light",
+    "rank": 311,
+    "is_h": false
+   }
+  ],
+  "n_ranked_bliss_covered": 311
+ },
+ "v6_per_bucket": {
+  "n_ranked": 311,
+  "P@10": 0.5,
+  "NDCG@10": 0.666,
+  "mean_rank_heldout_like": 136.0,
+  "mean_score_negative": 3.362,
+  "mean_rank_negative": 173.3,
+  "top10_kinds": [
+   "distractor",
+   "heldout",
+   "distractor",
+   "distractor",
+   "heldout",
+   "heldout",
+   "distractor",
+   "distractor",
+   "heldout",
+   "heldout"
+  ],
+  "MAP@10": 0.234,
+  "MRR@10": 0.5,
+  "neg_top10": 0,
+  "neg_top10_H": 0,
+  "mean_rank_negative_H": 192.5,
+  "per_negative_ranks": [
+   {
+    "spotify_id": "2jv1ovpDpTJEPIlth5Wn07",
+    "title": "TOMBSTONE",
+    "rank": 23,
+    "is_h": false
+   },
+   {
+    "spotify_id": "4bkPAARkDov1lV05emEF7a",
+    "title": "Soft Spine",
+    "rank": 58,
+    "is_h": false
+   },
+   {
+    "spotify_id": "2slLXFcITuhf0oSp2wVJLv",
+    "title": "Opaul",
+    "rank": 59,
+    "is_h": false
+   },
+   {
+    "spotify_id": "5v7oj9PosKdE39x9uwDs6C",
+    "title": "dancinwithsomebawdy",
+    "rank": 134,
+    "is_h": false
+   },
+   {
+    "spotify_id": "6HacgXCExkzS552ILfJTXu",
+    "title": "Census Designated",
+    "rank": 162,
+    "is_h": false
+   },
+   {
+    "spotify_id": "1vvBUZseJ7fwYPX1NedOLd",
+    "title": "Cha Cha",
+    "rank": 176,
+    "is_h": true
+   },
+   {
+    "spotify_id": "30efCAopZCFcoi43sSToNr",
+    "title": "prove it",
+    "rank": 185,
+    "is_h": true
+   },
+   {
+    "spotify_id": "32gSPav2xqFylAeCjJCxWi",
+    "title": "Alone",
+    "rank": 186,
+    "is_h": true
+   },
+   {
+    "spotify_id": "0FmrNFYyLLRtIS7XWJPLLk",
+    "title": "Akina Speed Star",
+    "rank": 223,
+    "is_h": true
+   },
+   {
+    "spotify_id": "7zDu3l7DDlfSlt20YMKkWo",
+    "title": "Martini Blue",
+    "rank": 271,
+    "is_h": false
+   },
+   {
+    "spotify_id": "1GfBLbAhZUWdseuDqhocmn",
+    "title": "Rumble",
+    "rank": 297,
+    "is_h": false
+   },
+   {
+    "spotify_id": "2y57H6nA3vic5t8awwaS69",
+    "title": "Dark Light",
+    "rank": 306,
+    "is_h": false
+   }
+  ],
+  "n_ranked_bliss_covered": 311
+ },
+ "v6_global": {
+  "n_ranked": 311,
+  "P@10": 0.6,
+  "NDCG@10": 0.664,
+  "mean_rank_heldout_like": 132.2,
+  "mean_score_negative": 3.337,
+  "mean_rank_negative": 178.2,
+  "top10_kinds": [
+   "distractor",
+   "distractor",
+   "heldout",
+   "distractor",
+   "heldout",
+   "heldout",
+   "heldout",
+   "heldout",
+   "heldout",
+   "distractor"
+  ],
+  "MAP@10": 0.31,
+  "MRR@10": 0.333,
+  "neg_top10": 0,
+  "neg_top10_H": 0,
+  "mean_rank_negative_H": 194.2,
+  "per_negative_ranks": [
+   {
+    "spotify_id": "2jv1ovpDpTJEPIlth5Wn07",
+    "title": "TOMBSTONE",
+    "rank": 23,
+    "is_h": false
+   },
+   {
+    "spotify_id": "4bkPAARkDov1lV05emEF7a",
+    "title": "Soft Spine",
+    "rank": 65,
+    "is_h": false
+   },
+   {
+    "spotify_id": "2slLXFcITuhf0oSp2wVJLv",
+    "title": "Opaul",
+    "rank": 67,
+    "is_h": false
+   },
+   {
+    "spotify_id": "5v7oj9PosKdE39x9uwDs6C",
+    "title": "dancinwithsomebawdy",
+    "rank": 143,
+    "is_h": false
+   },
+   {
+    "spotify_id": "30efCAopZCFcoi43sSToNr",
+    "title": "prove it",
+    "rank": 152,
+    "is_h": true
+   },
+   {
+    "spotify_id": "6HacgXCExkzS552ILfJTXu",
+    "title": "Census Designated",
+    "rank": 175,
+    "is_h": false
+   },
+   {
+    "spotify_id": "1vvBUZseJ7fwYPX1NedOLd",
+    "title": "Cha Cha",
+    "rank": 189,
+    "is_h": true
+   },
+   {
+    "spotify_id": "32gSPav2xqFylAeCjJCxWi",
+    "title": "Alone",
+    "rank": 202,
+    "is_h": true
+   },
+   {
+    "spotify_id": "0FmrNFYyLLRtIS7XWJPLLk",
+    "title": "Akina Speed Star",
+    "rank": 234,
+    "is_h": true
+   },
+   {
+    "spotify_id": "7zDu3l7DDlfSlt20YMKkWo",
+    "title": "Martini Blue",
+    "rank": 280,
+    "is_h": false
+   },
+   {
+    "spotify_id": "1GfBLbAhZUWdseuDqhocmn",
+    "title": "Rumble",
+    "rank": 302,
+    "is_h": false
+   },
+   {
+    "spotify_id": "2y57H6nA3vic5t8awwaS69",
+    "title": "Dark Light",
+    "rank": 307,
+    "is_h": false
+   }
+  ],
+  "n_ranked_bliss_covered": 311
+ },
+ "bliss_fixed": {
+  "n_ranked": 311,
+  "P@10": 0.3,
+  "NDCG@10": 0.604,
+  "mean_rank_heldout_like": 155.5,
+  "mean_score_negative": 0.245,
+  "mean_rank_negative": 188.7,
+  "top10_kinds": [
+   "distractor",
+   "distractor",
+   "heldout",
+   "heldout",
+   "distractor",
+   "heldout",
+   "distractor",
+   "distractor",
+   "distractor",
+   "negative"
+  ],
+  "MAP@10": 0.133,
+  "MRR@10": 0.333,
+  "neg_top10": 1,
+  "neg_top10_H": 0,
+  "mean_rank_negative_H": 165.5,
+  "per_negative_ranks": [
+   {
+    "spotify_id": "7zDu3l7DDlfSlt20YMKkWo",
+    "title": "Martini Blue",
+    "rank": 10,
+    "is_h": false
+   },
+   {
+    "spotify_id": "30efCAopZCFcoi43sSToNr",
+    "title": "prove it",
+    "rank": 91,
+    "is_h": true
+   },
+   {
+    "spotify_id": "5v7oj9PosKdE39x9uwDs6C",
+    "title": "dancinwithsomebawdy",
+    "rank": 110,
+    "is_h": false
+   },
+   {
+    "spotify_id": "6HacgXCExkzS552ILfJTXu",
+    "title": "Census Designated",
+    "rank": 137,
+    "is_h": false
+   },
+   {
+    "spotify_id": "1vvBUZseJ7fwYPX1NedOLd",
+    "title": "Cha Cha",
+    "rank": 166,
+    "is_h": true
+   },
+   {
+    "spotify_id": "0FmrNFYyLLRtIS7XWJPLLk",
+    "title": "Akina Speed Star",
+    "rank": 187,
+    "is_h": true
+   },
+   {
+    "spotify_id": "32gSPav2xqFylAeCjJCxWi",
+    "title": "Alone",
+    "rank": 218,
+    "is_h": true
+   },
+   {
+    "spotify_id": "2jv1ovpDpTJEPIlth5Wn07",
+    "title": "TOMBSTONE",
+    "rank": 237,
+    "is_h": false
+   },
+   {
+    "spotify_id": "4bkPAARkDov1lV05emEF7a",
+    "title": "Soft Spine",
+    "rank": 243,
+    "is_h": false
+   },
+   {
+    "spotify_id": "2slLXFcITuhf0oSp2wVJLv",
+    "title": "Opaul",
+    "rank": 252,
+    "is_h": false
+   },
+   {
+    "spotify_id": "1GfBLbAhZUWdseuDqhocmn",
+    "title": "Rumble",
+    "rank": 302,
+    "is_h": false
+   },
+   {
+    "spotify_id": "2y57H6nA3vic5t8awwaS69",
+    "title": "Dark Light",
+    "rank": 311,
+    "is_h": false
+   }
+  ],
+  "n_ranked_bliss_covered": 311
+ },
+ "bliss_adaptive": {
+  "n_ranked": 311,
+  "P@10": 0.3,
+  "NDCG@10": 0.665,
+  "mean_rank_heldout_like": 151.1,
+  "mean_score_negative": 0.25,
+  "mean_rank_negative": 181.5,
+  "top10_kinds": [
+   "distractor",
+   "heldout",
+   "distractor",
+   "heldout",
+   "distractor",
+   "heldout",
+   "distractor",
+   "distractor",
+   "distractor",
+   "distractor"
+  ],
+  "MAP@10": 0.15,
+  "MRR@10": 0.5,
+  "neg_top10": 0,
+  "neg_top10_H": 0,
+  "mean_rank_negative_H": 146.8,
+  "per_negative_ranks": [
+   {
+    "spotify_id": "7zDu3l7DDlfSlt20YMKkWo",
+    "title": "Martini Blue",
+    "rank": 17,
+    "is_h": false
+   },
+   {
+    "spotify_id": "30efCAopZCFcoi43sSToNr",
+    "title": "prove it",
+    "rank": 24,
+    "is_h": true
+   },
+   {
+    "spotify_id": "5v7oj9PosKdE39x9uwDs6C",
+    "title": "dancinwithsomebawdy",
+    "rank": 57,
+    "is_h": false
+   },
+   {
+    "spotify_id": "1vvBUZseJ7fwYPX1NedOLd",
+    "title": "Cha Cha",
+    "rank": 166,
+    "is_h": true
+   },
+   {
+    "spotify_id": "32gSPav2xqFylAeCjJCxWi",
+    "title": "Alone",
+    "rank": 190,
+    "is_h": true
+   },
+   {
+    "spotify_id": "0FmrNFYyLLRtIS7XWJPLLk",
+    "title": "Akina Speed Star",
+    "rank": 207,
+    "is_h": true
+   },
+   {
+    "spotify_id": "4bkPAARkDov1lV05emEF7a",
+    "title": "Soft Spine",
+    "rank": 210,
+    "is_h": false
+   },
+   {
+    "spotify_id": "2jv1ovpDpTJEPIlth5Wn07",
+    "title": "TOMBSTONE",
+    "rank": 221,
+    "is_h": false
+   },
+   {
+    "spotify_id": "2slLXFcITuhf0oSp2wVJLv",
+    "title": "Opaul",
+    "rank": 234,
+    "is_h": false
+   },
+   {
+    "spotify_id": "1GfBLbAhZUWdseuDqhocmn",
+    "title": "Rumble",
+    "rank": 270,
+    "is_h": false
+   },
+   {
+    "spotify_id": "6HacgXCExkzS552ILfJTXu",
+    "title": "Census Designated",
+    "rank": 271,
+    "is_h": false
+   },
+   {
+    "spotify_id": "2y57H6nA3vic5t8awwaS69",
+    "title": "Dark Light",
+    "rank": 311,
+    "is_h": false
+   }
+  ],
+  "n_ranked_bliss_covered": 311
+ },
+ "bliss_v2_blend": {
+  "n_ranked": 311,
+  "P@10": 0.6,
+  "NDCG@10": 0.907,
+  "mean_rank_heldout_like": 141.5,
+  "mean_score_negative": -1.543,
+  "mean_rank_negative": 278.7,
+  "top10_kinds": [
+   "heldout",
+   "heldout",
+   "distractor",
+   "distractor",
+   "heldout",
+   "heldout",
+   "heldout",
+   "distractor",
+   "distractor",
+   "heldout"
+  ],
+  "MAP@10": 0.458,
+  "MRR@10": 1.0,
+  "neg_top10": 0,
+  "neg_top10_H": 0,
+  "mean_rank_negative_H": 277.8,
+  "per_negative_ranks": [
+   {
+    "spotify_id": "7zDu3l7DDlfSlt20YMKkWo",
+    "title": "Martini Blue",
+    "rank": 217,
+    "is_h": false
+   },
+   {
+    "spotify_id": "5v7oj9PosKdE39x9uwDs6C",
+    "title": "dancinwithsomebawdy",
+    "rank": 244,
+    "is_h": false
+   },
+   {
+    "spotify_id": "1vvBUZseJ7fwYPX1NedOLd",
+    "title": "Cha Cha",
+    "rank": 258,
+    "is_h": true
+   },
+   {
+    "spotify_id": "30efCAopZCFcoi43sSToNr",
+    "title": "prove it",
+    "rank": 266,
+    "is_h": true
+   },
+   {
+    "spotify_id": "6HacgXCExkzS552ILfJTXu",
+    "title": "Census Designated",
+    "rank": 278,
+    "is_h": false
+   },
+   {
+    "spotify_id": "2slLXFcITuhf0oSp2wVJLv",
+    "title": "Opaul",
+    "rank": 284,
+    "is_h": false
+   },
+   {
+    "spotify_id": "2jv1ovpDpTJEPIlth5Wn07",
+    "title": "TOMBSTONE",
+    "rank": 292,
+    "is_h": false
+   },
+   {
+    "spotify_id": "0FmrNFYyLLRtIS7XWJPLLk",
+    "title": "Akina Speed Star",
+    "rank": 293,
+    "is_h": true
+   },
+   {
+    "spotify_id": "32gSPav2xqFylAeCjJCxWi",
+    "title": "Alone",
+    "rank": 294,
+    "is_h": true
+   },
+   {
+    "spotify_id": "4bkPAARkDov1lV05emEF7a",
+    "title": "Soft Spine",
+    "rank": 299,
+    "is_h": false
+   },
+   {
+    "spotify_id": "1GfBLbAhZUWdseuDqhocmn",
+    "title": "Rumble",
+    "rank": 308,
+    "is_h": false
+   },
+   {
+    "spotify_id": "2y57H6nA3vic5t8awwaS69",
+    "title": "Dark Light",
+    "rank": 311,
+    "is_h": false
+   }
+  ],
+  "n_ranked_bliss_covered": 311
+ },
+ "v2_on_bliss_subset": {
+  "n_ranked": 311,
+  "P@10": 0.5,
+  "NDCG@10": 0.726,
+  "mean_rank_heldout_like": 137.7,
+  "mean_score_negative": -1.787,
+  "mean_rank_negative": 292.9,
+  "top10_kinds": [
+   "distractor",
+   "heldout",
+   "heldout",
+   "distractor",
+   "heldout",
+   "distractor",
+   "heldout",
+   "distractor",
+   "distractor",
+   "heldout"
+  ],
+  "MAP@10": 0.284,
+  "MRR@10": 0.5,
+  "neg_top10": 0,
+  "neg_top10_H": 0,
+  "mean_rank_negative_H": 294.5,
+  "per_negative_ranks": [
+   {
+    "spotify_id": "5v7oj9PosKdE39x9uwDs6C",
+    "title": "dancinwithsomebawdy",
+    "rank": 267,
+    "is_h": false
+   },
+   {
+    "spotify_id": "1vvBUZseJ7fwYPX1NedOLd",
+    "title": "Cha Cha",
+    "rank": 274,
+    "is_h": true
+   },
+   {
+    "spotify_id": "7zDu3l7DDlfSlt20YMKkWo",
+    "title": "Martini Blue",
+    "rank": 276,
+    "is_h": false
+   },
+   {
+    "spotify_id": "2slLXFcITuhf0oSp2wVJLv",
+    "title": "Opaul",
+    "rank": 280,
+    "is_h": false
+   },
+   {
+    "spotify_id": "30efCAopZCFcoi43sSToNr",
+    "title": "prove it",
+    "rank": 292,
+    "is_h": true
+   },
+   {
+    "spotify_id": "6HacgXCExkzS552ILfJTXu",
+    "title": "Census Designated",
+    "rank": 293,
+    "is_h": false
+   },
+   {
+    "spotify_id": "2jv1ovpDpTJEPIlth5Wn07",
+    "title": "TOMBSTONE",
+    "rank": 298,
+    "is_h": false
+   },
+   {
+    "spotify_id": "4bkPAARkDov1lV05emEF7a",
+    "title": "Soft Spine",
+    "rank": 302,
+    "is_h": false
+   },
+   {
+    "spotify_id": "32gSPav2xqFylAeCjJCxWi",
+    "title": "Alone",
+    "rank": 304,
+    "is_h": true
+   },
+   {
+    "spotify_id": "0FmrNFYyLLRtIS7XWJPLLk",
+    "title": "Akina Speed Star",
+    "rank": 308,
+    "is_h": true
+   },
+   {
+    "spotify_id": "1GfBLbAhZUWdseuDqhocmn",
+    "title": "Rumble",
+    "rank": 310,
+    "is_h": false
+   },
+   {
+    "spotify_id": "2y57H6nA3vic5t8awwaS69",
+    "title": "Dark Light",
+    "rank": 311,
+    "is_h": false
+   }
+  ],
+  "n_ranked_bliss_covered": 311
+ },
+ "v6b_on_bliss_subset": {
+  "n_ranked": 311,
+  "P@10": 0.5,
+  "NDCG@10": 0.666,
+  "mean_rank_heldout_like": 136.0,
+  "mean_score_negative": 3.362,
+  "mean_rank_negative": 173.3,
+  "top10_kinds": [
+   "distractor",
+   "heldout",
+   "distractor",
+   "distractor",
+   "heldout",
+   "heldout",
+   "distractor",
+   "distractor",
+   "heldout",
+   "heldout"
+  ],
+  "MAP@10": 0.234,
+  "MRR@10": 0.5,
+  "neg_top10": 0,
+  "neg_top10_H": 0,
+  "mean_rank_negative_H": 192.5,
+  "per_negative_ranks": [
+   {
+    "spotify_id": "2jv1ovpDpTJEPIlth5Wn07",
+    "title": "TOMBSTONE",
+    "rank": 23,
+    "is_h": false
+   },
+   {
+    "spotify_id": "4bkPAARkDov1lV05emEF7a",
+    "title": "Soft Spine",
+    "rank": 58,
+    "is_h": false
+   },
+   {
+    "spotify_id": "2slLXFcITuhf0oSp2wVJLv",
+    "title": "Opaul",
+    "rank": 59,
+    "is_h": false
+   },
+   {
+    "spotify_id": "5v7oj9PosKdE39x9uwDs6C",
+    "title": "dancinwithsomebawdy",
+    "rank": 134,
+    "is_h": false
+   },
+   {
+    "spotify_id": "6HacgXCExkzS552ILfJTXu",
+    "title": "Census Designated",
+    "rank": 162,
+    "is_h": false
+   },
+   {
+    "spotify_id": "1vvBUZseJ7fwYPX1NedOLd",
+    "title": "Cha Cha",
+    "rank": 176,
+    "is_h": true
+   },
+   {
+    "spotify_id": "30efCAopZCFcoi43sSToNr",
+    "title": "prove it",
+    "rank": 185,
+    "is_h": true
+   },
+   {
+    "spotify_id": "32gSPav2xqFylAeCjJCxWi",
+    "title": "Alone",
+    "rank": 186,
+    "is_h": true
+   },
+   {
+    "spotify_id": "0FmrNFYyLLRtIS7XWJPLLk",
+    "title": "Akina Speed Star",
+    "rank": 223,
+    "is_h": true
+   },
+   {
+    "spotify_id": "7zDu3l7DDlfSlt20YMKkWo",
+    "title": "Martini Blue",
+    "rank": 271,
+    "is_h": false
+   },
+   {
+    "spotify_id": "1GfBLbAhZUWdseuDqhocmn",
+    "title": "Rumble",
+    "rank": 297,
+    "is_h": false
+   },
+   {
+    "spotify_id": "2y57H6nA3vic5t8awwaS69",
+    "title": "Dark Light",
+    "rank": 306,
+    "is_h": false
+   }
+  ],
+  "n_ranked_bliss_covered": 311
+ },
+ "paired_bootstrap_bliss_fixed_minus_v6b": {
+  "delta_P@10_ci95": [
+   -0.5,
+   0.3
+  ],
+  "delta_NDCG@10_ci95": [
+   -0.534,
+   0.363
+  ],
+  "delta_P@10_mean": -0.106,
+  "delta_NDCG@10_mean": -0.088
+ },
+ "paired_bootstrap_bliss_adaptive_minus_v6b": {
+  "delta_P@10_ci95": [
+   -0.5,
+   0.3
+  ],
+  "delta_NDCG@10_ci95": [
+   -0.536,
+   0.401
+  ],
+  "delta_P@10_mean": -0.116,
+  "delta_NDCG@10_mean": -0.07
+ },
+ "paired_bootstrap_blend_minus_v6b": {
+  "delta_P@10_ci95": [
+   -0.3,
+   0.6
+  ],
+  "delta_NDCG@10_ci95": [
+   -0.268,
+   0.646
+  ],
+  "delta_P@10_mean": 0.138,
+  "delta_NDCG@10_mean": 0.222
+ },
+ "bootstrap_bliss_fixed_P@10_ci95": [
+  0.1,
+  0.7
+ ],
+ "bootstrap_bliss_adaptive_P@10_ci95": [
+  0.0,
+  0.6
+ ],
+ "bootstrap_blend_P@10_ci95": [
+  0.2,
+  0.9
+ ],
+ "seed_sweep_distractors_42_46": {
+  "42": {
+   "bliss_fixed": {
+    "P@10": 0.3,
+    "NDCG@10": 0.604,
+    "n_ranked": 311
+   },
+   "v6b": {
+    "P@10": 0.5,
+    "NDCG@10": 0.666,
+    "n_ranked": 311
+   }
+  },
+  "43": {
+   "bliss_fixed": {
+    "P@10": 0.4,
+    "NDCG@10": 0.705,
+    "n_ranked": 311
+   },
+   "v6b": {
+    "P@10": 0.5,
+    "NDCG@10": 0.681,
+    "n_ranked": 311
+   }
+  },
+  "44": {
+   "bliss_fixed": {
+    "P@10": 0.4,
+    "NDCG@10": 0.922,
+    "n_ranked": 311
+   },
+   "v6b": {
+    "P@10": 0.5,
+    "NDCG@10": 0.705,
+    "n_ranked": 311
+   }
+  },
+  "45": {
+   "bliss_fixed": {
+    "P@10": 0.4,
+    "NDCG@10": 0.627,
+    "n_ranked": 311
+   },
+   "v6b": {
+    "P@10": 0.2,
+    "NDCG@10": 0.5,
+    "n_ranked": 311
+   }
+  },
+  "46": {
+   "bliss_fixed": {
+    "P@10": 0.3,
+    "NDCG@10": 0.585,
+    "n_ranked": 311
+   },
+   "v6b": {
+    "P@10": 0.4,
+    "NDCG@10": 0.57,
+    "n_ranked": 311
+   }
+  }
+ },
+ "full_pool": {
+  "n_pool_items": 701,
+  "n_bliss_covered": 701,
+  "bliss_fixed": {
+   "n_ranked": 701,
+   "P@10": 0.3,
+   "NDCG@10": 0.484,
+   "mean_rank_heldout_like": 338.3,
+   "mean_score_negative": 0.245,
+   "mean_rank_negative": 414.5,
+   "top10_kinds": [
+    "distractor",
+    "distractor",
+    "distractor",
+    "distractor",
+    "heldout",
+    "heldout",
+    "distractor",
+    "distractor",
+    "distractor",
+    "heldout"
+   ]
+  },
+  "v6b": {
+   "n_ranked": 701,
+   "P@10": 0.1,
+   "NDCG@10": 0.387,
+   "mean_rank_heldout_like": 310.4,
+   "mean_score_negative": 3.362,
+   "mean_rank_negative": 392.2,
+   "top10_kinds": [
+    "distractor",
+    "distractor",
+    "distractor",
+    "distractor",
+    "heldout",
+    "distractor",
+    "distractor",
+    "distractor",
+    "distractor",
+    "distractor"
+   ]
+  }
+ },
+ "diagnostics": {
+  "T3_tempo_crosscheck_n": 28,
+  "T3_pearson_r": 0.856,
+  "T3_median_abs_dBPM_octave_corrected": 2.0,
+  "T3_tempo_sentinel_rate_test": 0.0,
+  "S4_flatness_std_across_liked": 0.0487,
+  "dedup_threshold_0.1pct": 0.1286,
+  "adaptive_weights": [
+   0.0576,
+   0.9642,
+   0.503,
+   2.4654,
+   0.0969,
+   0.3372,
+   0.1369,
+   1.8784,
+   1.7529,
+   2.0613,
+   0.1999,
+   1.4846,
+   1.0794,
+   1.0026,
+   0.3226,
+   0.8937,
+   2.0466,
+   2.3077,
+   0.9146,
+   1.7866,
+   0.1064,
+   0.1986,
+   0.403
+  ],
+  "extract_p50_s": 0.64,
+  "extract_p90_s": 1.0,
+  "extract_n_tracks": 1078,
+  "random_P@10_baseline_311": 0.318,
+  "random_P@10_baseline_bliss_subset": 0.318
+ },
+ "counts": {
+  "test_likes": 129,
+  "test_with_librosa": 99,
+  "negatives": 13,
+  "negatives_with_librosa": 12,
+  "distractors": 200,
+  "pool_total": 590,
+  "n_ranked_full_pool_311": 311,
+  "bliss_covered": {
+   "distractor": 200,
+   "heldout": 99,
+   "negative": 12
+  },
+  "bliss_missing": {
+   "heldout": 0,
+   "negative": 0,
+   "distractor": 0
+  },
+  "train_liked_bliss_seeds": 363,
+  "train_liked_total": 520,
+  "split_label": "position-based holdout (NOT time-based)"
+ },
+ "pass_bars_d2": {
+  "M1_P@10_ge_0.70_and_ge_v6b_plus_0.10": false,
+  "M2_NDCG_ge_v6b_plus_0.05": false,
+  "M3_mean_rank_heldout_le_v6b_minus_20": false,
+  "M4_negatives_in_top10_le_1": true,
+  "M5_mean_rank_negative_ge_200": false,
+  "M6_mean_rank_H_negative_ge_200": false,
+  "M7_ablation_blend_minus_v2_P@10_ge_0.02": true,
+  "M8_runtime_p50_le_2s": true,
+  "M9_human_listen_gate": "NOT RUN - no Kevin listening yet",
+  "ablation_delta_P@10_blend_minus_v2": 0.1
+ },
+ "go_rule_4leg": {
+  "bliss_fixed": {
+   "leg1_offline_beats_v6": false,
+   "leg2_beats_chance": false,
+   "leg3_negative_control": false,
+   "leg4_live_keep_rate": "NOT RUN - needs 42 judged tracks",
+   "offline_verdict": "NO-GO - offline"
+  },
+  "bliss_adaptive": {
+   "leg1_offline_beats_v6": false,
+   "leg2_beats_chance": false,
+   "leg3_negative_control": true,
+   "leg4_live_keep_rate": "NOT RUN - needs 42 judged tracks",
+   "offline_verdict": "NO-GO - offline"
+  },
+  "bliss_v2_blend": {
+   "leg1_offline_beats_v6": false,
+   "leg2_beats_chance": false,
+   "leg3_negative_control": true,
+   "leg4_live_keep_rate": "NOT RUN - needs 42 judged tracks",
+   "offline_verdict": "NO-GO - offline"
+  },
+  "leg4_note": "P(>=7/10 | p=0.6) = 0.382, so a single 7/10 list proves nothing; GO needs k>=32/42 judged keeps.",
+  "note": "If \u00a7d.2 pass bars and the 4-leg rule conflict, the 4-leg rule wins (per task brief). The blend is not a pure bliss scorer; its offline legs are reported separately from the two bliss scorers.",
+  "P_ge_7_of_10_given_p_0.6": 0.382
+ }
+}

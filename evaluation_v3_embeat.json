@@ -1,0 +1,301 @@
+{
+ "method": "embeat_port (v3, architecture-only port; channel 5 stub)",
+ "random_seed": 616,
+ "git_hash": null,
+ "git_note": "local-only work; branch pipeline-v3 @ b7f3ef0a per brief (no git repo in this workspace dir)",
+ "pool": {
+  "n_ranked": 311,
+  "test_likes_with_librosa": 99,
+  "test_likes_total": 129,
+  "negatives_with_librosa": 12,
+  "negatives_total": 13,
+  "negatives_excluded_no_librosa": [
+   "6aJn7Cst74cj4lNIiPRgav"
+  ],
+  "distractors": 200,
+  "pool_total": 590,
+  "note": "Identical 311-item pool to evaluation_v2.json; baselines recomputed here match it exactly."
+ },
+ "baselines": {
+  "v2": {
+   "n_ranked": 311,
+   "P@10": 0.5,
+   "NDCG@10": 0.726,
+   "mean_rank_heldout_like": 137.7,
+   "mean_score_negative": -1.787,
+   "mean_rank_negative": 292.9,
+   "top10_kinds": [
+    "distractor",
+    "heldout",
+    "heldout",
+    "distractor",
+    "heldout",
+    "distractor",
+    "heldout",
+    "distractor",
+    "distractor",
+    "heldout"
+   ]
+  },
+  "v6_per_bucket": {
+   "n_ranked": 311,
+   "P@10": 0.5,
+   "NDCG@10": 0.666,
+   "mean_rank_heldout_like": 136.0,
+   "mean_score_negative": 3.362,
+   "mean_rank_negative": 173.3,
+   "top10_kinds": [
+    "distractor",
+    "heldout",
+    "distractor",
+    "distractor",
+    "heldout",
+    "heldout",
+    "distractor",
+    "distractor",
+    "heldout",
+    "heldout"
+   ]
+  },
+  "v6_global": {
+   "n_ranked": 311,
+   "P@10": 0.6,
+   "NDCG@10": 0.664,
+   "mean_rank_heldout_like": 132.2,
+   "mean_score_negative": 3.337,
+   "mean_rank_negative": 178.2,
+   "top10_kinds": [
+    "distractor",
+    "distractor",
+    "heldout",
+    "distractor",
+    "heldout",
+    "heldout",
+    "heldout",
+    "heldout",
+    "heldout",
+    "distractor"
+   ]
+  }
+ },
+ "eval_seed": {
+  "spotify_id": "6HseMEzSf4mxnUem0O1hJp",
+  "title": "TILL I DIE",
+  "artist": "SXMPRA, 1nonly",
+  "genre_bucket": "R",
+  "note": "medoid train like (position>=130) among top-30 artists; keeps channel 4 live in the eval ranking"
+ },
+ "ported_medoid": {
+  "n_ranked": 311,
+  "P@10": 0.6,
+  "NDCG@10": 0.829,
+  "mean_rank_heldout_like": 130.9,
+  "mean_score_negative": 0.0,
+  "mean_rank_negative": 162.7,
+  "top10_kinds": [
+   "heldout",
+   "distractor",
+   "distractor",
+   "heldout",
+   "heldout",
+   "distractor",
+   "heldout",
+   "distractor",
+   "heldout",
+   "heldout"
+  ],
+  "neg_top10": 0
+ },
+ "ported_mean_20seeds": {
+  "P@10": 0.39,
+  "NDCG@10": 0.734,
+  "mean_rank_heldout_like": 147.9,
+  "mean_rank_negative": 174.0,
+  "mean_neg_top10": 0.0,
+  "n_seeds": 20
+ },
+ "ablation": {
+  "full_port": {
+   "n_ranked": 311,
+   "P@10": 0.6,
+   "NDCG@10": 0.829,
+   "mean_rank_heldout_like": 130.9,
+   "mean_score_negative": 0.0,
+   "mean_rank_negative": 162.7,
+   "top10_kinds": [
+    "heldout",
+    "distractor",
+    "distractor",
+    "heldout",
+    "heldout",
+    "distractor",
+    "heldout",
+    "distractor",
+    "heldout",
+    "heldout"
+   ],
+   "neg_top10": 0
+  },
+  "minus_channel1": {
+   "n_ranked": 311,
+   "P@10": 0.6,
+   "NDCG@10": 0.948,
+   "mean_rank_heldout_like": 131.7,
+   "mean_score_negative": 0.0,
+   "mean_rank_negative": 159.3,
+   "top10_kinds": [
+    "heldout",
+    "heldout",
+    "heldout",
+    "distractor",
+    "heldout",
+    "distractor",
+    "distractor",
+    "heldout",
+    "heldout",
+    "distractor"
+   ],
+   "neg_top10": 0
+  },
+  "minus_channel2": {
+   "n_ranked": 311,
+   "P@10": 0.4,
+   "NDCG@10": 0.884,
+   "mean_rank_heldout_like": 130.3,
+   "mean_score_negative": 0.0,
+   "mean_rank_negative": 153.7,
+   "top10_kinds": [
+    "heldout",
+    "distractor",
+    "heldout",
+    "heldout",
+    "distractor",
+    "distractor",
+    "heldout",
+    "distractor",
+    "distractor",
+    "distractor"
+   ],
+   "neg_top10": 0
+  },
+  "minus_channel3": {
+   "n_ranked": 311,
+   "P@10": 0.6,
+   "NDCG@10": 0.829,
+   "mean_rank_heldout_like": 130.9,
+   "mean_score_negative": 0.0,
+   "mean_rank_negative": 162.7,
+   "top10_kinds": [
+    "heldout",
+    "distractor",
+    "distractor",
+    "heldout",
+    "heldout",
+    "distractor",
+    "heldout",
+    "distractor",
+    "heldout",
+    "heldout"
+   ],
+   "neg_top10": 0
+  },
+  "minus_channel4": {
+   "n_ranked": 311,
+   "P@10": 0.5,
+   "NDCG@10": 0.883,
+   "mean_rank_heldout_like": 131.5,
+   "mean_score_negative": 0.0,
+   "mean_rank_negative": 162.2,
+   "top10_kinds": [
+    "heldout",
+    "distractor",
+    "heldout",
+    "heldout",
+    "distractor",
+    "heldout",
+    "distractor",
+    "heldout",
+    "distractor",
+    "distractor"
+   ],
+   "neg_top10": 0
+  },
+  "channel1_only": {
+   "n_ranked": 311,
+   "P@10": 0.3,
+   "NDCG@10": 0.901,
+   "mean_rank_heldout_like": 130.7,
+   "mean_score_negative": 0.0,
+   "mean_rank_negative": 153.2,
+   "top10_kinds": [
+    "heldout",
+    "heldout",
+    "distractor",
+    "distractor",
+    "distractor",
+    "distractor",
+    "distractor",
+    "distractor",
+    "distractor",
+    "heldout"
+   ],
+   "neg_top10": 0
+  }
+ },
+ "contribution_rates_20seeds": {
+  "similar": {
+   "n_seeds": 20,
+   "of_20": 20,
+   "rate": 1.0
+  },
+  "popular": {
+   "n_seeds": 20,
+   "of_20": 20,
+   "rate": 1.0
+  },
+  "same_artist": {
+   "n_seeds": 19,
+   "of_20": 20,
+   "rate": 0.95
+  },
+  "related_artist": {
+   "n_seeds": 8,
+   "of_20": 20,
+   "rate": 0.4
+  },
+  "related_track": {
+   "n_seeds": 0,
+   "of_20": 20,
+   "rate": 0.0
+  }
+ },
+ "diversity_20seeds": {
+  "median_distinct_artists": 10,
+  "min_distinct_artists": 10,
+  "max_same_artist_in_top10": 1
+ },
+ "runtime": {
+  "median_recommend_s": 0.0221,
+  "max_recommend_s": 0.0262,
+  "n_seeds_timed": 20,
+  "peak_rss_mb_10seed_run": 141.0,
+  "rss_note": "/usr/bin/time not present on this VM; fresh-subprocess ru_maxrss",
+  "eval_wall_s": 3.1
+ },
+ "pool_bucket_assignment": {
+  "via": 478,
+  "artist": 112
+ },
+ "notes": [
+  "Channel 2 popularity proxy is the DEGRADED v2-score order within bucket (Deezer rank not stored on disk).",
+  "Pool buckets: artist map 112/590 direct, via_artist fallback 478/590, unknown 0/590.",
+  "O-bucket tracks are excluded from genre-filtered channel 1 (treated as unknown-genre per spec b.5); reachable via channels 2-4 and merge back-fill.",
+  "NDCG@10 QUIRK (evaluate.py ndcg_at_k): the ideal DCG is computed from the relevant items IN THE TOP 10 only, not from all 99 held-out likes, so NDCG@10 measures within-top-10 ordering, not standard NDCG. All methods use the same function, so relative comparisons hold; absolute values are not comparable to standard NDCG.",
+  "Zero-score tail: items outside every channel score 0.0 (~180/311); they are tie-broken by acoustic cosine to the seed (a real signal), not title order, so mean-rank legs are measurements rather than tie-break artifacts. P@10/NDCG@10 are unaffected (top 10 all score > 0).",
+  "Channel-4 conflict: contribution rate 8/20 (40%) is below the d.2.3 50% cut line, but removing channel 4 costs 0.10 P@10 (ablation minus_channel4), so per the b.4 ablation rule it is NOT redundant. Channel 4 is KEPT; the conflict is flagged for the coordinator.",
+  "Ablation NDCG note: removing channel 1 improves NDCG@10 (0.829 -> 0.948) while P@10 is unchanged (0.60); the d.2.3 ablation rule is stated on P@10 only, so no channel is cut on that rule, but channel 1 hurts within-top-10 ordering.",
+  "Spec d.2.1 \">=17 additional held-out likes\" is wrong: +0.05 P@10 is +0.5 held-out likes in a top 10.",
+  "Spec d.2.2 neg-rank leg is unsatisfiable vs v2 (292.9+20 > 311); evaluated vs best-P@10 baseline v6-global (178.2).",
+  "Final-score rescale implemented as linear max->2.0; the spec-quoted formula is self-contradictory (maps max to ~0.55)."
+ ]
+}

@@ -78,3 +78,37 @@ python test_pipeline_v2.py   # acceptance checks, must be all green
 Do not modify `~/workspace/spotify-liked-songs.txt` (read-only) and do
 not append to `~/workspace/spotify-recommended-tracks.txt` until Kevin
 has rated the new recommendations. Dedup is by Spotify track ID.
+
+## v3 (Nov 2026, integration — NO-GO offline)
+
+Harness + three experimental feature ports, integrated on a
+decontaminated 306-item pool (94 held-out + 12 negatives + 200
+distractors; 5 duplicate-audio held-out likes removed). Verdict: **no
+candidate passes Legs 1–3 of the pre-registered 4-leg GO rule, so v3
+ships the harness and the ports as experimental modules with v2
+unchanged as the ranker. No new recommendation list was built.**
+See `evaluation_report_v3.md` and `evaluation_v3.json` for the numbers.
+
+- `evaluate_v3.py` — eval harness v3 (P-01..P-11 ports + 4-leg verdict;
+  `test_evaluate_v3.py`, 97 checks). Run the verdict with
+  `audio-env/bin/python integrate_v3.py`.
+- `troi_patch.py` — Troi-style patch (audio neighbours + same-artist,
+  zipper). 306-pool: P@10 0.80, NDCG 0.820; fails Leg 1 (ΔNDCG CI
+  includes 0) and Leg 3 (mean neg rank 146.7 < 153.5).
+- `embeat_port.py` — Embeat architecture port (4 channels, medoid
+  seed). 306-pool: P@10 0.60, NDCG 0.829; minus-channel-1 variant
+  NDCG 0.948, P@10 flat. Channel 4 KEPT (removal costs 0.10 P@10).
+- `bliss_features.py` — 23-dim bliss vectors + distance scorer.
+  Alone below random (P@10 0.20); equal-weight bliss+v2 blend P@10
+  0.40, NDCG 0.956. Sampled-pool and full-pool (701) deltas disagree
+  in sign for bliss alone — unresolved, forces NO-GO on its own.
+- `integrate_v3.py` — the integration (decontaminate, re-score every
+  candidate on the 306 pool, 4-leg verdicts via `verdict_4leg`).
+  `checks_v3_integration.py` re-derives every number from the
+  per-item audit file `v3_scores_306.json`.
+
+Tests (all re-run fresh 2026-11-22): `test_pipeline_v2.py` 37 green;
+`test_evaluate_v3.py` 97 green; `test_troi_patch.py` 20 passed +
+1 xpassed; `test_embeat_port.py` 20 passed + T-16 FAIL (honest eval
+failure, not fixed by weakening the test); `test_bliss_features.py`
+20 passed + Z2 FAIL + 1 skipped.
