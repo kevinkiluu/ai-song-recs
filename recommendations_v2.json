@@ -1,0 +1,122 @@
+[
+ {
+  "title": "af1 (sped up)",
+  "artist": "Lilbubblegum",
+  "spotify_id": "4fWUvsts7tmWPgAmvcIpHH",
+  "deezer_id": 2350866785,
+  "v2_score": 1.488,
+  "v6_score_per_bucket": 3.59,
+  "v6_bucket": "global",
+  "v6_score_global": 3.59,
+  "nearest_cluster": 3,
+  "audio_source": "deezer_preview_30s"
+ },
+ {
+  "title": "Cut Me Out",
+  "artist": "Flux Pavilion",
+  "spotify_id": "2i9Jh3GC8vOa3kCc7x9dWp",
+  "deezer_id": 2854222132,
+  "v2_score": 1.419,
+  "v6_score_per_bucket": 3.94,
+  "v6_bucket": "global",
+  "v6_score_global": 3.94,
+  "nearest_cluster": 0,
+  "audio_source": "deezer_preview_30s"
+ },
+ {
+  "title": "The Weekend",
+  "artist": "88rising",
+  "spotify_id": "0v2Qgk39gLXMIJi6BY34Fz",
+  "deezer_id": 2613233272,
+  "v2_score": 1.371,
+  "v6_score_per_bucket": 3.23,
+  "v6_bucket": "global",
+  "v6_score_global": 3.23,
+  "nearest_cluster": 0,
+  "audio_source": "deezer_preview_30s"
+ },
+ {
+  "title": "HUMANS AND MONSTERS",
+  "artist": "Lil Darkie",
+  "spotify_id": "2S7uJQCvFAyANAnDiyVER8",
+  "deezer_id": 2498037421,
+  "v2_score": 1.298,
+  "v6_score_per_bucket": 5.13,
+  "v6_bucket": "global",
+  "v6_score_global": 5.13,
+  "nearest_cluster": 2,
+  "audio_source": "deezer_preview_30s"
+ },
+ {
+  "title": "kiss/20",
+  "artist": "DPR CREAM",
+  "spotify_id": "6ebdNCvIuFk0e6FamPVN09",
+  "deezer_id": 4321323112,
+  "v2_score": 1.241,
+  "v6_score_per_bucket": 3.09,
+  "v6_bucket": "global",
+  "v6_score_global": 3.09,
+  "nearest_cluster": 0,
+  "audio_source": "deezer_preview_30s"
+ },
+ {
+  "title": "Butterflies",
+  "artist": "Hearts2Hearts",
+  "spotify_id": "3s3Eo4rb6aq3O62g6z6jtZ",
+  "deezer_id": 3234208291,
+  "v2_score": 1.283,
+  "v6_score_per_bucket": 4.35,
+  "v6_bucket": "global",
+  "v6_score_global": 4.35,
+  "nearest_cluster": 0,
+  "audio_source": "deezer_preview_30s"
+ },
+ {
+  "title": "Wisteria",
+  "artist": "Hands Like Houses",
+  "spotify_id": "2a8cI3FNijSVvOg5ZjXkc3",
+  "deezer_id": 3750845132,
+  "v2_score": 1.117,
+  "v6_score_per_bucket": 2.87,
+  "v6_bucket": "global",
+  "v6_score_global": 2.87,
+  "nearest_cluster": 0,
+  "audio_source": "deezer_preview_30s"
+ },
+ {
+  "title": "Me, Myself & I",
+  "artist": "G-Eazy",
+  "spotify_id": "40YcuQysJ0KlGQTeGUosTC",
+  "deezer_id": 114395812,
+  "v2_score": 1.116,
+  "v6_score_per_bucket": 3.28,
+  "v6_bucket": "E",
+  "v6_score_global": 3.2,
+  "nearest_cluster": 0,
+  "audio_source": "deezer_preview_30s"
+ },
+ {
+  "title": "\uae68\uc5b4 (Are You Alive)",
+  "artist": "tripleS",
+  "spotify_id": "0hRr7x68aApt0TX1AIAA9W",
+  "deezer_id": 3334081191,
+  "v2_score": 1.064,
+  "v6_score_per_bucket": 2.97,
+  "v6_bucket": "global",
+  "v6_score_global": 2.97,
+  "nearest_cluster": 1,
+  "audio_source": "deezer_preview_30s"
+ },
+ {
+  "title": "Type Shit",
+  "artist": "Future",
+  "spotify_id": "28drn6tQo95MRvO0jQEo5C",
+  "deezer_id": 2715581042,
+  "v2_score": 1.053,
+  "v6_score_per_bucket": 3.52,
+  "v6_bucket": "H",
+  "v6_score_global": 3.3,
+  "nearest_cluster": 0,
+  "audio_source": "deezer_preview_30s"
+ }
+]
