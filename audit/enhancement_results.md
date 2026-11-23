@@ -31,3 +31,7 @@ python -m audit.recording_folds --likes /private/features_v2.json \
 ```
 
 The 98 eligible newest recordings are a position-based holdout from the training-era library. Future comparisons use the separate fresh gate and require untouched observations dated after the challenger freeze. [Original plan](plan.md) · [Earlier acceptance ledger](verification.md)
+
+## Clean-checkout verification
+
+Implementation commit `6d60644` passed all **77 enhancement tests**, all 83 existing audit/v4 tests, all 49 v3 archive checks and all eight search-order checks in a fresh clone. Every historical test file was rerun. The same private-data suites and counts listed in the earlier acceptance ledger remain outstanding. All nine tracked JSON files matched their original SHA-256 digests after testing. The coverage and Bliss CLIs also reproduced the saved measurement artifacts byte for byte. [Historical suite-by-suite results](verification.md)
