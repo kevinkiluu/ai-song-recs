@@ -7,13 +7,14 @@ Two modes:
                + ReccoBeats (by ISRC) for every pool track, save
                data/pool_features.json. No ranking happens here.
   recommend  : score the pool with the v2 model, MMR-diversify, verify
-               the top 30 by Spotify track ID against Liked Songs and the
+               the top 30 by Spotify track ID and recording key (cleaned
+               title + first artist) against Liked Songs and the
                recommendation history, rescore, and pick the final 10.
                Writes recommendations_v2.json. Never re-recommends.
 
 Pool dedup is by Deezer ID + (title, artist) strings; finalists are
-additionally verified by Spotify track ID, which is the dedup rule that
-governs the final 10.
+additionally verified by Spotify track ID and recording key, which is
+the dedup rule that governs the final 10.
 
 Run:
   ~/workspace/audio-env/bin/python recommend_v2.py build-pool
@@ -199,6 +200,47 @@ def mmr_select(cands, feats_std, scores, k, lam=MMR_LAMBDA):
     return selected
 
 
+def pick_search_hit(title, artist, response):
+    """Pick the best Spotify track ID from a search response.
+
+    Prefers an exact title match (cleaned, case-insensitive) over document
+    order; among exact matches only one whose first artist agrees is
+    returned. When no exact title match exists, falls back to the first
+    hit. When exact title matches exist but none agrees on artist, returns
+    None instead of attaching a different artist's same-title track (live
+    case: "drift (feat. Lames)" returns only other artists' "Drift"
+    recordings). The old code returned the first track URI in document
+    order, which picked "af1" for a "drift" query in the v9 run.
+    Title/artist comparison uses clean(), the same normalisation as the
+    dedup keys in load_id_sets()."""
+    hits = []
+
+    def walk(o):
+        if isinstance(o, dict):
+            uri = o.get('spotify_uri', '')
+            if isinstance(uri, str) and uri.startswith('spotify:track:'):
+                hits.append(o)
+                return
+            for v in o.values():
+                walk(v)
+        elif isinstance(o, list):
+            for v in o:
+                walk(v)
+
+    walk(response)
+    if not hits:
+        return None
+    want_title = clean(title)
+    want_artist = clean((artist or '').split(',')[0])
+    exact = [h for h in hits if clean(h.get('title', '')) == want_title]
+    if exact:
+        for h in exact:
+            if clean((h.get('subtitle', '') or '').split(',')[0]) == want_artist:
+                return h['spotify_uri'].replace('spotify:track:', '')
+        return None
+    return hits[0]['spotify_uri'].replace('spotify:track:', '')
+
+
 def spotify_search_id(title, artist):
     r = subprocess.run(['/opt/hatch/bin/spotify-api', 'search', '--query', title,
                         '--artist', artist, '--search-type', 'TRACKS'],
@@ -209,23 +251,39 @@ def spotify_search_id(title, artist):
         d = json.loads(r.stdout)
     except Exception:
         return None
-    # walk the response for the first track uri
-    def walk(o):
-        if isinstance(o, dict):
-            uri = o.get('spotify_uri', '')
-            if isinstance(uri, str) and uri.startswith('spotify:track:'):
-                return uri.replace('spotify:track:', '')
-            for v in o.values():
-                x = walk(v)
-                if x:
-                    return x
-        elif isinstance(o, list):
-            for v in o:
-                x = walk(v)
-                if x:
-                    return x
-        return None
-    return walk(d)
+    return pick_search_hit(title, artist, d)
+
+
+def is_already_known(sid, title, artist, liked_ids, liked_keys, hist_ids, hist_keys):
+    """True if this candidate duplicates a liked or previously recommended
+    recording, by Spotify ID or by recording key (cleaned title + first
+    artist). The key check catches the same recording under a different
+    Spotify ID, e.g. a re-release or an edited/explicit variant: v9
+    re-recommended "af1 (sped up)" and "A Milli" under new IDs because
+    only the ID was checked."""
+    if sid in liked_ids or sid in hist_ids:
+        return True
+    key = (clean(title), clean((artist or '').split(',')[0]))
+    return key in liked_keys or key in hist_keys
+
+
+def verify_candidates(cands, search_id, liked_ids, liked_keys, hist_ids, hist_keys):
+    """Resolve each candidate to a Spotify ID and drop duplicates.
+    search_id(title, artist) -> Spotify track ID or None."""
+    verified = []
+    for c in cands:
+        sid = search_id(c['title'], c['artist'])
+        time.sleep(0.2)
+        if not sid:
+            log(f"  no spotify match, dropping: {c['title']} - {c['artist']}")
+            continue
+        if is_already_known(sid, c['title'], c['artist'],
+                            liked_ids, liked_keys, hist_ids, hist_keys):
+            log(f"  already liked/history, dropping: {c['title']} ({sid})")
+            continue
+        c['spotify_id'] = sid
+        verified.append(c)
+    return verified
 
 
 def recommend():
@@ -246,19 +304,9 @@ def recommend():
                         s['final'][top100], k=30)
     cands30 = [pool[top100[i]] for i in sel100]
     log(f'MMR top 30 selected')
-    # verify by Spotify ID
-    verified = []
-    for c in cands30:
-        sid = spotify_search_id(c['title'], c['artist'])
-        time.sleep(0.2)
-        if not sid:
-            log(f"  no spotify match, dropping: {c['title']} - {c['artist']}")
-            continue
-        if sid in liked_ids or sid in hist_ids:
-            log(f"  already liked/history, dropping: {c['title']} ({sid})")
-            continue
-        c['spotify_id'] = sid
-        verified.append(c)
+    # verify by Spotify ID and recording key
+    verified = verify_candidates(cands30, spotify_search_id,
+                                 liked_ids, liked_keys, hist_ids, hist_keys)
     log(f'verified by Spotify ID: {len(verified)}')
     # fill any missing ReccoBeats by Spotify ID
     missing = [c for c in verified if not c.get('reccobeats')]
