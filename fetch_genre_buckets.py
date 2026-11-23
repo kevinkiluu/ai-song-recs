@@ -37,7 +37,8 @@ def run_cli(args):
 
 
 def collect_ids(uri):
-    ids = []
+    ids = {}
+    visited = set()
     d = run_cli(['experience', '--id', uri])
     while True:
         # Two response shapes: experience returns sections[].items,
@@ -48,22 +49,17 @@ def collect_ids(uri):
             items.extend(s.get('items', []))
             if s.get('next'):
                 next_url = s['next']
-        new = 0
         for it in items:
             u = it.get('spotify_uri', '')
             if u.startswith('spotify:track:'):
                 tid = u.replace('spotify:track:', '')
-                if tid not in ids:
-                    ids.append(tid)
-                    new += 1
-        if not next_url or new == 0:
-            break
-        try:
-            d = run_cli(['next-page', '--url', next_url])
-        except Exception as e:
-            print(f'  next-page failed ({e}); stopping with {len(ids)} ids')
-            break
-    return ids
+                ids[tid] = None
+        if not next_url:
+            return list(ids)
+        if next_url in visited:
+            raise RuntimeError('Spotify genre playlist pagination repeated a cursor')
+        visited.add(next_url)
+        d = run_cli(['next-page', '--url', next_url])
 
 
 def main():

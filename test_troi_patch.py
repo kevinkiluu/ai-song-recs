@@ -322,11 +322,11 @@ def test_eval_pool_reproduces_v2_baselines():
     assert res['pool']['negatives_with_librosa'] == 12
     assert res['pool']['distractors'] == 200
     assert res['methods']['v2']['P@10'] == 0.5
-    assert res['methods']['v2']['NDCG@10'] == 0.726
+    assert res['methods']['v2']['legacy_topk_hit_ndcg'] == 0.726
     assert res['methods']['v6_per_bucket']['P@10'] == 0.5
-    assert res['methods']['v6_per_bucket']['NDCG@10'] == 0.666
+    assert res['methods']['v6_per_bucket']['legacy_topk_hit_ndcg'] == 0.666
     assert res['methods']['v6_global']['P@10'] == 0.6
-    assert res['methods']['v6_global']['NDCG@10'] == 0.664
+    assert res['methods']['v6_global']['legacy_topk_hit_ndcg'] == 0.664
 
 
 # ---------------------------------------------------------------- decontamination + 4-leg
@@ -341,9 +341,10 @@ def test_eval_decontamination_removes_duplicate_audio():
     assert dec['pool']['n_dup_audio_removed'] == 5
     assert dec['pool']['n_ranked'] == 306
     assert dec['methods']['troi']['P@10'] == 0.8
-    assert dec['methods']['troi']['NDCG@10'] == 0.82
+    assert dec['methods']['troi']['legacy_topk_hit_ndcg'] == 0.82
+    assert dec['methods']['troi']['NDCG@10'] == 0.714
     assert dec['methods']['v2']['P@10'] == 0.5
-    assert dec['methods']['v2']['NDCG@10'] == 0.726
+    assert dec['methods']['v2']['legacy_topk_hit_ndcg'] == 0.726
     assert sorted(t['title'] for t in dec['removed_items']) == sorted([
         'Warriors', 'CRAZY', 'Red Rum', '[Gen]inside', 'Partyy'])
 
@@ -364,13 +365,13 @@ def test_four_leg_verdict_is_no_go_offline():
 
 def test_paired_bootstrap_ci():
     """P-04: B=10,000 stratified paired bootstrap, seed 42. Independently
-    computed CI: delta_NDCG@10 [-0.219, 0.572], delta_P@10 [-0.100, 0.800],
+    computed CI: delta_NDCG@10 [-0.154, 0.785], delta_P@10 [-0.100, 0.800],
     P@10(troi) [0.400, 1.000]. The delta_NDCG CI includes 0."""
     res = tp.evaluate_patch(write=False)
     pb = res['paired_bootstrap']
     assert pb['B'] == 10000 and pb['seed'] == 42
-    assert pb['delta_NDCG@10']['ci_95'][0] == pytest.approx(-0.219, abs=0.01)
-    assert pb['delta_NDCG@10']['ci_95'][1] == pytest.approx(0.572, abs=0.01)
+    assert pb['delta_NDCG@10']['ci_95'][0] == pytest.approx(-0.154, abs=0.01)
+    assert pb['delta_NDCG@10']['ci_95'][1] == pytest.approx(0.785, abs=0.01)
     assert pb['delta_P@10']['ci_95'][0] == pytest.approx(-0.100, abs=0.01)
     assert pb['P@10_troi']['ci_95'][0] == pytest.approx(0.400, abs=0.01)
 

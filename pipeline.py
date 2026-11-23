@@ -18,13 +18,18 @@ def log(msg):
     with open(LOG, 'a') as f:
         f.write(msg + '\n')
 
-def deezer_search(title, artist):
+def deezer_search(title, artist, *, raise_on_error=False):
     q = f"{artist} {title}"
     url = 'https://api.deezer.com/search/track?' + urllib.parse.urlencode({'q': q, 'limit': 5})
     try:
         with urllib.request.urlopen(url, timeout=20) as r:
-            return json.load(r).get('data', [])
+            response = json.load(r)
+            if not isinstance(response.get('data'), list):
+                raise ValueError(f"invalid Deezer search response: {response.get('error')}")
+            return response['data']
     except Exception as e:
+        if raise_on_error:
+            raise
         log(f'  search error: {e}')
         return []
 

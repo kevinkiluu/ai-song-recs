@@ -39,15 +39,8 @@ writing these tests; the spec's assumed 343-item pool is STALE):
      degeneracy rather than inventing a different imputation.
   G7. Spec T-02's Monte-Carlo band [0.359, 0.399] is for the stale 343
      pool; the band here is [0.298, 0.338] around the true 0.318.
-  G9. Spec P-01 vs T-07 contradiction (found when T-02 failed on the
-     first GREEN run): P-01 claims random_NDCG@10 == random_P@10, but
-     T-07's hand values require the v2 NDCG ideal (built from hits
-     inside the top-k). Under that convention a random ranking scores
-     NDCG@10 ~0.63 on the 311 pool, not 0.318. T-07 + landed
-     evaluate.py govern; random_NDCG@10 is therefore the deterministic
-     Monte-Carlo expectation under the v2 convention (seed 42, 2000
-     reps), checked against an independent inline simulation in T-02.
-     Consequence: v2 NDCG 0.726 is only ~0.09 above the chance floor.
+  G9. The frozen files conditioned the ideal on retrieved hits. These
+     tests check standard NDCG against the ideal over all relevant rows.
 
 All expected values below are hand-derived from the grounded counts above
 (or from hand-computed relevance vectors), never from the code under test.
@@ -116,16 +109,8 @@ def make_pool(seed=42):
         by_id[f'D{i:03d}']['score_v3'] = 40.0 - i * 0.05
     for i in range(12):
         by_id[f'N{i:02d}']['score_v3'] = -50.0 - i
-    # v6 (lower better): hits INTERLEAVED with MANY distractors in the
-    # top region so NDCG@10 (v2 convention) discriminates AND stays
-    # below 1.0 under bootstrap resampling: held-out H000..H007 at
-    # badness 1,4,7,10,13,16,19,22; D000..D029 fill the other integers
-    # 2..45. Point top-10 rel = [1,0,0,1,0,0,1,0,0,1] -> P@10 = 0.40,
-    # NDCG@10 = 0.773 (DCG 1.981 / IDCG 2.562). v3 beats it by
-    # +0.40 P@10 / +0.227 NDCG. A fixture with all hits above all
-    # misses would score NDCG 1.0 for any hit count and prove nothing
-    # (see G9); a fixture with only 4 competing distractors lets the
-    # bootstrap resample an all-held-out top 10, collapsing the CI to 0.
+    # On the v6 ascending scale hits occupy ranks 1, 4, 7, 10.
+    # The eight v3 hits occupy ranks 1..8. Both use the same 10-hit ideal.
     v6_held = {0: 1.0, 1: 4.0, 2: 7.0, 3: 10.0, 4: 13.0,
                5: 16.0, 6: 19.0, 7: 22.0}
     for i, v in v6_held.items():
@@ -188,28 +173,8 @@ def test_t02():
     rb = ev3.random_baseline(n_heldout_with_features=99, n_ranked=311, k=10)
     check('T-02 random_P@10 == 99/311', abs(rb['random_P@10'] - 99 / 311) < 0.001,
           f"got {rb['random_P@10']}")
-    # G9: random_NDCG@10 is NOT 99/311. Under the v2 NDCG convention it
-    # is the Monte-Carlo expectation (~0.63); verify it against an
-    # INDEPENDENT inline simulation (own NDCG code, different seed/reps),
-    # not against the module's value.
-    def _ndcg_v2_inline(rel):
-        dcg = sum(r / math.log2(i + 2) for i, r in enumerate(rel))
-        idcg = sum(1.0 / math.log2(i + 2)
-                   for i in range(min(10, sum(rel))))
-        return dcg / idcg if idcg else 0.0
-    rng_mc = np.random.RandomState(123)
-    base = np.array([1] * 99 + [0] * 212)
-    mc_vals = [_ndcg_v2_inline(rng_mc.permutation(base)[:10])
-               for _ in range(500)]
-    mc_mean = float(np.mean(mc_vals))
-    check('T-02 random_NDCG@10 matches independent MC (±0.03)',
-          abs(rb['random_NDCG@10'] - mc_mean) < 0.03,
-          f"module={rb['random_NDCG@10']:.3f} independent-MC={mc_mean:.3f}")
-    check('T-02 random_NDCG@10 in [0.55, 0.70] (v2 convention, G9)',
-          0.55 <= rb['random_NDCG@10'] <= 0.70,
-          f"got {rb['random_NDCG@10']}")
-    check('T-02 random_NDCG@10 != random_P@10 (G9: conventions differ)',
-          abs(rb['random_NDCG@10'] - rb['random_P@10']) > 0.2)
+    check('T-02 exact random NDCG@10 == 99/311 when at least 10 are relevant',
+          abs(rb['random_NDCG@10'] - 99/311) < 1e-12)
     check('T-02 random_Recall@10 == 10*99/311/99',
           abs(rb['random_Recall@10'] - (10 * 99 / 311) / 99) < 0.001,
           f"got {rb['random_Recall@10']}")
@@ -227,8 +192,8 @@ def test_t02():
     mean_n = float(np.mean(ndcgs))
     check('T-02 mean random P@10 in [0.298, 0.338]', 0.298 <= mean_p <= 0.338,
           f'got {mean_p:.3f}')
-    check('T-02 mean random NDCG@10 in [0.55, 0.70] (v2 convention, G9)',
-          0.55 <= mean_n <= 0.70, f'got {mean_n:.3f}')
+    check('T-02 mean random standard NDCG@10 in [0.298, 0.338]',
+          0.298 <= mean_n <= 0.338, f'got {mean_n:.3f}')
     m50 = ev3.rank_metrics([dict(x, score=x['score_v3']) for x in items],
                            'score', higher_better=True)
     check('T-02 BELOW_RANDOM false at P@10=0.80',
@@ -363,15 +328,8 @@ def test_t05():
     Fails pre-port: v2 runs one seed, so the range is unmeasured."""
     require_module()
     import numpy as np
-    # Distractor scores: 3*u^3 over the 5000-candidate pool (+ tiny
-    # jitter), so the drawn top distractors sit at ~2.7-3.0 with a
-    # thin tail. Held-out v3 scores (3.5, 3.2, 2.8) put H2 BELOW
-    # ~5 drawn distractors but still in the top 10, so misses sit
-    # above a hit and NDCG@10 (v2 convention) is < 1.0 and stable;
-    # v6's held-out badness is compressed (-3.5, then -2.0..-1.7),
-    # so only H0 cracks its top 10 and its NDCG pins at 1.0 with
-    # 1 hit. The sweep therefore tests STABILITY of a (negative)
-    # delta, not its direction; superiority is the bootstrap's job.
+    # Tail draws change how many distractors outrank the fixed held-out
+    # scores. The five draws measure sensitivity to distractor composition.
     per_seed = []
     for seed in (42, 43, 44, 45, 46):
         rng = np.random.RandomState(seed)
@@ -410,22 +368,16 @@ def test_t05():
           sweep['ndcg_sign_agreement'] >= 4,
           f"agreement={sweep['ndcg_sign_agreement']}/5 sweep={sweep}")
     check('T-05 sweep reports 5 seeds', sweep['n_seeds'] == 5)
-    # Paired bootstrap on the fixture: v3 P@10 0.80 vs v6 0.40, v3 NDCG
-    # 1.000 vs v6 0.801 -> point deltas +0.40 / +0.199. NOTE: the
-    # bootstrap CI on THIS fixture legitimately includes 0 (delta == 0
-    # in 2.5% of resamples: duplicated top heldout let v6's resampled
-    # NDCG hit 1.0) — the +0.199 gap is within resampling noise, and
-    # the harness must report that honestly. The CI-excludes-0 claim
-    # is therefore tested on a dedicated strong-gap fixture below
-    # (perfect v3 vs random v6), where the gap is large and robust.
+    # Independent full-pool IDCG values (10 hits in the ideal) give
+    # 0.870125 versus 0.451865 on this fixture.
     items = make_pool()
     boot = ev3.paired_bootstrap(items, 'score_v3', 'score_v6',
                                 higher_a=True, higher_b=False,
                                 B=2000, seed=42)
     check('T-05 bootstrap delta_P@10 == 0.40',
           abs(boot['delta_p10'] - 0.40) < 0.001, f"got {boot['delta_p10']}")
-    check('T-05 bootstrap delta_NDCG == 0.199',
-          abs(boot['delta_ndcg'] - 0.199) < 0.001, f"got {boot['delta_ndcg']}")
+    check('T-05 bootstrap delta_NDCG == 0.418',
+          abs(boot['delta_ndcg'] - 0.418) < 0.001, f"got {boot['delta_ndcg']}")
     check('T-05 bootstrap B recorded', boot['B'] == 2000)
     strong = make_pool()
     rng_s = np.random.RandomState(7)
@@ -435,8 +387,8 @@ def test_t05():
     boot_s = ev3.paired_bootstrap(strong, 'score_v3', 'score_v6',
                                   higher_a=True, higher_b=True,
                                   B=2000, seed=42)
-    check('T-05 strong-gap bootstrap delta_NDCG == 0.578',
-          abs(boot_s['delta_ndcg'] - 0.578) < 0.001,
+    check('T-05 strong-gap bootstrap delta_NDCG == 0.849',
+          abs(boot_s['delta_ndcg'] - 0.849) < 0.001,
           f"got {boot_s['delta_ndcg']}")
     check('T-05 strong-gap bootstrap CI low on delta_NDCG > 0',
           boot_s['delta_ndcg_ci'][0] > 0.0,
@@ -449,20 +401,20 @@ def test_t05():
 # ---------------------------------------------------------------- T-06
 def test_t06():
     """T-06 (P-01 + §d): negative-control power at the GROUNDED pool.
-    Hand values: (1-10/311)^12 = 0.676; ln(0.05)/ln(1-10/311) = 91.66 -> 92;
-    half-width 1.96*89.78/sqrt(12) = 50.8. Fails pre-port: v2 reports a
+    Uniform ranks sampled without replacement give P(no top-ten reject)
+    = comb(299, 10)/comb(311, 10), with a finite-population rank SE. Fails pre-port: v2 reports a
     mean negative rank with no uncertainty and no required-n."""
     require_module()
     nc = ev3.negative_control_stats(n_negatives_ranked=12, n_ranked=311,
                                     k=10, n_negatives_defined=13)
-    check('T-06 P(0 of 12 negs in top10|random) == 0.676',
-          abs(nc['p_zero_neg_in_top10_random'] - 0.676) < 0.001,
+    check('T-06 P(0 of 12 negs in top10|random) == 0.671',
+          abs(nc['p_zero_neg_in_top10_random'] - 0.671) < 0.001,
           f"got {nc['p_zero_neg_in_top10_random']}")
-    check('T-06 n_required_for_alpha_0.05 == 92',
-          nc['n_required_for_alpha_0.05'] == 92,
+    check('T-06 n_required_for_alpha_0.05 == 80',
+          nc['n_required_for_alpha_0.05'] == 80,
           f"got {nc['n_required_for_alpha_0.05']}")
-    check('T-06 mean-rank half-width == 50.8',
-          abs(nc['mean_rank_half_width'] - 50.8) < 0.1,
+    check('T-06 mean-rank half-width == 49.9',
+          abs(nc['mean_rank_half_width'] - 49.9) < 0.1,
           f"got {nc['mean_rank_half_width']}")
     check('T-06 negative control labelled UNDERPOWERED',
           nc['power_label'] == 'UNDERPOWERED', f"got {nc['power_label']}")
@@ -477,9 +429,9 @@ def test_t07():
     Fails pre-port: v2 has no MAP/MRR and no `defined` flag."""
     require_module()
     cases = [
-        ([1, 1, 0, 0, 0, 0, 0, 0, 0, 0], 0.20, 1.000, 1.000),
-        ([0, 1, 0, 0, 0, 0, 0, 0, 0, 0], 0.10, 0.631, 0.500),
-        ([1, 0, 1, 0, 0, 0, 0, 0, 0, 0], 0.20, 0.920, 1.000),
+        ([1, 1, 0, 0, 0, 0, 0, 0, 0, 0], 0.20, 0.359, 1.000),
+        ([0, 1, 0, 0, 0, 0, 0, 0, 0, 0], 0.10, 0.139, 0.500),
+        ([1, 0, 1, 0, 0, 0, 0, 0, 0, 0], 0.20, 0.330, 1.000),
     ]
     for rel, p, n, m in cases:
         got = ev3.metrics_from_rel(rel, n_relevant=130)

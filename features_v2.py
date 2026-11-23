@@ -24,7 +24,7 @@ Run: ~/workspace/audio-env/bin/python features_v2.py
 Outputs: data/reccobeats.json, data/deezer_matches.json,
           data/librosa_deep.json, features_v2.json
 """
-import json, os, sys, time, urllib.parse, urllib.request
+import json, os, tempfile, time, urllib.parse, urllib.request
 
 BASE = os.path.expanduser('~/workspace/audio-pipeline')
 DATA = os.path.join(BASE, 'data')
@@ -32,7 +32,6 @@ PREV = os.path.join(BASE, 'previews')
 os.makedirs(DATA, exist_ok=True)
 os.makedirs(PREV, exist_ok=True)
 LOG = os.path.join(BASE, 'features_v2.log')
-sys.path.insert(0, BASE)
 import pipeline as P  # reuse deezer_search / pick / estimate_key
 
 LIKED_FILE = os.path.expanduser('~/workspace/spotify-liked-songs.txt')
@@ -71,7 +70,7 @@ def load_liked():
     return tracks
 
 
-def load_buckets():
+def load_buckets(liked_ids):
     """Genre bucket per Spotify ID from Kevin's genre playlists.
 
     The mapping lives in data/genre_buckets.json (track ID -> bucket),
@@ -87,10 +86,11 @@ def load_buckets():
             'GENRE MAPPING MISSING: run fetch_genre_buckets.py first '
             f'(expected {path})')
     buckets = load_json(path, {})
-    log(f'genre buckets: {len(buckets)} labeled')
-    if len(buckets) < 500:
+    covered = sum(buckets.get(sid) in ('E', 'R', 'H', 'O') for sid in set(liked_ids))
+    log(f'genre buckets: {covered} liked tracks labeled')
+    if covered < 500:
         raise SystemExit(
-            f'GENRE MAPPING SUSPECT: only {len(buckets)} tracks labeled '
+            f'GENRE MAPPING SUSPECT: only {covered} liked tracks labeled '
             '(expected ~635); re-run fetch_genre_buckets.py')
     return buckets
 
@@ -129,7 +129,7 @@ def deezer_search_retry(title, artist, attempts=4):
     last_err = None
     for i in range(attempts):
         try:
-            return P.deezer_search(title, artist)
+            return P.deezer_search(title, artist, raise_on_error=True)
         except Exception as e:
             last_err = e
             time.sleep(2 ** (i + 1))
@@ -141,8 +141,18 @@ def download_preview(url, dest, attempts=3):
     for i in range(attempts):
         try:
             req = urllib.request.Request(url, headers={'User-Agent': 'muse-pipeline/2.0'})
-            with urllib.request.urlopen(req, timeout=30) as r, open(dest, 'wb') as f:
-                f.write(r.read())
+            with urllib.request.urlopen(req, timeout=30) as response:
+                audio = response.read()
+            if not audio:
+                raise ValueError('empty Deezer preview')
+            staged = tempfile.NamedTemporaryFile(dir=os.path.dirname(dest) or '.', delete=False)
+            try:
+                with staged:
+                    staged.write(audio)
+                os.replace(staged.name, dest)
+            finally:
+                if os.path.exists(staged.name):
+                    os.unlink(staged.name)
             return True
         except Exception as e:
             if i == attempts - 1:
@@ -152,12 +162,38 @@ def download_preview(url, dest, attempts=3):
     return False
 
 
+def refresh_cached_preview(match):
+    did = match.get('deezer_id')
+    if not did:
+        return
+    dest = os.path.join(PREV, f'{did}.mp3')
+    if not match.get('download_error') and os.path.isfile(dest) and os.path.getsize(dest):
+        return
+    # Fetch the existing recording by ID. Repeating the search can match a
+    # different artist or version and invalidate downstream identity joins.
+    try:
+        with urllib.request.urlopen(f'https://api.deezer.com/track/{did}', timeout=30) as response:
+            info = json.load(response)
+        if str(info.get('id')) != str(did) or not info.get('preview'):
+            raise ValueError('cached recording has no matching preview response')
+        if download_preview(info['preview'], dest):
+            match.pop('download_error', None)
+        else:
+            match['download_error'] = 'preview download failed'
+    except (OSError, ValueError) as error:
+        match['download_error'] = str(error)
+        log(f'  preview refresh failed for Deezer {did}: {error}')
+
+
 def match_deezer(tracks, durations):
     cache = load_json(os.path.join(DATA, 'deezer_matches.json'), {})
     done = 0
     for t in tracks:
         sid = t['spotify_id']
-        if sid in cache or sid == 'None':
+        if sid == 'None':
+            continue
+        if sid in cache:
+            refresh_cached_preview(cache[sid])
             continue
         title, artist = t['title'], (t.get('artist') or '').split(',')[0].strip()
         dur_s = (durations.get(sid) or 0) / 1000.0
@@ -267,10 +303,11 @@ def analyze_deep(path):
 
 def deep_features(matches):
     cache = load_json(os.path.join(DATA, 'librosa_deep.json'), {})
-    todo = [(sid, m['deezer_id']) for sid, m in matches.items()
-            if m.get('deezer_id') and str(m['deezer_id']) not in cache]
+    todo = sorted({str(m['deezer_id']) for m in matches.values() if m.get('deezer_id')
+                   and (not cache.get(str(m['deezer_id']))
+                        or 'error' in cache[str(m['deezer_id'])])})
     log(f'librosa deep: {len(cache)} cached, {len(todo)} to analyze')
-    for n, (sid, did) in enumerate(todo, 1):
+    for n, did in enumerate(todo, 1):
         dest = os.path.join(PREV, f'{did}.mp3')
         if not os.path.exists(dest):
             cache[str(did)] = {'error': 'preview file missing'}
@@ -292,9 +329,9 @@ def deep_features(matches):
 def main():
     tracks = load_liked()
     log(f'liked tracks: {len(tracks)}')
-    buckets = load_buckets()
-    durations = load_json('/tmp/liked_durations.json', {})
     ids = [t['spotify_id'] for t in tracks]
+    buckets = load_buckets(ids)
+    durations = load_json('/tmp/liked_durations.json', {})
     rb = fetch_reccobeats(ids)
     matches = match_deezer(tracks, durations)
     deep = deep_features(matches)

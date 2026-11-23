@@ -10,7 +10,7 @@
 # path, not a copy of evaluation_v3.json).
 import json, math, os, subprocess, sys
 
-BASE = os.path.expanduser('~/workspace/audio-pipeline')
+BASE = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(0, BASE)
 import evaluate_v3 as ev3
 
@@ -64,8 +64,8 @@ for cand in ('troi', 'embeat_full', 'embeat_minus_ch1', 'bliss_fixed',
                          rec['score_key'], higher_better=higher)
     check(f'C3 {cand} P@10 re-derived', m['P@10'] == rec['metrics']['P@10'],
           f"audit={m['P@10']} json={rec['metrics']['P@10']}")
-    check(f'C3 {cand} NDCG re-derived', m['NDCG@10'] == rec['metrics']['NDCG@10'],
-          f"audit={m['NDCG@10']} json={rec['metrics']['NDCG@10']}")
+    check(f'C3 {cand} NDCG re-derived', m['legacy_topk_hit_ndcg'] == rec['metrics']['NDCG@10'],
+          f"legacy={m['legacy_topk_hit_ndcg']} json={rec['metrics']['NDCG@10']}")
     check(f'C3 {cand} neg_top10 re-derived',
           m['n_neg_top10'] == rec['metrics']['n_neg_top10'],
           f"audit={m['n_neg_top10']} json={rec['metrics']['n_neg_top10']}")

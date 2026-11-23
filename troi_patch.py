@@ -60,7 +60,7 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-BASE = os.path.expanduser('~/workspace/audio-pipeline')
+BASE = os.path.dirname(os.path.realpath(__file__))
 DATA = os.path.join(BASE, 'data')
 LIKED_FILE = os.path.expanduser('~/workspace/spotify-liked-songs.txt')
 HIST_FILE = os.path.expanduser('~/workspace/spotify-recommended-tracks.txt')
@@ -714,7 +714,7 @@ def build_default_streams():
     Returns (streams dict keyed 'entity:mode', counts dict, log lines)."""
     artists, _ = build_seed_artists()
     pool = json.load(open(os.path.join(DATA, 'pool_features.json')))
-    model = V2Model()
+    model = V2Model(directory=BASE)
     s = model.score_records(pool)
     v2 = {id(r): float(sc) for r, sc in zip(pool, s['final'])}
     log_lines = []
@@ -932,7 +932,7 @@ def _build_eval_items(distractor_seed=42):
     from evaluate import TEST_N as EV_TEST_N, N_DISTRACTORS
     doc = json.load(open(os.path.join(BASE, 'features_v2.json')))
     tracks = [t for t in doc['tracks'] if t['spotify_id'] != 'None']
-    model = V2Model()
+    model = V2Model(directory=BASE)
     neg_recs = json.load(open(os.path.join(DATA, 'negatives_features.json')))
     pool = json.load(open(os.path.join(DATA, 'pool_features.json')))
     artist_bucket = {}
@@ -1023,46 +1023,22 @@ def _rank_methods(items):
     return methods, neg_top10, neg_ranks, order
 
 
-def _ndcg_binary(rel, k=10):
-    from evaluate import ndcg_at_k
-    return ndcg_at_k(rel, k)
-
-
 def _paired_bootstrap(items, B=10000, seed=42):
-    """P-04: paired bootstrap, resampling pool rows with replacement,
-    stratified by kind (held-out/negative/distractor counts preserved).
-    Recomputes P@10/NDCG@10 for Troi and v6-per-bucket per resample.
-    Items must already carry 'troi' (rank-position) scores."""
-    kinds = np.array([x['kind'] for x in items])
-    rel = np.array([x['relevant'] for x in items], dtype=float)
-    s_troi = np.array([x['troi'] for x in items], dtype=float)
-    s_v6b = -np.array([x['v6b'] for x in items], dtype=float)
-    kind_idx = {k: np.where(kinds == k)[0]
-                for k in ('heldout', 'negative', 'distractor')}
-    counts = {k: len(v) for k, v in kind_idx.items()}
-    rng = np.random.RandomState(seed)
-    dP, dN, pT = [], [], []
-    for _ in range(B):
-        idx = np.concatenate(
-            [rng.choice(kind_idx[k], size=counts[k], replace=True)
-             for k in ('heldout', 'negative', 'distractor')])
-        mets = {}
-        for name, s in (('troi', s_troi), ('v6b', s_v6b)):
-            o = idx[np.argsort(-s[idx], kind='stable')]
-            r = rel[o]
-            mets[name] = (float(r[:10].mean()), _ndcg_binary(r))
-        dP.append(mets['troi'][0] - mets['v6b'][0])
-        dN.append(mets['troi'][1] - mets['v6b'][1])
-        pT.append(mets['troi'][0])
-    def ci(a):
-        lo, hi = np.percentile(a, [2.5, 97.5])
-        return {'mean': round(float(np.mean(a)), 3),
-                'ci_95': [round(float(lo), 3), round(float(hi), 3)]}
-    return {'B': B, 'seed': seed, 'strata_counts': counts,
-            'delta_P@10': ci(dP), 'delta_NDCG@10': ci(dN),
-            'P@10_troi': ci(pT),
-            'P_delta_NDCG_le_0': round(float(np.mean(
-                np.array(dN) <= 0)), 4)}
+    """Describe fixed-panel score sensitivity using the actual point-ranking ties."""
+    from evaluate_v3 import paired_bootstrap
+
+    panel = [dict(row, point_tie=i) for i, row in enumerate(items)]
+    boot = paired_bootstrap(panel, 'troi', 'v6b', B=B, seed=seed,
+                            tie_a='point_tie', tie_b='point_tie')
+    means = boot['resample_means']
+    return {
+        'B': B, 'seed': seed, 'strata_counts': dict(Counter(x['kind'] for x in items)),
+        'inferential': False, 'interval_scope': boot['interval_scope'],
+        'delta_P@10': dict(mean=means['delta_precision'], ci_95=boot['delta_p10_ci']),
+        'delta_NDCG@10': dict(mean=means['delta_ndcg'], ci_95=boot['delta_ndcg_ci']),
+        'P@10_troi': dict(mean=means['precision_a'], ci_95=boot['p10_a_ci']),
+        'P_delta_NDCG_le_0': boot['fraction_delta_ndcg_le_zero'],
+    }
 
 
 def _seed_sweep():
@@ -1094,7 +1070,7 @@ def evaluate_patch(write=True):
     items removed -- see find_duplicate_audio_items). Pool-dependent
     thresholds from the specs are rescaled 343 -> 311 (raw) / 306
     (decontaminated) and both the spec number and the rescaled number
-    are recorded. Writes evaluation_v3_troi.json (unless write=False)
+    are recorded. Writes data/evaluation_v3_troi_replay.json (unless write=False)
     and returns the result dict."""
     from evaluate import rank_metrics
     t0 = time.time()
@@ -1279,8 +1255,8 @@ def evaluate_patch(write=True):
         'wall_s': round(time.time() - t0, 1),
     }
     if write:
-        json.dump(out, open(os.path.join(BASE, 'evaluation_v3_troi.json'),
-                            'w'), indent=1)
+        from evaluate import write_replay
+        write_replay(BASE, 'evaluation_v3_troi', out)
     return out
 
 
@@ -1343,7 +1319,7 @@ if __name__ == '__main__':
     if mode == 'eval':
         res = evaluate_patch(write=True)
         print(json.dumps(res, indent=1))
-        print('wrote evaluation_v3_troi.json')
+        print('wrote data/evaluation_v3_troi_replay.json')
     else:
         outputs, log, stats = run_default_patch()
         print(json.dumps({'stats': stats, 'log': log}, indent=1,

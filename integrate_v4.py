@@ -58,6 +58,10 @@ def _score_pool(pool, model, seed, buckets):
                          scores=scores, embeat_tie_score=float(relatedness), ranks={}))
     ranked = _rank_pool(rows)
     ranked['channel_coverage'] = {name: len(result) for name, result in channels.items()}
+    ranked['channel_recordings'] = {
+        name: [candidate['_evaluation_recording_id'] for candidate in result]
+        for name, result in channels.items()
+    }
     return ranked
 
 
@@ -274,9 +278,9 @@ def prepare_blind(result, verified, excluded_ids, excluded_keys):
     return blind, reveal
 
 
-def _read_track_export(path):
+def _read_track_export(data):
     rows = {}
-    for position, line in enumerate(path.read_text(encoding='utf-8').splitlines()):
+    for position, line in enumerate(data.decode('utf-8').splitlines()):
         fields = line.split('\t')
         if len(fields) >= 3 and not line.startswith('#'):
             title, artist, uri = fields[:3]
@@ -284,7 +288,7 @@ def _read_track_export(path):
     return rows
 
 
-def _write_blind(args, result):
+def _write_blind(args, result, source_bytes):
     if result['status'] != 'PENDING_LIVE':
         return
     required = ('liked_export', 'history', 'verified_spotify')
@@ -292,13 +296,13 @@ def _write_blind(args, result):
     if missing:
         result['blind_list'] = {'status': 'missing shortlist inputs', 'missing': missing}
         return
-    current_likes = args.current_likes or args.liked_export
-    exclusions = [row for path in (current_likes, args.history)
-                  for row in _read_track_export(path).values()]
+    current_likes = 'current_likes' if args.current_likes else 'liked_export'
+    exclusions = [row for name in (current_likes, 'history')
+                  for row in _read_track_export(source_bytes[name]).values()]
     ids = {sid for _, _, sid in exclusions}
     keys = {(embeat.clean(title), embeat.normalize_artist(artist))
             for title, artist, _ in exclusions}
-    verified = json.loads(args.verified_spotify.read_text(encoding='utf-8'))
+    verified = json.loads(source_bytes['verified_spotify'])
     blind, reveal = prepare_blind(result, verified, ids, keys)
     if blind:
         with args.blind_output.open('x', encoding='utf-8') as stream:
@@ -311,12 +315,12 @@ def _write_blind(args, result):
 
 
 
-def _read_records(path, key=None):
-    doc = json.loads(path.read_text(encoding='utf-8'))
+def _read_records(data, name, key=None):
+    doc = json.loads(data)
     if key is not None:
         doc = doc[key]
     if not isinstance(doc, list) or any(not isinstance(row, dict) for row in doc):
-        raise ValueError(f'{path} must contain a list of record objects')
+        raise ValueError(f'{name} must contain a list of record objects')
     return doc
 
 
@@ -381,24 +385,26 @@ def main(argv=None):
         result = dict(version=4, base_sha=BASE_SHA, status='INSUFFICIENT_EVIDENCE',
                       offline_status='INSUFFICIENT_EVIDENCE', missing_inputs=missing, pools={})
     else:
-        matches = json.loads(args.matches.read_text(encoding='utf-8')) if args.matches else {}
-        inputs = {name: _enrich_records(_read_records(path, 'tracks' if name == 'likes' else None),
+        # Seal the exact bytes parsed. Files may change while the models fit.
+        source_bytes = {name: path.read_bytes() for name, path in paths.items()}
+        matches = json.loads(source_bytes['matches']) if args.matches else {}
+        inputs = {name: _enrich_records(_read_records(data, name, 'tracks' if name == 'likes' else None),
                                         matches, args.previews)
-                  for name, path in paths.items() if name in ('likes', 'rejects', 'catalog', 'fresh')}
+                  for name, data in source_bytes.items() if name in ('likes', 'rejects', 'catalog', 'fresh')}
         if args.liked_export:
-            original = _read_track_export(args.liked_export)
+            original = _read_track_export(source_bytes['liked_export'])
             if set(original) != {row.get('position') for row in inputs['likes']} or any(
                     original[row['position']][2] != str(row.get('spotify_id'))
                     for row in inputs['likes']):
                 parser.error('original liked export does not match the frozen feature snapshot')
-        live = json.loads(args.live.read_text(encoding='utf-8')) if args.live else None
+        live = json.loads(source_bytes['live']) if args.live else None
         result = run_experiment(**inputs, holdout_start=args.holdout_start, cutoff=args.cutoff,
                                 reject_fold=args.reject_fold, sample_size=args.sample_size, live=live)
-        result['source_files'] = {name: {'path': str(path),
-                                          'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
+        result['source_files'] = {name: {'path': str(path.resolve()),
+                                          'sha256': hashlib.sha256(source_bytes[name]).hexdigest()}
                                   for name, path in paths.items()}
         if args.blind_output:
-            _write_blind(args, result)
+            _write_blind(args, result, source_bytes)
     with args.output.open('w', encoding='utf-8') as stream:
         json.dump(result, stream, indent=2, allow_nan=False)
         stream.write('\n')

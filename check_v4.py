@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Independently verify a local v4 audit from its manifest and scored rows."""
 
+import argparse
 from collections import Counter, defaultdict
 import hashlib
 import json
@@ -9,13 +10,22 @@ from pathlib import Path
 import random
 import re
 from statistics import mean
-import sys
 
 from sklearn.metrics import ndcg_score
 from scipy.stats import binomtest
 
 METHODS = {'v2_refit', 'v6_frozen', 'embeat_full', 'embeat_minus_ch1'}
 CHALLENGER = 'embeat_minus_ch1'
+SOURCES = {
+    'likes': 'liked_snapshot', 'rejects': 'historical_judgment',
+    'catalog': 'frozen_catalog', 'fresh': 'fresh_judgment',
+}
+# The evaluation protocol fixes these endpoints independently of the ranker's
+# mutable weights. Channel membership and ordering are observed before merging.
+CHANNEL_ENDPOINTS = {
+    'similar': (1.7, 1.0), 'popular': (1.0, 0.8),
+    'same_artist': (1.9, 1.0), 'related_artist': (1.8, 1.0),
+}
 
 
 def _require(valid, message):
@@ -54,10 +64,93 @@ def _identities(row):
 
 
 
+def _verify_sources(report, trusted_digests):
+    files = report['source_files']
+    required = {'likes', 'rejects', 'catalog'}
+    if report['split'] == 'fresh judgments':
+        required.add('fresh')
+    _require(required <= files.keys(), 'missing raw source file declaration')
+    _require(not report['live_rounds'] or 'live' in files, 'missing live source for reported rounds')
+    if trusted_digests is not None:
+        _require(isinstance(trusted_digests, dict) and trusted_digests
+                 and trusted_digests.keys() <= files.keys(), 'invalid trusted source digest list')
+
+    manifest = {row['row_id']: row for row in report['manifest']}
+    expected_ids = set()
+    for name, entry in files.items():
+        data = Path(entry['path']).read_bytes()
+        digest = hashlib.sha256(data).hexdigest()
+        if trusted_digests is not None and name in trusted_digests:
+            _equal(trusted_digests[name], digest, f'trusted source digest mismatch for {name}')
+        _equal(entry['sha256'], digest, f'source digest mismatch for {name}')
+        if name == 'live':
+            # The runner keeps the original array, including individual answers
+            # and the key. Compare JSON types as well as values (true differs from 1).
+            declared = json.dumps(report['live_rounds'], sort_keys=True, allow_nan=False)
+            original = json.dumps(json.loads(data), sort_keys=True, allow_nan=False)
+            _equal(original, declared, 'live rounds disagree with rated source')
+        if name not in SOURCES:
+            continue
+        rows = json.loads(data)
+        if name == 'likes':
+            rows = rows['tracks']
+        _require(isinstance(rows, list), f'invalid source rows for {name}')
+        _equal(len(rows), report['source_counts'][name], f'source count for {name}')
+        for index, raw in enumerate(rows):
+            source = SOURCES[name]
+            row_id = f'{source}:{index}'
+            expected_ids.add(row_id)
+            row = manifest.get(row_id)
+            _require(row is not None and row['source'] == source, f'source row mismatch for {row_id}')
+            for field in ('spotify_id', 'deezer_id', 'title', 'artist', 'position', 'added_at', 'audio_source'):
+                _equal(raw.get(field), row[field], f'source {field} mismatch for {row_id}')
+            # The runner can add a missing ISRC or hash when enriching a row.
+            for field in ('isrc', 'preview_sha256'):
+                if raw.get(field):
+                    _equal(raw[field], row[field], f'source {field} mismatch for {row_id}')
+            if name == 'catalog' and row.get('judgment_row_id'):
+                continue  # The fresh source row and the join are checked separately.
+            label = {'likes': 'like', 'rejects': 'reject', 'catalog': 'unlabeled'}.get(name)
+            _equal(label or raw.get('label'), row['label'], f'source label mismatch for {row_id}')
+            _equal(raw.get('label_source') or source, row['label_source'],
+                   f'source label provenance mismatch for {row_id}')
+    _equal(expected_ids, set(manifest), 'source/manifest membership mismatch')
+
+
+def _verify_channel_scores(pool):
+    trace = pool.get('channel_recordings')
+    _require(isinstance(trace, dict) and trace.keys() == CHANNEL_ENDPOINTS.keys(),
+             'missing channel evidence; rerun the evaluation or use --structure-only for legacy audits')
+    full = {row['recording_id']: 0.0 for row in pool['rows']}
+    ablated = full.copy()
+    for name, (first, last) in CHANNEL_ENDPOINTS.items():
+        ids = trace[name]
+        _require(isinstance(ids, list) and len(ids) == len(set(ids)) and set(ids) <= full.keys(),
+                 f'{name} channel recording membership')
+        _equal(len(ids), pool['channel_coverage'][name], f'{name} channel coverage')
+        for index, recording in enumerate(ids):
+            fraction = index / max(len(ids) - 1, 1)
+            value = (1 - fraction) * first + fraction * last
+            full[recording] += value
+            if name != 'similar':
+                ablated[recording] += value
+    for row in pool['rows']:
+        recording = row['recording_id']
+        for method, values in (('embeat_full', full), (CHALLENGER, ablated)):
+            _equal(values[recording], row['scores'][method], f'{method} channel score for {recording}')
+
+
 def _verify_manifest(manifest):
+    allowed = {'liked_snapshot': {'like'}, 'historical_judgment': {'reject'},
+               'fresh_judgment': {'like', 'reject'}, 'frozen_catalog': {'unlabeled'}}
     by_row, groups, by_token = {}, defaultdict(list), defaultdict(set)
     for row in manifest:
         row_id = row['row_id']
+        source = row['source']
+        _require(source in SOURCES.values() and re.fullmatch(re.escape(source) + r':[0-9]+', row_id),
+                 'manifest source/row ID mismatch')
+        if not (source == 'frozen_catalog' and row.get('judgment_row_id')):
+            _require(row['label'] in allowed[source], 'invalid source label')
         _require(row_id not in by_row, 'duplicate manifest row')
         by_row[row_id] = row
         group = row['recording_id']
@@ -157,7 +250,8 @@ def _offline_status(report, k):
             (effect['p_at_k'] == 0 and effect['map_at_k'] >= .02 - 1e-12))
         for key, sample in report['pools'].items():
             if key != 'full':
-                passing &= effect['p_at_k'] * sample['deltas'][method]['p_at_k'] >= 0
+                passing &= all(effect[name] * sample['deltas'][method][name] >= 0
+                               for name in ('p_at_k', 'ndcg_at_k'))
     return 'ELIGIBLE_FOR_BLIND' if passing else 'NO_GO_OFFLINE'
 
 
@@ -220,14 +314,19 @@ def _verify_live_summary(report):
 
 
 
-def verify(report):
+def verify(report, *, structure_only=False, trusted_digests=None):
     """Recompute from the audit. This module never imports the v4 runner."""
     _require(report['version'] == 4, 'expected v4 audit')
+    _require(trusted_digests is None or ('source_files' in report and not structure_only),
+             'raw source files required for trusted digest verification')
     if report.get('missing_inputs'):
         _require(not report['pools'] and report['status'] == report['offline_status'] ==
                  'INSUFFICIENT_EVIDENCE', 'unavailable-input verdict')
+        _require(not report.get('live_rounds'), 'missing-input report claims live rounds')
         return
     expected = _verify_manifest(report['manifest'])
+    if 'source_files' in report and not structure_only:
+        _verify_sources(report, trusted_digests)
     train = [r for r in report['manifest'] if r['partition'] == 'train']
     for kind in ('like', 'reject'):
         _equal(sum(r['label'] == kind for r in train), report['training_counts'][kind],
@@ -260,6 +359,8 @@ def verify(report):
         _require(any(r['recording_id'] == report['seed_recording_id'] and r['label'] == 'like'
                      for r in train), 'seed was not a training like')
         _verify_pool(pools['full'], expected, k)
+        if not structure_only:
+            _verify_channel_scores(pools['full'])
         unknown = sorted(i for i, row in expected.items() if row['label'] == 'unlabeled')
         judged = {i for i, row in expected.items() if row['label'] != 'unlabeled'}
         for seed in settings['seeds']:
@@ -281,7 +382,27 @@ def verify(report):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        raise SystemExit('usage: python check_v4.py path/to/evaluation-v4.json')
-    verify(json.loads(Path(sys.argv[1]).read_text(encoding='utf-8')))
-    print('Verified v4 audit')
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('audit', type=Path)
+    options = parser.add_mutually_exclusive_group()
+    options.add_argument('--source-lock', type=Path,
+                         help='JSON object of source role to SHA-256, frozen independently before this run')
+    options.add_argument('--structure-only', action='store_true',
+                         help='verify legacy report arithmetic without source or score replay')
+    args = parser.parse_args()
+    report = json.loads(args.audit.read_bytes())
+    if report.get('pools') and not args.structure_only and not report.get('source_files'):
+        parser.error('scored CLI audit requires raw source files; --structure-only checks arithmetic alone')
+    try:
+        lock = json.loads(args.source_lock.read_bytes()) if args.source_lock is not None else None
+        if args.source_lock is not None:
+            _require(isinstance(lock, dict) and lock, 'invalid trusted source digest list')
+        verify(report, structure_only=args.structure_only, trusted_digests=lock)
+    except (KeyError, OSError, ValueError) as exc:
+        parser.exit(1, f'Verification failed: {exc}\n')
+    if not report['pools']:
+        print('Verified an unscored v4 record; no ranking evidence')
+    elif args.structure_only:
+        print('Verified v4 report structure and arithmetic only')
+    else:
+        print('Verified v4 source files, Embeat channel scores, rankings, metrics and verdict')
