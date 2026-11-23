@@ -7,7 +7,7 @@ Two modes:
                + ReccoBeats (by ISRC) for every pool track, save
                data/pool_features.json. No ranking happens here.
   recommend  : score the pool with the v2 model, MMR-diversify, verify
-               the top 30 by Spotify track ID and recording key (cleaned
+               the top 100 by Spotify track ID and recording key (cleaned
                title + first artist) against Liked Songs and the
                recommendation history, rescore, and pick the final 10.
                Writes recommendations_v2.json. Never re-recommends.
@@ -40,6 +40,11 @@ RELATED_PER_ARTIST = 8
 TOP_PER_RELATED = 4
 POOL_CAP = 800
 MMR_LAMBDA = 0.7
+# How many of the top-scored pool tracks MMR-selects for the verify step.
+# Was 30; v7/v8/v9 consumed exactly that window, so the verify loop could
+# leave 0 clean picks (Nov 22, 2026). 100 keeps the same ranking and
+# just looks further down the same list.
+VERIFY_WINDOW = 100
 
 
 def log(msg):
@@ -301,13 +306,19 @@ def recommend():
     Z = (X - model.mean) / model.scale
     top100 = order[:100]
     sel100 = mmr_select([pool[i] for i in top100], Z[top100],
-                        s['final'][top100], k=30)
-    cands30 = [pool[top100[i]] for i in sel100]
-    log(f'MMR top 30 selected')
+                        s['final'][top100], k=VERIFY_WINDOW)
+    cands = [pool[top100[i]] for i in sel100]
+    log(f'MMR top {VERIFY_WINDOW} selected')
     # verify by Spotify ID and recording key
-    verified = verify_candidates(cands30, spotify_search_id,
+    verified = verify_candidates(cands, spotify_search_id,
                                  liked_ids, liked_keys, hist_ids, hist_keys)
     log(f'verified by Spotify ID: {len(verified)}')
+    if not verified:
+        # No clean candidates: report it instead of crashing on the
+        # empty rescore below (zip(*) over an empty list raised
+        # ValueError in the v10 run, Nov 22, 2026).
+        log('no clean candidates')
+        return []
     # fill any missing ReccoBeats by Spotify ID
     missing = [c for c in verified if not c.get('reccobeats')]
     if missing:
