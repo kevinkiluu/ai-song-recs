@@ -17,4 +17,12 @@ Every finding table cites the **original** source locations at the audited SHA. 
 | Reproducibility and acceptance | [Fresh checkout, per-suite counts and checksums](verification.md) |
 | Next work in priority order | [Six evidence gaps, falsifiable claims and measurements](plan.md) |
 
-The tried attacks include cases that held on main. Planting a known reject at rank 1 triggered the offline veto. Corrupting a scored row's join to the manifest failed verification. The fold-local evaluator withstood transitive recording aliases on a controlled experiment. The enrichment helper returned the added ISRC and preview digest without modifying the original row. The widened verify window reached beyond the first 30 exhausted candidates in an offline replay. None of these controls supplies the missing eligibility join, original offer denominators or the ten generation-time v10 outputs.
+## What held under attack
+
+- A known reject at rank 1 triggered the offline veto. A broken scored-row join also failed the old verifier. The separate forged-score and source-label cases exposed verification defects.
+- The fold-local evaluator excluded transitive recording aliases on a controlled split. Changing a discarded training twin’s features left the eligible scores unchanged.
+- The enrichment helper returned the ISRC and preview digest on its copied row, preserved the input row, and withheld an ISRC belonging to a different provider recording.
+- The widened verify window reached beyond 30 exhausted candidates. On the 94 archived held-out feature rows, pinned and patched MMR returned the same ordered top ten. This experiment holds the saved scores fixed.
+- The independent paths reproduced all nine historical P@10/legacy-NDCG pairs on the 306 rows, and all four archived standard-NDCG comparisons. The historical per-bucket/global v6 comparison could also be reconstructed for the original 311-row panel.
+
+The full-pool eligibility join, original offer denominators and exact v10 replay require the private source bundle. [Evidence required for acceptance](verification.md)
