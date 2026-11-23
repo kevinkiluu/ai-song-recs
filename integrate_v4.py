@@ -15,7 +15,7 @@ import numpy as np
 from threadpoolctl import threadpool_limits
 
 import embeat_port as embeat
-from evaluate_v4 import (SEEDS, build_manifest, evaluation_pool, live_decision,
+from evaluate_v4 import (SEEDS, build_manifest, embedded_spotify_isrc, evaluation_pool, live_decision,
                          ranking_metrics, sample_pool)
 from model_v2 import fit_records
 from scoring import V2Model, feat_vector, v6_score
@@ -120,6 +120,17 @@ def offline_decision(pools, *, fresh):
     return 'ELIGIBLE_FOR_BLIND'
 
 
+def fit_and_score_pool(pool, train):
+    """Fit v2, choose the training medoid and score every arm on the same pool."""
+    config, artifacts = fit_records(train['like'], train['reject'])
+    model = V2Model(artifacts, config)
+    buckets = embeat.artist_bucket_map(train['like'])
+    embeddings = embeat.embed_records(model, train['like'])
+    centroid = embeddings.mean(axis=0)
+    seed = train['like'][int(np.argmax(embeddings @ centroid))]
+    return _score_pool(pool, model, seed, buckets), seed
+
+
 def run_experiment(likes, rejects, catalog, *, fresh=None, holdout_start=0,
                    cutoff=130, reject_fold=0, sample_size=200, live=None):
     if sample_size < 0:
@@ -153,17 +164,9 @@ def run_experiment(likes, rejects, catalog, *, fresh=None, holdout_start=0,
     seed_id = None
     if not blocked:
         with threadpool_limits(limits=1):
-            config, artifacts = fit_records(train['like'], train['reject'])
-            model = V2Model(artifacts, config)
-            buckets = embeat.artist_bucket_map(train['like'])
-            # Recompute the medoid using only the fold's training likes.
-            embeddings = embeat.embed_records(model, train['like'])
-            centroid = embeddings.mean(axis=0)
-            seed_index = int(np.argmax(embeddings @ centroid))
-            seed = train['like'][seed_index]
+            pools['full'], seed = fit_and_score_pool(pool, train)
             seed_id = next(row['recording_id'] for row in manifest
                            if row['partition'] == 'train' and row['record'] is seed)
-            pools['full'] = _score_pool(pool, model, seed, buckets)
             for draw in SEEDS:
                 sample = sample_pool(pools['full']['rows'], sample_size, draw)
                 pools[f'sample_{draw}'] = _rank_pool(sample)
@@ -330,11 +333,14 @@ def _enrich_records(records, matches, previews):
     for record in records:
         record = dict(record)
         match = matches.get(record.get('spotify_id'), {})
-        # Compare the recorded match before borrowing metadata from it.
-        if (record.get('deezer_id') and
-                str(match.get('deezer_id')) == str(record['deezer_id']) and
-                not record.get('isrc') and match.get('isrc')):
-            record['isrc'] = match['isrc']
+        confirmed = [record.get('isrc'), embedded_spotify_isrc(record)]
+        if record.get('deezer_id') and str(match.get('deezer_id')) == str(record['deezer_id']):
+            confirmed.append(match.get('isrc'))
+        codes = {str(value).strip().replace('-', '').upper() for value in confirmed if value}
+        if len(codes) > 1:
+            raise ValueError('conflicting ISRCs for the same source row')
+        if codes and not record.get('isrc'):
+            record['isrc'] = next(value for value in confirmed if value)
         deezer_id = str(record.get('deezer_id'))
         if previews is not None and deezer_id.isascii() and deezer_id.isdecimal():
             if deezer_id not in hashes:

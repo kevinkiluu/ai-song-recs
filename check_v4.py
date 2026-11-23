@@ -108,6 +108,14 @@ def _verify_sources(report, trusted_digests):
             for field in ('isrc', 'preview_sha256'):
                 if raw.get(field):
                     _equal(raw[field], row[field], f'source {field} mismatch for {row_id}')
+            panel = raw.get('reccobeats') or {}
+            href = re.fullmatch(r'https://open\.spotify\.com/track/([A-Za-z0-9]{22})(?:\?.*)?',
+                                str(panel.get('href') or ''))
+            code = str(panel.get('isrc') or '').strip().replace('-', '').upper()
+            sid = str(raw.get('spotify_id') or '').strip().removeprefix('spotify:track:')
+            if href and href[1] == sid and re.fullmatch('[A-Z]{2}[A-Z0-9]{3}[0-9]{7}', code):
+                actual = str(row.get('isrc') or '').strip().replace('-', '').upper()
+                _equal(code, actual, f'embedded ISRC mismatch for {row_id}')
             if name == 'catalog' and row.get('judgment_row_id'):
                 continue  # The fresh source row and the join are checked separately.
             label = {'likes': 'like', 'rejects': 'reject', 'catalog': 'unlabeled'}.get(name)

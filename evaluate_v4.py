@@ -11,6 +11,17 @@ SEEDS = (42, 43, 44, 45, 46)
 PREVIEW_FIELDS = ('bpm', 'rms_mean', 'brightness_mean')
 
 
+def embedded_spotify_isrc(record):
+    """Return the ReccoBeats ISRC only when its own link identifies this track."""
+    panel = record.get('reccobeats') or {}
+    sid = str(record.get('spotify_id') or '').strip().removeprefix('spotify:track:')
+    href = str(panel.get('href') or '').split('?', 1)[0]
+    if not re.fullmatch(r'[A-Za-z0-9]{22}', sid) or href != f'https://open.spotify.com/track/{sid}':
+        return None
+    code = str(panel.get('isrc') or '').strip().replace('-', '').upper()
+    return code if re.fullmatch(r'[A-Z]{2}[A-Z0-9]{3}[0-9]{7}', code) else None
+
+
 def identity_tokens(record):
     tokens = []
     for field, namespace in (('spotify_id', 'spotify'), ('deezer_id', 'deezer'),
@@ -65,6 +76,13 @@ def build_manifest(likes, rejects, catalog, *, cutoff=130, holdout_start=0,
                     source == 'fresh_judgment' and
                     (label == 'unlabeled' or not record.get('label_source'))):
                 raise ValueError('fresh judgments require a like/reject label and label_source')
+            embedded = embedded_spotify_isrc(record)
+            if embedded:
+                previous = record.get('isrc')
+                if previous and str(previous).strip().replace('-', '').upper() != embedded:
+                    raise ValueError('conflicting ISRCs for the same source row')
+                if not previous:
+                    record = dict(record, isrc=embedded)
             keys = identity_tokens(record)
             for key in keys:
                 parents.setdefault(key, key)

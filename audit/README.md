@@ -4,6 +4,8 @@
 
 The review starts at `463331ccaed9ab5f3b8d1c9703bff956b155f566`. It uses the eight PR heads, executable code, checked-in item rows and read-only Spotify observations. The numerical comparison consults the old prose after computing the results. The fresh catalog/judgment join and the original v10 generation inputs remain unavailable. [Independent raw calculations and comparison](recomputation.md) · [Actual playlist reads and three-tier evidence](ratings.md)
 
+[Implementation and November 23 measurements for all six enhancements](enhancement_results.md)
+
 ## Findings, fixes and negative results
 
 Every finding table cites the **original** source locations at the audited SHA. Each reproduction uses a named test or a script. The historical artifacts retain their original metric values. The patched inferential evaluation uses standard NDCG with held-out positives in the ideal ranking.
