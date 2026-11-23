@@ -141,8 +141,8 @@ try:
           all(isinstance(r.get('v2_score'), (int, float))
               and isinstance(r.get('v6_score_per_bucket'), (int, float))
               for r in recs))
-except FileNotFoundError:
-    check('recs: file exists', False, 'recommendations_v2.json missing')
+except FileNotFoundError as missing:
+    check('recs: all required inputs exist', False, str(missing))
 
 # --- 7. report
 try:

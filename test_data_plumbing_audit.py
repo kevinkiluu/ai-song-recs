@@ -127,3 +127,24 @@ import recommend_v2
                                     cwd=Path(__file__).resolve().parent,
                                     text=True, capture_output=True)
             self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_legacy_acceptance_names_missing_recommendation_input(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            # The recommendation JSON exists; the external liked/history files do not.
+            root = Path(__file__).resolve().parent
+            script = """
+import os.path, runpy, sys
+old_expanduser = os.path.expanduser
+def expand(value):
+    if value == '~/workspace/audio-pipeline':
+        return sys.argv[1]
+    if value.startswith('~/workspace/'):
+        return os.path.join(sys.argv[2], value.rsplit('/', 1)[1])
+    return old_expanduser(value)
+os.path.expanduser = expand
+runpy.run_path(os.path.join(sys.argv[1], 'test_pipeline_v2.py'))
+"""
+            result = subprocess.run([sys.executable, "-c", script, str(root), tmp],
+                                    text=True, capture_output=True)
+            self.assertIn(str(Path(tmp, "spotify-liked-songs.txt")), result.stdout)
+            self.assertNotIn("recommendations_v2.json missing", result.stdout)
