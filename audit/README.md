@@ -2,7 +2,7 @@
 
 **v2 remains the production ranker. The fresh Embeat channel-1 ablation verdict is INSUFFICIENT EVIDENCE.** The 306 historical score rows support a narrower result. Full Embeat and Embeat without channel 1 each returned six held-out likes in ten slots. Removing the channel moved the likes earlier, increasing standard NDCG@10 from 0.603262 to 0.689829. Those observations do not measure what a listener will keep on a fresh list.
 
-The review starts at `463331ccaed9ab5f3b8d1c9703bff956b155f566`. It uses the eight PR heads, executable code, checked-in item rows and read-only Spotify observations. The numerical comparison consults the old prose after computing the results. The fresh catalog/judgment join and the original v10 generation inputs remain unavailable. [Independent raw calculations and comparison](recomputation.md) · [Actual playlist reads and three-tier evidence](ratings.md)
+The review starts at `463331ccaed9ab5f3b8d1c9703bff956b155f566`. It uses the eight PR heads, executable code, checked-in item rows and read-only Spotify observations. The numerical comparison consults the old prose after computing the results. The November 26 run restored the private inputs, reproduced the historical eligibility join and compared all ten original v10 rows. [Independent raw calculations and comparison](recomputation.md) · [Actual playlist reads and three-tier evidence](ratings.md)
 
 [Implementation and November 23 measurements for all six enhancements](enhancement_results.md)
 
@@ -27,4 +27,4 @@ Every finding table cites the **original** source locations at the audited SHA. 
 - The widened verify window reached beyond 30 exhausted candidates. On the 94 archived held-out feature rows, pinned and patched MMR returned the same ordered top ten. This experiment holds the saved scores fixed.
 - The independent paths reproduced all nine historical P@10/legacy-NDCG pairs on the 306 rows, and all four archived standard-NDCG comparisons. The historical per-bucket/global v6 comparison could also be reconstructed for the original 311-row panel.
 
-The full-pool eligibility join, original offer denominators and exact v10 replay require the private source bundle. [Evidence required for acceptance](verification.md)
+The original gate had one eligible like and 11 rejects. The full historical suites and strict v10 replay still have specific outstanding conditions. [November 26 results and merge review items](verification.md)

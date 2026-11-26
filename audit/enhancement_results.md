@@ -1,5 +1,7 @@
 # Enhancement measurements, November 23, 2026
 
+The November 26 acceptance record contains the subsequent private-input eligibility join, the accepted chronological comparison and the v10 replay results. [Updated acceptance record](verification.md)
+
 **v2 remains the production ranker. The Embeat channel-1 challenger still has insufficient fresh evidence.** The six plan items now have executable measurement paths. The available inputs support recording-identity checks, a provider-coverage measurement, and a sampled Bliss comparison. The historical full-pool and fresh-judgment estimates still require the private source bundle.
 
 | Priority | Implementation | Observed result |

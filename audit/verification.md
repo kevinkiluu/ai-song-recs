@@ -1,38 +1,63 @@
-# Acceptance status
+# PR #9 acceptance record
 
-**The full-suite and historical replay acceptance conditions remain open.** A fresh clone of implementation commit `d2330a2ec65d52bc1e3c164a7f946d467ab771ea` ran every `test_*.py`, the standalone v3 integration checker and the v4 producer/checker. It began and ended with empty Git status. The legacy scripts have module-level test execution and some call `sys.exit`, so they ran in separate processes. A private Linux mount mapped the fresh clone onto the scripts’ historical `~/workspace/audio-pipeline` location. Network was disabled for the historical suites. Python 3.12.14, NumPy 2.3.5, SciPy 1.17.0 and scikit-learn 1.8.0 were used.
+November 26, 2026. Every test file ran from a fresh clone of `b61140a`. The private inputs and v2 model were restored outside Git. The original eligibility join reproduced at recording level. The historical suites still have six failed assertions or missing-input cases across Bliss and Embeat. An independent, end-to-end replay of v10 remains unavailable.
 
-| Entry point | Fresh-checkout result | What it establishes or what failed |
-|---|---|---|
-| `python -m unittest test_evaluate_v4 test_check_v4 test_integrate_v4 test_audit_metrics test_audit_mutations test_ranker_audit test_data_plumbing_audit` | **83 passed** | 24 existing v4 tests plus 59 audit tests and controls. See the finding tables for the before/fix evidence. |
-| `python checks_v3_integration.py` | **49 passed** | Historical archive compatibility, including recomputation from the 306 per-item rows. |
-| `python test_search_order.py` | **8 passed** | Search order, title and artist matching, and refusal of an unrelated hit. |
-| `python test_pipeline_v2.py` | 26 passed, 4 failed | Missing fitted NPZ, negative features, GTZAN result, and liked export required for recommendation checks. The committed ten-row recommendations file itself loaded. |
-| `python test_verify_dedup.py` | 9 passed, 1 failed | Fixture checks ran. The real-data block stops at the absent liked export; it also requires the pool and history. |
-| `python test_wide_window.py` | 0 passed, 3 failed | Each case calls the original generation path and stops at the absent liked export. These grouped failures occur before the five historical assertions. Controlled window tests exercised the same production function separately. |
-| `python test_evaluate_v3.py` | 82 passed, 1 failed | T-01, the real-data block, stopped at the missing negative feature file. The synthetic checks ran with their corrected metric definitions. |
-| `python test_embeat_port.py` | 3 passed, 15 failed | Missing fitted model, pool and private inputs. Downstream checks also reported unset variables after setup failed. |
-| `python -m pytest -q test_troi_patch.py` | 10 passed, 10 failed, 1 unexpected pass | Missing private liked/history exports, negatives, model or pool. The test marked xfail is reported separately by pytest. |
-| `python -m pytest -q test_bliss_features.py` | 13 passed, 8 failed, 1 skipped | Recording-specific checks need the original previews and `data/bliss23.json`. The suite skipped its optional upstream FLAC fixture. |
+## Frozen sources
 
-The counts are the results the scripts actually emitted. Some historical checks sit inside a shared block and never execute after the first missing input.
+The original Muse handoff contains 50 files. Its checksum list covers the other 49. All 49 hashes matched on restoration and after the runs. The 590-row candidate pool, 13 rejects and Nov 21 liked export also match the full digests recorded in the Nov 21 provenance file. The handoff included the Nov 22 and Nov 24 libraries, 90-entry recommendation history, fitted v2 weights and ten original v10 rows. The separate judged panel checksum list also verified. All nine baseline JSON files tracked in Git still match `463331c` byte for byte.
 
-## CLI and v10
+The 49-file list was created for the handoff. The older manifest contained filenames only. Historical hash evidence is therefore stronger for the three files with Nov 21 digests. The 1,101-entry preview index records audio hashes and lengths. The audio bytes were omitted from the handoff.
 
-The full synthetic fresh experiment went through `integrate_v4.py`, strict `check_v4.py --source-lock`, and the independent `audit/recompute.py --trial` path successfully. It had ten synthetic likes and two rejects. With the production paths and missing private files, the producer returned exit 2 and wrote `INSUFFICIENT_EVIDENCE`. The checker identified that output as an unscored record.
+## Eligibility behind the nine-like shortfall
 
-The v10 generation entry point ran to completion on a controlled snapshot on both pinned and fixed code. It selected the same ten ordered fixture IDs beyond the exhausted window. Holding the available 94 historical scores fixed also reproduced the same MMR top ten. The actual private replay command `python audit/replay_v10.py .` returned exit 2 and named the absent fitted weights, exact candidate pool, liked and history exports, original Spotify search responses and original ten v10 rows. The replay also requests cached ReccoBeats responses when the original path needs a fill. Seven visible playlist survivors provide a current membership check. They cannot establish the original order or any extra offers. [Replay evidence and snapshot layout](ranker.md)
+The original rule was rerun from the new judged panel, raw ReccoBeats pool crosswalk, frozen catalog, original liked list, historical rejects and prior recommendation ledger. For each offered Spotify ID, require the matching Spotify href, agreement between the crosswalk key and returned ISRC, a catalog row with that ISRC, agreement on title and first artist, and an eligible previously unknown recording with audio features. The panel's corrected ID for the disputed v9 offer agrees with the dated ledger.
 
-## Frozen inputs
+| Original v5 evaluation cohort (rounds v5, v7, v8 and v9) | Likes | Rejects |
+|---|---:|---:|
+| Binary judgments among 40 offers, after setting aside seven neutral ratings | 3 | 30 |
+| Already known in the frozen inputs | 0 | 9 |
+| No eligible match by the historical catalog join | 2 | 10 |
+| Eligible recordings | **1** | **11** |
 
-Before edits, SHA-256 was calculated for **all nine JSON files tracked at `463331c`**. All nine matched after the fresh-checkout tests, including `features_v2.json`, `recommendations_v2.json` and `v3_scores_306.json`. No tracked JSON, fitted artifact or historical report changed in the PR. To repeat the byte comparison on a clone:
+The resulting twelve catalog row indices and labels match the full-pool rows in **each of the three** archived 589-row evaluations. The ten-like minimum therefore leaves **nine** more likes under the original rule. With the generation-time Deezer IDs in the archived offers and the corrected v9 identity, a separate retrospective join finds **two likes and 21 rejects**, leaving eight more likes under that rule. The folds reuse the same judgments.
 
-```bash
-git ls-tree -r --name-only 463331c | rg '\.json$' | while IFS= read -r path; do
-  git show "463331c:$path" | cmp - "$path" || exit 1
-done
-```
+The accepted streaming-history comparison retained v2. Across the two later ten-track rounds mean standard NDCG@10 moved from 0.1781 to 0.2153 on one held-out keep. That experiment evaluates order within already-issued lists.
 
-The original Nov 21 liked export (650 rows), Nov 22 dump (657), 90-entry history, 590-row pool, 13-row reject feature file and their independent checksum manifest were absent from the checkout, all available PR heads, local archives, releases and Actions artifacts. Only the available bytes can be certified. The current Spotify library and committed derived features are separate sources. No private history, raw listening export or audio has been committed. Spotify access was read-only.
+## Historical suites
 
-To close the remaining checks, recover the original hashed files, generation-time model/caches and original v10 offers, plus the original offers, post-rating playlist snapshots and cutoff liked membership for v5, v7, v8, v9 and v10. The scored v5 per-record manifest enables a separate arithmetic replay. The raw catalog/judgment sources and identity crosswalk enable independent confirmation of the eligible count behind the nine-like shortfall. [Recomputation and missing inputs](recomputation.md) · [Playlist inventory](ratings.md)
+Each legacy entry point ran in its own local copy with networking disabled. For the v2 recommendation acceptance and Troi suites, the pre-v7 history was reconstructed from the 60 ledger entries in rounds v3 through v6. The 90-row frozen master includes the issued v7 tracks themselves. Both the original master and the dated input files kept their hashes.
+
+| Entry point | Verified outcome |
+|---|---|
+| v4 and audit unit suites | 83 passed |
+| Enhancement suites | 77 passed |
+| v2 pipeline, verify dedup, search order, wide window | 37, 15, 8 and 5 passed respectively |
+| v3 evaluation and archive integration | 95 assertions and 49 archive checks passed |
+| Troi | 20 passed, one existing expected-failure case unexpectedly passed |
+| Embeat | 20 passed, T-16 failed its historical performance target. P@10 was 0.60 against a 0.60 best baseline. Mean reject rank was 162.7 against 178.2. |
+| Bliss, with the pinned upstream reference audio | 17 passed, five failed. Four tests require the missing original MP3s. B1 ran and failed its numerical comparison. |
+
+The four recording-specific Bliss tests (T3, Z2, S3 and C2) together need **44 unique preview files**, totaling 21,113,226 bytes. Match them against the private preview manifest before rerunning. For B1, the 221,444-byte FLAC from upstream commit `0de922d` matches Git blob `9007c9cce914f86eee6f434c2a4540aeb9281cbb`. With that fixture placed at `tests/fixtures/s16_mono_22_5kHz.flac`, the port met the 0.05 tolerance on 20 of 23 dimensions. Signed errors (port minus reference) on the remaining three were −0.706606 for tempo, +0.412997 for mean rolloff and +0.093132 for rolloff standard deviation. The first two exceed the maximum allowed error of 0.10. [Pinned upstream fixture](https://github.com/Polochon-street/bliss-rs/blob/0de922d/data/s16_mono_22_5kHz.flac) · [Historical test](../test_bliss_features.py)
+
+The raw v4 producer also stopped at its provider-identity guard. Thirteen liked rows carry conflicting ISRCs for Spotify and Deezer. A separate diagnostic withheld the disputed Deezer ISRC assertions, kept the frozen files intact and produced a scored report that passed the source-locked checker. The untouched-source run still requires identity adjudication for an unqualified result. [Verifier](../check_v4.py)
+
+## Original v10 row comparison
+
+The actual generation path loaded the fitted v2 model, scored all 590 catalog rows, selected its 100-candidate MMR window and found 30 previously known candidates. The replay compared the generated ten JSON objects with the original ten, including order, both providers' IDs, the scores, cluster and audio-source fields.
+
+| Verification evidence supplied | Original Spotify IDs recovered | Original positions | Full generated row list equal |
+|---|---:|---:|---|
+| Only generation-time material actually archived | — | — | Strict replay stopped before selection. The historical Spotify search responses were never saved. |
+| Resolve only the ten archived offers, assume misses for competitors and the two uncached ReccoBeats fills | 10/10 | 10/10 | Yes, all fields |
+| Also resolve competing candidates through the frozen identity crosswalk | 7/10 | 2/10 | No |
+| Use the frozen identity crosswalk alone | 4/10 | 2/10 | No |
+
+Using the derived Spotify answers with the untouched ReccoBeats cache also stops. Two offers needed lookups that are absent from the positive-only cache. Exact generation-time selection would require the responses for searched candidates, including misses, and those two fill outcomes. The archive can establish compatibility with every original output row. It cannot reconstruct the independent selection of those ten tracks. [Strict replay entry point](replay_v10.py)
+
+## Items for merge review
+
+- Run the four audio-dependent checks against the 44 hash-matched previews. Resolve the Bliss B1 discrepancy or carry it as a documented limitation of the historic extractor.
+- Record a disposition for Embeat T-16 as a measured negative result and for the 13 disputed provider identities. The historical success thresholds and raw files were preserved.
+- If exact v10 selection is required for merge, recover a contemporaneous verification log. If none exists, a reviewer must explicitly accept the documented limit of the retrospective replay.
+
+[Earlier clean-checkout record before the private handoff](https://github.com/kevinkiluu/ai-song-recs/blob/b61140a5cd204a39db217974a388d39f941eaba1/audit/verification.md) · [Original audit findings](README.md)
