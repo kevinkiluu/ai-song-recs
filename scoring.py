@@ -103,11 +103,12 @@ def v6_score(librosa_feats, bucket=None):
 class V2Model:
     """Loads model_v2.npz/json and scores feature vectors."""
 
-    def __init__(self, artifact=None, config=None):
+    def __init__(self, artifact=None, config=None, *, directory=None):
         if artifact is None:
-            with np.load(os.path.join(BASE, 'model_v2.npz')) as stored:
+            directory = BASE if directory is None else directory
+            with np.load(os.path.join(directory, 'model_v2.npz')) as stored:
                 artifact = dict(stored)
-            with open(os.path.join(BASE, 'model_v2.json')) as stream:
+            with open(os.path.join(directory, 'model_v2.json')) as stream:
                 config = json.load(stream)
         z = artifact
         self.median = z['imputer_median']

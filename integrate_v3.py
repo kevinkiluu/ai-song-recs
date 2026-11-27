@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""v3 integration: decontaminate the shared pool to 306 items, re-score
-every candidate on it, compute the pre-registered 4-leg GO verdict per
-candidate via evaluate_v3.verdict_4leg, and write evaluation_v3.json +
-v3_scores_306.json (per-item audit file the checks re-derive from).
+"""Forensic v3 replay using the historical fitted models and candidate panels.
+
+The historical fit contains the evaluation rejects. Recomputations here
+describe those fixed panels and cannot qualify a method for promotion. The
+recording-disjoint refit is in integrate_v4.py. Outputs go to data/.
 
 Candidates:
   troi            Troi patch (S3 audio-neighbour + S4 same-artist, zipper)
@@ -34,9 +35,8 @@ import json, os, sys, time
 
 import numpy as np
 
-BASE = os.path.expanduser('~/workspace/audio-pipeline')
+BASE = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(0, BASE)
-os.chdir(BASE)
 
 import evaluate_v3 as ev3
 from evaluate import rank_metrics
@@ -105,7 +105,8 @@ def main():
                            higher_better=(key == 'v2'))
         for k in ('P@10', 'NDCG@10', 'mean_rank_heldout_like',
                   'mean_rank_negative'):
-            assert got[k] == ref[mkey][k], (mkey, k, got[k], ref[mkey][k])
+            field = 'legacy_topk_hit_ndcg' if k == 'NDCG@10' else k
+            assert got[field] == ref[mkey][k], (mkey, k, got[field], ref[mkey][k])
     print('311-pool baselines reproduce evaluation_v2.json exactly')
 
     # ---- 2. decontaminate: drop the 5 duplicate-audio held-out likes
@@ -242,15 +243,7 @@ def main():
         cands[name] = {'score_key': key, 'higher_better': higher,
                        'metrics': point_metrics(order, key, higher)}
 
-    # ---- 5. paired bootstrap vs v6-per-bucket + 4-leg verdicts.
-    # ev3 items carry every score column, fed in the CANONICAL build
-    # order (held-out, negative, distractor as _build_eval_items built
-    # them) for every candidate. This matters because v6b scores are
-    # heavily tied (rounded to 2 dp): feeding each candidate's own
-    # ranked order changes how v6b ties break inside the bootstrap and
-    # makes its point delta disagree with the reported point metrics
-    # (caught 2026-11-22: troi delta_NDCG read 0.175 vs 0.820-0.654 =
-    # 0.166). Build order matches evaluate.rank_metrics' tie order.
+    # Preserve each ranker's point order for ties during paired resampling.
     def ev3_items():
         out = []
         for x in items:
@@ -285,10 +278,19 @@ def main():
         cands[name]['delta_P@10_sampled'] = round(d_samp, 3)
 
     for name, key, higher, order in specs:
-        boot = ev3.paired_bootstrap(ev3_items(), key, 'v6b',
-                                    higher_a=higher, higher_b=False)
+        panel = ev3_items()
+        candidate_order = {id(row): n for n, row in enumerate(order)}
+        baseline_order = {id(row): n for n, row in enumerate(ordered_by(items, 'v6b', False))}
+        for record, row in zip(panel, items):
+            record.update(deezer_id=row['rec'].get('deezer_id'),
+                          candidate_tie=candidate_order[id(row)], baseline_tie=baseline_order[id(row)])
+        boot = ev3.paired_bootstrap(panel, key, 'v6b', higher_a=higher, higher_b=False,
+                                    tie_a='candidate_tie', tie_b='baseline_tie')
         m = cands[name]['metrics']
         vin = {
+            'inferential': False,
+            'n_rejects': sum(row['kind'] == 'negative' for row in items),
+            'n_ranked': len(items),
             'delta_ndcg_ci_low': boot['delta_ndcg_ci'][0],
             'delta_ndcg': boot['delta_ndcg'],
             'delta_p10': boot['delta_p10'],
@@ -346,14 +348,14 @@ def main():
             'n_dup_audio_removed': 5,
             'removed_duplicate_audio': removed,
             'random_P@10': random_p10,
-            'random_NDCG@10_v2_convention': round(
+            'random_NDCG@10': round(
                 rb['random_NDCG@10'], 3),
             'random_mean_rank': random_mean_rank,
             'split_label': 'position-based holdout (NOT time-based)',
             'note': ('5 held-out likes share a Deezer preview ID with a '
                      'train like (same audio, different Spotify ID); '
                      'removed from the eval pool for ALL v3 verdicts. '
-                     'The v2/v6 models were TRAINED on the twin rows, so '
+                     'The historical v2 model was fit on the training twins, so '
                      'the train side still contains their audio twins; '
                      'only the test side is decontaminated here.'),
         },
@@ -362,7 +364,7 @@ def main():
         'full_pool': {
             'n_ranked': 701,
             'note': ('99 held-out + 12 negatives + all 590 pool tracks. '
-                     'P-10 sensitivity only; the 306 sampled pool governs.'),
+                     'This historical sensitivity restores the five known training twins.'),
             'v6_per_bucket': full['v6_per_bucket'],
         },
         'blend_weight_note': {
@@ -384,20 +386,12 @@ def main():
                 'adopted, because adopting it would be tuning on the '
                 'test set. The Wave-1 blend weight itself is undocumented.'),
         },
-        'verdict': ('NO-GO — offline' if not any(
-            c['offline_pass'] for c in cands.values()) else
-            'PENDING — live leg not yet judged (n=0/42)'),
+        'verdict': 'INSUFFICIENT_EVIDENCE — historical panel sensitivity only',
         'recommendations_built': False,
-        'recommendations_note': ('No candidate passes Legs 1-3, so per '
-            'the eval-spec sequencing no new recommendation list is built '
-            'or spent. The v7 playlist (v2 list, pending Kevin rating) '
-            'stands as the current best.')
-            if not any(c['offline_pass'] for c in cands.values()) else
-            'A candidate passes Legs 1-3; see recommendations_v3.json.',
+        'recommendations_note': ('Historical fitted models include the evaluation rejects. '
+                                 'Use integrate_v4 for a disjoint refit.'),
         'wall_s': round(time.time() - t0, 1),
     }
-    json.dump(out, open(os.path.join(BASE, 'evaluation_v3.json'), 'w'),
-              indent=1)
     audit = {'items': [
         {'spotify_id': x['rec'].get('spotify_id'),
          'deezer_id': x['rec'].get('deezer_id'),
@@ -410,11 +404,16 @@ def main():
                      'embeat_minus_ch1', 'bliss_fixed', 'bliss_adaptive',
                      'bliss_v2_blend')}}
         for x in items]}
-    json.dump(audit, open(os.path.join(BASE, 'v3_scores_306.json'), 'w'),
-              indent=1)
-    print(f"wrote evaluation_v3.json + v3_scores_306.json in {out['wall_s']}s")
+    write_outputs(out, audit)
+    print(f"wrote data/evaluation_v3_replay.json + data/v3_scores_306_replay.json in {out['wall_s']}s")
     print('OVERALL VERDICT:', out['verdict'])
     return 0
+
+
+def write_outputs(report, audit):
+    from evaluate import write_replay
+    write_replay(BASE, 'evaluation_v3', report)
+    write_replay(BASE, 'v3_scores_306', audit)
 
 
 def build_full_pool(tp, ep, bf, bucket_for, M, adapt_w, by_dz, seed_rec):
@@ -439,7 +438,7 @@ def build_full_pool(tp, ep, bf, bucket_for, M, adapt_w, by_dz, seed_rec):
     assert len(items) == 701, len(items)
     for x in items:
         x['bucket'] = bucket_for(x['rec'])
-    model = V2Model()
+    model = V2Model(directory=BASE)
     s = model.score_records([x['rec'] for x in items])
     for x, sc in zip(items, s['final']):
         x['v2'] = round(float(sc), 3)

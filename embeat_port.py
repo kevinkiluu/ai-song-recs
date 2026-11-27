@@ -68,7 +68,7 @@ from collections import Counter, defaultdict
 
 import numpy as np
 
-BASE = os.path.expanduser('~/workspace/audio-pipeline')
+BASE = os.path.dirname(os.path.realpath(__file__))
 DATA = os.path.join(BASE, 'data')
 LIKED_FILE = os.path.expanduser('~/workspace/spotify-liked-songs.txt')
 HIST_FILE = os.path.expanduser('~/workspace/spotify-recommended-tracks.txt')
@@ -125,7 +125,7 @@ _EVAL_INDEX_CACHE = None
 def get_model():
     global _MODEL
     if _MODEL is None:
-        _MODEL = V2Model()
+        _MODEL = V2Model(directory=BASE)
     return _MODEL
 
 
@@ -852,10 +852,11 @@ def build_eval_items():
     for m in ('v2', 'v6_per_bucket', 'v6_global'):
         for k in ('P@10', 'NDCG@10', 'mean_rank_heldout_like',
                   'mean_rank_negative'):
-            if got[m][k] != ref[m][k]:
+            field = 'legacy_topk_hit_ndcg' if k == 'NDCG@10' else k
+            if got[m][field] != ref[m][k]:
                 raise RuntimeError(
                     f'eval pool drift: baseline {m} {k} recomputed as '
-                    f"{got[m][k]}, evaluation_v2.json says {ref[m][k]}")
+                    f"{got[m][field]}, evaluation_v2.json says {ref[m][k]}")
     _EVAL_ITEMS_CACHE = (items, got)
     return _EVAL_ITEMS_CACHE
 
@@ -953,8 +954,7 @@ def rank_eval_pool(seed_spotify_id=None, channels=None, top_k=10):
 
 def evaluate_port(write=True):
     """Full section-(d) evaluation. Returns the results dict and, when
-    write=True, writes evaluation_v3_embeat.json next to
-    evaluation_v2.json."""
+    write=True, writes data/evaluation_v3_embeat_replay.json."""
     from evaluate import rank_metrics
     t_start = time.perf_counter()
     items, baselines = build_eval_items()
@@ -1115,12 +1115,8 @@ def evaluate_port(write=True):
             'O-bucket tracks are excluded from genre-filtered channel 1 '
             '(treated as unknown-genre per spec b.5); reachable via '
             'channels 2-4 and merge back-fill.',
-            'NDCG@10 QUIRK (evaluate.py ndcg_at_k): the ideal DCG is '
-            'computed from the relevant items IN THE TOP 10 only, not '
-            'from all 99 held-out likes, so NDCG@10 measures within-top-10 '
-            'ordering, not standard NDCG. All methods use the same '
-            'function, so relative comparisons hold; absolute values are '
-            'not comparable to standard NDCG.',
+            'NDCG@10 uses the eligible pool ideal. Frozen v2/v3 files used '
+            'the conditional statistic now named legacy_topk_hit_ndcg.',
             'Zero-score tail: items outside every channel score 0.0 '
             '(~180/311); they are tie-broken by acoustic cosine to the '
             'seed (a real signal), not title order, so mean-rank legs are '
@@ -1131,10 +1127,6 @@ def evaluate_port(write=True):
             'P@10 (ablation minus_channel4), so per the b.4 ablation rule '
             'it is NOT redundant. Channel 4 is KEPT; the conflict is '
             'flagged for the coordinator.',
-            'Ablation NDCG note: removing channel 1 improves NDCG@10 '
-            '(0.829 -> 0.948) while P@10 is unchanged (0.60); the d.2.3 '
-            'ablation rule is stated on P@10 only, so no channel is cut '
-            'on that rule, but channel 1 hurts within-top-10 ordering.',
             'Spec d.2.1 ">=17 additional held-out likes" is wrong: +0.05 '
             'P@10 is +0.5 held-out likes in a top 10.',
             'Spec d.2.2 neg-rank leg is unsatisfiable vs v2 (292.9+20 > '
@@ -1145,10 +1137,9 @@ def evaluate_port(write=True):
         ],
     }
     if write:
-        json.dump(results, open(os.path.join(BASE,
-                                             'evaluation_v3_embeat.json'),
-                                'w'), indent=1)
-        log('wrote evaluation_v3_embeat.json')
+        from evaluate import write_replay
+        write_replay(BASE, 'evaluation_v3_embeat', results)
+        log('wrote data/evaluation_v3_embeat_replay.json')
     return results
 
 

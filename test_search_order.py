@@ -10,10 +10,7 @@ match), putting the wrong track in the first v9 playlist.
 
 Rule: prefer an exact title match (cleaned, case-insensitive) over
 document order; among exact matches only one whose first artist agrees
-is returned; fall back to the first hit only when no exact title match
-exists; return None when exact title matches exist but none agrees on
-artist (attaching a different artist's same-title track is worse than
-dropping the candidate).
+is returned. Drop the candidate when no hit agrees on both fields.
 
 The fixtures below mirror the real Spotify search response shape
 (sections -> items with title / subtitle / spotify_uri), with the exact
@@ -82,13 +79,13 @@ check('tie-break: artist agreement wins among exact title matches',
       R.pick_search_hit('A Milli', 'Lil Wayne', TWO_MILLI)
       == '1LDwUN1jMnTK7vCZBFoTYe')
 
-# No exact title match: fall back to the first hit (old behaviour).
+# Without an exact title match, the candidate has no verified recording.
 NO_MATCH = resp([
     item('Some Other Song', 'Someone', 'FIRSTID0001'),
     item('Another Song', 'Someone Else', 'SECONDID0002'),
 ])
-check('fallback: no exact match returns the first hit',
-      R.pick_search_hit('drift', 'Lilbubblegum', NO_MATCH) == 'FIRSTID0001')
+check('no matching title: unrelated hit is rejected',
+      R.pick_search_hit('drift', 'Lilbubblegum', NO_MATCH) is None)
 
 # Exact title matches exist but none agrees on artist: return None
 # rather than a different artist's same-title track. Mirrors the live

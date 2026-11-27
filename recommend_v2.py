@@ -8,7 +8,7 @@ Two modes:
                data/pool_features.json. No ranking happens here.
   recommend  : score the pool with the v2 model, MMR-diversify, verify
                the top 100 by Spotify track ID and recording key (cleaned
-               title + first artist) against Liked Songs and the
+               title + first artist, folding trailing remix) against Liked Songs and the
                recommendation history, rescore, and pick the final 10.
                Writes recommendations_v2.json. Never re-recommends.
 
@@ -20,7 +20,7 @@ Run:
   ~/workspace/audio-env/bin/python recommend_v2.py build-pool
   ~/workspace/audio-env/bin/python recommend_v2.py recommend
 """
-import json, os, subprocess, sys, time, urllib.parse, urllib.request
+import json, os, re, subprocess, sys, time, urllib.parse, urllib.request
 from collections import Counter
 
 import numpy as np
@@ -28,7 +28,6 @@ import numpy as np
 BASE = os.path.expanduser('~/workspace/audio-pipeline')
 DATA = os.path.join(BASE, 'data')
 PREV = os.path.join(BASE, 'previews')
-sys.path.insert(0, BASE)
 import features_v2 as F
 import pipeline as P
 from scoring import V2Model, feat_vector, v6_score
@@ -70,40 +69,40 @@ def clean(s):
     return P.clean(s)
 
 
+def search_key(title, artist):
+    # Preserve version text (including square-bracketed live/remix titles).
+    # clean() already normalizes parenthesized feature credits and punctuation.
+    title = (title or '').replace('[', '(').replace(']', ')')
+    return clean(title), clean((artist or '').split(',')[0])
+
+
 def rec_key(title, artist):
-    """Recording key for dedup: clean() plus folding a trailing 'remix'
-    onto the base title, so a remix and its original count as the same
-    song. Live case: Kevin dropped 'Lemonade (Remix)' in v8, but the v2
-    generator re-offered 'Lemonade (feat. NAV)' in both v11 and v12
-    because clean() keeps '(Remix)' as the word 'remix' and the two
-    versions got different keys. Other parentheticals are kept, so two
-    different songs sharing a title stay distinct: 'Strategy (from the
-    Netflix film KPop Demon Hunters)' is not the same song as 'Strategy
-    (feat. Megan Thee Stallion)' even though both are by TWICE. clean()
-    itself is untouched: Spotify search matching still needs the exact
-    title."""
-    t = clean(title)
-    if t.endswith(' remix'):
-        t = t[:-len(' remix')]
-    return (t, clean((artist or '').split(',')[0]))
+    """Normalize the recording for exclusions, folding a trailing remix."""
+    title = clean(title).removesuffix(' remix')
+    return title, clean((artist or '').split(',')[0])
+
+
+def track_id(value):
+    sid = (value or '').strip().removeprefix('spotify:track:').strip()
+    return '' if sid.lower() in ('none', 'null') else sid
 
 
 def load_id_sets():
-    liked_ids, liked_keys = set(), set()
-    for line in open(LIKED_FILE):
-        p = line.rstrip('\n').split('\t')
-        if len(p) >= 3:
-            liked_ids.add(p[2].replace('spotify:track:', ''))
-            liked_keys.add(rec_key(p[0], p[1]))
-    hist_ids, hist_keys = set(), set()
-    for line in open(HIST_FILE):
-        if line.startswith('#'):
-            continue
-        p = line.rstrip('\n').split('\t')
-        if len(p) >= 3:
-            hist_ids.add(p[2].replace('spotify:track:', ''))
-            hist_keys.add(rec_key(p[0], p[1]))
-    return liked_ids, liked_keys, hist_ids, hist_keys
+    def read_export(path):
+        ids, keys = set(), set()
+        with open(path) as stream:
+            for line in stream:
+                # Group headers lack track fields. A real title can start with '#'.
+                fields = line.rstrip('\n').split('\t')
+                if len(fields) >= 2:
+                    key = rec_key(*fields[:2])
+                    if all(key):
+                        keys.add(key)
+                if len(fields) >= 3 and track_id(fields[2]):
+                    ids.add(track_id(fields[2]))
+        return ids, keys
+
+    return read_export(LIKED_FILE) + read_export(HIST_FILE)
 
 
 def build_pool():
@@ -206,13 +205,21 @@ def build_pool():
     return out
 
 
+def candidate_tie_key(c):
+    # Pool rows have unique Deezer IDs. Use text order for both numeric and
+    # string IDs, with identity metadata as a fallback for external callers.
+    return (str(c.get('deezer_id') or ''), search_key(c.get('title'), c.get('artist')),
+            track_id(c.get('spotify_id')))
+
+
 def mmr_select(cands, feats_std, scores, k, lam=MMR_LAMBDA):
     """Maximal marginal relevance over standardized feature vectors."""
     from sklearn.metrics.pairwise import cosine_similarity
     sim = cosine_similarity(feats_std)
-    selected, remaining = [], list(range(len(cands)))
+    selected = []
+    remaining = sorted(range(len(cands)), key=lambda i: candidate_tie_key(cands[i]))
     while remaining and len(selected) < k:
-        best, best_val = None, -1e18
+        best, best_val = None, -float('inf')
         for i in remaining:
             div = max((sim[i][j] for j in selected), default=0.0)
             val = lam * scores[i] - (1 - lam) * div
@@ -223,19 +230,25 @@ def mmr_select(cands, feats_std, scores, k, lam=MMR_LAMBDA):
     return selected
 
 
-def pick_search_hit(title, artist, response):
-    """Pick the best Spotify track ID from a search response.
+def ranked_window(records, model, scores, limit, k):
+    """Apply a stable score cutoff, then MMR on those rows' standardized vectors."""
+    order = sorted(range(len(records)), key=lambda i: (-scores[i], candidate_tie_key(records[i])))[:limit]
+    candidates = [records[i] for i in order]
+    X = np.vstack([feat_vector(c)[0] for c in candidates])
+    X = np.where(np.isnan(X), model.median, X)
+    Z = (X - model.mean) / model.scale
+    selected = mmr_select(candidates, Z, scores[order], k=k)
+    return [candidates[i] for i in selected]
 
-    Prefers an exact title match (cleaned, case-insensitive) over document
-    order; among exact matches only one whose first artist agrees is
-    returned. When no exact title match exists, falls back to the first
-    hit. When exact title matches exist but none agrees on artist, returns
-    None instead of attaching a different artist's same-title track (live
-    case: "drift (feat. Lames)" returns only other artists' "Drift"
-    recordings). The old code returned the first track URI in document
-    order, which picked "af1" for a "drift" query in the v9 run.
-    Title/artist comparison uses clean(), the same normalisation as the
-    dedup keys in load_id_sets()."""
+
+def pick_search_hit(title, artist, response):
+    """Resolve only hits with matching title (including version) and first artist."""
+    if not isinstance(response, (dict, list)) or (isinstance(response, dict) and
+            (response.get('error') or response.get('errors') or response.get('isError'))):
+        raise ValueError('invalid or failed Spotify search response')
+    want = search_key(title, artist)
+    if not all(want):
+        return None
     hits = []
 
     def walk(o):
@@ -251,17 +264,12 @@ def pick_search_hit(title, artist, response):
                 walk(v)
 
     walk(response)
-    if not hits:
-        return None
-    want_title = clean(title)
-    want_artist = clean((artist or '').split(',')[0])
-    exact = [h for h in hits if clean(h.get('title', '')) == want_title]
-    if exact:
-        for h in exact:
-            if clean((h.get('subtitle', '') or '').split(',')[0]) == want_artist:
-                return h['spotify_uri'].replace('spotify:track:', '')
-        return None
-    return hits[0]['spotify_uri'].replace('spotify:track:', '')
+    for hit in hits:
+        if search_key(hit.get('title'), hit.get('subtitle')) == want:
+            sid = track_id(hit['spotify_uri'])
+            if re.fullmatch(r'[A-Za-z0-9]{22}', sid):
+                return sid
+    return None
 
 
 def spotify_search_id(title, artist):
@@ -269,66 +277,60 @@ def spotify_search_id(title, artist):
                         '--artist', artist, '--search-type', 'TRACKS'],
                        capture_output=True, text=True, timeout=60)
     if r.returncode != 0:
-        return None
-    try:
-        d = json.loads(r.stdout)
-    except Exception:
-        return None
-    return pick_search_hit(title, artist, d)
+        raise RuntimeError(f'Spotify search failed with exit code {r.returncode}')
+    return pick_search_hit(title, artist, json.loads(r.stdout))
 
 
 def is_already_known(sid, title, artist, liked_ids, liked_keys, hist_ids, hist_keys):
     """True if this candidate duplicates a liked or previously recommended
-    recording, by Spotify ID or by recording key (rec_key: cleaned title
-    + first artist, with remix variants folded onto the base title). The
-    key check catches the same recording under a different Spotify ID,
-    e.g. a re-release or an edited/explicit variant: v9 re-recommended
-    "af1 (sped up)" and "A Milli" under new IDs because only the ID was
-    checked; v11/v12 re-offered "Lemonade (feat. NAV)" after Kevin dropped
-    "Lemonade (Remix)" in v8 because clean() kept the two versions apart."""
-    if sid in liked_ids or sid in hist_ids:
+    recording, by Spotify ID or by the normalized title and first artist.
+    The key also blocks the original when history contains its remix. The v9 run
+    re-recommended "af1 (sped up)" and "A Milli" under new IDs because
+    only the ID was checked."""
+    sid = track_id(sid)
+    if sid and (sid in liked_ids or sid in hist_ids):
         return True
     key = rec_key(title, artist)
     return key in liked_keys or key in hist_keys
 
 
 def verify_candidates(cands, search_id, liked_ids, liked_keys, hist_ids, hist_keys):
-    """Resolve each candidate to a Spotify ID and drop duplicates.
-    search_id(title, artist) -> Spotify track ID or None."""
+    """Resolve eligible candidates, keeping the first verified ID/recording once."""
     verified = []
+    seen_ids, seen_keys = set(hist_ids), set(hist_keys)
     for c in cands:
-        sid = search_id(c['title'], c['artist'])
+        title, artist = c['title'], c['artist']
+        if is_already_known(c.get('spotify_id'), title, artist,
+                            liked_ids, liked_keys, seen_ids, seen_keys):
+            continue
+        sid = track_id(search_id(title, artist))
         time.sleep(0.2)
         if not sid:
-            log(f"  no spotify match, dropping: {c['title']} - {c['artist']}")
+            log(f'  no spotify match, dropping: {title} - {artist}')
             continue
-        if is_already_known(sid, c['title'], c['artist'],
-                            liked_ids, liked_keys, hist_ids, hist_keys):
-            log(f"  already liked/history, dropping: {c['title']} ({sid})")
+        if sid in liked_ids or sid in seen_ids:
+            log(f'  already liked/history/verified, dropping: {title} ({sid})')
             continue
-        c['spotify_id'] = sid
-        verified.append(c)
+        seen_ids.add(sid)
+        seen_keys.add(rec_key(title, artist))
+        verified.append(dict(c, spotify_id=sid))
     return verified
 
 
 def recommend():
     liked_ids, liked_keys, hist_ids, hist_keys = load_id_sets()
-    pool = json.load(open(os.path.join(DATA, 'pool_features.json')))
-    pool = [p for p in pool if p.get('librosa')]
+    with open(os.path.join(DATA, 'pool_features.json')) as stream:
+        pool = [p for p in json.load(stream) if p.get('librosa')]
     log(f'pool with librosa: {len(pool)}')
+    output_path = os.path.join(BASE, 'recommendations_v2.json')
+    if not pool:
+        F.save_json(output_path, [])
+        log('no clean candidates')
+        return []
     model = V2Model()
     s = model.score_records(pool)
-    order = np.argsort(-s['final'])
-    # standardized features for MMR
-    X, _ = zip(*[feat_vector(p) for p in pool])
-    X = np.vstack(X)
-    X = np.where(np.isnan(X), model.median, X)
-    Z = (X - model.mean) / model.scale
-    top100 = order[:100]
-    sel100 = mmr_select([pool[i] for i in top100], Z[top100],
-                        s['final'][top100], k=VERIFY_WINDOW)
-    cands = [pool[top100[i]] for i in sel100]
-    log(f'MMR top {VERIFY_WINDOW} selected')
+    cands = ranked_window(pool, model, s['final'], limit=VERIFY_WINDOW, k=VERIFY_WINDOW)
+    log(f'MMR top {len(cands)} selected')
     # verify by Spotify ID and recording key
     verified = verify_candidates(cands, spotify_search_id,
                                  liked_ids, liked_keys, hist_ids, hist_keys)
@@ -337,6 +339,7 @@ def recommend():
         # No clean candidates: report it instead of crashing on the
         # empty rescore below (zip(*) over an empty list raised
         # ValueError in the v10 run, Nov 22, 2026).
+        F.save_json(output_path, [])
         log('no clean candidates')
         return []
     # fill any missing ReccoBeats by Spotify ID
@@ -348,17 +351,10 @@ def recommend():
                 c['reccobeats'] = rb[c['spotify_id']]
     # rescore verified set and MMR pick 10
     s2 = model.score_records(verified)
-    X2, _ = zip(*[feat_vector(c) for c in verified])
-    X2 = np.vstack(X2)
-    X2 = np.where(np.isnan(X2), model.median, X2)
-    Z2 = (X2 - model.mean) / model.scale
-    order2 = np.argsort(-s2['final'])
-    top20 = order2[:20]
-    sel = mmr_select([verified[i] for i in top20], Z2[top20],
-                     s2['final'][top20], k=10)
-    final = [verified[top20[i]] for i in sel]
+    final = ranked_window(verified, model, s2['final'], limit=20, k=10)
     # artist -> bucket map for v6 buckets
-    doc = json.load(open(os.path.join(BASE, 'features_v2.json')))
+    with open(os.path.join(BASE, 'features_v2.json')) as stream:
+        doc = json.load(stream)
     artist_bucket = {}
     for t in doc['tracks']:
         a = (t.get('artist') or '').split(',')[0].strip().lower()
@@ -382,7 +378,7 @@ def recommend():
                     'v6_score_global': v6g,
                     'nearest_cluster': int(s2['nearest_cluster'][i]),
                     'audio_source': c.get('audio_source')})
-    json.dump(out, open(os.path.join(BASE, 'recommendations_v2.json'), 'w'), indent=1)
+    F.save_json(output_path, out)
     print('\nFINAL 10 (v2 score | v6 per-bucket | v6 global | cluster):')
     for o in out:
         print(f"  {o['v2_score']:+.2f} | {o['v6_score_per_bucket']} ({o['v6_bucket']}) | "

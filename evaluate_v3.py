@@ -18,22 +18,21 @@ header G1..G8):
   * The split is POSITION-based, not time-based: no liked track carries
     added_at (0/650). P-02 labels it so everywhere and refuses any
     time-based split (TIME_SPLIT_REFUSED) until added_at coverage >= 95%.
-  * NDCG@10 ideal DCG follows the v2 convention (ideal built from the
-    hits inside the top-k window), NOT RecBole's min(|R|, K) ideal:
-    the spec's own T-07 hand values (e.g. rel=[1,0,1,...] -> 0.920)
-    require the v2 convention, and keeping it preserves comparability
-    with evaluation_v2.json. This is stated in METRIC_DEFINITIONS.
+  * Standard NDCG uses all eligible relevant items. The frozen v2/v3
+    JSON used only retrieved hits in its ideal; legacy_topk_hit_ndcg
+    reproduces that separately named historical statistic.
 
 Run:  ~/workspace/audio-env/bin/python evaluate_v3.py
       (prints the real-data pool audit + grounded baselines as JSON)
 Tests: ~/workspace/audio-env/bin/python test_evaluate_v3.py
 """
 import json, math, os, sys
-from functools import lru_cache
 
 import numpy as np
 
-BASE = os.path.expanduser('~/workspace/audio-pipeline')
+from evaluate import legacy_topk_hit_ndcg, ndcg_at_k
+
+BASE = os.path.dirname(os.path.realpath(__file__))
 DATA = os.path.join(BASE, 'data')
 
 SPLIT_LABEL_POSITION = 'position-based holdout (NOT time-based)'
@@ -49,17 +48,10 @@ LIVE_K_GO_42 = 32
 
 METRIC_DEFINITIONS = {
     'P@10': {'formula': 'hits in top 10 / 10',
-             'note': 'headline offline metric; direct analogue of the '
-                     '10-track keep rate'},
+             'note': 'offline share of slots occupied by held-out likes'},
     'NDCG@10': {'discount': 'log2',
                 'formula': 'DCG / IDCG, DCG = sum(rel_i / log2(i+2))',
-                'ideal': 'IDCG built from ones(min(k, hits inside top-k)) '
-                         '— the v2 convention (evaluate.py ndcg_at_k), '
-                         'NOT min(k, n_relevant). Kept so v3 NDCG stays '
-                         'comparable with evaluation_v2.json; the spec T-07 '
-                         'hand values require this convention.',
-                'note': 'Recommenders defaults to loge; ours is log2 and '
-                        'the two are not interchangeable.'},
+                'ideal': 'one hit at each of the first min(k, n_relevant) ranks'},
     'MAP@10': {'normalisation': 'min(k, n_relevant)',
                'formula': 'sum over hits of precision@rank / min(k, n_relevant)',
                'note': 'Recommenders map_at_k convention. NOT RecBole MAP '
@@ -84,10 +76,7 @@ def metrics_from_rel(rel, n_relevant, k=10):
     rel = [int(x) for x in list(rel)[:k]]
     n_hits = int(sum(rel))
     p10 = n_hits / k
-    dcg = float(sum(r / math.log2(i + 2) for i, r in enumerate(rel)))
-    ideal_n = min(k, n_hits)
-    idcg = float(sum(1.0 / math.log2(i + 2) for i in range(ideal_n)))
-    ndcg = dcg / idcg if idcg > 0 else 0.0
+    ndcg = ndcg_at_k(rel, k, n_relevant=n_relevant)
     first = next((i + 1 for i, r in enumerate(rel) if r), None)
     mrr = 1.0 / first if first else 0.0
     ap_num = 0.0
@@ -100,18 +89,25 @@ def metrics_from_rel(rel, n_relevant, k=10):
     map10 = ap_num / denom if denom > 0 else 0.0
     defined = n_hits > 0
     return {
-        'P@10': round(p10, 3),
-        'NDCG@10': round(ndcg, 3),
-        'MAP@10': round(map10, 3),
-        'MRR@10': round(mrr, 3),
-        'Recall@10': round(n_hits / n_relevant, 3) if n_relevant else 0.0,
-        'Hit@10': 1 if n_hits else 0,
+        f'P@{k}': round(p10, 3),
+        f'NDCG@{k}': round(ndcg, 3),
+        'legacy_topk_hit_ndcg': round(legacy_topk_hit_ndcg(rel, k), 3),
+        f'MAP@{k}': round(map10, 3),
+        f'MRR@{k}': round(mrr, 3),
+        f'Recall@{k}': round(n_hits / n_relevant, 3) if n_relevant else 0.0,
+        f'Hit@{k}': 1 if n_hits else 0,
         'n_hits': n_hits,
         'defined': defined,
         'warning': (None if defined else
                     'ZERO_HITS: metric is 0.0 with n_hits=0 — a bare 0.0 '
                     'is never reported without this flag (P-09).'),
     }
+
+
+def _item_identity(row):
+    rec = row.get('rec', row)
+    return tuple(str(rec.get(field) or '') for field in
+                 ('spotify_id', 'deezer_id', 'isrc', 'preview_sha256', 'title', 'artist'))
 
 
 def rank_items(items, score_key, higher_better=True):
@@ -125,10 +121,10 @@ def rank_items(items, score_key, higher_better=True):
     scored = [dict(x) for x in items if x.get(score_key) is not None]
     if higher_better:
         scored.sort(key=lambda x: (-float(x[score_key]),
-                                   str(x.get('spotify_id', ''))))
+                                   _item_identity(x)))
     else:
         scored.sort(key=lambda x: (float(x[score_key]),
-                                   str(x.get('spotify_id', ''))))
+                                   _item_identity(x)))
     i = 0
     n = len(scored)
     while i < n:
@@ -180,65 +176,39 @@ def rank_metrics(items, score_key, higher_better=True, k=10,
             [float(x[score_key]) for x in ranked
              if x.get('kind') == 'negative'])), 3)
             if 'negative' in ranks else None),
-        'n_neg_top10': len(neg_top),
-        'n_neg_top10_H': sum(1 for x in neg_top if x.get('bucket') == 'H'),
-        'top10_kinds': [x.get('kind') for x in topk],
-        'top10_ids': [x.get('spotify_id') for x in topk],
-        'distinct_artists_top10': len({str(x.get('artist', '')) for x in topk}),
-        'random_P@10': round(rb['random_P@10'], 3),
-        'random_NDCG@10': round(rb['random_NDCG@10'], 3),
-        'below_random': bool(m['P@10'] <= rb['random_P@10']),
+        f'n_neg_top{k}': len(neg_top),
+        f'n_neg_top{k}_H': sum(1 for x in neg_top if x.get('bucket') == 'H'),
+        f'top{k}_kinds': [x.get('kind') for x in topk],
+        f'top{k}_ids': [x.get('spotify_id') for x in topk],
+        f'distinct_artists_top{k}': len({str(x.get('artist', '')) for x in topk}),
+        f'random_P@{k}': round(rb[f'random_P@{k}'], 3),
+        f'random_NDCG@{k}': round(rb[f'random_NDCG@{k}'], 3),
+        'below_random': bool(m[f'P@{k}'] <= rb[f'random_P@{k}']),
     })
     return m
 
 
 # ---------------------------------------------------------------- P-01
-@lru_cache(maxsize=32)
-def _random_ndcg_mc(n_heldout_with_features, n_ranked, reps=2000, seed=42):
-    """Monte-Carlo expectation of NDCG@10 under a uniform random ranking,
-    using the v2 NDCG convention (ideal from hits inside the top-k).
-    Cached: the value depends only on the pool shape."""
-    rng = np.random.default_rng(seed)
-    base = np.array([1] * n_heldout_with_features
-                    + [0] * (n_ranked - n_heldout_with_features))
-    vals = []
-    for _ in range(reps):
-        rel = rng.permutation(base)[:10]
-        vals.append(_ndcg_rel(rel))
-    return float(np.mean(vals))
-
-
 def random_baseline(n_heldout_with_features, n_ranked, k=10):
-    """Chance floor of the *actual* ranked pool (P-01). Never hardcoded:
-    random P@10 = n_heldout / n_ranked.
-
-    DELTA G9 (spec contradiction, resolved in favour of T-07 + the
-    landed evaluate.py): the spec's P-01 claims random_NDCG@10 equals
-    random_P@10, but that equality holds only under the STANDARD NDCG
-    ideal (min(k, n_relevant) ones). The v2/T-07 ideal is built from the
-    hits inside the top-k window, under which a random ranking scores
-    NDCG@10 ~ 0.63 on the 311 pool — far above 0.318 — because any
-    ranking whose top-10 hits sit above its misses scores 1.0. So
-    random_NDCG@10 here is the Monte-Carlo expectation under the v2
-    convention (seed 42, 2000 reps), NOT random_P@10. Consequence: v2's
-    NDCG@10 0.726 sits only ~0.09 above the chance floor under this
-    convention, while P@10 0.50 vs 0.318 looks stronger. The NDCG
-    margin is the weaker evidence; the GO gate's Leg 1 still uses the
-    bootstrap CI on the NDCG *difference*, which is unaffected."""
-    p = n_heldout_with_features / n_ranked if n_ranked else 0.0
-    sd = math.sqrt((n_ranked ** 2 - 1) / 12.0) if n_ranked else 0.0
+    """Exact expectations for a uniform permutation, including short pools."""
+    r, n = n_heldout_with_features, n_ranked
+    if k <= 0 or not 0 <= r <= n:
+        raise ValueError('invalid cutoff or pool counts')
+    prevalence = r / n if n else 0.0
+    slots = min(k, n)
+    hits = slots * prevalence
+    discounts = 1 / np.log2(np.arange(2, slots + 2))
+    ideal = discounts[:min(k, r)].sum()
     return {
-        'random_P@10': p,
-        'random_NDCG@10': _random_ndcg_mc(n_heldout_with_features, n_ranked),
-        'random_NDCG@10_method': ('Monte-Carlo expectation under the v2 '
-                                  'NDCG convention, seed 42, 2000 reps'),
-        'random_Recall@10': (k * p) / n_heldout_with_features
-                            if n_heldout_with_features else 0.0,
-        'random_hits_top10': k * p,
-        'random_mean_rank': (n_ranked + 1) / 2.0,
-        'uniform_rank_sd': sd,
-        'n_heldout_with_features': n_heldout_with_features,
-        'n_ranked': n_ranked,
+        f'random_P@{k}': hits / k,
+        f'random_NDCG@{k}': float(prevalence * discounts.sum() / ideal) if ideal else 0.0,
+        f'random_NDCG@{k}_method': 'exact expected DCG divided by recording-pool IDCG',
+        f'random_Recall@{k}': hits / r if r else 0.0,
+        f'random_hits_top{k}': hits,
+        'random_mean_rank': (n + 1) / 2 if n else None,
+        'uniform_rank_sd': math.sqrt((n*n - 1) / 12.0) if n else 0.0,
+        'n_heldout_with_features': r,
+        'n_ranked': n,
     }
 
 
@@ -269,61 +239,69 @@ def assert_split_allowed(split, added_at_coverage, total_liked):
 
 
 # ---------------------------------------------------------------- P-04
-def _ndcg_rel(rel):
-    rel = np.asarray(rel, dtype=float)
-    if len(rel) == 0 or rel.sum() == 0:
-        return 0.0
-    dcg = float((rel / np.log2(np.arange(2, len(rel) + 2))).sum())
-    ideal = np.ones(min(len(rel), int(rel.sum())))
-    idcg = float((ideal / np.log2(np.arange(2, len(ideal) + 2))).sum())
-    return dcg / idcg if idcg > 0 else 0.0
-
-
 def paired_bootstrap(items, score_a_key, score_b_key,
                      higher_a=True, higher_b=False,
-                     B=BOOTSTRAP_B, seed=BOOTSTRAP_SEED, k=10):
-    """Paired bootstrap CI on the A-minus-B difference (P-04).
+                     B=BOOTSTRAP_B, seed=BOOTSTRAP_SEED, k=10,
+                     tie_a=None, tie_b=None):
+    """Stratified item-resampling sensitivity of a single, fixed scored panel.
 
-    Resampling unit is the ranked pool item (n=1 user makes a t-test over
-    users undefined), stratified by kind so each resample keeps the
-    99/12/200 counts. B=10,000, seed 42 by default."""
-    rel = np.array([1 if x.get('relevant') else 0 for x in items], dtype=float)
-    kinds = [x.get('kind') for x in items]
-    sa = np.array([float(x[score_a_key]) for x in items], dtype=float)
-    sb = np.array([float(x[score_b_key]) for x in items], dtype=float)
-    ka = sa if higher_a else -sa
-    kb = sb if higher_b else -sb
-    kind_values = sorted(set(kinds))
-    kind_idx = {kv: np.array([i for i, kk in enumerate(kinds) if kk == kv])
-                for kv in kind_values}
+    A/B share every draw. Rank ties use the same keys as the point ranking.
+    Optional tie columns contain the method's actual frozen tie positions.
+    Replicate slots can repeat recordings. Percentiles describe this artificial
+    perturbation and cannot estimate uncertainty over future independent lists.
+    """
+    if B <= 0 or k <= 0 or not items:
+        raise ValueError('positive B and k and a nonempty paired panel are required')
+    # Canonicalize strata before drawing so reordering identified rows does not change the
+    # random experiment. Recording IDs distinguish catalog rows without Spotify IDs.
+    items = sorted(items, key=_item_identity)
+    rel = np.asarray([int(x['relevant']) for x in items])
+    strata = {}
+    for i, item in enumerate(items):
+        strata.setdefault(item['kind'], []).append(i)
+    strata = [strata[key] for key in sorted(strata)]
+
+    def ranking(score_key, higher, tie):
+        scores = np.array([float(x[score_key]) for x in items])
+        if not np.isfinite(scores).all():
+            raise ValueError('paired scores must be finite and share panel membership')
+        return np.array(sorted(range(len(items)), key=lambda i: (
+            -scores[i] if higher else scores[i],
+            items[i][tie] if tie else _item_identity(items[i]))))
+
+    a, b = ranking(score_a_key, higher_a, tie_a), ranking(score_b_key, higher_b, tie_b)
+    discounts = 1 / np.log2(np.arange(2, min(k, len(items)) + 2))
+
+    def metrics(order, weights, ideal):
+        top = np.repeat(rel[order], weights[order])[:k]
+        return top.sum() / k, float(top @ discounts / ideal) if ideal else 0.0
+
+    def paired(weights):
+        total = int(rel @ weights)
+        ideal = discounts[:min(k, total)].sum()
+        pa, na = metrics(a, weights, ideal)
+        pb, nb = metrics(b, weights, ideal)
+        return pa - pb, na - nb, pa
+
+    dp, dn, pa = paired(np.ones(len(items), dtype=int))
     rng = np.random.default_rng(seed)
-    d_p, d_n, p_a = [], [], []
+    draws = []
     for _ in range(B):
-        idx = np.concatenate([
-            rng.choice(kind_idx[kv], size=len(kind_idx[kv]), replace=True)
-            for kv in kind_values])
-        order_a = idx[np.argsort(-ka[idx], kind='stable')]
-        order_b = idx[np.argsort(-kb[idx], kind='stable')]
-        ra, rb_ = rel[order_a][:k], rel[order_b][:k]
-        p_a.append(float(ra.mean()))
-        d_p.append(float(ra.mean() - rb_.mean()))
-        d_n.append(_ndcg_rel(ra) - _ndcg_rel(rb_))
-    d_p, d_n, p_a = map(np.array, (d_p, d_n, p_a))
-    lo, hi = 2.5, 97.5
+        sample = np.concatenate([rng.choice(group, size=len(group), replace=True)
+                                 for group in strata])
+        draws.append(paired(np.bincount(sample, minlength=len(items))))
+    draws = np.asarray(draws)
+    means = draws.mean(axis=0).round(3).tolist()
+    intervals = np.percentile(draws, [2.5, 97.5], axis=0).T.round(3).tolist()
     return {
-        'delta_p10': round(float(np.mean(rel[np.argsort(-ka, kind="stable")][:k])
-                                 - np.mean(rel[np.argsort(-kb, kind="stable")][:k])), 3),
-        'delta_ndcg': round(float(_ndcg_rel(rel[np.argsort(-ka, kind="stable")][:k])
-                                  - _ndcg_rel(rel[np.argsort(-kb, kind="stable")][:k])), 3),
-        'delta_p10_ci': [round(float(np.percentile(d_p, lo)), 3),
-                         round(float(np.percentile(d_p, hi)), 3)],
-        'delta_ndcg_ci': [round(float(np.percentile(d_n, lo)), 3),
-                          round(float(np.percentile(d_n, hi)), 3)],
-        'p10_a': round(float(np.mean(p_a)), 3),
-        'p10_a_ci': [round(float(np.percentile(p_a, lo)), 3),
-                     round(float(np.percentile(p_a, hi)), 3)],
-        'B': B, 'seed': seed, 'k': k,
+        f'delta_p{k}': round(float(dp), 3), 'delta_ndcg': round(float(dn), 3),
+        f'p{k}_a': round(float(pa), 3), f'delta_p{k}_ci': intervals[0],
+        'delta_ndcg_ci': intervals[1], f'p{k}_a_ci': intervals[2],
+        'resample_means': dict(delta_precision=means[0], delta_ndcg=means[1], precision_a=means[2]),
+        'fraction_delta_ndcg_le_zero': round(float(np.mean(draws[:, 1] <= 0)), 4),
+        'B': B, 'seed': seed, 'k': k, 'inferential': False,
         'resampling_unit': 'pool item, stratified by kind',
+        'interval_scope': 'Fixed-panel item-resampling sensitivity, with duplicate recording slots.',
     }
 
 
@@ -417,6 +395,10 @@ def check_leakage(top10_ids, train_ids, heldout_ids, negative_ids,
     top10 = set(top10_ids)
     if top10 & set(train_ids):
         violations.append(f'top10 ∩ train = {sorted(top10 & set(train_ids))}')
+    if set(train_ids) & set(heldout_ids):
+        violations.append('train ∩ heldout_likes is non-empty')
+    if set(train_ids) & set(distractor_ids):
+        violations.append('train ∩ distractors is non-empty')
     if set(negative_ids) & set(heldout_ids):
         violations.append('negatives ∩ heldout_likes is non-empty')
     if set(negative_ids) & set(train_ids):
@@ -489,11 +471,18 @@ def negative_control_stats(n_negatives_ranked, n_ranked, k=10,
     """Negative-control power (T-06): chance of seeing zero negatives in
     the top 10, n required for alpha=0.05, and the mean-rank half-width.
     All recomputed from the actual ranked counts."""
-    p_top = k / n_ranked if n_ranked else 0.0
-    p_zero = (1.0 - p_top) ** n_negatives_ranked
-    n_req = math.ceil(math.log(0.05) / math.log(1.0 - p_top)) if 0 < p_top < 1 else None
-    sd = math.sqrt((n_ranked ** 2 - 1) / 12.0) if n_ranked else 0.0
-    half = 1.96 * sd / math.sqrt(n_negatives_ranked) if n_negatives_ranked else None
+    n, m = n_ranked, n_negatives_ranked
+    if k <= 0 or not 0 <= m <= n:
+        raise ValueError('invalid cutoff or negative-control counts')
+    slots = min(k, n)
+    ways = math.comb(n, slots)
+    def p_none(count):
+        return math.comb(n - count, slots) / ways
+    p_zero = p_none(m)
+    n_req = next((i for i in range(n + 1) if p_none(i) <= .05), None)
+    sd = math.sqrt((n**2 - 1) / 12) if n else 0.0
+    half = (1.96 * sd * math.sqrt((n - m) / (m * (n - 1)))
+            if m and n > 1 else (0.0 if m else None))
     return {
         'n_negatives_ranked': n_negatives_ranked,
         'n_negatives_defined': (n_negatives_defined if n_negatives_defined is not None
@@ -503,8 +492,8 @@ def negative_control_stats(n_negatives_ranked, n_ranked, k=10,
         'n_required_for_alpha_0.05': n_req,
         'uniform_rank_sd': round(sd, 1),
         'mean_rank_half_width': round(half, 1) if half is not None else None,
-        'power_label': ('UNDERPOWERED' if half is not None and half > 25.0
-                        else 'POWERED'),
+        'power_label': ('UNAVAILABLE' if half is None else
+                        'UNDERPOWERED' if half > 25.0 else 'POWERED'),
     }
 
 
@@ -575,7 +564,10 @@ def verdict_4leg(m):
              or (m['delta_p10'] == 0.0 and m.get('delta_map10', 0.0) >= 0.02)))
     leg2 = bool(m['p10_v3'] >= 0.50
                 and m['p10_v3_ci_low'] > m['random_p10'])
-    leg3 = bool(m['n_neg_top10'] == 0 and m['n_neg_top10_H'] == 0
+    control = (negative_control_stats(m['n_rejects'], m['n_ranked'])
+               if 'n_rejects' in m and 'n_ranked' in m else None)
+    leg3 = bool(m['mean_rank_negative_v3'] is not None
+                and m['n_neg_top10'] == 0 and m['n_neg_top10_H'] == 0
                 and m['mean_rank_negative_v3'] > m['random_mean_rank'])
     agreement = not bool(m.get('sampled_disagreement', False))
     legs = {
@@ -601,10 +593,8 @@ def verdict_4leg(m):
             'n_neg_top10_H': m['n_neg_top10_H'],
             'mean_rank_negative_v3': m['mean_rank_negative_v3'],
             'random_mean_rank': m['random_mean_rank'],
-            'power_label': 'UNDERPOWERED (n=12 ranked negatives; '
-                           'half-width ~50.8 ranks — the leg passes on '
-                           'point conditions, the label records that the '
-                           'control cannot prove much)',
+            'power_label': control['power_label'] if control else 'UNAVAILABLE',
+            'mean_rank_half_width': control['mean_rank_half_width'] if control else None,
             'rule': '0 gold negatives in top 10 (incl. 0 H-bucket) AND '
                     'mean_rank_negative(v3) > random mean rank'},
         'sampled_metric_agreement': {
@@ -616,14 +606,20 @@ def verdict_4leg(m):
     live_n = m.get('live_n')
     live_keeps = m.get('live_keeps')
     per_list = m.get('live_per_list_keeps') or []
-    consec_le7 = (len(per_list) >= 2 and per_list[-1] <= 7
-                  and per_list[-2] <= 7)
-    if live_n is None or live_keeps is None:
+    if (live_n is None) != (live_keeps is None):
+        raise ValueError('both live_n and live_keeps are required')
+    if live_n is not None:
+        from evaluate_v4 import live_decision
+        live_status = live_decision('ELIGIBLE_FOR_BLIND', live_keeps, live_n, per_list)
+    else:
+        live_status = 'PENDING_LIVE'
+    consec_le7 = any(max(a, b) <= 7 for a, b in zip(per_list, per_list[1:]))
+    if live_status == 'PENDING_LIVE':
         leg4 = {'passed': None, 'status': 'pending',
                 'rule': f'cumulative keeps k >= 32 of n = 42 (or k >= 37 '
                         f'of 50); Wilson 95% lower bound > 0.60 AND exact '
                         f'binomial p <= 0.05 vs p0 = 0.60'}
-        verdict = ('PENDING — live leg not yet judged (n=0/42); GO requires '
+        verdict = (f'PENDING — live checkpoint incomplete (n={live_n or 0}); GO requires '
                    'Leg 4 at n = 42. A single 9/10 or 10/10 list is not a GO.')
     else:
         lo, _hi = wilson_ci(live_keeps, live_n)
@@ -652,7 +648,10 @@ def verdict_4leg(m):
             verdict = ('NO-GO — offline signal did not transfer to listening')
     legs['leg4_live_keep_rate'] = leg4
     offline_pass = leg1 and leg2 and leg3
-    if not agreement:
+    if m.get('inferential') is False:
+        offline_pass = False
+        verdict = 'INSUFFICIENT_EVIDENCE — historical panel sensitivity only'
+    elif not agreement:
         verdict = ('NO-GO — unresolved measurement disagreement '
                    '(SAMPLED_METRIC_DISAGREEMENT); investigate before '
                    're-deciding')

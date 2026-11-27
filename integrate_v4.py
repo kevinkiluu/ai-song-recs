@@ -15,7 +15,7 @@ import numpy as np
 from threadpoolctl import threadpool_limits
 
 import embeat_port as embeat
-from evaluate_v4 import (SEEDS, build_manifest, evaluation_pool, live_decision,
+from evaluate_v4 import (SEEDS, build_manifest, embedded_spotify_isrc, evaluation_pool, live_decision,
                          ranking_metrics, sample_pool)
 from model_v2 import fit_records
 from scoring import V2Model, feat_vector, v6_score
@@ -58,6 +58,10 @@ def _score_pool(pool, model, seed, buckets):
                          scores=scores, embeat_tie_score=float(relatedness), ranks={}))
     ranked = _rank_pool(rows)
     ranked['channel_coverage'] = {name: len(result) for name, result in channels.items()}
+    ranked['channel_recordings'] = {
+        name: [candidate['_evaluation_recording_id'] for candidate in result]
+        for name, result in channels.items()
+    }
     return ranked
 
 
@@ -116,6 +120,17 @@ def offline_decision(pools, *, fresh):
     return 'ELIGIBLE_FOR_BLIND'
 
 
+def fit_and_score_pool(pool, train):
+    """Fit v2, choose the training medoid and score every arm on the same pool."""
+    config, artifacts = fit_records(train['like'], train['reject'])
+    model = V2Model(artifacts, config)
+    buckets = embeat.artist_bucket_map(train['like'])
+    embeddings = embeat.embed_records(model, train['like'])
+    centroid = embeddings.mean(axis=0)
+    seed = train['like'][int(np.argmax(embeddings @ centroid))]
+    return _score_pool(pool, model, seed, buckets), seed
+
+
 def run_experiment(likes, rejects, catalog, *, fresh=None, holdout_start=0,
                    cutoff=130, reject_fold=0, sample_size=200, live=None):
     if sample_size < 0:
@@ -149,17 +164,9 @@ def run_experiment(likes, rejects, catalog, *, fresh=None, holdout_start=0,
     seed_id = None
     if not blocked:
         with threadpool_limits(limits=1):
-            config, artifacts = fit_records(train['like'], train['reject'])
-            model = V2Model(artifacts, config)
-            buckets = embeat.artist_bucket_map(train['like'])
-            # Recompute the medoid using only the fold's training likes.
-            embeddings = embeat.embed_records(model, train['like'])
-            centroid = embeddings.mean(axis=0)
-            seed_index = int(np.argmax(embeddings @ centroid))
-            seed = train['like'][seed_index]
+            pools['full'], seed = fit_and_score_pool(pool, train)
             seed_id = next(row['recording_id'] for row in manifest
                            if row['partition'] == 'train' and row['record'] is seed)
-            pools['full'] = _score_pool(pool, model, seed, buckets)
             for draw in SEEDS:
                 sample = sample_pool(pools['full']['rows'], sample_size, draw)
                 pools[f'sample_{draw}'] = _rank_pool(sample)
@@ -274,9 +281,9 @@ def prepare_blind(result, verified, excluded_ids, excluded_keys):
     return blind, reveal
 
 
-def _read_track_export(path):
+def _read_track_export(data):
     rows = {}
-    for position, line in enumerate(path.read_text(encoding='utf-8').splitlines()):
+    for position, line in enumerate(data.decode('utf-8').splitlines()):
         fields = line.split('\t')
         if len(fields) >= 3 and not line.startswith('#'):
             title, artist, uri = fields[:3]
@@ -284,7 +291,7 @@ def _read_track_export(path):
     return rows
 
 
-def _write_blind(args, result):
+def _write_blind(args, result, source_bytes):
     if result['status'] != 'PENDING_LIVE':
         return
     required = ('liked_export', 'history', 'verified_spotify')
@@ -292,13 +299,13 @@ def _write_blind(args, result):
     if missing:
         result['blind_list'] = {'status': 'missing shortlist inputs', 'missing': missing}
         return
-    current_likes = args.current_likes or args.liked_export
-    exclusions = [row for path in (current_likes, args.history)
-                  for row in _read_track_export(path).values()]
+    current_likes = 'current_likes' if args.current_likes else 'liked_export'
+    exclusions = [row for name in (current_likes, 'history')
+                  for row in _read_track_export(source_bytes[name]).values()]
     ids = {sid for _, _, sid in exclusions}
     keys = {(embeat.clean(title), embeat.normalize_artist(artist))
             for title, artist, _ in exclusions}
-    verified = json.loads(args.verified_spotify.read_text(encoding='utf-8'))
+    verified = json.loads(source_bytes['verified_spotify'])
     blind, reveal = prepare_blind(result, verified, ids, keys)
     if blind:
         with args.blind_output.open('x', encoding='utf-8') as stream:
@@ -311,12 +318,12 @@ def _write_blind(args, result):
 
 
 
-def _read_records(path, key=None):
-    doc = json.loads(path.read_text(encoding='utf-8'))
+def _read_records(data, name, key=None):
+    doc = json.loads(data)
     if key is not None:
         doc = doc[key]
     if not isinstance(doc, list) or any(not isinstance(row, dict) for row in doc):
-        raise ValueError(f'{path} must contain a list of record objects')
+        raise ValueError(f'{name} must contain a list of record objects')
     return doc
 
 
@@ -326,11 +333,14 @@ def _enrich_records(records, matches, previews):
     for record in records:
         record = dict(record)
         match = matches.get(record.get('spotify_id'), {})
-        # Compare the recorded match before borrowing metadata from it.
-        if (record.get('deezer_id') and
-                str(match.get('deezer_id')) == str(record['deezer_id']) and
-                not record.get('isrc') and match.get('isrc')):
-            record['isrc'] = match['isrc']
+        confirmed = [record.get('isrc'), embedded_spotify_isrc(record)]
+        if record.get('deezer_id') and str(match.get('deezer_id')) == str(record['deezer_id']):
+            confirmed.append(match.get('isrc'))
+        codes = {str(value).strip().replace('-', '').upper() for value in confirmed if value}
+        if len(codes) > 1:
+            raise ValueError('conflicting ISRCs for the same source row')
+        if codes and not record.get('isrc'):
+            record['isrc'] = next(value for value in confirmed if value)
         deezer_id = str(record.get('deezer_id'))
         if previews is not None and deezer_id.isascii() and deezer_id.isdecimal():
             if deezer_id not in hashes:
@@ -381,24 +391,26 @@ def main(argv=None):
         result = dict(version=4, base_sha=BASE_SHA, status='INSUFFICIENT_EVIDENCE',
                       offline_status='INSUFFICIENT_EVIDENCE', missing_inputs=missing, pools={})
     else:
-        matches = json.loads(args.matches.read_text(encoding='utf-8')) if args.matches else {}
-        inputs = {name: _enrich_records(_read_records(path, 'tracks' if name == 'likes' else None),
+        # Seal the exact bytes parsed. Files may change while the models fit.
+        source_bytes = {name: path.read_bytes() for name, path in paths.items()}
+        matches = json.loads(source_bytes['matches']) if args.matches else {}
+        inputs = {name: _enrich_records(_read_records(data, name, 'tracks' if name == 'likes' else None),
                                         matches, args.previews)
-                  for name, path in paths.items() if name in ('likes', 'rejects', 'catalog', 'fresh')}
+                  for name, data in source_bytes.items() if name in ('likes', 'rejects', 'catalog', 'fresh')}
         if args.liked_export:
-            original = _read_track_export(args.liked_export)
+            original = _read_track_export(source_bytes['liked_export'])
             if set(original) != {row.get('position') for row in inputs['likes']} or any(
                     original[row['position']][2] != str(row.get('spotify_id'))
                     for row in inputs['likes']):
                 parser.error('original liked export does not match the frozen feature snapshot')
-        live = json.loads(args.live.read_text(encoding='utf-8')) if args.live else None
+        live = json.loads(source_bytes['live']) if args.live else None
         result = run_experiment(**inputs, holdout_start=args.holdout_start, cutoff=args.cutoff,
                                 reject_fold=args.reject_fold, sample_size=args.sample_size, live=live)
-        result['source_files'] = {name: {'path': str(path),
-                                          'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
+        result['source_files'] = {name: {'path': str(path.resolve()),
+                                          'sha256': hashlib.sha256(source_bytes[name]).hexdigest()}
                                   for name, path in paths.items()}
         if args.blind_output:
-            _write_blind(args, result)
+            _write_blind(args, result, source_bytes)
     with args.output.open('w', encoding='utf-8') as stream:
         json.dump(result, stream, indent=2, allow_nan=False)
         stream.write('\n')
