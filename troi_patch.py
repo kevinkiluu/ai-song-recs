@@ -107,7 +107,18 @@ def first_artist(artist):
 
 
 def norm_key(title, artist):
-    return (clean(title), clean(first_artist(artist)))
+    """Recording key: cleaned title + first artist, with a trailing
+    'remix' folded onto the base title, so a remix and its original count
+    as the same song (same rule as recommend_v2.rec_key: Kevin dropped
+    'Lemonade (Remix)' in v8 and the generator re-offered the original in
+    v11/v12). Other parentheticals are kept, so distinct same-title songs
+    stay distinct. Must stay in sync with rec_key: load_id_sets() builds
+    its sets with rec_key, and DifferenceElement compares norm_key against
+    those sets."""
+    t = clean(title)
+    if t.endswith(' remix'):
+        t = t[:-len(' remix')]
+    return (t, clean(first_artist(artist)))
 
 
 # ---------------------------------------------------------------- entities
