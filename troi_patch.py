@@ -107,7 +107,9 @@ def first_artist(artist):
 
 
 def norm_key(title, artist):
-    return (clean(title), clean(first_artist(artist)))
+    from recommend_v2 import rec_key
+
+    return rec_key(title, artist)
 
 
 # ---------------------------------------------------------------- entities

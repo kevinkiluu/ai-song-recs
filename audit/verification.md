@@ -2,6 +2,16 @@
 
 November 26, 2026. Every test file ran from a fresh clone of `b61140a`. The private inputs and v2 model were restored outside Git. The original eligibility join reproduced at recording level. The historical suites still have six failed assertions or missing-input cases across Bliss and Embeat. An independent, end-to-end replay of v10 remains unavailable.
 
+## November 27 main reconciliation
+
+Merged `2965babc` into the audit branch. Candidate pool filtering, final verification, within-batch deduplication, Troi and Embeat now use the same title and first-artist key with a trailing `remix` folded away. The audit's Spotify search matching still distinguishes the two titles. Its partial-row handling, Spotify ID checks and deterministic selection remain in place.
+
+The 13 recording-key checks passed on merged main and the reconciled audit tree. With the frozen Nov 21 liked list and 90-entry history, the stock Embeat T-14 passed on both `463331cc` and `2965babc`. That historical test compares the old cleaned keys. A focused reproduction supplies the original track to Embeat while retaining the archived remix history. It was emitted on `463331cc` and blocked on `2965babc` and the audit tree. Direct v2 and Troi checks reproduced the same key change.
+
+The two main revisions produced bit-identical v2 scores on 1,253 frozen rows and matched all 306 published scores at their recorded precision. With offer identities supplied and lookup misses assumed, both revisions also reproduced the ten serialized rows for each of v9 and v10. The dated v9 panel corrects one historical Spotify ID. With only the archived crosswalk for Spotify resolution, the remix exclusion changed two v10 positions between the revisions. The score parity and the replay limits below still apply.
+
+The historical suites reran on the reconciled source tree. The checksum and eligibility checks reproduced the Nov 26 results. Embeat T-16 and the five Bliss cases below still need disposition. The untouched-source v4 producer still reports the thirteen provider identity conflicts.
+
 ## Frozen sources
 
 The original Muse handoff contains 50 files. Its checksum list covers the other 49. All 49 hashes matched on restoration and after the runs. The 590-row candidate pool, 13 rejects and Nov 21 liked export also match the full digests recorded in the Nov 21 provenance file. The handoff included the Nov 22 and Nov 24 libraries, 90-entry recommendation history, fitted v2 weights and ten original v10 rows. The separate judged panel checksum list also verified. All nine baseline JSON files tracked in Git still match `463331c` byte for byte.

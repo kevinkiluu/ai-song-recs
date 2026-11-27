@@ -8,7 +8,7 @@ Two modes:
                data/pool_features.json. No ranking happens here.
   recommend  : score the pool with the v2 model, MMR-diversify, verify
                the top 100 by Spotify track ID and recording key (cleaned
-               title + first artist) against Liked Songs and the
+               title + first artist, folding trailing remix) against Liked Songs and the
                recommendation history, rescore, and pick the final 10.
                Writes recommendations_v2.json. Never re-recommends.
 
@@ -76,9 +76,10 @@ def search_key(title, artist):
     return clean(title), clean((artist or '').split(',')[0])
 
 
-def recording_key(title, artist):
-    """The original v2 exclusion rule: cleaned title and first artist."""
-    return clean(title), clean((artist or '').split(',')[0])
+def rec_key(title, artist):
+    """Normalize the recording for exclusions, folding a trailing remix."""
+    title = clean(title).removesuffix(' remix')
+    return title, clean((artist or '').split(',')[0])
 
 
 def track_id(value):
@@ -94,7 +95,7 @@ def load_id_sets():
                 # Group headers lack track fields. A real title can start with '#'.
                 fields = line.rstrip('\n').split('\t')
                 if len(fields) >= 2:
-                    key = recording_key(*fields[:2])
+                    key = rec_key(*fields[:2])
                     if all(key):
                         keys.add(key)
                 if len(fields) >= 3 and track_id(fields[2]):
@@ -141,7 +142,7 @@ def build_pool():
                     continue
                 title = t.get('title', '')
                 tart = (t.get('artist', {}) or {}).get('name', '')
-                key = recording_key(title, tart)
+                key = rec_key(title, tart)
                 if key in liked_keys or key in hist_keys:
                     continue
                 pool[did] = {'deezer_id': did, 'title': title, 'artist': tart,
@@ -282,15 +283,14 @@ def spotify_search_id(title, artist):
 
 def is_already_known(sid, title, artist, liked_ids, liked_keys, hist_ids, hist_keys):
     """True if this candidate duplicates a liked or previously recommended
-    recording, by Spotify ID or by recording key (cleaned title + first
-    artist). The key check catches the same recording under a different
-    Spotify ID when both titles normalize to the same value. The v9 run
+    recording, by Spotify ID or by the normalized title and first artist.
+    The key also blocks the original when history contains its remix. The v9 run
     re-recommended "af1 (sped up)" and "A Milli" under new IDs because
     only the ID was checked."""
     sid = track_id(sid)
     if sid and (sid in liked_ids or sid in hist_ids):
         return True
-    key = recording_key(title, artist)
+    key = rec_key(title, artist)
     return key in liked_keys or key in hist_keys
 
 
@@ -312,7 +312,7 @@ def verify_candidates(cands, search_id, liked_ids, liked_keys, hist_ids, hist_ke
             log(f'  already liked/history/verified, dropping: {title} ({sid})')
             continue
         seen_ids.add(sid)
-        seen_keys.add(recording_key(title, artist))
+        seen_keys.add(rec_key(title, artist))
         verified.append(dict(c, spotify_id=sid))
     return verified
 
