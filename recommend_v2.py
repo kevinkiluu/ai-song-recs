@@ -70,13 +70,31 @@ def clean(s):
     return P.clean(s)
 
 
+def rec_key(title, artist):
+    """Recording key for dedup: clean() plus folding a trailing 'remix'
+    onto the base title, so a remix and its original count as the same
+    song. Live case: Kevin dropped 'Lemonade (Remix)' in v8, but the v2
+    generator re-offered 'Lemonade (feat. NAV)' in both v11 and v12
+    because clean() keeps '(Remix)' as the word 'remix' and the two
+    versions got different keys. Other parentheticals are kept, so two
+    different songs sharing a title stay distinct: 'Strategy (from the
+    Netflix film KPop Demon Hunters)' is not the same song as 'Strategy
+    (feat. Megan Thee Stallion)' even though both are by TWICE. clean()
+    itself is untouched: Spotify search matching still needs the exact
+    title."""
+    t = clean(title)
+    if t.endswith(' remix'):
+        t = t[:-len(' remix')]
+    return (t, clean((artist or '').split(',')[0]))
+
+
 def load_id_sets():
     liked_ids, liked_keys = set(), set()
     for line in open(LIKED_FILE):
         p = line.rstrip('\n').split('\t')
         if len(p) >= 3:
             liked_ids.add(p[2].replace('spotify:track:', ''))
-            liked_keys.add((clean(p[0]), clean(p[1].split(',')[0])))
+            liked_keys.add(rec_key(p[0], p[1]))
     hist_ids, hist_keys = set(), set()
     for line in open(HIST_FILE):
         if line.startswith('#'):
@@ -84,7 +102,7 @@ def load_id_sets():
         p = line.rstrip('\n').split('\t')
         if len(p) >= 3:
             hist_ids.add(p[2].replace('spotify:track:', ''))
-            hist_keys.add((clean(p[0]), clean(p[1].split(',')[0])))
+            hist_keys.add(rec_key(p[0], p[1]))
     return liked_ids, liked_keys, hist_ids, hist_keys
 
 
@@ -125,7 +143,7 @@ def build_pool():
                     continue
                 title = t.get('title', '')
                 tart = (t.get('artist', {}) or {}).get('name', '')
-                key = (clean(title), clean(tart))
+                key = rec_key(title, tart)
                 if key in liked_keys or key in hist_keys:
                     continue
                 pool[did] = {'deezer_id': did, 'title': title, 'artist': tart,
@@ -261,14 +279,16 @@ def spotify_search_id(title, artist):
 
 def is_already_known(sid, title, artist, liked_ids, liked_keys, hist_ids, hist_keys):
     """True if this candidate duplicates a liked or previously recommended
-    recording, by Spotify ID or by recording key (cleaned title + first
-    artist). The key check catches the same recording under a different
-    Spotify ID, e.g. a re-release or an edited/explicit variant: v9
-    re-recommended "af1 (sped up)" and "A Milli" under new IDs because
-    only the ID was checked."""
+    recording, by Spotify ID or by recording key (rec_key: cleaned title
+    + first artist, with remix variants folded onto the base title). The
+    key check catches the same recording under a different Spotify ID,
+    e.g. a re-release or an edited/explicit variant: v9 re-recommended
+    "af1 (sped up)" and "A Milli" under new IDs because only the ID was
+    checked; v11/v12 re-offered "Lemonade (feat. NAV)" after Kevin dropped
+    "Lemonade (Remix)" in v8 because clean() kept the two versions apart."""
     if sid in liked_ids or sid in hist_ids:
         return True
-    key = (clean(title), clean((artist or '').split(',')[0]))
+    key = rec_key(title, artist)
     return key in liked_keys or key in hist_keys
 
 

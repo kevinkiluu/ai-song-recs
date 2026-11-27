@@ -756,14 +756,14 @@ def recommend(seed_spotify_id, top_k=10, random_seed=616):
     ch5 = recall_related_track_stub(index, seed_rec, top_k=top_k)
     # exclusion: never re-recommend Liked Songs or history (by key; the
     # pool builder already excluded them, this is defense in depth)
-    from recommend_v2 import load_id_sets
+    from recommend_v2 import load_id_sets, rec_key
 
     _, liked_keys, _, hist_keys = load_id_sets()
     excluded = liked_keys | hist_keys
 
     def _keep(c):
-        return (clean(c.get('title') or ''),
-                clean((c.get('artist') or '').split(',')[0])) not in excluded
+        return rec_key(c.get('title') or '',
+                       (c.get('artist') or '')) not in excluded
 
     lists = {'similar': [c for c in ch1 if _keep(c)],
              'popular': [c for c in ch2 if _keep(c)],
